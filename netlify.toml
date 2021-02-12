@@ -1,5 +1,5 @@
 [build]
-  publish = "./build"
+  publish = "build/"
   command = "yarn build"
 
 [context.test] # “test” is a branch name
