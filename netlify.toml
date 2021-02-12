@@ -2,9 +2,9 @@
   publish = ""
   command = "yarn run build"
 
-[context.test] # “test” is a branch name
-  command = "yarn test"
-  base = "test"
+#[context.test] # “test” is a branch name
+#  command = "yarn test"
+#  base = "test"
 
 [context.production.environment]
   publish = "build/"
