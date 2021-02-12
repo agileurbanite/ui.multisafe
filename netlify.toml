@@ -1,7 +1,6 @@
 [build]
   publish = "./build"
   command = "yarn build"
-  environment = { NODE_VERSION = "14.15.5" }
 
 [context.test] # “test” is a branch name
   command = "yarn test"
