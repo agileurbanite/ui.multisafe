@@ -6,6 +6,6 @@ export const store = createStore({
     someAction: action((state) => {
       state.someData += 1;
     }),
-    someThunk: thunk(() => {}),
-  },
+    someThunk: thunk(() => {})
+  }
 });

@@ -1,3 +1,3 @@
 export const routes = {
-  root: '/',
+  root: '/'
 };

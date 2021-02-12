@@ -17,5 +17,5 @@ ReactDOM.render(
       </MuiThemeProvider>
     </StoreProvider>
   </React.StrictMode>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );
