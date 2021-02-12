@@ -17,18 +17,18 @@
     to = "/index.html"
     status = 200
 
-[[headers]]
-  # Define which paths this specific [[headers]] block will cover.
-  for = "/*"
-
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    Content-Security-Policy = "frame-ancestors https://www.facebook.com"
-
-    # Multi-value headers are expressed with multi-line strings.
-	cache-control = '''
-	max-age=0,
-	no-cache,
-	no-store,
-	must-revalidate'''
+#[[headers]]
+#  # Define which paths this specific [[headers]] block will cover.
+#  for = "/*"
+#
+#  [headers.values]
+#    X-Frame-Options = "DENY"
+#    X-XSS-Protection = "1; mode=block"
+#    Content-Security-Policy = "frame-ancestors https://www.facebook.com"
+#
+#    # Multi-value headers are expressed with multi-line strings.
+#	cache-control = '''
+#	max-age=0,
+#	no-cache,
+#	no-store,
+#	must-revalidate'''
