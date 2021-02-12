@@ -1,7 +1,7 @@
 [build]
   publish = "./build"
   command = "yarn build"
-  environment = { ACCESS_TOKEN = "super secret", NODE_VERSION = "14.15.5" }
+  environment = { NODE_VERSION = "14.15.5" }
 
 # List of .env variables
 [build.environment]
