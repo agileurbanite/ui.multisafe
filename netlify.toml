@@ -3,10 +3,6 @@
   command = "yarn build"
   environment = { NODE_VERSION = "14.15.5" }
 
-# List of .env variables
-[build.environment]
-  REACT_APP_IS_TESTNET = true
-
 [context.test] # “test” is a branch name
   command = "yarn test"
   base = "test"
