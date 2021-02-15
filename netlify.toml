@@ -2,15 +2,12 @@
   publish = ""
   command = "yarn run build"
 
-#[context.test] # “test” is a branch name
-#  command = "yarn test"
-#  base = "test"
-
-#[context.production.environment]
-#  publish = "build/"
-#  command = "yarn build"
-#  environment = { NODE_VERSION = "14.15.5" }
-
+[context.dev.environment]
+  REACT_APP_STAGE = "dev"
+[context.qa.environment]
+  REACT_APP_STAGE = "qa"
+[context.preprod.environment]
+  REACT_APP_STAGE = "preprod"
 
 [[redirects]]
     from = "/*"
