@@ -1,10 +1,10 @@
 [build]
-  publish = ""
+  publish = "build/"
   command = "yarn run build"
 
-[context.dev.environment]
+[context.develepoment.environment]
   REACT_APP_STAGE = "dev"
-[context.qa.environment]
+[context.staging.environment]
   REACT_APP_STAGE = "qa"
 [context.preprod.environment]
   REACT_APP_STAGE = "preprod"
