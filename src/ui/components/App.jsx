@@ -1,5 +1,12 @@
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { Welcome } from './Welcome/Welcome';
+import { Home } from './Home/Home';
+import { routes } from '../config/routes';
+
 export const App = () => (
-  <>
-    <div>Multisafe is live and on {process.env.NODE_ENV.toUpperCase()} env</div>
-  </>
+  <Switch>
+    <Redirect exact from={routes.root} to={routes.welcome} />
+    <Route exact path={routes.welcome} component={Welcome} />
+    <Route exact path={[routes.getStarted, routes.createMultisafe]} component={Home} />
+  </Switch>
 );
