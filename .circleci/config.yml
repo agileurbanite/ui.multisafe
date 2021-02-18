@@ -49,7 +49,7 @@ jobs:
           paths:
             - public
 
-  deploy:
+  stage:
     executor: node
     steps:
       - checkout
@@ -62,7 +62,22 @@ jobs:
           command: yarn add netlify-cli
       - run:
           name: Deploy to Netlify
-          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=./public -p
+          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=./public
+
+  release:
+    executor: node
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./
+      - <<: *restore_cache
+      - <<: *install_node_modules
+      - run:
+          name: Install netlify-cli
+          command: yarn add netlify-cli
+      - run:
+          name: Deploy to Netlify
+          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod --dir=./public
 
 workflows:
   workflow:
@@ -81,5 +96,11 @@ workflows:
           filters:
             branches:
               only:
-                - master
                 - dev
+      - release:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
