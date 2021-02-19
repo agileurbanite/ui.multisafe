@@ -14,6 +14,11 @@ aliases:
       name: Install dependencies
       command: yarn
 
+  install_netlify: &install_netlify
+    run:
+      name: Install Netlify
+      command: yarn add netlify-cli
+
   save_cache: &save_cache
     save_cache:
       name: Save NPM package cache
@@ -59,7 +64,7 @@ jobs:
       - <<: *install_netlify
       - run:
           name: Deploy to Netlify
-          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN -p --dir=build
+          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=./public
 
   release:
     executor: node
@@ -69,13 +74,13 @@ jobs:
           at: ./
       - <<: *restore_cache
       - <<: *install_node_modules
-      - run: ls -lAh /home/circleci/project/public
+      - <<: *install_netlify
       - run:
-          name: Install Netlify
+          name: Install netlify-cli
           command: yarn add netlify-cli
       - run:
-          name: Deploy to Netlify Production
-          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod --dir=build
+          name: Deploy to Netlify
+          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod --dir=./public
 
 workflows:
   workflow:
@@ -88,13 +93,12 @@ workflows:
       - build:
           requires:
             - test
-      - stage:
+      - deploy:
           requires:
             - build
           filters:
             branches:
               only:
-                - master
                 - dev
       - release:
           requires:

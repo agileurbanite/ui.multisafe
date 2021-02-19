@@ -1,14 +1,12 @@
-[context.develepoment.environment]
-  REACT_APP_STAGE = "dev"
 [context.staging.environment]
   REACT_APP_STAGE = "qa"
 [context.preprod.environment]
   REACT_APP_STAGE = "preprod"
 
 [[redirects]]
-    from = "/*"
-    to = "/index.html"
-    status = 200
+  from = "/*"
+  to = "/index.html"
+  status = 200
 
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
@@ -20,8 +18,8 @@
     Content-Security-Policy = "frame-ancestors https://www.facebook.com"
 
     # Multi-value headers are expressed with multi-line strings.
-	cache-control = '''
-	max-age=0,
-	no-cache,
-	no-store,
-	must-revalidate'''
+  cache-control = '''
+    max-age=0,
+    no-cache,
+    no-store,
+    must-revalidate'''
