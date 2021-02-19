@@ -64,7 +64,9 @@ jobs:
       - <<: *install_netlify
       - run:
           name: Deploy to Netlify
-          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=./public
+          environment:
+            NETLIFY_SITE_ID: d4fe72bb-10e4-4d3f-9af8-23367defdcc7
+          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=build
 
   release:
     executor: node
@@ -76,11 +78,8 @@ jobs:
       - <<: *install_node_modules
       - <<: *install_netlify
       - run:
-          name: Install netlify-cli
-          command: yarn add netlify-cli
-      - run:
-          name: Deploy to Netlify
-          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod --dir=./public
+          name: Deploy to Netlify Production
+          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --prod --dir=build
 
 workflows:
   workflow:
@@ -93,7 +92,7 @@ workflows:
       - build:
           requires:
             - test
-      - deploy:
+      - stage:
           requires:
             - build
           filters:
