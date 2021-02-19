@@ -4,9 +4,9 @@ import { Topbar } from '../general/Topbar/Topbar';
 import { GetStarted } from './GetStarted/GetStarted';
 import { CreateMultisafe } from './CreateMultisafe/CreateMultisafe';
 import { Footer } from '../general/Footer/Footer';
-import { useStyles } from './Home.styles';
+import { useStyles } from './StartWork.styles';
 
-export const Home = () => {
+export const StartWork = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>

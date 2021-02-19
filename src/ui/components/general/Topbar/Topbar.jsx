@@ -1,15 +1,13 @@
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useStyles } from './Topbar.styles';
-import { routes } from '../../../config/routes';
-import logo from '../../../images/logo/logo-black.svg';
+// import { routes } from '../../../config/routes';
+import logo from '../../../images/logo/logo-black@3x.png';
 
 export const Topbar = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <Link to={routes.getStarted}>
-        <img src={logo} alt="Logo of Multisafe" />
-      </Link>
+      <img className={classes.logo} src={logo} alt="Logo of Multisafe" />
       <span>Account</span>
     </div>
   );

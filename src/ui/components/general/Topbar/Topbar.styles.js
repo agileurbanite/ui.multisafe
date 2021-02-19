@@ -9,6 +9,9 @@ const styles = {
     padding: '0 24px',
     borderBottom: '1px solid #00000020',
     alignSelf: 'stretch'
+  },
+  logo: {
+    width: '182px'
   }
 };
 
