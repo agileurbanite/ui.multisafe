@@ -7,14 +7,14 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000000'
+    backgroundColor: ({ variant }) => (variant === 'dark' ? '#000000' : 'transparent')
   },
   text: {
     fontSize: '12px',
     fontWeight: 500,
     lineHeight: 1.33,
     letterSpacing: '0.4px',
-    color: '#ffffff99'
+    color: ({ variant }) => (variant === 'dark' ? '#ffffff99' : '#00000099')
   }
 };
 

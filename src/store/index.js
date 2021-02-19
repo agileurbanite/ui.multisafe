@@ -1,11 +1,11 @@
-import { createStore, action, thunk } from 'easy-peasy';
+import { createStore } from 'easy-peasy';
+import { general } from './general';
 
 export const store = createStore({
-  app: {
-    someData: 0,
-    someAction: action((state) => {
-      state.someData += 1;
-    }),
-    someThunk: thunk(() => {})
-  }
+  general,
+  startWork: {
+    getStarted: {},
+    createMultisafe: {}
+  },
+  multiSafe: {}
 });

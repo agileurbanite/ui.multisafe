@@ -1,24 +1,26 @@
 import { makeStyles } from '@material-ui/core';
-import backgroundImage from '../../images/landing_page_background/landing_page_background@2x.jpg';
+import background from '../../images/welcome-page/background.svg';
 
 const styles = {
   container: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  page: {
-    height: 'calc(100vh - 52px)',
+    height: '100vh',
     display: 'grid',
-    gridTemplateColumns: '17% 29% auto',
-    gridTemplateRows: '25% auto',
+    gridTemplateColumns: '17% 350px 70px auto',
+    gridTemplateRows: '25% auto 52px',
     gridTemplateAreas: `
-      '. . .'
-      '. a .'
+      'l . . .'
+      '. a a .'
+      'f f f f'
     `,
-    backgroundImage: `url(${backgroundImage})`,
+    backgroundImage: `url(${background})`,
     backgroundPosition: 'center',
-    backgroundSize: '100% 100%',
+    backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat'
+  },
+  logo: {
+    gridArea: 'l',
+    width: '182px',
+    margin: '18px 0 0 24px'
   },
   content: {
     gridArea: 'a'
@@ -37,7 +39,17 @@ const styles = {
     letterSpacing: '0.5px',
     margin: 0
   },
+  laptop: {
+    gridArea: '2 / 3 / 3 / 5',
+    width: '80%',
+    minWidth: '500px',
+    maxWidth: '1000px'
+  },
+  footer: {
+    gridArea: 'f'
+  },
   getStarted: {
+    width: '236px',
     marginTop: '36px'
   }
 };
