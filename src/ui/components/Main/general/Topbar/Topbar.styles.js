@@ -7,8 +7,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '0 24px',
-    borderBottom: '1px solid #00000020',
-    alignSelf: 'stretch'
+    borderBottom: '1px solid #00000020'
   },
   logo: {
     width: '182px'

@@ -1,6 +1,6 @@
-import { useStyles } from './CreateMultisafe.styles';
+import { useStyles } from './CreateMultiSafe.styles';
 
-export const CreateMultisafe = () => {
+export const CreateMultiSafe = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
