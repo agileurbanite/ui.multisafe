@@ -2,7 +2,8 @@ export const routes = {
   root: '/',
   welcome: '/welcome',
   getStarted: '/get-started',
-  createMultisafe: '/create-multisafe'
+  createMultisafe: '/create-multisafe',
+  dashboard: '/multisafe/:id/dashboard'
 };
 
 // const exampleRoutes = {
@@ -15,7 +16,7 @@ export const routes = {
 //     loadMultisafe: 'multisafe.io/load-multisafe',
 //   },
 //   multiSafe: {
-//     dashboard: 'multisafe.io/multisafe/id/dashboard',
+//     dashboard: 'multisafe.io/multisafe/:id/dashboard',
 //     members: 'multisafe.io/multisafe/id/members',
 //     createMultisafe: 'multisafe.io/multisafe/id/create-multisafe',
 //     loadMultisafe: 'multisafe.io/multisafe/id/load-multisafe',

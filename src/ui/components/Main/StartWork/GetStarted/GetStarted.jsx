@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
-import { routes } from '../../../config/routes';
+import { routes } from '../../../../config/routes';
 import { useStyles } from './GetStarted.styles';
 
 export const GetStarted = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <h1>GetStarted with MultiSafe</h1>
+      <h1>Get Started with MultiSafe</h1>
       <Link to={routes.createMultisafe}>Create new multisafe</Link>
+      <Link to="/multisafe/1/dashboard">Test MultiSave</Link>
     </div>
   );
 };
