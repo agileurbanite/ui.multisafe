@@ -11,7 +11,7 @@ export const StartWork = () => {
     <div className={classes.container}>
       <Switch>
         <Route exact path={routes.getStarted} component={GetStarted} />
-        <Route exact path={routes.createMultisafe} component={CreateMultiSafe} />
+        <Route exact path={routes.createMultiSafe} component={CreateMultiSafe} />
       </Switch>
       <Footer />
     </div>
