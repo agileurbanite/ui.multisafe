@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
+import { emojiDict } from '../../../../emoji';
 import { routes } from '../../../../config/routes';
 import { useStyles } from './GetStarted.styles';
 import { Headline } from '../../../general/Headline/Headline';
 import { EmojiIcon } from '../../../general/EmojiIcon/EmojiIcon';
 import { TextInput } from '../../../general/TextInput/TextInput';
-import { emojiDict } from '../../../../emoji';
 import { ContentSeparator } from '../../../general/ContentSeparator/ContentSeparator';
 
 export const GetStarted = () => {
@@ -35,19 +35,23 @@ export const GetStarted = () => {
               <div className={classes.routeIcon}>
                 <span className={classes.icon}>+</span>
               </div>
-              <span className={classes.routeName}>Create new Multi Safe</span>
+              <span className={classes.routeName}>
+                Create new Multisafe
+              </span>
             </Link>
           </section>
-          <ContentSeparator height={1} bg="#000" />
+          <ContentSeparator height={1} bg="#000"/>
           <section className={classes.multisafeAction}>
             <Link to={routes.loadMultisafe} className={classes.routeLink}>
               <div className={classes.routeIcon}>
                 <span className={classes.icon}>-</span>
               </div>
-              <span className={classes.routeName}>Load existing Multi Safe</span>
+              <span className={classes.routeName}>
+                Load existing Multisafe
+              </span>
             </Link>
           </section>
-          <ContentSeparator height={1} bg="#000" />
+          <ContentSeparator height={1} bg="#000"/>
           <Link to="/multisafe/1/dashboard">Safe Name test.testnet</Link>
         </div>
         <div className={classes.readOnlyMultisaves}>[::list of multisaves::]</div>

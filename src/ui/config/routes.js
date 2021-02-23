@@ -2,7 +2,6 @@ export const routes = {
   root: '/',
   welcome: '/welcome',
   getStarted: '/get-started',
-  createMultisafe: '/create-multisafe',
-  loadMultisafe: '/load-multisafe',
+  createMultiSafe: '/create-multisafe',
   dashboard: '/multisafe/:id/dashboard'
 };

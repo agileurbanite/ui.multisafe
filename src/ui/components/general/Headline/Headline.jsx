@@ -7,10 +7,13 @@ const Headline = ({ isCenter, className, children, is, renderAs, ...restProps })
   const Hx = renderAs || `h${is}`;
 
   return (
-    <Hx className={cn(classes.main, `is${is}`, { isCenter }, propOr('', className))} {...restProps}>
+    <Hx
+      className={cn(classes.main, `is${is}`, {isCenter}, propOr('', className))}
+      {...restProps}
+    >
       {children}
     </Hx>
-  );
+  )
 };
 
 export { Headline };

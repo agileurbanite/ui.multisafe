@@ -1,8 +1,9 @@
 import { Switch, Route } from 'react-router-dom';
-import { Footer } from '../../general/Footer/Footer';
+import { routes } from '../../../config/routes';
 import { GetStarted } from './GetStarted/GetStarted';
 import { CreateMultisafe } from './CreateMultisafe/CreateMultisafe';
-import { routes } from '../../../config/routes';
+import { LoadMultisafe } from './LoadMultisafe/LoadMultisafe';
+import { Footer } from '../../general/Footer/Footer';
 import { useStyles } from './StartWork.styles';
 
 export const StartWork = () => {
@@ -12,8 +13,10 @@ export const StartWork = () => {
       <Switch>
         <Route exact path={routes.getStarted} component={GetStarted} />
         <Route exact path={routes.createMultisafe} component={CreateMultisafe} />
+        <Route exact path={routes.loadMultisafe} component={LoadMultisafe} />
       </Switch>
       <Footer />
     </div>
   );
+
 };
