@@ -20,7 +20,7 @@ export const App = () => {
       <Route exact path={routes.welcome} component={Welcome} />
       <Route
         exact
-        path={[routes.getStarted, routes.createMultiSafe, routes.loadMultisafe, routes.dashboard]}
+        path={[routes.getStarted, routes.createMultisafe, routes.loadMultisafe, routes.dashboard]}
         component={Main}
       />
     </Switch>
