@@ -8,7 +8,7 @@ export const Main = () => (
   <>
     <Topbar />
     <Switch>
-      <Route exact path={[routes.getStarted, routes.createMultiSafe]} component={StartWork} />
+      <Route exact path={[routes.getStarted, routes.createMultisafe, routes.loadMultisafe]} component={StartWork} />
       <Route exact path={routes.dashboard} component={MultiSafe} />
     </Switch>
   </>
