@@ -9,8 +9,8 @@ export const onConnectToWallet = thunk(async (actions, _, { getStoreState }) => 
   await wallet.requestSignIn(
     'test.dev-1612425940555-3335158',
     'MultiSafe',
-    'http://localhost:3000/get-started',
-    'http://localhost:3000/welcome?failed-signin'
+    `${window.location.origin}/get-started`,
+    `${window.location.origin}/welcome?failed-signin`
   );
 
   await wallet._keyStore.clear();
