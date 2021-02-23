@@ -9,8 +9,6 @@ const styles = {
   },
   content: {
     gridArea: '1 / 2 / 2 / 3'
-    // height: '200vh',
-    // backgroundColor: 'orange'
   }
 };
 

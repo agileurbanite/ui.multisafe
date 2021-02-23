@@ -7,13 +7,18 @@ const styles = {
     alignItems: 'center'
   },
   container: {
-    width: 300,
+    width: 400,
     height: 300,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     flexWrap: 'wrap',
     outline: 'none'
+  },
+  buttonWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   iconWrapper: {
     width: '96px',

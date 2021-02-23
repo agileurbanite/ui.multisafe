@@ -1,7 +1,10 @@
 export const initState = {
+  isAppInitialized: false,
   user: {
     isConnected: false,
-    signerId: null,
-    signerPublicKey: null
-  }
+    accountId: null,
+    walletPublicKey: null
+  },
+  near: null,
+  wallet: null
 };
