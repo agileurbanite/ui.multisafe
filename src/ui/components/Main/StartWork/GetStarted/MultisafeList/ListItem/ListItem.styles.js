@@ -2,8 +2,8 @@ import { makeStyles } from '@material-ui/core';
 
 const styles = {
   container: {
-    display: 'flex'
+    marginTop: '16px'
   }
 };
 
-export const useStyles = makeStyles(styles, { name: 'Dashboard' });
+export const useStyles = makeStyles(styles, { name: 'ListItem' });
