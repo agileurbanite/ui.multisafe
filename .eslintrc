@@ -14,7 +14,8 @@
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": 0,
     "react/jsx-props-no-spreading": "off",
-    "camelcase": 0
+    "camelcase": 0,
+    "no-alert": "off"
   },
   "overrides": [{ "files": ["*.jsx", "*.js"] }]
 }
