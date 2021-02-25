@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 const styles = {
   container: {
     display: 'flex',
+    flexDirection: 'column'
   },
   pageHeader: {
     display: 'flex',
@@ -42,7 +43,7 @@ const styles = {
     fontWeight: 'bold',
     lineHeight: 1.5,
     color: '#00c08b',
-    height: 24,
+    height: 24
   },
 
   routeIcon: {
@@ -56,11 +57,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     textDecoration: 0
-  },
-
-  readOnlyMultisaves: {
-    marginTop: 16
   }
-}
+};
 
 export const useStyles = makeStyles(styles, { name: 'GetStarted' });
