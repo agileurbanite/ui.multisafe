@@ -17,6 +17,7 @@ export const onLoadMultisafePanel = thunk(async (actions, payload, { getStoreSta
     loadMultisafePanel({ contract });
     push(`/multisafe/${multisafeId}/dashboard`);
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error('Error', e);
   }
 });
