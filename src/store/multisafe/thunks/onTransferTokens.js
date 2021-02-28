@@ -12,7 +12,6 @@ export const onTransferTokens = thunk(async (actions, payload, { getState }) => 
       }
     });
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.error('Error', e);
+    throw new Error(e);
   }
 });

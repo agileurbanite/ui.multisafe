@@ -7,6 +7,7 @@ import { ContentSeparator } from '../../../general/ContentSeparator/ContentSepar
 import { MultisafeList } from './MultisafeList/MultisafeList';
 import { routes } from '../../../../config/routes';
 import { useStyles } from './GetStarted.styles';
+import { CreateMulitsafeLink } from './CreateMultisafeLink/CreateMulitsafeLink';
 
 export const GetStarted = () => {
   const classes = useStyles();
@@ -30,14 +31,7 @@ export const GetStarted = () => {
         <TextInput />
       </div>
       <div className={classes.multisafeActions}>
-        <section className={classes.multisafeAction}>
-          <Link to={routes.createMultisafe} className={classes.routeLink}>
-            <div className={classes.routeIcon}>
-              <span className={classes.icon}>+</span>
-            </div>
-            <span className={classes.routeName}>Create new Multisafe</span>
-          </Link>
-        </section>
+        <CreateMulitsafeLink>Create Multi Safe</CreateMulitsafeLink>
         <ContentSeparator height={1} bg="#000" />
         <section className={classes.multisafeAction}>
           <Link to={routes.loadMultisafe} className={classes.routeLink}>
