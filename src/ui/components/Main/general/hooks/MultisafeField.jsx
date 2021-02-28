@@ -1,7 +1,7 @@
 import { FilledInput, InputAdornment, TextField } from '@material-ui/core';
 import { useController } from 'react-hook-form';
 
-export const MultisafeField = ({ control, name, defaultValue, type }) => {
+export const MultisafeField = ({ control, name, defaultValue, type, label }) => {
   const {
     field: { ref, ...inputProps }
   } = useController({
@@ -9,7 +9,8 @@ export const MultisafeField = ({ control, name, defaultValue, type }) => {
     control,
     rules: { required: true },
     defaultValue,
-    type
+    type,
+    label
   });
 
   if (type === 'number')
@@ -19,7 +20,8 @@ export const MultisafeField = ({ control, name, defaultValue, type }) => {
         aria-describedby="filled-weight-helper-text"
         {...inputProps}
         inputRef={ref}
+        label={label}
       />
     );
-  return <TextField {...inputProps} inputRef={ref} variant="filled" />;
+  return <TextField {...inputProps} inputRef={ref} variant="filled" label={label} />;
 };
