@@ -3,7 +3,7 @@ import { connect, keyStores, WalletConnection } from 'near-api-js';
 
 // TODO move configs to config folder
 export const onInitApp = thunk(async (actions) => {
-  const { initApp } = actions;
+  const { initApp, initNear } = actions;
 
   const near = await connect({
     networkId: 'testnet',
@@ -14,7 +14,7 @@ export const onInitApp = thunk(async (actions) => {
 
   const wallet = new WalletConnection(near, 'multisafe');
 
-  initApp({
+  initNear({
     near,
     wallet,
     user: {
@@ -22,4 +22,6 @@ export const onInitApp = thunk(async (actions) => {
       accountId: wallet.getAccountId()
     }
   });
+
+  initApp();
 });
