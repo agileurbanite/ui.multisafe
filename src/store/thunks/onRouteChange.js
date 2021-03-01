@@ -6,16 +6,16 @@ const { createMultisafe, dashboard } = routes;
 
 export const onRouteChange = thunk(async (actions, payload) => {
   const { enableLoading, disableLoading } = actions.general;
-  const { history } = payload;
+  const { history, withLoading = true } = payload;
 
   const res = matchPath(history.location.pathname, [createMultisafe, dashboard]);
   if (res === null) return;
 
-  enableLoading();
+  withLoading && enableLoading();
   const { path, params } = res;
 
   if (path === routes.dashboard)
     await actions.multisafe.onLoadMultisafePanel({ multisafeId: params.id });
 
-  disableLoading();
+  withLoading && disableLoading();
 });

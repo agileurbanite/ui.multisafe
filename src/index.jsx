@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import { StoreProvider } from 'easy-peasy';
 import { MuiThemeProvider } from '@material-ui/core';
 import { createBrowserHistory } from 'history';
-import { Router } from './ui/components/providers/Router';
+import { Router } from './ui/providers/Router';
 import { App } from './ui/components/App';
 import { store } from './store';
 import { theme } from './ui/config/theme';

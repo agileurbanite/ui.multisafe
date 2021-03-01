@@ -2,7 +2,9 @@ import { thunk } from 'easy-peasy';
 import { connect, keyStores, WalletConnection } from 'near-api-js';
 
 // TODO move configs to config folder
-export const onInitApp = thunk(async (actions) => {
+export const onInitApp = thunk(async (actions, payload, { getStoreActions }) => {
+  const { history } = payload;
+  const { onRouteChange } = getStoreActions();
   const { initApp, initNear } = actions;
 
   const near = await connect({
@@ -23,5 +25,13 @@ export const onInitApp = thunk(async (actions) => {
     },
   });
 
+  // Load data from local storage
+
+  // Handle redirects
+  if (history.location.pathname === '/') {
+    history.replace('/welcome');
+  }
+
+  await onRouteChange({ history, withLoading: false });
   initApp();
 });
