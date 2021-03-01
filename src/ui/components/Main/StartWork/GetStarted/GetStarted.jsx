@@ -11,7 +11,6 @@ import { CreateMulitsafeLink } from './CreateMultisafeLink/CreateMulitsafeLink';
 
 export const GetStarted = () => {
   const classes = useStyles();
-
   return (
     <div className={classes.container}>
       <div className={classes.pageHeader}>

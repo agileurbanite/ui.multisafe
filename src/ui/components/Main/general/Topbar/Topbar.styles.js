@@ -11,6 +11,11 @@ const styles = {
   },
   logo: {
     width: '182px'
+  },
+  progress: {
+    position: 'absolute',
+    top: '70px',
+    width: '100%'
   }
 };
 

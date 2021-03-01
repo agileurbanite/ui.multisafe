@@ -4,10 +4,16 @@ import { setContractMethods } from '../../../ui/config/config';
 
 // TODO move configs to config folder
 export const onLoadMultisafePanel = thunk(async (actions, payload, { getStoreState }) => {
-  const { push, multisafeId } = payload;
+  const { multisafeId } = payload;
   const state = getStoreState();
   const { wallet } = state.general;
   const { loadMultisafePanel } = actions;
+
+  // await new Promise((res) => {
+  //   setTimeout(() => {
+  //     res();
+  //   }, 500);
+  // })
 
   try {
     const contract = await new Contract(wallet.account(), multisafeId, {
@@ -18,7 +24,6 @@ export const onLoadMultisafePanel = thunk(async (actions, payload, { getStoreSta
     });
 
     loadMultisafePanel({ contract });
-    push(`/multisafe/${multisafeId}/dashboard`);
   } catch (e) {
     throw new Error(e);
   }
