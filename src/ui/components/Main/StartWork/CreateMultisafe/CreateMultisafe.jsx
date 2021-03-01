@@ -1,20 +1,16 @@
 import { Link, useHistory } from 'react-router-dom';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { useStoreActions, useStoreState } from 'easy-peasy';
-import { utils } from 'near-api-js';
-import { useStyles } from './CreateMultisafe.styles';
+import { useStoreActions } from 'easy-peasy';
 import { FormItemHeader } from '../../general/FormItem/FormItemHeader';
 import { MultisafeField } from '../../general/hooks/MultisafeField';
 import { Headline } from '../../../general/Headline/Headline';
-import { set } from '../../../../utils/storage';
-import { spaceToSnake } from '../../../../utils/format';
-import { contractName } from '../../../../config/config';
+import { routes } from '../../../../config/routes';
+import { useStyles } from './CreateMultisafe.styles';
 
 export const CreateMultisafe = () => {
   const classes = useStyles();
-  const { push, goBack } = useHistory();
-  const multisafes = useStoreState((s) => s.startWork.multisafes);
-  const onCreateMultisafe = useStoreActions((actions) => actions.multisafe.onCreateMultisafe);
+  const { push } = useHistory();
+  const onCreateMultisafe = useStoreActions((a) => a.startWork.onCreateMultisafe);
 
   // Form template
   const { control, handleSubmit, getValues } = useForm({
@@ -32,40 +28,15 @@ export const CreateMultisafe = () => {
     name: 'members',
   });
 
-  const serializeData = ({ name, members, num_confirmations, amount }) => ({
-    name: spaceToSnake(name),
-    num_confirmations: Number(num_confirmations),
-    amount: utils.format.parseNearAmount(amount),
-    members: members.map(({ account_id }) => ({ account_id })),
-    GAS: 1e14,
-  });
-
-  const onSubmit = async (data) => {
-    const storageData = {
-      multisafes: [
-        ...multisafes,
-        ...[
-          {
-            name: data.name,
-            multisafeId: `${data.name}.${contractName}`,
-            members: data.members,
-            amount: data.amount,
-            confirmations: data.num_confirmations,
-          },
-        ],
-      ],
-    };
-    set('multisafe', storageData);
-    await onCreateMultisafe({ push, data: serializeData(data) });
-  };
+  const onSubmit = handleSubmit((data) => onCreateMultisafe({ data }));
 
   return (
     <div className={classes.container}>
-      <button type="button" onClick={() => goBack()}>
+      <button type="button" onClick={() => push(routes.getStarted)}>
         Back
       </button>
       <Headline is={1}>Create New Multi Safe.</Headline>
-      <form autoComplete="off" onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+      <form autoComplete="off" onSubmit={onSubmit} className={classes.form}>
         <ul>
           <li className={classes.multisafeName}>
             <FormItemHeader

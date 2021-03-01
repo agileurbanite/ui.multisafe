@@ -1,1 +1,5 @@
-export const actions = {};
+import { loadCreateMultisafe } from './loadCreateMultisafe';
+
+export const actions = {
+  loadCreateMultisafe,
+};

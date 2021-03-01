@@ -1,5 +1,8 @@
 import { thunk } from 'easy-peasy';
 import { Contract } from 'near-api-js';
+import { near } from '../../../ui/config/near';
+
+const { methods } = near.multisig;
 
 export const onLoadMultisafePanel = thunk(async (actions, payload, { getStoreState }) => {
   const { multisafeId } = payload;
@@ -14,12 +17,8 @@ export const onLoadMultisafePanel = thunk(async (actions, payload, { getStoreSta
   });
 
   try {
-    const contract = await new Contract(wallet.account(), multisafeId, {
-      viewMethods: ['get_members', 'get_request', 'get_num_confirmations', 'list_request_ids'],
-      changeMethods: ['add_request', 'confirm', 'delete_request'],
-    });
-
-    loadMultisafePanel({ contract });
+    const multisig = await new Contract(wallet.account(), multisafeId, methods);
+    loadMultisafePanel({ multisig });
   } catch (e) {
     throw new Error(e);
   }
