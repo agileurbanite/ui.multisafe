@@ -4,12 +4,12 @@ const styles = {
   modal: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   button: {
     width: '100%',
     padding: '10px',
-    marginTop: '34px'
+    marginTop: '34px',
   },
   container: {
     width: 300,
@@ -18,8 +18,8 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     flexWrap: 'wrap',
-    outline: 'none'
-  }
+    outline: 'none',
+  },
 };
 
 export const useStyles = makeStyles(styles, { name: 'NewTransaction' });

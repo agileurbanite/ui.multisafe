@@ -5,5 +5,5 @@ import { thunks } from './thunks';
 export const general = {
   ...initState,
   ...actions,
-  ...thunks
+  ...thunks,
 };

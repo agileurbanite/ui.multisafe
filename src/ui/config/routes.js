@@ -5,5 +5,5 @@ export const routes = {
   createMultisafe: '/create-multisafe',
   loadMultisafe: '/load-multisafe',
   dashboard: '/multisafe/:id/dashboard',
-  success: '/success'
+  success: '/success',
 };

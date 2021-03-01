@@ -1,10 +1,5 @@
 import { action } from 'easy-peasy';
 
-export const initApp = action((state, payload) => {
-  const { near, wallet, user } = payload;
-
+export const initApp = action((state) => {
   state.isAppInitialized = true;
-  state.user = user;
-  state.near = near;
-  state.wallet = wallet;
 });

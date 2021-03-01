@@ -5,28 +5,28 @@ const styles = {
   form: {},
   multisafeName: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   membersList: {
-    display: 'block'
+    display: 'block',
   },
   membersListFields: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   addMemberInput: {
     '& *:not(:first-child)': {
-      marginLeft: 20
-    }
+      marginLeft: 20,
+    },
   },
   confirmations: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   depositSection: {
     display: 'flex',
-    flexDirection: 'column'
-  }
+    flexDirection: 'column',
+  },
 };
 
 export const useStyles = makeStyles(styles, { name: 'CreateMultisafe' });

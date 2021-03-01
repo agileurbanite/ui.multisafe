@@ -3,14 +3,14 @@ import { useController } from 'react-hook-form';
 
 export const MultisafeField = ({ control, name, defaultValue, type, label }) => {
   const {
-    field: { ref, ...inputProps }
+    field: { ref, ...inputProps },
   } = useController({
     name,
     control,
     rules: { required: true },
     defaultValue,
     type,
-    label
+    label,
   });
 
   if (type === 'number')

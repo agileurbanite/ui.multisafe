@@ -4,7 +4,7 @@ const styles = {
   modal: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   container: {
     width: 400,
@@ -13,12 +13,12 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     flexWrap: 'wrap',
-    outline: 'none'
+    outline: 'none',
   },
   buttonWrapper: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   iconWrapper: {
     width: '96px',
@@ -27,8 +27,8 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     border: '1px solid rgba(0, 0, 0, 0.14)',
-    borderRadius: '8px'
-  }
+    borderRadius: '8px',
+  },
 };
 
 export const useStyles = makeStyles(styles, { name: 'GetStartedModal' });

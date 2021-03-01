@@ -1,16 +1,14 @@
 import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import { useStyles } from './ListItem.styles';
 
-export const ListItem = ({ multisafe: { multisafeId, name }, onLoadMultisafePanel, push }) => {
+export const ListItem = ({ multisafe: { multisafeId, name } }) => {
   const classes = useStyles();
-
-  const onClick = () => {
-    onLoadMultisafePanel({ push, multisafeId });
-  };
-
   return (
     <div className={classes.container}>
-      <Button variant="outlined" onClick={onClick}>{`${name} - ${multisafeId}`}</Button>
+      <Link to={`/multisafe/${multisafeId}/dashboard`}>
+        <Button variant="outlined">{`${name} - ${multisafeId}`}</Button>
+      </Link>
     </div>
   );
 };

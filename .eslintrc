@@ -7,7 +7,7 @@
     "no-underscore-dangle": 0,
     "no-unused-vars": "warn",
     "arrow-body-style": "warn",
-    "no-unused-expressions": ["error", { "allowTernary": true }],
+    "no-unused-expressions": 0,
     "react/react-in-jsx-scope": 0,
     "react/jsx-uses-react": 0,
     "react-hooks/rules-of-hooks": "error",
