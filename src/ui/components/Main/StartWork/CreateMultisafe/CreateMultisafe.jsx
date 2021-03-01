@@ -22,14 +22,14 @@ export const CreateMultisafe = () => {
       name: '',
       members: [{ memberName: '', account_id: '' }],
       num_confirmations: 0,
-      amount: 0
-    }
+      amount: 0,
+    },
   });
 
   // Members field array
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'members'
+    name: 'members',
   });
 
   const serializeData = ({ name, members, num_confirmations, amount }) => ({
@@ -37,7 +37,7 @@ export const CreateMultisafe = () => {
     num_confirmations: Number(num_confirmations),
     amount: utils.format.parseNearAmount(amount),
     members: members.map(({ account_id }) => ({ account_id })),
-    GAS: 1e14
+    GAS: 1e14,
   });
 
   const onSubmit = async (data) => {
@@ -50,10 +50,10 @@ export const CreateMultisafe = () => {
             multisafeId: `${data.name}.${contractName}`,
             members: data.members,
             amount: data.amount,
-            confirmations: data.num_confirmations
-          }
-        ]
-      ]
+            confirmations: data.num_confirmations,
+          },
+        ],
+      ],
     };
     set('multisafe', storageData);
     await onCreateMultisafe({ push, data: serializeData(data) });
@@ -123,7 +123,7 @@ export const CreateMultisafe = () => {
                 type="button"
                 onClick={() => {
                   append([
-                    { memberName: getValues('memberName'), account_id: getValues('account_id') }
+                    { memberName: getValues('memberName'), account_id: getValues('account_id') },
                   ]);
                 }}>
                 Add Member

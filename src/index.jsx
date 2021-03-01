@@ -20,5 +20,5 @@ render(
       </MuiThemeProvider>
     </StoreProvider>
   </StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

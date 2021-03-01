@@ -13,7 +13,7 @@ const TextInput = () => {
         className={classes.textField}
         placeholder="Search by name or address"
         InputProps={{
-          className: classes.input
+          className: classes.input,
         }}
       />
     </form>

@@ -7,5 +7,5 @@ export const thunks = {
   onLoadMultisafePanel,
   onTransferTokens,
   onPrepareContract,
-  onCreateMultisafe
+  onCreateMultisafe,
 };

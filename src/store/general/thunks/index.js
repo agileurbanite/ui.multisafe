@@ -3,5 +3,5 @@ import { onConnectToWallet } from './onConnectToWallet';
 
 export const thunks = {
   onInitApp,
-  onConnectToWallet
+  onConnectToWallet,
 };

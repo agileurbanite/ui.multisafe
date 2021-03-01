@@ -11,10 +11,10 @@ const styles = {
       'b b b'
       '. c .'
     `,
-    backgroundColor: 'rgba(0, 0, 0, 0.87)'
+    backgroundColor: 'rgba(0, 0, 0, 0.87)',
   },
   topWrapper: {
-    gridArea: 'a'
+    gridArea: 'a',
   },
   separator: {
     gridArea: 'b',
@@ -22,8 +22,8 @@ const styles = {
     height: '1px',
     border: 'none',
     backgroundColor: '#3b3b3b',
-    margin: '24px 0 8px 0'
-  }
+    margin: '24px 0 8px 0',
+  },
 };
 
 export const useStyles = makeStyles(styles, { name: 'Sidebar' });

@@ -18,5 +18,4 @@ export const StartWork = () => {
       <Footer />
     </div>
   );
-
 };

@@ -9,7 +9,7 @@ export const onInitApp = thunk(async (actions) => {
     networkId: 'testnet',
     nodeUrl: 'https://rpc.testnet.near.org',
     walletUrl: 'http://wallet.testnet.near.org',
-    keyStore: new keyStores.BrowserLocalStorageKeyStore()
+    keyStore: new keyStores.BrowserLocalStorageKeyStore(),
   });
 
   const wallet = new WalletConnection(near, 'multisafe');
@@ -19,8 +19,8 @@ export const onInitApp = thunk(async (actions) => {
     wallet,
     user: {
       isConnected: wallet.isSignedIn(),
-      accountId: wallet.getAccountId()
-    }
+      accountId: wallet.getAccountId(),
+    },
   });
 
   initApp();

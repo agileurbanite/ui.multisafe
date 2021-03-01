@@ -5,5 +5,5 @@ import { loadSuccessPage } from './loadSuccessPage';
 export const actions = {
   loadMultisafePanel,
   loadCreateMultisafePage,
-  loadSuccessPage
+  loadSuccessPage,
 };

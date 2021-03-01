@@ -16,7 +16,7 @@ export const onLoadMultisafePanel = thunk(async (actions, payload, { getStoreSta
   try {
     const contract = await new Contract(wallet.account(), multisafeId, {
       viewMethods: ['get_members', 'get_request', 'get_num_confirmations', 'list_request_ids'],
-      changeMethods: ['add_request', 'confirm', 'delete_request']
+      changeMethods: ['add_request', 'confirm', 'delete_request'],
     });
 
     loadMultisafePanel({ contract });

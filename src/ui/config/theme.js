@@ -3,8 +3,8 @@ import { createMuiTheme } from '@material-ui/core';
 export const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#00c08b'
-    }
+      main: '#00c08b',
+    },
   },
   overrides: {
     MuiButton: {
@@ -15,8 +15,8 @@ export const theme = createMuiTheme({
         borderRadius: 8,
         fontWeight: 700,
         letterSpacing: '1.25px',
-        lineHeight: 1.14
-      }
-    }
-  }
+        lineHeight: 1.14,
+      },
+    },
+  },
 });

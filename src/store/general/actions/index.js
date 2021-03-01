@@ -9,5 +9,5 @@ export const actions = {
   initNear,
   enableLoading,
   disableLoading,
-  connectToWallet
+  connectToWallet,
 };

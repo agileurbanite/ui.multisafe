@@ -4,7 +4,7 @@ export const onCreateMultisafe = thunk(async (actions, payload, { getState }) =>
   const { contract } = getState();
   const {
     data: { name, members, num_confirmations, amount, GAS },
-    push
+    push,
   } = payload;
   const { loadSuccessPage } = actions;
 
@@ -13,10 +13,10 @@ export const onCreateMultisafe = thunk(async (actions, payload, { getState }) =>
       {
         name,
         members,
-        num_confirmations
+        num_confirmations,
       },
       GAS,
-      amount
+      amount,
     );
 
     loadSuccessPage({ contract });

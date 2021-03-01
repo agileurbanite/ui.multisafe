@@ -9,9 +9,9 @@ export const store = createStore(
     general,
     startWork,
     multisafe,
-    ...thunks
+    ...thunks,
   },
   {
-    name: 'MultiSafe'
-  }
+    name: 'MultiSafe',
+  },
 );

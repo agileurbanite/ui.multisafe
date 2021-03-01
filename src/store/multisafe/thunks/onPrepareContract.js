@@ -10,7 +10,7 @@ export const onPrepareContract = thunk(async (actions, payload, { getStoreState 
 
   try {
     const contract = await new Contract(wallet.account(), multisafeId, {
-      ...setContractMethods([], ['create'])
+      ...setContractMethods([], ['create']),
     });
 
     loadCreateMultisafePage({ contract });

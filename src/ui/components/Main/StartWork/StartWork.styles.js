@@ -6,8 +6,8 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 };
 
 export const useStyles = makeStyles(styles, { name: 'StartWork' });

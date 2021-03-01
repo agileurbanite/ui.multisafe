@@ -8,8 +8,8 @@ export const onTransferTokens = thunk(async (actions, payload, { getState }) => 
     await contract.add_request({
       request: {
         receiver_id: 'eclipseeer.testnet',
-        actions: [{ type: 'Transfer', amount: utils.format.parseNearAmount('1') }]
-      }
+        actions: [{ type: 'Transfer', amount: utils.format.parseNearAmount('1') }],
+      },
     });
   } catch (e) {
     throw new Error(e);

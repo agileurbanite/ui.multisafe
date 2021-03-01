@@ -19,7 +19,7 @@ export class Router extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: props.history.location
+      location: props.history.location,
     };
 
     // This is a bit of a hack. We have to start listening for location
@@ -64,7 +64,7 @@ export class Router extends React.Component {
           history: this.props.history,
           location: this.state.location,
           match: Router.computeRootMatch(this.state.location.pathname),
-          staticContext: this.props.staticContext
+          staticContext: this.props.staticContext,
         }}>
         <HistoryContext.Provider
           children={this.props.children || null}

@@ -1,3 +1,3 @@
 export const initState = {
-  contract: null
+  contract: null,
 };

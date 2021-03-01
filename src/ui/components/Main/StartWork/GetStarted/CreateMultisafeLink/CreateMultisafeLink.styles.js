@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core';
 const styles = {
   container: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   link: {},
-  icon: {}
+  icon: {},
 };
 
 export const useStyles = makeStyles(styles, { name: 'GetStarted' });

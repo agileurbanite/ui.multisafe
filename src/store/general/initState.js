@@ -3,8 +3,8 @@ export const initState = {
   isLoading: false,
   user: {
     isConnected: false,
-    accountId: null
+    accountId: null,
   },
   near: null,
-  wallet: null
+  wallet: null,
 };

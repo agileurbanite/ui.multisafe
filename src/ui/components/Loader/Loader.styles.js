@@ -9,8 +9,8 @@ const styles = {
     alignItems: 'center',
     position: 'fixed',
     top: 0,
-    left: 0
-  }
+    left: 0,
+  },
 };
 
 export const useStyles = makeStyles(styles, { name: 'Loader' });
