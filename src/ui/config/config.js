@@ -1,10 +1,5 @@
 export const contractName = 'dev-1612259671980-4872321';
 
-export const setContractMethods = (viewMethods = [], changeMethods = []) => ({
-  viewMethods,
-  changeMethods,
-});
-
 export const getConfig = () => {
   let config = {
     networkId: 'default',
@@ -19,8 +14,6 @@ export const getConfig = () => {
       ...config,
       GAS: 200000000000000,
       DEFAULT_NEW_ACCOUNT_AMOUNT: 12,
-
-      contractMethods: { ...setContractMethods() },
     };
   }
 
