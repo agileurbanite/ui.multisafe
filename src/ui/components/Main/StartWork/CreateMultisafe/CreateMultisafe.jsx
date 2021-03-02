@@ -17,8 +17,8 @@ export const CreateMultisafe = () => {
     defaultValues: {
       name: '',
       members: [{ memberName: '', account_id: '' }],
-      num_confirmations: 0,
-      amount: 0,
+      num_confirmations: '1',
+      amount: '',
     },
   });
 
