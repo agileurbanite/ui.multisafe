@@ -1,9 +1,9 @@
-import { onLoadCreateMultisafe } from './onLoadCreateMultisafe';
+import { onMountCreateMultisafe } from './onMountCreateMultisafe';
 import { onCreateMultisafe } from './onCreateMultisafe';
 import { onLoadMultisafe } from './onLoadMultisafe';
 
 export const thunks = {
-  onLoadCreateMultisafe,
+  onMountCreateMultisafe,
   onCreateMultisafe,
   onLoadMultisafe,
 };

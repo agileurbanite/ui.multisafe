@@ -4,7 +4,7 @@ import { near } from '../../../ui/config/near';
 
 const { methods } = near.multisig;
 
-export const onLoadMultisafePanel = thunk(async (actions, payload, { getStoreState }) => {
+export const onMountMultisafePanel = thunk(async (actions, payload, { getStoreState }) => {
   const { multisafeId } = payload;
   const state = getStoreState();
   const { wallet } = state.general;
