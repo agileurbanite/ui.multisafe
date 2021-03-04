@@ -7,9 +7,8 @@ const styles = {
     alignItems: 'center',
   },
   button: {
-    width: '100%',
+    gridArea: 'c',
     padding: '10px',
-    marginTop: '34px',
   },
   container: {
     width: 300,

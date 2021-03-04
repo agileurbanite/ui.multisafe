@@ -12,7 +12,7 @@
     "classnames": "^2.2.6",
     "easy-peasy": "^4.0.1",
     "history": "4.10.1",
-    "near-api-js": "^0.36.3",
+    "near-api-js": "^0.37.0",
     "ramda": "^0.27.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

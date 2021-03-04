@@ -1,3 +1,7 @@
 export const initState = {
-  multisig: null,
+  name: '',
+  multisafeId: '',
+  balance: 0,
+  members: [],
+  contract: null,
 };

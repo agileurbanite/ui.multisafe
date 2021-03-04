@@ -1,10 +1,14 @@
-import { createMuiTheme } from '@material-ui/core';
+import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core';
 
 export const theme = createMuiTheme({
   palette: {
     primary: {
       main: '#00c08b',
     },
+  },
+  colors: {
+    dashboardGrey: '#989898',
+    dashboardHoverBgGrey: '#ffffff28',
   },
   overrides: {
     MuiButton: {

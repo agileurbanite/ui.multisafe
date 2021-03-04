@@ -1,5 +1,4 @@
 import { createStore } from 'easy-peasy';
-import { thunks } from './thunks';
 import { general } from './general';
 import { persist } from './persist';
 import { startWork } from './startWork';
@@ -11,7 +10,6 @@ export const store = createStore(
     startWork,
     multisafe,
     persist,
-    ...thunks,
   },
   {
     name: 'MultiSafe',

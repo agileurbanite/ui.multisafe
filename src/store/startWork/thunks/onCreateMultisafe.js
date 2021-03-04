@@ -11,13 +11,13 @@ const serializeData = ({ name, members, num_confirmations, amount }) => ({
 });
 
 export const onCreateMultisafe = thunk(async (actions, payload, { getState }) => {
-  const { multisigFactory } = getState();
+  const { factoryContract } = getState();
   const { data } = payload;
 
   const serializedData = serializeData(data);
 
   try {
-    await multisigFactory.create(
+    await factoryContract.create(
       {
         name: serializedData.name,
         members: serializedData.members,

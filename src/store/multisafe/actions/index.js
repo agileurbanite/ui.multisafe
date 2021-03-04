@@ -1,5 +1,5 @@
-import { loadMultisafePanel } from './loadMultisafePanel';
+import { mountMultisafe } from './mountMultisafe';
 
 export const actions = {
-  loadMultisafePanel,
+  mountMultisafe,
 };

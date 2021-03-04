@@ -1,3 +1,3 @@
 export const initState = {
-  multisigFactory: null,
+  factoryContract: null,
 };
