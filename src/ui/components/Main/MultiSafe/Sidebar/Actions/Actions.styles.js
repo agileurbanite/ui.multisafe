@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const styles = {
+const styles = (theme) => ({
   container: {
     display: 'grid',
     gridTemplateColumns: '24px auto 24px',
@@ -17,10 +17,11 @@ const styles = {
   tools: {
     gridArea: 'a',
     display: 'flex',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
   },
   iconButton: {
     padding: '8px',
+    margin: '0 16px',
   },
   icon: {
     color: '#989898',
@@ -43,6 +44,20 @@ const styles = {
       letterSpacing: '0.5px',
     },
   },
-};
+  readOnly: {
+    gridArea: 'c',
+    height: 36,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: theme.colors.dashboardGrey,
+    fontSize: 14,
+    fontWeight: 700,
+    letterSpacing: '1.5px',
+    border: `1px solid #ffffff1e`,
+    borderRadius: 8,
+    userSelect: 'none',
+  },
+});
 
 export const useStyles = makeStyles(styles, { name: 'Actions' });

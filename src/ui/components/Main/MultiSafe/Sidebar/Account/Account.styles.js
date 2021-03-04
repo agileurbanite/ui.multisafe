@@ -27,12 +27,18 @@ const styles = (theme) => ({
     fontWeight: 700,
     letterSpacing: '0.25px',
     lineHeight: 1.5,
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
   },
   multisafeId: {
     gridArea: 'c',
     alignSelf: 'start',
     color: theme.colors.dashboardGrey,
     lineHeight: 1.5,
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
   },
   icon: {
     gridArea: 'd',
