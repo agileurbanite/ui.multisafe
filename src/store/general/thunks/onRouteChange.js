@@ -7,7 +7,7 @@ const { createMultisafe, dashboard } = routes;
 export const onRouteChange = thunk(async (actions, payload, { getStoreActions }) => {
   const storeActions = getStoreActions();
   const { enableLoading, disableLoading } = actions;
-  const { onMountMultisafePanel } = storeActions.multisafe;
+  const { onMountMultisafe } = storeActions.multisafe;
   const { onMountCreateMultisafe } = storeActions.startWork;
   const { history, withLoading = true } = payload;
 
@@ -19,7 +19,7 @@ export const onRouteChange = thunk(async (actions, payload, { getStoreActions })
   const ifRouteIs = (route) => route === path;
 
   ifRouteIs(createMultisafe) && (await onMountCreateMultisafe());
-  ifRouteIs(dashboard) && (await onMountMultisafePanel({ multisafeId: params.id }));
+  ifRouteIs(dashboard) && (await onMountMultisafe({ multisafeId: params.multisafeId }));
 
   withLoading && disableLoading();
 });

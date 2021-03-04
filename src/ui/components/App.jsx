@@ -23,7 +23,13 @@ export const App = () => {
       <Route exact path={routes.welcome} component={Welcome} />
       <Route
         exact
-        path={[routes.getStarted, routes.createMultisafe, routes.loadMultisafe, routes.dashboard]}
+        path={[
+          routes.getStarted,
+          routes.createMultisafe,
+          routes.loadMultisafe,
+          routes.dashboard,
+          routes.members,
+        ]}
         component={Main}
       />
       <Route path="*" component={PageNotFound} />

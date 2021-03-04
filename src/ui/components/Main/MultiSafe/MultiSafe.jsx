@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router';
 import { Sidebar } from './Sidebar/Sidebar';
+import { Dashboard } from './Dashboard/Dashboard';
+import { Members } from './Members/Members';
 import { routes } from '../../../config/routes';
 import { useStyles } from './MultiSafe.styles';
 
@@ -9,8 +11,10 @@ export const MultiSafe = () => {
     <div className={classes.container}>
       <Sidebar />
       <div className={classes.content}>
-        <h1>MultiSafe Dashboard</h1>
-        <Link to={routes.getStarted}>Back to get started</Link>
+        <Switch>
+          <Route exact path={routes.dashboard} component={Dashboard} />
+          <Route exact path={routes.members} component={Members} />
+        </Switch>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { emojiDict } from '../../../../emoji';
+import { emoji } from '../../../../config/emoji';
 import { Headline } from '../../../general/Headline/Headline';
 import { EmojiIcon } from '../../../general/EmojiIcon/EmojiIcon';
 import { MultisafeList } from './MultisafeList/MultisafeList';
@@ -12,7 +12,7 @@ export const GetStarted = () => {
     <div className={classes.container}>
       <div className={classes.pageHeader}>
         <div className={classes.emoji}>
-          <EmojiIcon position="center" size={72} content={emojiDict.handRaised} elem="span" />
+          <EmojiIcon position="center" size={72} content={emoji.handRaised} elem="span" />
         </div>
         <div className={classes.titleBlock}>
           <Headline isCenter is={1}>

@@ -4,4 +4,4 @@ const styles = {
   container: {},
 };
 
-export const useStyles = makeStyles(styles, { name: 'Dashboard' });
+export const useStyles = makeStyles(styles, { name: 'Members' });

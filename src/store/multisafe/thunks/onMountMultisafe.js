@@ -4,17 +4,17 @@ import { near } from '../../../ui/config/near';
 
 const { methods } = near.multisig;
 
-export const onMountMultisafePanel = thunk(async (actions, payload, { getStoreState }) => {
+export const onMountMultisafe = thunk(async (actions, payload, { getStoreState }) => {
   const { multisafeId } = payload;
   const state = getStoreState();
   const { wallet } = state.general;
   const { loadMultisafePanel } = actions;
 
-  await new Promise((res) => {
-    setTimeout(() => {
-      res();
-    }, 500);
-  });
+  // await new Promise((res) => {
+  //   setTimeout(() => {
+  //     res();
+  //   }, 500);
+  // });
 
   try {
     const multisig = await new Contract(wallet.account(), multisafeId, methods);

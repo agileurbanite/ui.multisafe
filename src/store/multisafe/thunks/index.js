@@ -1,7 +1,7 @@
-import { onMountMultisafePanel } from './onMountMultisafePanel';
+import { onMountMultisafe } from './onMountMultisafe';
 import { onTransferTokens } from './onTransferTokens';
 
 export const thunks = {
-  onMountMultisafePanel,
+  onMountMultisafe,
   onTransferTokens,
 };

@@ -6,6 +6,10 @@ export const theme = createMuiTheme({
       main: '#00c08b',
     },
   },
+  colors: {
+    dashboardGrey: '#989898',
+    dashboardHoverBgGrey: '#ffffff28',
+  },
   overrides: {
     MuiButton: {
       containedPrimary: {
