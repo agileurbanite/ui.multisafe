@@ -1,3 +1,3 @@
 export const initState = {
-  multisig: null,
+  contract: null,
 };
