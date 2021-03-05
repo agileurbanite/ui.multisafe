@@ -10,7 +10,9 @@ export class Router extends React.Component {
 
   handleRouteChange = async () => {
     const { store, history } = this.props;
-    const { onRouteChange } = store.getActions().general;
+    const actions = store.getActions();
+    const onRouteChange = actions.general.onRouteChange;
+
     await onRouteChange({ history });
     this.setState({ location: history.location });
   };

@@ -4,8 +4,8 @@ import { emoji } from '../../../../../config/emoji';
 import { useStyles } from './Account.styles';
 
 export const Account = ({ onToggleList }) => {
-  const name = useStoreState((s) => s.multisafe.name);
-  const multisafeId = useStoreState((s) => s.multisafe.multisafeId);
+  const name = useStoreState((s) => s.multisafe.general.name);
+  const multisafeId = useStoreState((s) => s.multisafe.general.multisafeId);
   const classes = useStyles();
 
   return (

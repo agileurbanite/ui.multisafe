@@ -10,9 +10,10 @@ const serializeData = ({ name, members, num_confirmations, amount }) => ({
   GAS: 1e14,
 });
 
-export const onCreateMultisafe = thunk(async (actions, payload, { getState }) => {
-  const { factoryContract } = getState();
+export const onCreateMultisafe = thunk(async (_, payload, { getStoreState }) => {
   const { data } = payload;
+  const store = getStoreState();
+  const factoryContract = store.startWork.entities.factoryContract;
 
   const serializedData = serializeData(data);
 

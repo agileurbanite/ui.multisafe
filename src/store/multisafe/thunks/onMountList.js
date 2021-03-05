@@ -1,15 +1,18 @@
 import { thunk } from 'easy-peasy';
 
-export const onMountList = thunk(async (actions, payload, { getStoreState }) => {
+export const onMountList = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
   const { setListOpen } = payload;
-  const state = getStoreState();
+  const store = getStoreState();
+  const multisafes = store.multisafe.multisafes;
+  const actions = getStoreActions();
+  const mountList = actions.multisafe.mountList;
 
   try {
-    const multisafes = state.persist.multisafes.map((multisafe) => ({
+    const _multisafes = multisafes.map((multisafe) => ({
       ...multisafe,
       balance: '10',
     }));
-    actions.mountList({ multisafes });
+    mountList({ multisafes: _multisafes });
     setListOpen(true);
   } catch (e) {
     throw new Error(e);

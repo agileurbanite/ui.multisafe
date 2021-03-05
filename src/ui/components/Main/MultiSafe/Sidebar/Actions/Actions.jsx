@@ -7,9 +7,9 @@ import { near } from '../../../../../config/near';
 import { useStyles } from './Actions.styles';
 
 export const Actions = () => {
-  const balance = useStoreState((s) => s.multisafe.balance);
-  const multisafeId = useStoreState((s) => s.multisafe.multisafeId);
-  const isMember = useStoreState((s) => s.multisafe.computed.isMember);
+  const balance = useStoreState((s) => s.multisafe.general.balance);
+  const multisafeId = useStoreState((s) => s.multisafe.general.multisafeId);
+  const isMember = useStoreState((s) => s.multisafe.selectors.isMember);
   const classes = useStyles();
 
   const copyToClipboard = () => {

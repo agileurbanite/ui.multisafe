@@ -1,10 +1,11 @@
 import { thunk } from 'easy-peasy';
 
 // TODO move configs to config folder
-export const onConnectToWallet = thunk(async (actions, _, { getStoreState }) => {
-  const state = getStoreState();
-  const { wallet } = state.general;
-  const { connectToWallet } = actions;
+export const onConnectToWallet = thunk(async (_, __, { getStoreState, getStoreActions }) => {
+  const store = getStoreState();
+  const wallet = store.general.entities.wallet;
+  const actions = getStoreActions();
+  const connectToWallet = actions.general.connectToWallet;
 
   await wallet.requestSignIn(
     'test.dev-1612425940555-3335158',

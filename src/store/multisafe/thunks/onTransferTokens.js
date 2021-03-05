@@ -1,8 +1,9 @@
 import { thunk } from 'easy-peasy';
 import { utils } from 'near-api-js';
 
-export const onTransferTokens = thunk(async (actions, payload, { getState }) => {
-  const { contract } = getState();
+export const onTransferTokens = thunk(async (_, __, { getState }) => {
+  const store = getState();
+  const contract = store.entities.contract;
 
   try {
     await contract.add_request({
