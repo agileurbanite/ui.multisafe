@@ -3,5 +3,10 @@ export const initState = {
   multisafeId: '',
   balance: 0,
   members: [],
+  sidebar: {
+    isOpen: false,
+    isLoading: false,
+    multisafes: [],
+  },
   contract: null,
 };

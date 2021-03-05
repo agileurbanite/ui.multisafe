@@ -1,8 +1,9 @@
+import { Add, SystemUpdateAlt } from '@material-ui/icons';
 import { emoji } from '../../../../config/emoji';
 import { Headline } from '../../../general/Headline/Headline';
 import { EmojiIcon } from '../../../general/EmojiIcon/EmojiIcon';
+import { GreenLink } from '../../general/GreenLink/GreenLink';
 import { MultisafeList } from './MultisafeList/MultisafeList';
-import { Link } from './Link/Link';
 import { routes } from '../../../../config/routes';
 import { useStyles } from './GetStarted.styles';
 
@@ -24,8 +25,12 @@ export const GetStarted = () => {
         </div>
       </div>
       <div className={classes.multisafeActions}>
-        <Link to={routes.createMultisafe} text="Create Multi Safe" />
-        <Link to={routes.loadMultisafe} text="Load existing Multisafe" />
+        <GreenLink to={routes.createMultisafe} text="Create new Multi Safe" icon={Add} />
+        <GreenLink
+          to={routes.loadMultisafe}
+          text="Load existing Multi Safe"
+          icon={SystemUpdateAlt}
+        />
       </div>
       <MultisafeList />
     </div>
