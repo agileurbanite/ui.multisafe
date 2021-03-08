@@ -1,5 +1,5 @@
 import { isMember } from './isMember';
 
-export const computed = {
+export const selectors = {
   isMember,
 };

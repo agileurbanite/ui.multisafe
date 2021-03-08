@@ -2,9 +2,12 @@ import { thunk } from 'easy-peasy';
 import { connect, keyStores, WalletConnection } from 'near-api-js';
 
 // TODO move configs to config folder
-export const onInitApp = thunk(async (actions, payload) => {
+export const onInitApp = thunk(async (_, payload, { getStoreActions }) => {
   const { history } = payload;
-  const { initApp, initNear, onRouteChange } = actions;
+  const actions = getStoreActions();
+  const initApp = actions.general.initApp;
+  const initNear = actions.general.initNear;
+  const onRouteChange = actions.general.onRouteChange;
 
   const near = await connect({
     networkId: 'testnet',

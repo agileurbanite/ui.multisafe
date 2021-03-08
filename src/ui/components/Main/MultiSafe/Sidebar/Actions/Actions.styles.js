@@ -46,7 +46,7 @@ const styles = (theme) => ({
   },
   readOnly: {
     gridArea: 'c',
-    height: 36,
+    height: 34,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

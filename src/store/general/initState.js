@@ -5,6 +5,8 @@ export const initState = {
     isConnected: false,
     accountId: null,
   },
-  near: null,
-  wallet: null,
+  entities: {
+    near: null,
+    wallet: null,
+  },
 };

@@ -8,14 +8,15 @@
     "no-unused-vars": "warn",
     "arrow-body-style": "warn",
     "no-unused-expressions": 0,
+    "prefer-destructuring": 0,
+    "camelcase": 0,
+    "no-alert": 0,
     "react/react-in-jsx-scope": 0,
     "react/jsx-uses-react": 0,
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": 0,
-    "react/jsx-props-no-spreading": "off",
-    "camelcase": 0,
-    "no-alert": "off"
+    "react/jsx-props-no-spreading": 0
   },
   "overrides": [{ "files": ["*.jsx", "*.js"] }]
 }

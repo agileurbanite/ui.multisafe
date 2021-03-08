@@ -4,11 +4,11 @@ import { Actions } from './Actions/Actions';
 import { Navigation } from './Navigation/Navigation';
 import { useStyles } from './Sidebar.styles';
 
-export const Sidebar = () => {
+export const Sidebar = ({ onToggleList }) => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <Account />
+      <Account onToggleList={onToggleList} />
       <Actions />
       <Divider className={classes.divider} />
       <Navigation />

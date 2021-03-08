@@ -6,9 +6,12 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: '256px auto',
     gridTemplateRows: 'auto',
+    gridTemplateAreas: `
+      'a b'
+    `,
   },
   content: {
-    gridArea: '1 / 2 / 2 / 3',
+    gridArea: 'b',
   },
 };
 

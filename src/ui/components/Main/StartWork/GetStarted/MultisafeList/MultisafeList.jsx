@@ -3,7 +3,7 @@ import { ListItem } from './ListItem/ListItem';
 import { useStyles } from './MultisafeList.styles';
 
 export const MultisafeList = () => {
-  const multisafes = useStoreState((s) => s.persist.multisafes);
+  const multisafes = useStoreState((store) => store.multisafe.multisafes);
   const classes = useStyles();
 
   return (
