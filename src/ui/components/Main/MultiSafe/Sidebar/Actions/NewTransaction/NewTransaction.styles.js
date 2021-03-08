@@ -8,7 +8,7 @@ const styles = {
   },
   button: {
     gridArea: 'c',
-    padding: '10px',
+    height: 36,
   },
   container: {
     width: 300,

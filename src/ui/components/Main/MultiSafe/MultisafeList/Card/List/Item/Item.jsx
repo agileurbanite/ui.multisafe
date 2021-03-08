@@ -1,15 +1,22 @@
+import { Link } from 'react-router-dom';
+import { Divider } from '@material-ui/core';
+import { emoji as emojiConfig } from '../../../../../../../config/emoji';
+import { getRoute } from '../../../../../../../config/routes';
+import { formatNearBalance } from '../../../../../../../utils/format';
 import { useStyles } from './Item.styles';
 
-export const Item = ({ emoji, name }) => {
+export const Item = ({
+  multisafe: { name, emoji = emojiConfig.foxMuzzle, multisafeId, balance },
+}) => {
   const classes = useStyles();
   return (
-    <div className={classes.container}>
-      <div className={classes.iconContainer}>
-        <span className={classes.icon}>{emoji}</span>
+    <Link to={getRoute.dashboard(multisafeId)}>
+      <div className={classes.container}>
+        <span className={classes.emoji}>{emoji}</span>
+        <span className={classes.name}>{name}</span>
+        <span className={classes.balance}>{formatNearBalance(balance)}</span>
+        <Divider className={classes.divider} />
       </div>
-      <div className={classes.textContainer}>
-        <span className={classes.text}>{name}</span>
-      </div>
-    </div>
+    </Link>
   );
 };

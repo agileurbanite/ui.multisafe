@@ -3,26 +3,32 @@ import { makeStyles } from '@material-ui/core';
 const styles = (theme) => ({
   container: {
     width: '100%',
-    display: 'flex',
-    color: theme.palette.primary.main,
+    minHeight: 56,
+    display: 'grid',
+    gridTemplateColumns: '56px auto auto',
+    gridTemplateRows: '50% 50%',
   },
-  iconContainer: {
-    height: 56,
-    width: 56,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+  emoji: {
+    gridArea: '1 / 1 / 3 / 2',
+    justifySelf: 'center',
+    alignSelf: 'center',
+    fontSize: 18,
   },
-  icon: {},
-  textContainer: {
-    width: 'calc(100% - 56px)',
-    display: 'flex',
-    alignItems: 'center',
-    borderBottom: `1px solid ${theme.colors.dividerOnWhite}`,
-  },
-  text: {
+  name: {
+    gridArea: '1 / 2 / 2 / 3',
     fontWeight: 700,
     lineHeight: 1.5,
+    alignSelf: 'end',
+  },
+  balance: {
+    gridArea: '2 / 2 / 3 / 3',
+    fontSize: 14,
+    color: '#626262',
+  },
+  divider: {
+    gridArea: '2 / 2 / 3 / 4',
+    alignSelf: 'end',
+    backgroundColor: theme.colors.dividerOnWhite,
   },
 });
 

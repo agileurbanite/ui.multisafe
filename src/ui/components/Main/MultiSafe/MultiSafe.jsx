@@ -9,8 +9,8 @@ import { routes } from '../../../config/routes';
 import { useStyles } from './MultiSafe.styles';
 
 export const MultiSafe = () => {
-  const [isListOpen, setListOpen] = useState(true);
-  const onMountList = useStoreActions((a) => a.multisafe.onMountList);
+  const [isListOpen, setListOpen] = useState(false);
+  const onMountList = useStoreActions((actions) => actions.multisafe.onMountList);
   const classes = useStyles();
 
   const onListOpen = () => onMountList({ setListOpen });
