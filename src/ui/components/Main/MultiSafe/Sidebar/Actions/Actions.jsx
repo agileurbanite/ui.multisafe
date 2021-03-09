@@ -2,7 +2,7 @@ import { IconButton, Tooltip } from '@material-ui/core';
 import { FileCopyOutlined, OpenInNew } from '@material-ui/icons';
 import { useStoreState } from 'easy-peasy';
 import { NewTransaction } from './NewTransaction/NewTransaction';
-import { formatNearBalance } from '../../../../../utils/format';
+import { formatNearBalance } from '../../../../../../utils/format';
 import { near } from '../../../../../config/near';
 import { useStyles } from './Actions.styles';
 

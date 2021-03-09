@@ -1,6 +1,6 @@
 import { thunk } from 'easy-peasy';
 import { utils } from 'near-api-js';
-import { spaceToSnake } from '../../../ui/utils/format';
+import { spaceToSnake } from '../../../utils/format';
 
 const serializeData = ({ name, members, num_confirmations, amount }) => ({
   name: spaceToSnake(name),

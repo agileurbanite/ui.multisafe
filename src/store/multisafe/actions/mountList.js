@@ -4,6 +4,6 @@ export const mountList = action((state, payload) => {
   state.multisafes = payload.data.map(([contractState, members], index) => ({
     ...state.multisafes[index],
     balance: contractState.amount,
-    members,
+    members: members.map(({ account_id }) => ({ accountId: account_id })),
   }));
 });
