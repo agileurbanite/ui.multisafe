@@ -7,8 +7,10 @@ import { List } from './List/List';
 import { useStyles } from './Card.styles';
 
 export const Card = ({ onListClose }) => {
-  const multisafes = useStoreState((store) => store.multisafe.multisafes);
+  const membership = useStoreState((store) => store.multisafe.selectors.multisafes.membership);
+  const readOnly = useStoreState((store) => store.multisafe.selectors.multisafes.readOnly);
   const classes = useStyles();
+
   return (
     <Paper className={classes.container} elevation={5} square>
       <div className={classes.topbar}>
@@ -21,7 +23,9 @@ export const Card = ({ onListClose }) => {
       <Divider className={classes.divider} />
       <GreenLink to={routes.createMultisafe} text="Create new Multi Safe" icon={Add} />
       <GreenLink to={routes.loadMultisafe} text="Load existing Multi Safe" icon={SystemUpdateAlt} />
-      <List multisafes={multisafes} />
+      <List multisafes={membership} />
+      <h4 className={classes.readOnlyHeader}>Read Only</h4>
+      <List multisafes={readOnly} />
     </Paper>
   );
 };

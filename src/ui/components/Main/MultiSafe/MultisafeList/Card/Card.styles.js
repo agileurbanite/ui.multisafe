@@ -39,6 +39,10 @@ const styles = (theme) => ({
   divider: {
     backgroundColor: theme.colors.dividerOnWhite,
   },
+  readOnlyHeader: {
+    margin: '26px 0 20px 16px',
+    color: 'rgba(0, 0, 0, 0.54)',
+  },
 });
 
 export const useStyles = makeStyles(styles, { name: 'Card' });
