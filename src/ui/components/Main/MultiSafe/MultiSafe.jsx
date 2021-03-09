@@ -20,7 +20,7 @@ export const MultiSafe = () => {
   return (
     <div className={classes.container}>
       <Sidebar onToggleList={onToggleList} />
-      <MultisafeList onListClose={onListClose} isListOpen={isListOpen} />
+      {isListOpen && <MultisafeList onListClose={onListClose} />}
       <div className={classes.content}>
         <Switch>
           <Route exact path={routes.dashboard} component={Dashboard} />
