@@ -13,7 +13,13 @@ const testnet = {
   },
   multisafe: {
     methods: {
-      viewMethods: ['get_members', 'get_request', 'get_num_confirmations', 'list_request_ids'],
+      viewMethods: [
+        'get_members',
+        'get_request',
+        'get_num_confirmations',
+        'list_request_ids',
+        'get_confirmations',
+      ],
       changeMethods: ['add_request', 'confirm', 'delete_request'],
     },
   },

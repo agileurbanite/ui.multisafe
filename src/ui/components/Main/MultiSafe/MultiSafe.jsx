@@ -1,6 +1,7 @@
 import { useStoreActions } from 'easy-peasy';
 import { useState } from 'react';
 import { Switch, Route } from 'react-router';
+import { Footer } from '../../general/Footer/Footer';
 import { Sidebar } from './Sidebar/Sidebar';
 import { MultisafeList } from './MultisafeList/MultisafeList';
 import { Dashboard } from './Dashboard/Dashboard';
@@ -26,6 +27,7 @@ export const MultiSafe = () => {
           <Route exact path={routes.dashboard} component={Dashboard} />
           <Route exact path={routes.members} component={Members} />
         </Switch>
+        <Footer />
       </div>
     </div>
   );

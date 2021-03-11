@@ -4,12 +4,14 @@ export const theme = createMuiTheme({
   palette: {
     primary: {
       main: '#00c08b',
+      light: '#01d59c',
     },
   },
   colors: {
     dashboardGrey: '#989898',
     dashboardHoverBgGrey: '#ffffff28',
     dividerOnWhite: '#dfdfdf',
+    red: '#e40029',
   },
   overrides: {
     MuiButton: {

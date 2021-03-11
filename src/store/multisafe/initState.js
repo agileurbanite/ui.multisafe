@@ -7,6 +7,9 @@ export const initState = persist(
       multisafeId: '',
       balance: 0,
     },
+    dashboard: {
+      transactions: [],
+    },
     members: [],
     multisafes: [],
     entities: {

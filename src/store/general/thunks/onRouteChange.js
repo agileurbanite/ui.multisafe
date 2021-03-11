@@ -2,7 +2,7 @@ import { thunk } from 'easy-peasy';
 import { matchPath } from 'react-router';
 import { routes } from '../../../ui/config/routes';
 
-const { createMultisafe, dashboard } = routes;
+const { createMultisafe, dashboard, members } = routes;
 
 export const onRouteChange = thunk(async (_, payload, { getStoreActions }) => {
   const { history, withLoading = true } = payload;
@@ -10,9 +10,10 @@ export const onRouteChange = thunk(async (_, payload, { getStoreActions }) => {
   const enableLoading = actions.general.enableLoading;
   const disableLoading = actions.general.disableLoading;
   const onMountMultisafe = actions.multisafe.onMountMultisafe;
+  const onMountDashboard = actions.multisafe.onMountDashboard;
   const onMountCreateMultisafe = actions.startWork.onMountCreateMultisafe;
 
-  const res = matchPath(history.location.pathname, [createMultisafe, dashboard]);
+  const res = matchPath(history.location.pathname, [createMultisafe, dashboard, members]);
   if (res === null) return;
 
   withLoading && enableLoading();
@@ -20,7 +21,18 @@ export const onRouteChange = thunk(async (_, payload, { getStoreActions }) => {
   const ifRouteIs = (route) => route === path;
 
   ifRouteIs(createMultisafe) && (await onMountCreateMultisafe());
-  ifRouteIs(dashboard) && (await onMountMultisafe({ multisafeId: params.multisafeId }));
+
+  if (ifRouteIs(dashboard)) {
+    const { multisafeId } = params;
+    // TODO we can unite those 2 thunks into one
+    await onMountMultisafe({ multisafeId });
+    await onMountDashboard();
+  }
+
+  if (ifRouteIs(members)) {
+    const { multisafeId } = params;
+    await onMountMultisafe({ multisafeId });
+  }
 
   withLoading && disableLoading();
 });
