@@ -1,12 +1,15 @@
 import { makeStyles } from '@material-ui/core';
+import * as R from 'ramda'
+
+const resolveCSSPropValue = (value) => (props) => R.propOr(null, value, props);
 
 const styles = {
   main: {
     lineHeight: 'normal',
-    margin: 0,
+    textAlign: R.curry(resolveCSSPropValue)('textPosition')
   },
   is1: {
-    lineHeight: 'normal',
+    margin: 0,
     fontWeight: 900,
     fontSize: '34px',
   },

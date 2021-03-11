@@ -1,31 +1,17 @@
 import { makeStyles } from '@material-ui/core';
 
 const styles = {
-  container: {},
-  form: {},
-  multisafeName: {
+  container: {
+    width: "620px"
+  },
+  headerWrapper: {
     display: 'flex',
-    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 25,
   },
-  membersList: {
-    display: 'block',
-  },
-  membersListFields: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  addMemberInput: {
-    '& *:not(:first-child)': {
-      marginLeft: 20,
-    },
-  },
-  confirmations: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  depositSection: {
-    display: 'flex',
-    flexDirection: 'column',
+  subheader: {
+    marginTop: 25
   },
 };
 

@@ -1,9 +1,7 @@
-import cn from 'classnames';
+import { Divider } from '@material-ui/core';
 import { useStyles } from './ContentSeparator.styles';
 
-const ContentSeparator = ({ bg, height }) => {
-  const classes = useStyles({ bg, height });
-  return <hr className={cn(classes.main, `height-${height}`)} />;
+export const ContentSeparator = ({ bg, height, margin }) => {
+  const classes = useStyles({ bg, height, margin });
+  return <Divider className={classes.divider} />;
 };
-
-export { ContentSeparator };
