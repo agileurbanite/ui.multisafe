@@ -1,19 +1,20 @@
 import { useFieldArray } from 'react-hook-form';
-import { List, ListItem, Button, } from '@material-ui/core';
+import { List, ListItem, Button, IconButton } from '@material-ui/core'
+import { Delete as DeleteIcon } from '@material-ui/icons'
 import { MultisafeField } from '../../../../general/MultisafeField/MultisafeField';
 import { useStyles } from './MembersField.styles';
 
 
 export const MembersField = ({ control, getValues, name }) => {
   const classes = useStyles();
-  const { fields, append } = useFieldArray({ control, name });
+  const { fields, append, remove } = useFieldArray({ control, name });
   const appendMember = () => append([
     {
       memberName: getValues('memberName'),
       account_id: getValues('account_id')
     },
   ]);
-
+  const removeMember = idx => remove(idx);
   return <>
     <List className={classes.addMemberInputList}>
       {fields.map((item, idx) => (
@@ -36,6 +37,9 @@ export const MembersField = ({ control, getValues, name }) => {
             variant="filled"
             fullWidth
           />
+          <IconButton className={classes.iconButton} onClick={removeMember}>
+            <DeleteIcon className={classes.icon}/>
+          </IconButton>
 
         </ListItem>
       ))}
