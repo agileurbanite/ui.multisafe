@@ -16,10 +16,10 @@ export const GetStarted = () => {
           <EmojiIcon position="center" size={72} content={emoji.handRaised} elem="span" />
         </div>
         <div className={classes.titleBlock}>
-          <Headline isCenter is={1}>
+          <Headline is={1}>
             Get started with Multisafe.
           </Headline>
-          <Headline isCenter is={1}>
+          <Headline is={1}>
             Choose one of the options.
           </Headline>
         </div>
