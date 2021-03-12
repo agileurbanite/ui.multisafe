@@ -20,7 +20,7 @@ export const MultisafeField = (
     rules: { required: true },
     defaultValue,
   });
-
+  
   if (type === 'number') {
     return (
         <TextField
@@ -28,10 +28,11 @@ export const MultisafeField = (
           variant={variant}
           label={label}
           className={className}
-          defaultValue={defaultValue}
+          placeholder={defaultValue}
           InputProps={{
             endAdornment: name !== 'num_confirmations' ? <InputAdornment position="end">NEAR</InputAdornment> : null,
           }}
+          {...inputProps}
         />
     );
   }
@@ -42,7 +43,7 @@ export const MultisafeField = (
       variant={variant}
       label={label}
       className={className}
-      value={defaultValue}
+      placeholder={defaultValue}
       {...inputProps}
     />
   )
