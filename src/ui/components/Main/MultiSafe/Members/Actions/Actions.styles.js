@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const styles = (theme) => ({
+const styles = {
   container: {},
   tools: {
     display: "flex",
@@ -18,6 +18,6 @@ const styles = (theme) => ({
   icon: {
     color: '#989898'
   },
-});
+};
 
 export const useStyles = makeStyles(styles, { name: 'Actions' });

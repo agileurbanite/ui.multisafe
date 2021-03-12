@@ -1,11 +1,10 @@
-import { useStoreState } from 'easy-peasy';
 import { Delete as DeleteIcon } from '@material-ui/icons';
 import { Divider, IconButton } from '@material-ui/core';
 import { CopyToClipboard } from '../../general/CopyToClipboard/CopyToClipboard';
 import { OpenInExplorer } from '../../general/OpenInExplorer/OpenInExplorer';
 import { useStyles } from './Actions.styles';
 
-export const Actions = ({ accountId, isHovered }) => {
+export const Actions = ({ accountId }) => {
   const classes = useStyles();
 
   return (

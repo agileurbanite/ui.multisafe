@@ -20,7 +20,7 @@ export const MultisafeField = (
     rules: { required: true },
     defaultValue,
   });
-  
+
   if (type === 'number') {
     return (
         <TextField
