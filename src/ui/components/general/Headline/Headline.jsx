@@ -2,14 +2,14 @@ import * as R from 'ramda';
 import cn from 'classnames';
 import { useStyles } from './Headline.styles';
 
-export const Headline = ({ textPosition, className, children, is, renderAs }) => {
-  const classes = useStyles({ textPosition });
+export const Headline = ({ textAlign, className, children, is, renderAs }) => {
+  const classes = useStyles({ textAlign });
   const Hx = renderAs || `h${is}`;
-  if (!is) return <Hx className={cn(classes.main, { textPosition }, R.propOr('', className))}>
+  if (!is) return <Hx className={cn(classes.main, { textAlign }, R.propOr('', className))}>
     {children}
   </Hx>
   return (
-    <Hx className={cn(classes.main, `is${is}`, { textPosition }, R.propOr('', className))}>
+    <Hx className={cn(classes.main, `is${is}`, { textAlign }, R.propOr('', className))}>
       {children}
     </Hx>
   );

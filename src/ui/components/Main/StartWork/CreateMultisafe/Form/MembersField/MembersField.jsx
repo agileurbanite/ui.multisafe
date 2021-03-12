@@ -22,7 +22,7 @@ export const MembersField = ({ control, getValues, name }) => {
           <MultisafeField
             name={`members[${idx}].memberName`}
             control={control}
-            defaultValue={item.memberName}
+            defaultValue=""
             label="Member Name"
             className={classes.memberName}
             variant="filled"
@@ -31,7 +31,7 @@ export const MembersField = ({ control, getValues, name }) => {
           <MultisafeField
             name={`members[${idx}].account_id`}
             control={control}
-            defaultValue={item.account_id}
+            defaultValue=""
             label="Member Address"
             className={classes.memberAddress}
             variant="filled"

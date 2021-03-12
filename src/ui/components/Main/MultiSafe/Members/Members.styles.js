@@ -1,7 +1,28 @@
 import { makeStyles } from '@material-ui/core';
 
 const styles = {
-  container: {},
+  container: {
+    width: 'calc(100% - 48px)',
+  },
+  header: {
+    margin: '30px 12px',
+    fontWeight: 900
+  },
+  tableRow: {
+    '&:hover': {
+      backgroundColor: "rgba(0, 0, 0, 0.04)"
+    }
+  },
+  table: {
+    tableLayout: 'fixed'
+  },
+  tableCell: {
+    padding: "16px",
+
+  },
+  tableCellActions: {
+    padding: "0 16px",
+  }
 };
 
 export const useStyles = makeStyles(styles, { name: 'Members' });

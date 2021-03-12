@@ -6,7 +6,7 @@ const resolveCSSPropValue = (value) => (props) => R.propOr(null, value, props);
 const styles = {
   main: {
     lineHeight: 'normal',
-    textAlign: R.curry(resolveCSSPropValue)('textPosition')
+    textAlign: R.curry(resolveCSSPropValue) ('textAlign')
   },
   is1: {
     margin: 0,

@@ -10,14 +10,7 @@ import { Headline } from '../../../../general/Headline/Headline'
 export const Form = () => {
   const onCreateMultisafe = useStoreActions(a => a.startWork.onCreateMultisafe);
 
-  const { control, handleSubmit, getValues } = useForm({
-    defaultValues: {
-      name: '',
-      members: [{ memberName: '', account_id: '' }],
-      num_confirmations: '1',
-      amount: '',
-    }
-  });
+  const { control, handleSubmit, getValues } = useForm();
 
   const classes = useStyles();
 
@@ -92,7 +85,7 @@ export const Form = () => {
           type="number"
           name="amount"
           control={control}
-          defaultValue="3.5"
+          defaultValue="5"
           label="Amount"
           variant="filled"
           className={classes.confirmationsField}
