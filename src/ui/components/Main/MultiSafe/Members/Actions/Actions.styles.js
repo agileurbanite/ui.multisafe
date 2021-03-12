@@ -4,16 +4,7 @@ const styles = {
   container: {},
   tools: {
     display: "flex",
-    justifyContent: "flex-end"
-  },
-  divider: {
-    alignSelf: 'center',
-    height: 24
-  },
-  removeButton: {
-    '&:hover': {
-      color: "#e40029"
-    }
+    justifyContent: "flex-end",
   },
   icon: {
     color: '#989898'

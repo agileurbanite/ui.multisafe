@@ -1,5 +1,5 @@
 import React from 'react';
-import { useStoreActions, useStoreState } from 'easy-peasy';
+import { useStoreState } from 'easy-peasy';
 import {
   TableContainer,
   Table,
@@ -13,8 +13,15 @@ import { useStyles } from './Members.styles';
 
 export const Members = () => {
   const members = useStoreState(({ multisafe }) => multisafe.members);
-  const onDeleteRequest = useStoreActions((actions) => actions.multisafe.onDeleteRequest);
-  const [cellIndex, setCellIndex] = React.useState(null);
+  const [isHovered, setHovered] = React.useState({});
+
+  const handleMouseEnter = (index) => () => {
+    setHovered((prevState) => ({ ...prevState, [index]: true }));
+  };
+
+  const handleMouseLeave = (index) => () => {
+    setHovered((prevState) => ({ ...prevState, [index]: false }));
+  };
 
   const classes = useStyles();
 
@@ -34,14 +41,16 @@ export const Members = () => {
               <TableRow
                 key={member.memberName}
                 className={classes.tableRow}
-                onMouseEnter={() => setCellIndex(idx)}
-                onMouseLeave={() => setCellIndex(null)}>
-                <TableCell className={classes.tableCell} width="30%">{member.memberName}</TableCell>
-                <TableCell className={classes.tableCell} width="50%">{member.accountId}</TableCell>
+                onMouseEnter={handleMouseEnter(idx)}
+                onMouseLeave={handleMouseLeave(idx)}>
+                <TableCell className={classes.tableCell} width="30%">
+                  {member.memberName}
+                </TableCell>
+                <TableCell className={classes.tableCell} width="50%">
+                  {member.accountId}
+                </TableCell>
                 <TableCell className={classes.tableCellActions} width="20%">
-                  {cellIndex === idx && (
-                    <Actions accountId={member.accountId} onDeleteRequest={onDeleteRequest} />
-                  )}
+                  {isHovered[idx] && <Actions accountId={member.accountId} />}
                 </TableCell>
               </TableRow>
             ))}
