@@ -1,5 +1,5 @@
-export const Ledger = () => (
-  <svg width="56" height="56" viewBox="0 0 56 56">
+export const Ledger = ({ className }) => (
+  <svg className={className} viewBox="0 0 56 56">
     <defs>
       <path
         id="kqc4zln96a"

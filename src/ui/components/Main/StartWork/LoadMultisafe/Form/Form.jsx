@@ -6,7 +6,7 @@ import { TextField } from '../../../general/TextField/TextField';
 import { useStyles } from './Form.styles';
 
 export const Form = () => {
-  const onLoadMultisafe = useStoreActions((a) => a.startWork.onLoadMultisafe);
+  const onLoadMultisafe = useStoreActions((actions) => actions.startWork.onLoadMultisafe);
   const { control, handleSubmit } = useForm();
   const { push } = useHistory();
   const classes = useStyles();

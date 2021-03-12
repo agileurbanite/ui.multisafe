@@ -24,7 +24,7 @@ export const GetStartedModal = ({ isOpen, onClose }) => {
         <div className={classes.buttonWrapper}>
           <IconButton onClick={onConnect}>
             <div className={classes.iconWrapper}>
-              <Near />
+              <Near className={classes.icon} />
             </div>
           </IconButton>
           <span>Near Wallet</span>
@@ -32,7 +32,7 @@ export const GetStartedModal = ({ isOpen, onClose }) => {
         <div className={classes.buttonWrapper}>
           <IconButton>
             <div className={classes.iconWrapper}>
-              <Ledger />
+              <Ledger className={classes.icon} />
             </div>
           </IconButton>
           <span>Ledger</span>
