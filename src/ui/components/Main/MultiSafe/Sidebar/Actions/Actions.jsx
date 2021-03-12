@@ -21,6 +21,7 @@ export const Actions = () => {
         <OpenInExplorer
           classNames={{ iconButton: classes.iconButton, icon: classes.icon }}
           accountId={multisafeId}
+          accountType="contract"
         />
       </div>
 
