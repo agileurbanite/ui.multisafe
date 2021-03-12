@@ -29,6 +29,10 @@ const styles = {
     border: '1px solid rgba(0, 0, 0, 0.14)',
     borderRadius: '8px',
   },
+  icon: {
+    height: 56,
+    width: 56,
+  },
 };
 
 export const useStyles = makeStyles(styles, { name: 'GetStartedModal' });

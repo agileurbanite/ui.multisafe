@@ -10,15 +10,6 @@ const styles = {
     gridArea: 'c',
     height: 36,
   },
-  container: {
-    width: 300,
-    height: 300,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    outline: 'none',
-  },
 };
 
 export const useStyles = makeStyles(styles, { name: 'NewTransaction' });

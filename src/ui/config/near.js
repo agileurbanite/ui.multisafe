@@ -20,7 +20,7 @@ const testnet = {
         'list_request_ids',
         'get_confirmations',
       ],
-      changeMethods: ['add_request', 'confirm', 'delete_request'],
+      changeMethods: ['add_request', 'add_request_and_confirm', 'confirm', 'delete_request'],
     },
   },
 };

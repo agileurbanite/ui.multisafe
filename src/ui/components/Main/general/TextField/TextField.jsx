@@ -8,6 +8,12 @@ export const TextField = ({
   variant,
   placeholder,
   className,
+  muiClasses,
+  InputProps,
+  label,
+  fullWidth,
+  helperText,
+  error,
 }) => {
   const { field } = useController({ name, control, defaultValue });
   return (
@@ -19,6 +25,12 @@ export const TextField = ({
       variant={variant}
       placeholder={placeholder}
       className={className}
+      classes={muiClasses}
+      InputProps={InputProps}
+      label={label}
+      helperText={helperText}
+      fullWidth={fullWidth}
+      error={error}
     />
   );
 };

@@ -1,11 +1,10 @@
-import { Button, Modal, Paper } from '@material-ui/core';
-import { useStoreActions } from 'easy-peasy';
 import { useState } from 'react';
+import { Button, Modal } from '@material-ui/core';
+import { SendFunds } from './SendFunds/SendFunds';
 import { useStyles } from './NewTransaction.styles';
 
 // TODO Create Modal as a general component
 export const NewTransaction = () => {
-  const onTransferTokens = useStoreActions((a) => a.multisafe.onTransferTokens);
   const [isOpen, setOpen] = useState(false);
   const classes = useStyles();
 
@@ -23,9 +22,7 @@ export const NewTransaction = () => {
         New Transaction
       </Button>
       <Modal open={isOpen} onClose={onClose} className={classes.modal}>
-        <Paper className={classes.container}>
-          <Button onClick={onTransferTokens}>Send 1 NEAR to eclipseeer.testnet</Button>
-        </Paper>
+        <SendFunds onClose={onClose} />
       </Modal>
     </>
   );
