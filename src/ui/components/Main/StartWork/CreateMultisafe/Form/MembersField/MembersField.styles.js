@@ -5,14 +5,17 @@ const styles = {
     width: 620
   },
   addMemberInput: {},
-  memberName: {
-    width: '100%'
-  },
   memberAddress: {
     width: '100%',
-    marginLeft: 20
   },
-  addButton: {},
+  memberAddressInput: {
+    fontSize: 16,
+    fontWeight: 900
+  },
+  addButton: {
+    borderColor: "rgba(0, 0, 0, 0.12)",
+    borderRadius: 8
+  },
   iconButton: {
     padding: '8px',
     margin: '0 16px',
@@ -22,7 +25,10 @@ const styles = {
     '&:hover': {
       color: '#e40029',
     },
-  }
+  },
+  addIcon: {
+    color: '#00c08b'
+  },
 };
 
 export const useStyles = makeStyles(styles, { name: 'MembersField' });

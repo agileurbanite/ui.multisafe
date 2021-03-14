@@ -6,9 +6,8 @@ const styles = {
   },
   headerWrapper: {
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 25,
+    marginTop: 36,
   },
   subheader: {
     marginTop: 25
