@@ -1,4 +1,3 @@
-import React from 'react';
 import { useStoreState } from 'easy-peasy';
 import {
   TableContainer,
@@ -8,21 +7,11 @@ import {
   TableCell,
   TableBody,
 } from '@material-ui/core';
-import { Actions } from './Actions/Actions';
 import { useStyles } from './Members.styles';
+import { Row } from './Row/Row';
 
 export const Members = () => {
   const members = useStoreState(({ multisafe }) => multisafe.members);
-  const [isHovered, setHovered] = React.useState({});
-
-  const handleMouseEnter = (index) => () => {
-    setHovered((prevState) => ({ ...prevState, [index]: true }));
-  };
-
-  const handleMouseLeave = (index) => () => {
-    setHovered((prevState) => ({ ...prevState, [index]: false }));
-  };
-
   const classes = useStyles();
 
   return (
@@ -37,23 +26,7 @@ export const Members = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {members.map((member, idx) => (
-              <TableRow
-                key={member.memberName}
-                className={classes.tableRow}
-                onMouseEnter={handleMouseEnter(idx)}
-                onMouseLeave={handleMouseLeave(idx)}>
-                <TableCell className={classes.tableCell} width="30%">
-                  {member.memberName}
-                </TableCell>
-                <TableCell className={classes.tableCell} width="50%">
-                  {member.accountId}
-                </TableCell>
-                <TableCell className={classes.tableCellActions} width="20%">
-                  {isHovered[idx] && <Actions accountId={member.accountId} />}
-                </TableCell>
-              </TableRow>
-            ))}
+            <Row members={members} classNames={classes}/>
           </TableBody>
         </Table>
       </TableContainer>

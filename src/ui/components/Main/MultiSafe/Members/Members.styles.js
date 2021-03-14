@@ -14,7 +14,8 @@ const styles = {
     }
   },
   table: {
-    tableLayout: 'fixed'
+    tableLayout: 'fixed',
+    minWidth: 620
   },
   tableCell: {
     padding: "16px",
