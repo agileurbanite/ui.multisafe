@@ -1,23 +1,28 @@
 import { persist } from 'easy-peasy';
 
-export const initState = persist(
-  {
-    general: {
-      name: '',
-      multisafeId: '',
-      balance: 0,
-    },
-    dashboard: {
-      transactions: [],
-    },
-    members: [],
-    multisafes: [],
-    entities: {
-      contract: null,
+export const initState = {
+  general: {
+    name: '',
+    multisafeId: '',
+    balance: 0,
+  },
+  dashboard: {
+    transactions: [],
+  },
+  members: [],
+  multisafes: [],
+  selectors: {
+    multisafes: {
+      membership: [],
+      readOnly: [],
     },
   },
-  {
-    allow: ['multisafes'],
-    storage: 'localStorage',
+  entities: {
+    contract: null,
   },
-);
+};
+
+export const initPersistentState = persist(initState, {
+  allow: ['multisafes'],
+  storage: 'localStorage',
+});

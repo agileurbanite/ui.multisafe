@@ -1,10 +1,10 @@
-import { initState } from './initState';
+import { initPersistentState } from './initState';
 import { selectors } from './selectors';
 import { actions } from './actions';
 import { thunks } from './thunks';
 
 export const multisafe = {
-  ...initState,
+  ...initPersistentState,
   ...actions,
   ...thunks,
   selectors,
