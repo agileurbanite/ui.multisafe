@@ -1,5 +1,6 @@
 import { useStoreState } from 'easy-peasy';
 import { LinearProgress } from '@material-ui/core';
+import { Account } from './Account/Account';
 import { useStyles } from './Topbar.styles';
 import logo from '../../../../images/logo/logo-black@3x.png';
 
@@ -13,7 +14,7 @@ export const Topbar = () => {
     <>
       <div className={classes.container}>
         <img className={classes.logo} src={logo} alt="Logo of Multisafe" />
-        {isConnected ? <span>{accountId}</span> : <span>Connect to wallet</span>}
+        {isConnected ? <Account accountId={accountId} /> : <span>Connect to wallet</span>}
       </div>
       {isLoading && <LinearProgress className={classes.progress} />}
     </>
