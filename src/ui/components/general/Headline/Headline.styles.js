@@ -5,16 +5,17 @@ const resolveCSSPropValue = (value) => (props) => R.propOr(null, value, props);
 
 const styles = {
   main: {
+    margin: 0,
+    fontWeight: 900,
     lineHeight: 'normal',
     textAlign: R.curry(resolveCSSPropValue) ('textAlign')
   },
   is1: {
-    margin: 0,
-    fontWeight: 900,
-    fontSize: '34px',
+    fontSize: 34,
   },
-  is2: {},
-  is3: {},
+  is3: {
+    fontSize: 20,
+  }
 };
 
 export const useStyles = makeStyles(styles, { name: 'Headline' });
