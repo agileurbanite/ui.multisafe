@@ -24,6 +24,8 @@ const styles = {
   },
   content: {
     gridArea: 'a',
+    display: 'flex',
+    flexDirection: 'column',
   },
   header: {
     fontSize: '60px',
@@ -49,8 +51,17 @@ const styles = {
     gridArea: 'f',
   },
   getStarted: {
-    width: '236px',
-    marginTop: '36px',
+    width: 236,
+    marginTop: 36,
+  },
+  tryDemo: {
+    width: 236,
+    marginTop: 16,
+    borderRadius: 8,
+    padding: 11,
+    borderColor: 'rgba(255, 255, 255, 0.12)',
+    letterSpacing: 1.25,
+    fontWeight: 700,
   },
 };
 

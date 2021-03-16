@@ -1,24 +1,11 @@
 import { makeStyles } from '@material-ui/core';
 
 const styles = {
-  modal: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   container: {
-    width: 400,
-    height: 300,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    outline: 'none',
-  },
-  buttonWrapper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    margin: '0 10px',
   },
   iconWrapper: {
     width: '96px',
@@ -35,4 +22,4 @@ const styles = {
   },
 };
 
-export const useStyles = makeStyles(styles, { name: 'GetStartedModal' });
+export const useStyles = makeStyles(styles, { name: 'Icon' });

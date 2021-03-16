@@ -3,7 +3,7 @@ import { Button, Modal } from '@material-ui/core';
 import { SendFunds } from './SendFunds/SendFunds';
 import { useStyles } from './NewTransaction.styles';
 
-// TODO Create Popover as a general component
+// TODO Create Modal as a general component
 export const NewTransaction = () => {
   const [isOpen, setOpen] = useState(false);
   const classes = useStyles();
