@@ -27,8 +27,6 @@ export const onInitApp = thunk(async (_, payload, { getStoreActions }) => {
     },
   });
 
-  // Load data from local storage
-
   // Handle redirects
   if (history.location.pathname === '/') {
     history.replace('/welcome');

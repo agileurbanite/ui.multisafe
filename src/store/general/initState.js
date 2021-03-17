@@ -5,6 +5,9 @@ export const initState = {
     isConnected: false,
     accountId: null,
   },
+  selectors: {
+    hasSavedMultisafes: false,
+  },
   entities: {
     near: null,
     wallet: null,
