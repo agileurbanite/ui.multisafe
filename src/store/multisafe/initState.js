@@ -23,6 +23,6 @@ export const initState = {
 };
 
 export const initPersistentState = persist(initState, {
-  allow: ['multisafes'],
+  allow: ['multisafes', 'general'],
   storage: 'localStorage',
 });

@@ -1,18 +1,19 @@
 import { thunk } from 'easy-peasy';
 import { connect, keyStores, WalletConnection } from 'near-api-js';
+import { getDataBeforeRenderPage } from './helpers/getDataBeforeRenderPage';
+import { near as nearConfig } from '../../../ui/config/near';
 
-// TODO move configs to config folder
+const { networkId, nodeUrl, walletUrl } = nearConfig;
+
 export const onInitApp = thunk(async (_, payload, { getStoreActions }) => {
   const { history } = payload;
   const actions = getStoreActions();
-  const initApp = actions.general.initApp;
   const initNear = actions.general.initNear;
-  const onRouteChange = actions.general.onRouteChange;
 
   const near = await connect({
-    networkId: 'testnet',
-    nodeUrl: 'https://rpc.testnet.near.org',
-    walletUrl: 'http://wallet.testnet.near.org',
+    networkId,
+    nodeUrl,
+    walletUrl,
     keyStore: new keyStores.BrowserLocalStorageKeyStore(),
   });
 
@@ -27,11 +28,5 @@ export const onInitApp = thunk(async (_, payload, { getStoreActions }) => {
     },
   });
 
-  // Handle redirects
-  if (history.location.pathname === '/') {
-    history.replace('/welcome');
-  }
-
-  await onRouteChange({ history, withLoading: false });
-  initApp();
+  await getDataBeforeRenderPage(actions, history, false);
 });
