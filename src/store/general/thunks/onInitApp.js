@@ -1,7 +1,7 @@
 import { thunk } from 'easy-peasy';
 import { connect, keyStores, WalletConnection } from 'near-api-js';
 import { getDataBeforeRenderPage } from './helpers/getDataBeforeRenderPage';
-import { near as nearConfig } from '../../../ui/config/near';
+import { near as nearConfig } from '../../../config/near';
 
 const { networkId, nodeUrl, walletUrl } = nearConfig;
 
