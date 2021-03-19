@@ -1,15 +1,18 @@
+import { useStoreState } from 'easy-peasy';
 import { useHistory } from 'react-router-dom';
 import { Typography, IconButton } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
 import { Form } from './Form/Form';
-import { routes } from '../../../../config/routes';
+import { redirectBack } from '../general/redirectBack';
 import { useStyles } from './LoadMultisafe.styles';
 
 export const LoadMultisafe = () => {
+  const hasSavedMultisafes = useStoreState((store) => store.general.selectors.hasSavedMultisafes);
+  const multisafeId = useStoreState((store) => store.multisafe.general.multisafeId);
   const { push } = useHistory();
   const classes = useStyles();
 
-  const goBack = () => push(routes.getStarted);
+  const goBack = () => redirectBack(hasSavedMultisafes, multisafeId, push);
 
   return (
     <div className={classes.container}>

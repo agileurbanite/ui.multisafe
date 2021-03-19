@@ -5,10 +5,10 @@ export const onDisconnect = thunk((_, payload, { getStoreActions }) => {
   const { history } = payload;
   const actions = getStoreActions();
   const resetState = actions.resetState;
-  const onInitApp = actions.general.onInitApp;
+  const onInitNear = actions.general.onInitNear;
 
   resetState();
   localStorage.clear();
   history.push(routes.welcome);
-  onInitApp({ history });
+  onInitNear();
 });

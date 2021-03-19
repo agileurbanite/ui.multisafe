@@ -3,7 +3,8 @@ import { render } from 'react-dom';
 import { StoreProvider } from 'easy-peasy';
 import { MuiThemeProvider } from '@material-ui/core';
 import { createBrowserHistory } from 'history';
-import { Router } from './ui/providers/Router';
+import { Initializer } from './ui/components/Initializer/Initializer';
+import { Router } from './ui/components/Router';
 import { App } from './ui/components/App';
 import { store } from './store';
 import { theme } from './ui/config/theme';
@@ -14,9 +15,11 @@ render(
   <StrictMode>
     <StoreProvider store={store}>
       <MuiThemeProvider theme={theme}>
-        <Router history={history} store={store}>
-          <App />
-        </Router>
+        <Initializer history={history} store={store}>
+          <Router>
+            <App />
+          </Router>
+        </Initializer>
       </MuiThemeProvider>
     </StoreProvider>
   </StrictMode>,
