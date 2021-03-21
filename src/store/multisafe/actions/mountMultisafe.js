@@ -3,7 +3,7 @@ import * as R from 'ramda';
 
 // Temporary function
 const nearAddressToName = address => R.compose(
-  R.replace(/\.(testnet|betanet|localnet|near)/g, ''),
+  R.replace(/\.(testnet|guildnet|betanet|localnet|near)/g, ''),
   R.join(''),
   R.juxt([
     R.compose(

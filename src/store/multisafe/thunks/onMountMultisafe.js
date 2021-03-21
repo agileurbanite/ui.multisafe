@@ -12,7 +12,7 @@ export const onMountMultisafe = thunk(async (_, payload, { getStoreState, getSto
   const mountMultisafe = actions.multisafe.mountMultisafe;
 
   const contract = new Contract(wallet.account(), multisafeId, nearConfig.multisafe.methods);
-  const localMultisafe = multisafes.find((multisafe) => multisafe.multisafeId === multisafeId);
+  const localMultisafe = multisafes.find((multisafe) => multisafe.multisafeId === multisafeId) || {name: "Unknown", multisafeId};
 
   try {
     const account = await near.account(multisafeId);

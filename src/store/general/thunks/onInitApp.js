@@ -1,5 +1,6 @@
 import { thunk } from 'easy-peasy';
-import { connect, keyStores, WalletConnection } from 'near-api-js';
+import { connect, keyStores } from 'near-api-js';
+import { ProgressiveWalletConnection } from '../../../ui/config/api-overrides/progressive-wallet-connection';
 
 // TODO move configs to config folder
 export const onInitApp = thunk(async (_, payload, { getStoreActions }) => {
@@ -16,7 +17,7 @@ export const onInitApp = thunk(async (_, payload, { getStoreActions }) => {
     keyStore: new keyStores.BrowserLocalStorageKeyStore(),
   });
 
-  const wallet = new WalletConnection(near, 'multisafe');
+  const wallet = new ProgressiveWalletConnection(near, 'multisafe');
 
   initNear({
     near,

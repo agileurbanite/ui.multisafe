@@ -15,18 +15,10 @@ export const onCreateMultisafe = thunk(async (_, payload, { getStoreState }) => 
   const store = getStoreState();
   const factoryContract = store.startWork.entities.factoryContract;
 
-  const serializedData = serializeData(data);
+  const { name, members, num_confirmations, amount, GAS } = serializeData(data);
 
   try {
-    await factoryContract.create(
-      {
-        name: serializedData.name,
-        members: serializedData.members,
-        num_confirmations: serializedData.num_confirmations,
-      },
-      serializedData.GAS,
-      serializedData.amount,
-    );
+    await factoryContract.create({ name, members, num_confirmations }, GAS, amount);
   } catch (error) {
     throw new Error(error);
   }
