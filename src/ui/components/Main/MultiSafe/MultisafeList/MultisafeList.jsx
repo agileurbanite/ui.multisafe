@@ -7,6 +7,7 @@ import { List } from './List/List';
 import { useStyles } from './MultisafeList.styles';
 
 export const MultisafeList = ({ onListClose }) => {
+  const isConnected = useStoreState((store) => store.general.user.isConnected);
   const membership = useStoreState((store) => store.multisafe.selectors.multisafes.membership);
   const readOnly = useStoreState((store) => store.multisafe.selectors.multisafes.readOnly);
   const classes = useStyles();
@@ -22,7 +23,12 @@ export const MultisafeList = ({ onListClose }) => {
           <h3 className={classes.header}>Multi Safe List</h3>
         </div>
         <Divider className={classes.divider} />
-        <GreenLink to={routes.createMultisafe} text="Create new Multi Safe" icon={Add} />
+        <GreenLink
+          to={routes.createMultisafe}
+          text="Create new Multi Safe"
+          icon={Add}
+          disabled={!isConnected}
+        />
         <GreenLink
           to={routes.loadMultisafe}
           text="Load existing Multi Safe"

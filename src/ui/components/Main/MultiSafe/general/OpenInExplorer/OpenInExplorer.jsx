@@ -1,6 +1,6 @@
 import { IconButton, Tooltip } from '@material-ui/core';
 import { OpenInNew } from '@material-ui/icons';
-import { near } from '../../../../../config/near';
+import { near } from '../../../../../../config/near';
 
 export const OpenInExplorer = ({ accountId, classNames, accountType = 'account' }) => (
   <a href={near.getCheckAccountInExplorerUrl(accountId)} target="_blank" rel="noreferrer">

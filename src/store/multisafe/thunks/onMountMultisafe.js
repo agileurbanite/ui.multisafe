@@ -1,6 +1,6 @@
 import { thunk } from 'easy-peasy';
 import { Contract } from 'near-api-js';
-import { near as nearConfig } from '../../../ui/config/near';
+import { near as nearConfig } from '../../../config/near';
 
 export const onMountMultisafe = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
   const { multisafeId } = payload;

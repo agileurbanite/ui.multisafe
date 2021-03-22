@@ -1,11 +1,12 @@
-import { Link } from 'react-router-dom';
+import { Container } from './Container/Container';
 import { useStyles } from './GreenLink.styles';
 
-export const GreenLink = ({ to, text, icon }) => {
-  const classes = useStyles();
+export const GreenLink = ({ to, text, icon, disabled }) => {
+  const classes = useStyles({ disabled });
   const Icon = icon;
+
   return (
-    <Link to={to}>
+    <Container to={to} disabled={disabled}>
       <div className={classes.container}>
         <div className={classes.iconContainer}>
           <Icon className={classes.icon} />
@@ -14,6 +15,6 @@ export const GreenLink = ({ to, text, icon }) => {
           <span className={classes.text}>{text}</span>
         </div>
       </div>
-    </Link>
+    </Container>
   );
 };

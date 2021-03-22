@@ -4,7 +4,8 @@ const styles = (theme) => ({
   container: {
     width: '100%',
     display: 'flex',
-    color: theme.palette.primary.main,
+    color: ({ disabled }) => (disabled ? 'grey' : theme.palette.primary.main),
+    userSelect: 'none',
   },
   iconContainer: {
     height: 56,
