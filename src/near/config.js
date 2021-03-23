@@ -38,4 +38,4 @@ const getNearConfig = () => {
 };
 
 // TODO pass the env variable to get the real config based on the env where it runs
-export const near = getNearConfig();
+export const config = getNearConfig();

@@ -1,6 +1,6 @@
 import { thunk } from 'easy-peasy';
 import { Contract } from 'near-api-js';
-import { near as nearConfig } from '../../../near/config';
+import { config } from '../../../near/config';
 
 export const onMountMultisafe = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
   const { multisafeId } = payload;
@@ -11,7 +11,7 @@ export const onMountMultisafe = thunk(async (_, payload, { getStoreState, getSto
   const actions = getStoreActions();
   const mountMultisafe = actions.multisafe.mountMultisafe;
 
-  const contract = new Contract(wallet.account(), multisafeId, nearConfig.multisafe.methods);
+  const contract = new Contract(wallet.account(), multisafeId, config.multisafe.methods);
   const localMultisafe = multisafes.find((multisafe) => multisafe.multisafeId === multisafeId) || {
     name: 'Unknown',
     multisafeId,
