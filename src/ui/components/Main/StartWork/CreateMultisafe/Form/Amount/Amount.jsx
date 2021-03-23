@@ -17,7 +17,7 @@ export const Amount = ({ control, classNames, hasError, errorMessage }) => (
         variant="filled"
         label="Amount*"
         fullWidth
-        defaultValue={0}
+        defaultValue="0"
         className={classNames?.amountField}
         error={hasError}
         helperText={errorMessage}

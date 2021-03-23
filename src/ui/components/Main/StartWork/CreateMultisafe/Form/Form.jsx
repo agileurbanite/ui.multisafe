@@ -2,13 +2,12 @@ import { Button, Typography } from '@material-ui/core';
 import { useStoreActions } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { has } from 'ramda';
 import { useStyles } from './Form.styles';
 import { MembersField } from './MembersField/MembersField';
 import { MultisafeName } from './MultisafeName/MultisafeName';
 import { Confirmations } from './Confirmations/Confirmations';
 import { Amount } from './Amount/Amount';
-import { createMultisafeSchema } from '../../../../../../utils/validation';
+import { createMultisafeSchema } from '../../../../../../utils/validation/CreateMultisafePage';
 
 export const Form = () => {
   const onCreateMultisafe = useStoreActions((a) => a.startWork.onCreateMultisafe);
@@ -26,8 +25,8 @@ export const Form = () => {
       <MultisafeName
         control={control}
         classNames={classes}
-        hasError={!!errors.name}
-        errorMessage={has('name', errors) ? errors.name.message : null}
+        hasError={!!errors?.name}
+        errorMessage={!!errors?.name && errors?.name?.message}
       />
       <MembersField
         control={control}
@@ -35,20 +34,18 @@ export const Form = () => {
         classNames={classes}
         name="members"
         errors={errors}
-        hasError={!!errors.members}
-        errorMessage={has('members', errors) ? errors.members.message : null}
       />
       <Confirmations
         control={control}
         classNames={classes}
-        hasError={!!errors.num_confirmations}
-        errorMessage={has('num_confirmations', errors) ? errors.num_confirmations.message : null}
+        hasError={!!errors?.num_confirmations}
+        errorMessage={!!errors?.num_confirmations && errors?.num_confirmations?.message}
       />
       <Amount
         control={control}
         classNames={classes}
-        hasError={!!errors.amount}
-        errorMessage={has('amount', errors) ? errors.amount.message : null}
+        hasError={!!errors?.amount}
+        errorMessage={!!errors?.amount && errors?.amount?.message}
       />
       <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
         Create Multi Safe

@@ -15,6 +15,11 @@ const validationMessageType = {
   amount: 'Recommended amount - 5 NEAR',
 };
 
+const patterns = {
+  memberAddress: /\.(testnet|betanet|localnet|near)/g,
+  amount: /^([5-9]|0?[1-9][0-9]+)$/g,
+};
+
 export const createMultisafeSchema = yup.object().shape({
   name: yup.string().required(requiredMessageType.name).min(4, validationMessageType.name),
   members: yup
@@ -24,11 +29,18 @@ export const createMultisafeSchema = yup.object().shape({
         account_id: yup
           .string()
           .required(requiredMessageType.account_id)
-          .min(2, validationMessageType.account_id),
+          .min(2, validationMessageType.account_id)
+          .matches(
+            patterns.memberAddress,
+            'Member address must contain network connection type: alice.near, alice.testnet etc',
+          ),
       }),
     )
     .required(requiredMessageType.members)
     .min(1, validationMessageType.members),
   num_confirmations: yup.string().required(requiredMessageType.num_confirmations),
-  amount: yup.number().required(requiredMessageType.amount).min(5, validationMessageType.amount),
+  amount: yup
+    .string()
+    .required(requiredMessageType.amount)
+    .matches(patterns.amount, validationMessageType.amount),
 });

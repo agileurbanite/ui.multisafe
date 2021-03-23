@@ -1,7 +1,6 @@
-import { useFieldArray } from 'react-hook-form';
+import { useFieldArray, useWatch } from 'react-hook-form'
 import { List, ListItem, Button, IconButton, Typography, FormHelperText } from '@material-ui/core';
 import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
-import { has } from 'ramda'
 import { useStyles } from './MembersField.styles';
 import { BulletHeading } from '../../../../general/BulletHeading/BulletHeading';
 import { ContentSeparator } from '../../../../../general/ContentSeparator/ContentSeparator';
@@ -13,11 +12,14 @@ export const MembersField = ({
   name,
   classNames,
   errors,
-  hasError,
-  errorMessage,
 }) => {
   const classes = useStyles();
   const { fields, append, remove } = useFieldArray({ control, name });
+  const watchedMembers =
+    useWatch({
+      control,
+      name: 'members',
+    }) || [];
 
   const appendMember = () => append([{ account_id: getValues('account_id') }]);
 
@@ -45,8 +47,8 @@ export const MembersField = ({
                 label="Member Address*"
                 className={classes.memberAddress}
                 fullWidth
-                error={has('members', errors) && has(`members[${idx}].account_id`, errors)}
-                helperText={has(`members[${idx}].account_id`, errors) ? errors.members[idx].account_id.message : null}
+                error={!!errors?.members?.[idx]?.account_id}
+                helperText={!!errors?.members && errors?.members?.[idx]?.account_id.message}
                 InputProps={{
                   classes: {
                     root: classes.memberAddressInput,
@@ -69,8 +71,8 @@ export const MembersField = ({
             onClick={appendMember}>
             Add Member
           </Button>
-          <FormHelperText id="members-validation-field" error={hasError}>
-            {errorMessage}
+          <FormHelperText id="members-validation-field" error={watchedMembers < 1}>
+            {watchedMembers < 1 && errors?.members?.message}
           </FormHelperText>
         </section>
       </section>
