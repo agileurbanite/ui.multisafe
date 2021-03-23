@@ -1,6 +1,6 @@
 import { thunk } from 'easy-peasy';
 import { Contract } from 'near-api-js';
-import { near } from '../../../config/near';
+import { near } from '../../../near/config';
 
 const { contractId, methods } = near.multisafeFactory;
 

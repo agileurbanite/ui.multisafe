@@ -1,5 +1,5 @@
-import { WalletConnection } from 'near-api-js'
-import { RedirectConnectedWalletAccount } from './redirect-connected-wallet';
+import { WalletConnection } from 'near-api-js';
+import { RedirectConnectedWalletAccount } from './RedirectConnectedWalletAccount';
 
 export class ProgressiveWalletConnection extends WalletConnection {
   account() {

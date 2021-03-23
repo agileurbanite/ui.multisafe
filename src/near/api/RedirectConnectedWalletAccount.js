@@ -4,8 +4,8 @@ import { baseDecode } from 'borsh';
 import { createTransaction } from 'near-api-js/lib/transaction';
 import * as qs from 'query-string';
 import * as R from 'ramda';
-import { getRoute } from '../routes';
-import { decode } from '../../../utils/buffer';
+import { getRoute } from '../../ui/config/routes';
+import { decode } from '../../utils/buffer';
 
 export class RedirectConnectedWalletAccount extends Account {
   constructor(walletConnection, connection, accountId) {
@@ -66,8 +66,14 @@ export class RedirectConnectedWalletAccount extends Account {
     }
 
     if (permission.FunctionCall) {
-      const { receiver_id: allowedReceiverId, method_names: allowedMethods } = permission.FunctionCall;
-      if (allowedReceiverId === this.accountId && allowedMethods.includes("add_request_and_confirm")) {
+      const {
+        receiver_id: allowedReceiverId,
+        method_names: allowedMethods,
+      } = permission.FunctionCall;
+      if (
+        allowedReceiverId === this.accountId &&
+        allowedMethods.includes('add_request_and_confirm')
+      ) {
         return true;
       }
       if (allowedReceiverId === receiverId) {
@@ -75,9 +81,11 @@ export class RedirectConnectedWalletAccount extends Account {
           return false;
         }
         const [{ functionCall }] = actions;
-        return functionCall &&
-          (!functionCall.deposit || functionCall.deposit.toString() === "0") &&
-          (allowedMethods.length === 0 || allowedMethods.includes(functionCall.methodName));
+        return (
+          functionCall &&
+          (!functionCall.deposit || functionCall.deposit.toString() === '0') &&
+          (allowedMethods.length === 0 || allowedMethods.includes(functionCall.methodName))
+        );
       }
     }
     return false;
