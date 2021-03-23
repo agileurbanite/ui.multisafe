@@ -4,7 +4,7 @@ import { useController, useWatch } from 'react-hook-form';
 import { BulletHeading } from '../../../../general/BulletHeading/BulletHeading';
 import { ContentSeparator } from '../../../../../general/ContentSeparator/ContentSeparator';
 
-export const Confirmations = ({ control, classNames }) => {
+export const Confirmations = ({ control, classNames, hasError, errorMessage }) => {
   const watchedMembers =
     useWatch({
       control,
@@ -38,6 +38,8 @@ export const Confirmations = ({ control, classNames }) => {
           disabled={R.isEmpty(membersCountList)}
           className={classNames?.confirmationsField}
           select
+          error={hasError}
+          helperText={errorMessage}
           {...inputProps}
         >
           {membersCountList.map((idx) => (
@@ -46,7 +48,7 @@ export const Confirmations = ({ control, classNames }) => {
             </MenuItem>
           ))}
         </TextField>
-        <FormHelperText id="filled-confirmation-helper-text">of 1 owner(s)</FormHelperText>
+        {!errorMessage && <FormHelperText id="filled-confirmation-helper-text">of 1 owner(s)</FormHelperText>}
       </section>
       <ContentSeparator bg="rgba(0, 0, 0, 0.87)" height={1} margin="24px 0" />
     </>

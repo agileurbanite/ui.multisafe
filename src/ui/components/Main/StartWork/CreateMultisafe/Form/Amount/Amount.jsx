@@ -4,7 +4,7 @@ import { ContentSeparator } from '../../../../../general/ContentSeparator/Conten
 import { Near } from '../../../../../general/icons/Near'
 import { TextField } from '../../../../general/TextField/TextField'
 
-export const Amount = ({ control, classNames }) => (
+export const Amount = ({ control, classNames, hasError, errorMessage }) => (
   <>
     <BulletHeading>Deposit funds</BulletHeading>
     <Typography className={classNames?.description}>
@@ -17,7 +17,10 @@ export const Amount = ({ control, classNames }) => (
         variant="filled"
         label="Amount*"
         fullWidth
+        defaultValue={0}
         className={classNames?.amountField}
+        error={hasError}
+        helperText={errorMessage}
         InputProps={{
           classes: {
             root: classNames.amountInputRoot,

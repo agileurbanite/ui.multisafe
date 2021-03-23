@@ -1,19 +1,28 @@
 import { useFieldArray } from 'react-hook-form';
-import { List, ListItem, Button, IconButton, Typography } from '@material-ui/core';
+import { List, ListItem, Button, IconButton, Typography, FormHelperText } from '@material-ui/core';
 import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
+import { has } from 'ramda'
 import { useStyles } from './MembersField.styles';
 import { BulletHeading } from '../../../../general/BulletHeading/BulletHeading';
-import { ContentSeparator } from '../../../../../general/ContentSeparator/ContentSeparator'
-import { TextField } from '../../../../general/TextField/TextField'
+import { ContentSeparator } from '../../../../../general/ContentSeparator/ContentSeparator';
+import { TextField } from '../../../../general/TextField/TextField';
 
-export const MembersField = ( { control, getValues, name, classNames } ) => {
+export const MembersField = ({
+  control,
+  getValues,
+  name,
+  classNames,
+  errors,
+  hasError,
+  errorMessage,
+}) => {
   const classes = useStyles();
   const { fields, append, remove } = useFieldArray({ control, name });
 
   const appendMember = () => append([{ account_id: getValues('account_id') }]);
 
   const removeMember = (idx) => remove(idx);
-
+  
   return (
     <>
       <BulletHeading>Members</BulletHeading>
@@ -36,10 +45,12 @@ export const MembersField = ( { control, getValues, name, classNames } ) => {
                 label="Member Address*"
                 className={classes.memberAddress}
                 fullWidth
+                error={has('members', errors) && has(`members[${idx}].account_id`, errors)}
+                helperText={has(`members[${idx}].account_id`, errors) ? errors.members[idx].account_id.message : null}
                 InputProps={{
                   classes: {
-                    root: classes.memberAddressInput
-                  }
+                    root: classes.memberAddressInput,
+                  },
                 }}
               />
               <IconButton className={classes.iconButton} onClick={removeMember}>
@@ -58,6 +69,9 @@ export const MembersField = ( { control, getValues, name, classNames } ) => {
             onClick={appendMember}>
             Add Member
           </Button>
+          <FormHelperText id="members-validation-field" error={hasError}>
+            {errorMessage}
+          </FormHelperText>
         </section>
       </section>
       <ContentSeparator bg="rgba(0, 0, 0, 0.87)" height={1} margin="24px 0" />
