@@ -10,9 +10,9 @@ const requiredMessageType = {
 const validationMessageType = {
   name: 'Name must be at least 4 characters long',
   members: 'At least 1 member must be present',
-  account_id: "Member's name must contain at least 2 characters long",
+  account_id: "Member address must contain network connection type: e.g. alice.near, alice.testnet",
   num_confirmations: '',
-  amount: 'Recommended amount - 5 NEAR',
+  amount: 'Enter a valid amount. Minimum is 5 NEAR',
 };
 
 const patterns = {
@@ -29,10 +29,8 @@ export const createMultisafeSchema = yup.object().shape({
         account_id: yup
           .string()
           .required(requiredMessageType.account_id)
-          .min(2, validationMessageType.account_id)
           .matches(
-            patterns.memberAddress,
-            'Member address must contain network connection type: alice.near, alice.testnet etc',
+            patterns.memberAddress, validationMessageType.account_id,
           ),
       }),
     )
