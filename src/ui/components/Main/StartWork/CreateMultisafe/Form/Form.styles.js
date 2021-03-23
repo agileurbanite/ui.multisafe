@@ -8,7 +8,7 @@ const styles = {
   },
   description: {
     marginTop: 25,
-    fontSize: 14
+    fontSize: 14,
   },
   textFieldInputRoot: {
     borderRadius: 8,
@@ -19,19 +19,18 @@ const styles = {
     border: 'none',
   },
   confirmationsField: {
-    width: '50%'
+    width: '50%',
   },
   confirmationInput: {
     fontWeight: 900,
-    fontSize: 16
+    fontSize: 16,
   },
   amountField: {
-    width: "50%",
-
+    width: '50%',
   },
   amountInputRoot: {
     fontSize: 16,
-    fontWeight: 900
+    fontWeight: 900,
   },
   adornmentText: {
     marginLeft: 8,
@@ -45,16 +44,16 @@ const styles = {
   submitButton: {
     fontSize: 14,
     margin: '25px auto 16px',
-    display: 'block'
+    display: 'block',
   },
   createMultisafeBlock: {
     width: '100%',
-    marginTop: 25
+    marginTop: 25,
   },
   fee: {
     marginTop: 16,
-    fontSize: 12
-  }
-}
+    fontSize: 12,
+  },
+};
 
 export const useStyles = makeStyles(styles, { name: 'Form' });
