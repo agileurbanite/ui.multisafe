@@ -1,5 +1,6 @@
 import { thunk } from 'easy-peasy';
-import { connect, keyStores, WalletConnection } from 'near-api-js';
+import { connect, keyStores } from 'near-api-js';
+import { WalletConnection } from '../../../near/api/WalletConnection';
 import { config } from '../../../near/config';
 
 const { networkId, nodeUrl, walletUrl } = config;

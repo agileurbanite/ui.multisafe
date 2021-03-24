@@ -1,33 +1,26 @@
+/* eslint-disable */
 import { Account } from 'near-api-js';
 import { PublicKey } from 'near-api-js/lib/utils';
 import { baseDecode } from 'borsh';
 import { createTransaction } from 'near-api-js/lib/transaction';
 import * as qs from 'query-string';
 import * as R from 'ramda';
-import { getRoute } from '../../ui/config/routes';
 import { decode } from '../../utils/buffer';
 
 export class RedirectConnectedWalletAccount extends Account {
   constructor(walletConnection, connection, accountId) {
     super(connection, accountId);
     this.walletConnection = walletConnection;
-    this.redirectUrl = '';
   }
 
-  resolveRedirectUrl(receiverId) {
-    const currentUrl = window.location;
-    const { url, query } = qs.parseUrl(currentUrl.href);
-
-    if (R.has('errorCode', query)) {
-      this.redirectUrl = qs.stringifyUrl({ url, query: { error: 'transactionError' } });
-    } else {
-      const mUrl = R.replace(currentUrl.pathname, '')(url);
-      this.redirectUrl = qs.stringifyUrl({
-        url: `${mUrl}${getRoute.members(receiverId)}`,
-        query: {},
-      });
-    }
-    return this.redirectUrl;
+  resolveRedirectUrl() {
+    return qs.stringifyUrl({
+      url: window.location.href,
+      query: {
+        name: 'My Multisafe',
+        multisafeId: 'my-muiltisafe.testnet',
+      },
+    });
   }
 
   async signAndSendTransaction(receiverId, actions) {
