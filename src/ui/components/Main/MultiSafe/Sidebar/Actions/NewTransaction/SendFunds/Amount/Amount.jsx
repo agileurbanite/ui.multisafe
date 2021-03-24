@@ -6,7 +6,7 @@ import { TextField } from '../../../../../../general/TextField/TextField';
 import { formatNearBalance } from '../../../../../../../../../utils/format';
 import { useStyles } from './Amount.styles';
 
-export const Amount = ({ control, classNames, setValue }) => {
+export const Amount = ({ control, classNames, setValue, hasError, errorMessage}) => {
   const balance = useStoreState((store) => store.multisafe.general.balance);
   const classes = useStyles();
 
@@ -20,6 +20,8 @@ export const Amount = ({ control, classNames, setValue }) => {
         variant="outlined"
         placeholder="Amount*"
         fullWidth
+        error={hasError}
+        helperText={errorMessage}
         className={classes.textField}
         InputProps={{
           endAdornment: (

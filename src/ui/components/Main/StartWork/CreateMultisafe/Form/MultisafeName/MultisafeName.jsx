@@ -3,7 +3,7 @@ import { TextField } from '../../../../general/TextField/TextField';
 import { BulletHeading } from '../../../../general/BulletHeading/BulletHeading';
 import { ContentSeparator } from '../../../../../general/ContentSeparator/ContentSeparator'
 
-export const MultisafeName = ({ control, classNames }) => (
+export const MultisafeName = ({ control, classNames, hasError, errorMessage }) => (
   <>
     <BulletHeading>Multi Safe Name</BulletHeading>
     <Typography className={classNames?.description}>
@@ -18,6 +18,8 @@ export const MultisafeName = ({ control, classNames }) => (
         placeholder="Multi Safe Name*"
         fullWidth
         className={classNames?.textField}
+        error={hasError}
+        helperText={errorMessage}
         InputProps={{
           classes: {
             root: classNames.textFieldInputRoot,
