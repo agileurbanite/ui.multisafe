@@ -40,7 +40,7 @@ export const onHandleWalletRedirect = thunk(async (_, payload, { getStoreActions
   if (ifRouteIs(welcome) && errorCode) {
     actions.general.setError({
       isError: true,
-      description: 'You have not connected your wallet. Please try again',
+      description: 'You have not connected your wallet',
     });
     return;
   }
