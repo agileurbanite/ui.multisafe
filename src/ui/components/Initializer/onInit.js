@@ -5,7 +5,9 @@ export const onInit = async (store, history, setInit) => {
   await store.persist.resolveRehydration();
   const actions = store.getActions();
 
-  await actions.general.onInitNear({ history });
+  await actions.general.onInitNear();
+  await actions.general.onHandleWalletRedirect({ history });
+
   setInitRoute(history, store);
 
   await getDataBeforeRenderPage(actions, history, false);

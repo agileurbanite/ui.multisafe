@@ -15,7 +15,11 @@ export const Status = ({ transaction, onConfirmRequest, onDeleteRequest }) => {
     <TableCell className={classes.tableCell}>
       {isMember ? (
         <div className={classes.container}>
-          <button type="button" className={classes.button} onClick={confirmRequest}>
+          <button
+            type="button"
+            className={classes.button}
+            onClick={confirmRequest}
+            disabled={hasUserConfirm}>
             <Done className={classes.doneIcon} />
             <span className={classes.description}>{`${currentNum}/${totalNum}`}</span>
           </button>

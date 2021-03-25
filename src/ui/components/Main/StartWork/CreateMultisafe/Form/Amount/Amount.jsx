@@ -1,8 +1,8 @@
-import { InputAdornment, Typography } from '@material-ui/core'
+import { InputAdornment, Typography } from '@material-ui/core';
 import { BulletHeading } from '../../../../general/BulletHeading/BulletHeading';
-import { ContentSeparator } from '../../../../../general/ContentSeparator/ContentSeparator'
-import { Near } from '../../../../../general/icons/Near'
-import { TextField } from '../../../../general/TextField/TextField'
+import { ContentSeparator } from '../../../../../general/ContentSeparator/ContentSeparator';
+import { Near } from '../../../../../general/icons/Near';
+import { TextField } from '../../../../general/TextField/TextField';
 
 export const Amount = ({ control, classNames, hasError, errorMessage }) => (
   <>

@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 
 const styles = {
   container: {
-    width: "620px"
+    width: '620px',
   },
   headerWrapper: {
     display: 'flex',
@@ -10,7 +10,7 @@ const styles = {
     marginTop: 36,
   },
   subheader: {
-    marginTop: 25
+    marginTop: 25,
   },
 };
 

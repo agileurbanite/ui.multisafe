@@ -1,6 +1,6 @@
 import { ChevronRight } from '@material-ui/icons';
-import { Headline } from '../../../general/Headline/Headline'
-import { useStyles } from './BulletHeading.styles'
+import { Headline } from '../../../general/Headline/Headline';
+import { useStyles } from './BulletHeading.styles';
 
 export const BulletHeading = ({ children }) => {
   const classes = useStyles();
@@ -9,5 +9,5 @@ export const BulletHeading = ({ children }) => {
       <ChevronRight className={classes.chevron} />
       <Headline is={3}>{children}</Headline>
     </div>
-  )
-}
+  );
+};

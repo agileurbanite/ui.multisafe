@@ -26,7 +26,7 @@ export const Members = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            <Row members={members} classNames={classes}/>
+            <Row members={members} classNames={classes} />
           </TableBody>
         </Table>
       </TableContainer>

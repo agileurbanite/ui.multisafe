@@ -24,7 +24,7 @@ export const MembersField = ({
   const appendMember = () => append([{ account_id: getValues('account_id') }]);
 
   const removeMember = (idx) => remove(idx);
-  
+
   return (
     <>
       <BulletHeading>Members</BulletHeading>

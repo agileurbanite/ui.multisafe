@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { TextField } from '../../../../general/TextField/TextField';
 import { BulletHeading } from '../../../../general/BulletHeading/BulletHeading';
-import { ContentSeparator } from '../../../../../general/ContentSeparator/ContentSeparator'
+import { ContentSeparator } from '../../../../../general/ContentSeparator/ContentSeparator';
 
 export const MultisafeName = ({ control, classNames, hasError, errorMessage }) => (
   <>

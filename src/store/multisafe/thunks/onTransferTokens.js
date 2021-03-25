@@ -10,14 +10,11 @@ export const onTransferTokens = thunk(async (_, payload, { getState }) => {
 
   try {
     await contract[method]({
-      request: {
-        receiver_id: recipientId,
-        actions: [
-          {
-            type: 'Transfer',
-            amount: utils.format.parseNearAmount(amount),
-          },
-        ],
+      payload: {
+        request: {
+          receiver_id: recipientId,
+          actions: [{ type: 'Transfer', amount: utils.format.parseNearAmount(amount) }],
+        },
       },
     });
   } catch (e) {

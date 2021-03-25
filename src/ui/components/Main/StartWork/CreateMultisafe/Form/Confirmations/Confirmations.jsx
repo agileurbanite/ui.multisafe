@@ -17,7 +17,7 @@ export const Confirmations = ({ control, classNames, hasError, errorMessage }) =
     name: 'num_confirmations',
     control,
     rules: { required: true },
-    defaultValue: "",
+    defaultValue: '',
   });
 
   const membersCountList = R.addIndex(R.map)((_, idx) => idx + 1, watchedMembers);
@@ -43,7 +43,10 @@ export const Confirmations = ({ control, classNames, hasError, errorMessage }) =
           {...inputProps}
         >
           {membersCountList.map((idx) => (
-            <MenuItem value={idx} key={`confirmation-member-${idx}`} className={classNames?.confirmationInput}>
+            <MenuItem
+              value={idx}
+              key={`confirmation-member-${idx}`}
+              className={classNames?.confirmationInput}>
               {idx}
             </MenuItem>
           ))}

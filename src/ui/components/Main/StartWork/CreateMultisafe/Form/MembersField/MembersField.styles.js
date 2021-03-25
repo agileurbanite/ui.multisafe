@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 
 const styles = {
   container: {
-    width: 620
+    width: 620,
   },
   addMemberInput: {},
   memberAddress: {
@@ -10,11 +10,11 @@ const styles = {
   },
   memberAddressInput: {
     fontSize: 16,
-    fontWeight: 900
+    fontWeight: 900,
   },
   addButton: {
-    borderColor: "rgba(0, 0, 0, 0.12)",
-    borderRadius: 8
+    borderColor: 'rgba(0, 0, 0, 0.12)',
+    borderRadius: 8,
   },
   iconButton: {
     padding: '8px',
@@ -27,7 +27,7 @@ const styles = {
     },
   },
   addIcon: {
-    color: '#00c08b'
+    color: '#00c08b',
   },
 };
 

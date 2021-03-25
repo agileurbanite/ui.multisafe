@@ -9,7 +9,11 @@ export const Actions = ({ accountId }) => {
     <div className={classes.container}>
       <div className={classes.tools}>
         <CopyToClipboard classNames={{ icon: classes.icon }} accountId={accountId} />
-        <OpenInExplorer classNames={{ icon: classes.icon }} accountId={accountId} accountType="account"/>
+        <OpenInExplorer
+          classNames={{ icon: classes.icon }}
+          accountId={accountId}
+          accountType="account"
+        />
       </div>
     </div>
   );
