@@ -7,7 +7,10 @@ const { createMultisafe } = routesConfig;
 
 const handleCreateMultisafe = (actions, { name, multisafeId, errorCode }, replace) => {
   if (errorCode) {
-    actions.general.setError({ isError: true, description: 'Cant create new multisafe' });
+    actions.general.setError({
+      isError: true,
+      description: 'The multisafe was not created. Please try again',
+    });
     return;
   }
   actions.multisafe.addMultisafe({ data: { name, multisafeId } });
@@ -38,6 +41,9 @@ export const onHandleWalletRedirect = thunk(async (_, payload, { getStoreActions
   }
 
   if (queryParams.errorCode) {
-    actions.general.setError({ isError: true, description: 'Some default wallet error' });
+    actions.general.setError({
+      isError: true,
+      description: 'Your transaction was not completed. Please try again',
+    });
   }
 });

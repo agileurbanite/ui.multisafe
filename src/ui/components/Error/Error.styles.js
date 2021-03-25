@@ -7,10 +7,21 @@ const styles = {
     alignItems: 'center',
   },
   container: {
-    width: 350,
+    width: 300,
     display: 'flex',
     flexDirection: 'column',
     outline: 'none',
+    borderRadius: 8,
+    padding: 16,
+  },
+  header: {
+    color: 'rgba(0, 0, 0, 0.87)',
+    fontWeight: 900,
+  },
+  footer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
   },
 };
 
