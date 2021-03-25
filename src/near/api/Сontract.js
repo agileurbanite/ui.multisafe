@@ -7,7 +7,7 @@ const validateBNLike = (argMap) => {
   const bnLike = 'number, decimal string or BN';
   Object.keys(argMap).forEach((key) => {
     const argValue = argMap[key];
-    if (argValue && !BN.isBN(argValue) && isNaN(argValue)) {
+    if (argValue && !BN.isBN(argValue) && Number.isNaN(argValue)) {
       throw new ArgumentTypeError(key, bnLike, argValue);
     }
   });
@@ -49,37 +49,3 @@ export class Contract {
     });
   }
 }
-
-// viewMethods.forEach((methodName) => {
-//   Object.defineProperty(this, methodName, {
-//     writable: false,
-//     enumerable: true,
-//     value: async (args = {}, options = {}, ...ignored) => {
-//       if (ignored.length || !(isObject(args) || isUint8Array(args)) || !isObject(options)) {
-//         throw new PositionalArgsError();
-//       }
-//       return this.account.viewFunction(this.contractId, methodName, args, options);
-//     },
-//   });
-// });
-//
-// changeMethods.forEach((methodName) => {
-//   Object.defineProperty(this, methodName, {
-//     writable: false,
-//     enumerable: true,
-//     value: async (args = {}, gas, amount, ...ignored) => {
-//       if (ignored.length || !(isObject(args) || isUint8Array(args))) {
-//         throw new PositionalArgsError();
-//       }
-//       validateBNLike({ gas, amount });
-//       const rawResult = await this.account.functionCall(
-//         this.contractId,
-//         methodName,
-//         args,
-//         gas,
-//         amount,
-//       );
-//       return getTransactionLastResult(rawResult);
-//     },
-//   });
-// });

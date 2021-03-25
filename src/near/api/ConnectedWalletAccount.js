@@ -54,7 +54,7 @@ export class ConnectedWalletAccount extends Account {
       actions,
       blockHash,
     );
-    await this.walletConnection.requestSignTransactions([transaction], callbackUrl); // ВСТАВИТИ СЮДИ
+    await this.walletConnection.requestSignTransactions([transaction], callbackUrl);
 
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -63,7 +63,7 @@ export class ConnectedWalletAccount extends Account {
     });
 
     // TODO: Aggregate multiple transaction request with "debounce".
-    // TODO: Introduce TrasactionQueue which also can be used to watch for status?
+    // TODO: Introduce TransactionQueue which also can be used to watch for status?
   }
 
   validateArgs(args) {

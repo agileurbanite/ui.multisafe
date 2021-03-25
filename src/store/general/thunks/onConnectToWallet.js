@@ -7,8 +7,6 @@ export const onConnectToWallet = thunk(async (_, __, { getStoreState, getStoreAc
   const actions = getStoreActions();
   const connectToWallet = actions.general.connectToWallet;
 
-  console.log(window.location);
-
   await wallet.requestSignIn(
     'test.dev-1612425940555-3335158',
     'MultiSafe',
