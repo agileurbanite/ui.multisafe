@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useStyles } from './Form.styles';
 import { MembersField } from './MembersField/MembersField';
+import { AccountId } from './AccountId/AccountId';
 import { MultisafeName } from './MultisafeName/MultisafeName';
 import { Confirmations } from './Confirmations/Confirmations';
 import { Amount } from './Amount/Amount';
@@ -27,6 +28,12 @@ export const Form = () => {
         classNames={classes}
         hasError={!!errors?.name}
         errorMessage={!!errors?.name && errors?.name?.message}
+      />
+      <AccountId
+        control={control}
+        classNames={classes}
+        hasError={!!errors?.multisafeId}
+        errorMessage={!!errors?.multisafeId && errors?.multisafeId?.message}
       />
       <MembersField
         control={control}
