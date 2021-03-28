@@ -1,4 +1,7 @@
+import * as R from 'ramda';
 import * as yup from 'yup';
+import { config } from '../../near/config';
+import { debounceAsync } from '../debounceAsync'
 
 const requiredMessageType = {
   name: 'Please enter multisafe name',
@@ -18,9 +21,21 @@ const validationMessageType = {
 };
 
 const patterns = {
-  memberAddress: /\.(testnet|betanet|localnet|near)/g,
+  memberAddress: /^[a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]\.(testnet|betanet|localnet|guildnet|near)/g,
   amount: /^([5-9]|0?[1-9][0-9]+)$/g,
 };
+
+const isUserExist = debounceAsync(async (value) => {
+  const response = await fetch(config.nodeUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(config.endpoint.setParams({ account_id: value })),
+  });
+  const result = await response.json();
+  return R.has('result', result);
+}, 500);
 
 export const createMultisafeSchema = yup.object().shape({
   name: yup.string().required(requiredMessageType.name).min(4, validationMessageType.name),
@@ -35,7 +50,11 @@ export const createMultisafeSchema = yup.object().shape({
         account_id: yup
           .string()
           .required(requiredMessageType.account_id)
-          .matches(patterns.memberAddress, validationMessageType.account_id),
+          .matches(patterns.memberAddress, validationMessageType.account_id)
+          .test({
+            message: 'Oops! The user is not found :(',
+            test: isUserExist
+          }),
       }),
     )
     .required(requiredMessageType.members)
