@@ -58,7 +58,7 @@ export const Form = () => {
         Create Multi Safe
       </Button>
       <Typography className={classes.fee} align="center">
-        Fee price 0 to create Multi Safe
+        To create Multi Safe you need to have at least 5 NEAR
       </Typography>
     </form>
   );
