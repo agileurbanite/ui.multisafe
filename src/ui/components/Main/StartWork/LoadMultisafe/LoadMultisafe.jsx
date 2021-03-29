@@ -26,8 +26,8 @@ export const LoadMultisafe = () => {
         Multi Safe Name and Address
       </Typography>
       <Typography className={classes.description}>
-        You are about to load an existing Gnosis Safe. First, choose a name and enter the Safe
-        address. The name is only stored locally and will never be shared with Gnosis or any third
+        You are about to load an existing Multi Safe. First, choose a name and enter the Safe
+        address. The name is only stored locally and will never be shared with NEAR or any third
         parties. Your connected wallet does not have to be the owner of this Safe. In this case, the
         interface will provide you a read-only view.
       </Typography>
