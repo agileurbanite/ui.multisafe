@@ -23,6 +23,14 @@ const testnet = {
       changeMethods: ['add_request', 'add_request_and_confirm', 'confirm', 'delete_request'],
     },
   },
+  endpoint: {
+    jsonrpc: "2.0",
+    id: "dontcare",
+    method: "query",
+    setParams({account_id}) {
+      return {...this, params: {request_type: 'view_account', finality: 'final', account_id}}
+    }
+  }
 };
 
 const createHelpers = (config) => ({
