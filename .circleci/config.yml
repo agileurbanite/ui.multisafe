@@ -89,7 +89,7 @@ workflows:
             branches:
               ignore:
                 - gh-pages
-                - dev
+                - /.*/
       - build:
           requires:
             - test
@@ -105,5 +105,4 @@ workflows:
             - build
           filters:
             branches:
-              only:
-                - master
+              only: master
