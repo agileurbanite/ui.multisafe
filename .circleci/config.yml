@@ -89,6 +89,7 @@ workflows:
             branches:
               ignore:
                 - gh-pages
+                - dev
       - build:
           requires:
             - test
