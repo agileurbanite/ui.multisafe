@@ -1,21 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { StrictMode } from 'react';
+import { render } from 'react-dom';
 import { StoreProvider } from 'easy-peasy';
-import { BrowserRouter } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core';
+import { createBrowserHistory } from 'history';
+import { Initializer } from './ui/components/Initializer/Initializer';
+import { Router } from './ui/components/Router';
 import { App } from './ui/components/App';
 import { store } from './store';
 import { theme } from './ui/config/theme';
 
-ReactDOM.render(
-  <React.StrictMode>
+const history = createBrowserHistory();
+
+render(
+  <StrictMode>
     <StoreProvider store={store}>
       <MuiThemeProvider theme={theme}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <Initializer history={history} store={store}>
+          <Router>
+            <App />
+          </Router>
+        </Initializer>
       </MuiThemeProvider>
     </StoreProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </StrictMode>,
+  document.getElementById('root'),
 );

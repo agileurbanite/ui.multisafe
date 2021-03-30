@@ -14,6 +14,11 @@ aliases:
       name: Install dependencies
       command: yarn
 
+  install_netlify: &install_netlify
+    run:
+      name: Install Netlify
+      command: yarn add netlify-cli
+
   save_cache: &save_cache
     save_cache:
       name: Save NPM package cache
@@ -47,9 +52,8 @@ jobs:
       - persist_to_workspace:
           root: ./
           paths:
-            - public
-
-  deploy:
+            - build
+  stage:
     executor: node
     steps:
       - checkout
@@ -57,12 +61,25 @@ jobs:
           at: ./
       - <<: *restore_cache
       - <<: *install_node_modules
-      - run:
-          name: Install netlify-cli
-          command: yarn add netlify-cli
+      - <<: *install_netlify
       - run:
           name: Deploy to Netlify
-          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN --dir=./public -p
+          environment:
+            NETLIFY_SITE_ID: d4fe72bb-10e4-4d3f-9af8-23367defdcc7
+          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN -p --dir=build
+
+  release:
+    executor: node
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./
+      - <<: *restore_cache
+      - <<: *install_node_modules
+      - <<: *install_netlify
+      - run:
+          name: Deploy to Netlify Production
+          command: yarn netlify deploy --site $NETLIFY_SITE_ID --auth $NETLIFY_AUTH_TOKEN -p --dir=build
 
 workflows:
   workflow:
@@ -75,11 +92,17 @@ workflows:
       - build:
           requires:
             - test
-      - deploy:
+      - stage:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - dev
+      - release:
           requires:
             - build
           filters:
             branches:
               only:
                 - master
-                - dev
