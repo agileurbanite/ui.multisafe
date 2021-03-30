@@ -4,7 +4,7 @@ import { Footer } from '../general/Footer/Footer';
 import { ConnectWallet } from '../general/ConnectWallet/ConnectWallet';
 import { useStyles } from './Welcome.styles';
 import { routes } from '../../config/routes';
-import logo from '../../images/logo/logo-white@3x.png';
+import logo from '../../images/logo/logo-white.svg';
 import laptop from '../../images/welcome-page/laptop@2x.png';
 
 export const Welcome = () => {
