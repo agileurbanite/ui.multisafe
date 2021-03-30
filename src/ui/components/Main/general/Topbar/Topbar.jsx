@@ -3,7 +3,7 @@ import { LinearProgress } from '@material-ui/core';
 import { Account } from './Account/Account';
 import { NonConnected } from './NonConnected/NonConnected';
 import { useStyles } from './Topbar.styles';
-import logo from '../../../../images/logo/logo-black@3x.png';
+import logo from '../../../../images/logo/logo-black.svg';
 
 export const Topbar = () => {
   const isConnected = useStoreState((store) => store.general.user.isConnected);
