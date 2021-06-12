@@ -1,6 +1,6 @@
 {
-  "extends": ["react-app", "airbnb", "plugin:jsx-a11y/recommended", "prettier", "prettier/react"],
-  "plugins": ["react", "react-hooks", "jsx-a11y", "prettier"],
+  "extends": ["react-app", "airbnb", "prettier"],
+  "plugins": ["react", "react-hooks", "prettier"],
   "rules": {
     "import/prefer-default-export": 0,
     "no-param-reassign": 0,
