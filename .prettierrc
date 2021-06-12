@@ -1,9 +1,6 @@
 {
-  "useTabs": false,
   "printWidth": 100,
-  "tabWidth": 2,
   "singleQuote": true,
-  "endOfLine": "lf",
   "trailingComma": "all",
-  "jsxBracketSameLine": true
+  "endOfLine": "lf"
 }
