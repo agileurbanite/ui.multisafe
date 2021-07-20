@@ -1,0 +1,18 @@
+import { makeStyles } from '@material-ui/core';
+
+const styles = {
+  container: {
+    width: 'calc(100vw - 48px)',
+    height: '72px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '0 24px',
+    borderBottom: '1px solid #00000020',
+  },
+  logo: {
+    width: '182px',
+  },
+};
+
+export const useStyles = makeStyles(styles, { name: 'Topbar' });

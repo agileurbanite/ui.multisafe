@@ -4,6 +4,7 @@ import { useStoreActions } from 'easy-peasy';
 import { Modal } from '../Modal/Modal';
 import { Icon } from './Icon/Icon';
 import { Near } from '../icons/Near';
+import { Ledger } from '../icons/Ledger';
 import { useStyles } from './ConnectWallet.styles';
 
 export const ConnectWallet = ({ button }) => {
@@ -22,6 +23,7 @@ export const ConnectWallet = ({ button }) => {
         </p>
         <div className={classes.icons}>
           <Icon onClick={onConnectToWallet} title="Near Wallet" icon={Near} />
+          <Icon onClick={() => {}} title="Ledger" icon={Ledger} />
         </div>
         <div className={classes.footer}>
           <Button className={classes.cancel} onClick={onClose}>
