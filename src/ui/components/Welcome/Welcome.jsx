@@ -1,7 +1,6 @@
 import { Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { Footer } from '../general/Footer/Footer';
-import { ConnectWallet } from '../general/ConnectWallet/ConnectWallet';
 import { useStyles } from './Welcome.styles';
 import { routes } from '../../config/routes';
 import logo from '../../images/logo/logo-white.svg';
@@ -11,7 +10,8 @@ export const Welcome = () => {
   const { push } = useHistory();
   const classes = useStyles();
 
-  const tryDemo = () => push(routes.getStarted);
+  const goToConnectWallet = () => push(routes.connectWallet);
+  const goToGetStarted = () => push(routes.getStarted);
 
   return (
     <div className={classes.container}>
@@ -27,15 +27,20 @@ export const Welcome = () => {
           <br />
           digital assets
         </p>
-        <ConnectWallet
-          button={{
-            className: classes.getStarted,
-            variant: 'contained',
-            color: 'primary',
-            content: 'Get Started',
-          }}
-        />
-        <Button className={classes.tryDemo} variant="outlined" color="primary" onClick={tryDemo}>
+        <Button
+          className={classes.getStarted}
+          variant="contained"
+          color="primary"
+          onClick={goToConnectWallet}
+        >
+          Get Started
+        </Button>
+        <Button
+          className={classes.tryDemo}
+          variant="outlined"
+          color="primary"
+          onClick={goToGetStarted}
+        >
           Try Demo
         </Button>
       </div>

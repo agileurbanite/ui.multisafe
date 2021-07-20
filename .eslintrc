@@ -11,6 +11,7 @@
     "prefer-destructuring": 0,
     "camelcase": 0,
     "no-alert": 0,
+    "spaced-comment": 0,
     "react/react-in-jsx-scope": 0,
     "react/jsx-uses-react": 0,
     "react-hooks/rules-of-hooks": "error",
