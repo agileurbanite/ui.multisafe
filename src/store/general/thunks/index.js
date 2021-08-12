@@ -3,6 +3,7 @@ import { onRouteChange } from './onRouteChange';
 import { onConnectToWallet } from './onConnectToWallet';
 import { onDisconnect } from './onDisconnect';
 import { onHandleWalletRedirect } from './onHandleWalletRedirect';
+import { onConnectToIndexer } from './onConnectToIndexer';
 
 export const thunks = {
   onInitNear,
@@ -10,4 +11,5 @@ export const thunks = {
   onConnectToWallet,
   onDisconnect,
   onHandleWalletRedirect,
+  onConnectToIndexer,
 };

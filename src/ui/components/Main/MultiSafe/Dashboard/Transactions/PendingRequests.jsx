@@ -7,25 +7,27 @@ import {
   TableCell,
   TableBody,
 } from '@material-ui/core';
+import dateFormat from 'dateformat';
 import { Type } from './Type/Type';
 import { Status } from './Status/Status';
 import { Recipient } from './Recipient/Recipient';
 import { formatNearBalance } from '../../../../../../utils/format';
-import { useStyles } from './Transactions.styles';
+import { useStyles } from './PendingRequests.styles';
 
-export const Transactions = () => {
-  const transactions = useStoreState((store) => store.multisafe.dashboard.transactions);
+export const PendingRequests = () => {
+  const pendingRequests = useStoreState((store) => store.multisafe.dashboard.pendingRequests);
   const onConfirmRequest = useStoreActions((actions) => actions.multisafe.onConfirmRequest);
   const onDeleteRequest = useStoreActions((actions) => actions.multisafe.onDeleteRequest);
   const classes = useStyles();
   return (
     <>
-      <h2 className={classes.header}>Transactions</h2>
+      <h2 className={classes.header}>Pending Requests</h2>
       <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
+              <TableCell>Created At</TableCell>
               <TableCell>Type</TableCell>
               <TableCell>Recipient</TableCell>
               <TableCell>Amount</TableCell>
@@ -33,14 +35,15 @@ export const Transactions = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {transactions.map((transaction) => (
-              <TableRow key={transaction.requestId}>
-                <TableCell>{transaction.requestId}</TableCell>
+            {pendingRequests.map((request) => (
+              <TableRow key={request.requestId}>
+                <TableCell>{request.requestId}</TableCell>
+                <TableCell>{dateFormat(request.createdAt, 'd mmm yyyy HH:MM')}</TableCell>
                 <Type />
-                <Recipient recipient={transaction.recipient} />
-                <TableCell>{formatNearBalance(transaction.amount)}</TableCell>
+                <Recipient recipient={request.recipient} />
+                <TableCell>{formatNearBalance(request.amount)}</TableCell>
                 <Status
-                  transaction={transaction}
+                  request={request}
                   onConfirmRequest={onConfirmRequest}
                   onDeleteRequest={onDeleteRequest}
                 />
