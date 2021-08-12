@@ -4,6 +4,7 @@ import { disableLoading } from './disableLoading';
 import { connectToWallet } from './connectToWallet';
 import { setError } from './setError';
 import { removeError } from './removeError';
+import { connectToIndexer } from './connectToIndexer';
 
 export const actions = {
   initNear,
@@ -12,4 +13,5 @@ export const actions = {
   connectToWallet,
   setError,
   removeError,
+  connectToIndexer,
 };

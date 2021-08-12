@@ -2,9 +2,9 @@ import { TableCell } from '@material-ui/core';
 import { Done, Close } from '@material-ui/icons';
 import { useStyles } from './Status.styles';
 
-export const Status = ({ transaction, onConfirmRequest, onDeleteRequest }) => {
-  const { requestId, isMember } = transaction;
-  const { hasUserConfirm, totalNum, currentNum } = transaction.confirms;
+export const Status = ({ request, onConfirmRequest, onDeleteRequest }) => {
+  const { requestId, isMember } = request;
+  const { hasUserConfirm, totalNum, currentNum } = request.confirms;
 
   const classes = useStyles({ hasUserConfirm });
 

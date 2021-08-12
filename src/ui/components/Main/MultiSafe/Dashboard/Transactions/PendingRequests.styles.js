@@ -8,4 +8,4 @@ const styles = {
   },
 };
 
-export const useStyles = makeStyles(styles, { name: 'Transactions' });
+export const useStyles = makeStyles(styles, { name: 'PendingRequests' });

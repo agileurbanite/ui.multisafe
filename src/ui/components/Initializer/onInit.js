@@ -5,6 +5,7 @@ export const onInit = async (store, history, setInit) => {
   await store.persist.resolveRehydration();
   const actions = store.getActions();
 
+  await actions.general.onConnectToIndexer();
   await actions.general.onInitNear();
   await actions.general.onHandleWalletRedirect({ history });
 

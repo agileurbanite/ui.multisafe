@@ -13,6 +13,8 @@ export const initState = {
   },
   entities: {
     near: null,
+    archivalRpc: null,
     wallet: null,
+    indexerConnection: null,
   },
 };
