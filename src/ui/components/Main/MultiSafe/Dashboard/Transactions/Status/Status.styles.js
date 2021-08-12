@@ -1,6 +1,9 @@
 import { makeStyles } from '@material-ui/core';
 
-const isConfirmed = (yes, no) => ({ hasUserConfirm }) => (hasUserConfirm ? yes : no);
+const isConfirmed =
+  (yes, no) =>
+  ({ hasUserConfirm }) =>
+    hasUserConfirm ? yes : no;
 
 const styles = (theme) => ({
   tableCell: {
@@ -52,7 +55,7 @@ const styles = (theme) => ({
   cancelIcon: {
     height: 20,
     width: 20,
-    color: theme.colors.red,
+    color: ({ canDelete }) => (canDelete ? theme.colors.red : theme.colors.dashboardGrey),
   },
 });
 
