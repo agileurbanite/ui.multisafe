@@ -14,6 +14,7 @@ const testnet = {
     },
   },
   multisafe: {
+    deleteRequestCooldown: 15 * 60 * 1000, // 15 minutes in milliseconds
     methods: {
       viewMethods: [
         'get_members',
