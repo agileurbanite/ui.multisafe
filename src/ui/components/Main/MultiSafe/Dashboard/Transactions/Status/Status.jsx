@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { TableCell, IconButton } from '@material-ui/core';
 import { Done, Close } from '@material-ui/icons';
+import cn from 'classnames';
 import { config } from '../../../../../../../near/config';
 import { useStyles } from './Status.styles';
 
@@ -11,7 +12,7 @@ export const Status = ({ request, onConfirmRequest, onDeleteRequest }) => {
   const { requestId, isMember, createdAt } = request;
   const { hasUserConfirm, totalNum, currentNum } = request.confirms;
   const [canDelete, setCanDelete] = useState(canDeleteRequest(createdAt));
-  const classes = useStyles({ hasUserConfirm, canDelete });
+  const classes = useStyles({ hasUserConfirm, canDelete, isMember });
 
   useEffect(() => {
     if (!isMember || canDelete) return () => {};
@@ -31,24 +32,22 @@ export const Status = ({ request, onConfirmRequest, onDeleteRequest }) => {
   const deleteRequest = () => onDeleteRequest({ requestId });
   return (
     <TableCell className={classes.tableCell}>
-      {isMember ? (
-        <div className={classes.container}>
-          <button
-            type="button"
-            className={classes.button}
-            onClick={confirmRequest}
-            disabled={hasUserConfirm}
-          >
-            <Done className={classes.doneIcon} />
-            <span className={classes.description}>{`${currentNum}/${totalNum}`}</span>
-          </button>
+      <div className={classes.container}>
+        <button
+          type="button"
+          className={cn(classes.button, { [classes.disabledButton]: !isMember })}
+          onClick={confirmRequest}
+          disabled={!isMember || hasUserConfirm}
+        >
+          <Done className={classes.doneIcon} />
+          <span className={classes.description}>{`${currentNum}/${totalNum}`}</span>
+        </button>
+        {isMember && (
           <IconButton className={classes.cancel} onClick={deleteRequest} disabled={!canDelete}>
             <Close className={classes.cancelIcon} />
           </IconButton>
-        </div>
-      ) : (
-        <span>Pending</span>
-      )}
+        )}
+      </div>
     </TableCell>
   );
 };

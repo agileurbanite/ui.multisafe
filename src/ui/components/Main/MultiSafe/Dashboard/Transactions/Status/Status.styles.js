@@ -28,6 +28,12 @@ const styles = (theme) => ({
       borderColor: theme.palette.primary.main,
     },
   },
+  disabledButton: {
+    cursor: 'default!important',
+    '&:hover': {
+      borderColor: 'rgba(0, 0, 0, 0.12)',
+    },
+  },
   doneIcon: {
     height: 18,
     width: 18,
