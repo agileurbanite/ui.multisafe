@@ -7,7 +7,10 @@ export const initState = {
     balance: 0,
   },
   dashboard: {
-    transactions: [],
+    pendingRequests: [],
+  },
+  history: {
+    requests: [],
   },
   members: [],
   multisafes: [],

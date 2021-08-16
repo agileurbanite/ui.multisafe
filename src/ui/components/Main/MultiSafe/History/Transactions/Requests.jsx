@@ -1,4 +1,4 @@
-import { useStoreActions, useStoreState } from 'easy-peasy';
+import { useStoreState } from 'easy-peasy';
 import {
   TableContainer,
   Table,
@@ -12,16 +12,14 @@ import { Type } from './Type/Type';
 import { Status } from './Status/Status';
 import { Recipient } from './Recipient/Recipient';
 import { formatNearBalance } from '../../../../../../utils/format';
-import { useStyles } from './PendingRequests.styles';
+import { useStyles } from './Requests.styles';
 
-export const PendingRequests = () => {
-  const pendingRequests = useStoreState((store) => store.multisafe.dashboard.pendingRequests);
-  const onConfirmRequest = useStoreActions((actions) => actions.multisafe.onConfirmRequest);
-  const onDeleteRequest = useStoreActions((actions) => actions.multisafe.onDeleteRequest);
+export const Requests = () => {
+  const requests = useStoreState((store) => store.multisafe.history.requests);
   const classes = useStyles();
   return (
     <>
-      <h2 className={classes.header}>Pending Requests</h2>
+      <h2 className={classes.header}>Request History</h2>
       <TableContainer>
         <Table>
           <TableHead>
@@ -35,18 +33,14 @@ export const PendingRequests = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {pendingRequests.map((request) => (
+            {requests.map((request) => (
               <TableRow key={request.requestId}>
                 <TableCell>{request.requestId}</TableCell>
                 <TableCell>{dateFormat(request.createdAt, 'd mmm yyyy - HH:MM')}</TableCell>
                 <Type />
                 <Recipient recipient={request.recipient} />
                 <TableCell>{formatNearBalance(request.amount)}</TableCell>
-                <Status
-                  request={request}
-                  onConfirmRequest={onConfirmRequest}
-                  onDeleteRequest={onDeleteRequest}
-                />
+                <Status status={request.status} />
               </TableRow>
             ))}
           </TableBody>
