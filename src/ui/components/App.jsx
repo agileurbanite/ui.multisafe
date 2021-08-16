@@ -22,6 +22,7 @@ export const App = () => (
           routes.createMultisafe,
           routes.loadMultisafe,
           routes.dashboard,
+          routes.history,
           routes.members,
         ]}
         component={Main}
