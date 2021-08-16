@@ -31,7 +31,7 @@ export const PendingRequests = () => {
               <TableCell>Type</TableCell>
               <TableCell>Recipient</TableCell>
               <TableCell>Amount</TableCell>
-              <TableCell>Status</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
