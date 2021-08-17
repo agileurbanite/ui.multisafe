@@ -34,9 +34,8 @@ export const MultisafeList = ({ onListClose }) => {
           text="Load existing Multi Safe"
           icon={SystemUpdateAlt}
         />
-        <List multisafes={membership} />
-        <h4 className={classes.readOnlyHeader}>Read Only</h4>
-        <List multisafes={readOnly} />
+        <List multisafes={membership} title="Membership" />
+        <List multisafes={readOnly} title="Read Only" />
       </Paper>
     </ClickAwayListener>
   );

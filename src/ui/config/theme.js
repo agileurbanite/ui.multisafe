@@ -14,6 +14,14 @@ export const theme = createMuiTheme({
     red: '#e40029',
   },
   overrides: {
+    MuiIconButton: {
+      root: {
+        transition: 'none',
+        '&:hover': {
+          backgroundColor: 'inherit',
+        }
+      }
+    },
     MuiButton: {
       containedPrimary: {
         color: 'white',

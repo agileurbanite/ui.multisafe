@@ -5,8 +5,12 @@ const styles = (theme) => ({
     width: '100%',
     minHeight: 56,
     display: 'grid',
-    gridTemplateColumns: '56px auto auto',
-    gridTemplateRows: '50% 50%',
+    gridTemplateColumns: '56px auto 30px',
+    gridTemplateRows: 'auto auto',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#e9e9e9',
+    },
   },
   emoji: {
     gridArea: '1 / 1 / 3 / 2',
@@ -19,10 +23,12 @@ const styles = (theme) => ({
     fontWeight: 700,
     lineHeight: 1.5,
     alignSelf: 'end',
+    marginTop: 8,
   },
   balance: {
     gridArea: '2 / 2 / 3 / 3',
     fontSize: 14,
+    margin: '5px 0 8px 0',
     color: '#626262',
   },
   divider: {

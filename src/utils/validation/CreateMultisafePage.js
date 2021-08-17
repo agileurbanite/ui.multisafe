@@ -1,7 +1,7 @@
 import * as R from 'ramda';
 import * as yup from 'yup';
 import { config } from '../../near/config';
-import { debounceAsync } from '../debounceAsync'
+import { debounceAsync } from '../debounceAsync';
 
 const requiredMessageType = {
   name: 'Please enter multisafe name',
@@ -21,7 +21,8 @@ const validationMessageType = {
 };
 
 const patterns = {
-  memberAddress: /^[a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]\.(testnet|betanet|localnet|guildnet|near)/g,
+  memberAddress:
+    /^[a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]\.(testnet|betanet|localnet|guildnet|near)/g,
   amount: /^([5-9]|0?[1-9][0-9]+)$/g,
 };
 
@@ -38,11 +39,8 @@ const isUserExist = debounceAsync(async (value) => {
 }, 500);
 
 export const createMultisafeSchema = yup.object().shape({
-  name: yup.string().required(requiredMessageType.name).min(4, validationMessageType.name),
-  multisafeId: yup
-    .string()
-    .required(requiredMessageType.multisafeId)
-    .min(1, validationMessageType.multisafeId),
+  name: yup.string().required(requiredMessageType.name),
+  multisafeId: yup.string().required(requiredMessageType.multisafeId),
   members: yup
     .array()
     .of(
@@ -53,7 +51,7 @@ export const createMultisafeSchema = yup.object().shape({
           .matches(patterns.memberAddress, validationMessageType.account_id)
           .test({
             message: 'Oops! The user is not found :(',
-            test: isUserExist
+            test: isUserExist,
           }),
       }),
     )
