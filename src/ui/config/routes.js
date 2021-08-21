@@ -1,9 +1,6 @@
 export const routes = {
   root: '/',
   welcome: '/welcome',
-  connectWallet: '/connect-wallet',
-  connectLedger: '/connect-wallet/ledger',
-  selectLedgerAccount:  '/connect-wallet/ledger/select-account',
   getStarted: '/get-started',
   createMultisafe: '/create-multisafe',
   loadMultisafe: '/load-multisafe',

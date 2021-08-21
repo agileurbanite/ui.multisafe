@@ -7,7 +7,6 @@ export const SelectAccount = () => {
   const location = useLocation();
   const classes = useStyles();
 
-  console.log(location);
   return (
     <div>
       <h1>Select account</h1>

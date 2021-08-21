@@ -13,13 +13,13 @@ export const onConnectToIndexer = thunk(async (_, __, { getStoreActions }) => {
     realm: 'near-explorer',
   });
 
-  connection.open();
+  // connection.open();
 
-  await new Promise((resolve) => {
-    connection.onopen = () => {
-      resolve();
-    };
-  });
+  // await new Promise((resolve) => {
+  //   connection.onopen = () => {
+  //     resolve();
+  //   };
+  // });
 
   connectToIndexer(connection);
 });
