@@ -19,6 +19,7 @@ const styles = {
   icon: {
     height: 56,
     width: 56,
+    fill: 'rgba(0, 0, 0, 0.87)'
   },
 };
 
