@@ -2,6 +2,7 @@ import { thunk } from 'easy-peasy';
 import { utils } from 'near-api-js';
 import qs from 'query-string';
 import { spaceToSnake } from '../../../utils/format';
+import { getMultisafeFactoryContract } from '../helpers/getMultisafeFactoryContract';
 import { config } from '../../../near/config';
 
 const serializeData = ({ name, multisafeId, members, num_confirmations, amount }) => ({
@@ -18,8 +19,8 @@ const getCallbackUrl = (queryParams) => `${window.location.href}?${qs.stringify(
 export const onCreateMultisafe = thunk(async (_, payload, { getStoreState }) => {
   const { data } = payload;
   const store = getStoreState();
-  const factoryContract = store.startWork.entities.factoryContract;
 
+  const factoryContract = getMultisafeFactoryContract(store);
   const { name, multisafeId, members, num_confirmations, amount, gas } = serializeData(data);
 
   try {
@@ -33,7 +34,7 @@ export const onCreateMultisafe = thunk(async (_, payload, { getStoreState }) => 
       amount,
       callbackUrl: getCallbackUrl({
         name,
-        multisafeId: `${multisafeId}.${config.multisafeFactory.contractId}`,
+        multisafeId: `${multisafeId}.${config.multisafeFactoryId}`,
       }),
     });
   } catch (error) {

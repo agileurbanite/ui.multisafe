@@ -1,5 +1,1 @@
-export const initState = {
-  entities: {
-    factoryContract: null,
-  },
-};
+export const initState = {};
