@@ -9,7 +9,6 @@ export const getDataBeforeRenderPage = async (actions, browserHistory, withLoadi
   const onMountMultisafe = actions.multisafe.onMountMultisafe;
   const onMountDashboard = actions.multisafe.onMountDashboard;
   const onMountHistory = actions.multisafe.onMountHistory;
-  const onMountCreateMultisafe = actions.startWork.onMountCreateMultisafe;
 
   const match = matchPath(browserHistory.location.pathname, [
     createMultisafe,
@@ -23,10 +22,6 @@ export const getDataBeforeRenderPage = async (actions, browserHistory, withLoadi
   const { path } = match;
   const { multisafeId } = match?.params;
   const ifRouteIs = (route) => route === path;
-
-  if (ifRouteIs(createMultisafe)) {
-    await onMountCreateMultisafe();
-  }
 
   // TODO maybe we can unite these 2 thunks into one
   if (ifRouteIs(dashboard)) {

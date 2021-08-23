@@ -6,13 +6,7 @@ const testnet = {
   helperUrl: 'https://helper.testnet.near.org',
   explorerUrl: 'https://explorer.testnet.near.org',
   indexerUrl: 'wss://near-explorer-wamp.onrender.com/ws',
-  multisafeFactory: {
-    contractId: 'dev-1612259671980-4872321',
-    methods: {
-      viewMethods: [],
-      changeMethods: ['create'],
-    },
-  },
+  multisafeFactoryId: 'dev-1612259671980-4872321',
   multisafe: {
     deleteRequestCooldown: 15 * 60 * 1000, // 15 minutes in milliseconds
     methods: {
