@@ -7,6 +7,7 @@ const { contractId, methods } = config.multisafeFactory;
 export const onMountCreateMultisafe = thunk(async (_, __, { getStoreState, getStoreActions }) => {
   const store = getStoreState();
   const wallet = store.general.entities.wallet;
+
   const actions = getStoreActions();
   const mountCreateMultisafe = actions.startWork.mountCreateMultisafe;
 
