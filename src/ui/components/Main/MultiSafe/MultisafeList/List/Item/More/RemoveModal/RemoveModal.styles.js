@@ -42,4 +42,4 @@ const styles = {
   },
 };
 
-export const useStyles = makeStyles(styles, { name: 'DeleteCampaignModal' });
+export const useStyles = makeStyles(styles, { name: 'RemoveModal' });
