@@ -8,7 +8,7 @@ import { routes } from '../../../config/routes';
 import { useStyles } from './WalletOptions.styles';
 
 export const WalletOptions = () => {
-  const onConnectToWallet = useStoreActions((a) => a.general.onConnectToWallet);
+  const onConnectNearWallet = useStoreActions((a) => a.general.onConnectNearWallet);
   const history = useHistory();
   const classes = useStyles();
 
@@ -22,7 +22,7 @@ export const WalletOptions = () => {
         Please connect your wallet to use all the features of Multi Safe
       </p>
       <div className={classes.icons}>
-        <Icon onClick={onConnectToWallet} title="Near Wallet" icon={Near} />
+        <Icon onClick={onConnectNearWallet} title="Near Wallet" icon={Near} />
         <Icon onClick={goToConnectLedger} title="Ledger" icon={Ledger} />
       </div>
       <p>OR</p>
