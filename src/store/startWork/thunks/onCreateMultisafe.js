@@ -24,7 +24,7 @@ export const onCreateMultisafe = thunk(async (_, payload, { getStoreState }) => 
 
   try {
     await factoryContract.create({
-      payload: {
+      args: {
         name: multisafeId,
         members,
         num_confirmations,
