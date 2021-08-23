@@ -3,9 +3,11 @@ import { IconButton, Popover } from '@material-ui/core';
 import { MoreVertOutlined, EditOutlined, DeleteOutline } from '@material-ui/icons';
 import { MenuItem } from './MenuItem/MenuItem';
 import { useStyles } from './More.styles';
+import { RemoveModal } from './RemoveModal/RemoveModal';
 
-export const More = () => {
+export const More = ({ name, multisafeId }) => {
   const [isOpen, setOpen] = useState(false);
+  const [isOpenRemoveModal, setOpenRemoveModal] = useState(false);
   const buttonRef = useRef(null);
 
   const onOpen = (e) => {
@@ -20,7 +22,15 @@ export const More = () => {
 
   const exportCampaignCSV = () => {};
   const stopPropagation = (e) => e.stopPropagation();
-  const openDeleteCampaignModal = () => {};
+
+  const openRemoveModal = () => {
+    setOpenRemoveModal(true);
+    setOpen(false);
+  };
+
+  const closeRemoveModal = () => {
+    setOpenRemoveModal(false);
+  };
 
   const classes = useStyles();
   return (
@@ -60,10 +70,19 @@ export const More = () => {
             icon={DeleteOutline}
             classNames={{ icon: classes.deleteCampaign }}
             text="Remove"
-            onClick={openDeleteCampaignModal}
+            onClick={openRemoveModal}
           />
         </div>
       </Popover>
+      {isOpenRemoveModal && (
+        <RemoveModal
+          isOpenRemoveModal={isOpenRemoveModal}
+          closeRemoveModal={closeRemoveModal}
+          stopPropagation={stopPropagation}
+          multisafeId={multisafeId}
+          name={name}
+        />
+      )}
     </>
   );
 };
