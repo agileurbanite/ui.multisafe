@@ -6,7 +6,7 @@ import { Icon } from '../general/Icon/Icon';
 import { useStyles } from './ChooseWallet.styles';
 
 export const ChooseWallet = ({ onCloseModal, setStep }) => {
-  const onConnectToWallet = useStoreActions((a) => a.general.onConnectToWallet);
+  const onConnectNearWallet = useStoreActions((a) => a.general.onConnectNearWallet);
   const classes = useStyles();
 
   const openConnectLedger = () => setStep(2);
@@ -18,7 +18,7 @@ export const ChooseWallet = ({ onCloseModal, setStep }) => {
         Connect your wallet to use all the features of Multi Safe
       </p>
       <div className={classes.icons}>
-        <Icon onClick={onConnectToWallet} title="Near Wallet" icon={Near} />
+        <Icon onClick={onConnectNearWallet} title="Near Wallet" icon={Near} />
         <Icon onClick={openConnectLedger} title="Ledger" icon={Ledger} />
       </div>
       <div className={classes.footer}>
