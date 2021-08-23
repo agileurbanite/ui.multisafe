@@ -21,7 +21,7 @@ export const Item = ({
       <span className={classes.name}>{name}</span>
       <span className={classes.balance}>{formatNearBalance(balance)}</span>
       <Divider className={classes.divider} />
-      <More />
+      <More name={name} multisafeId={multisafeId} />
     </div>
   );
 };
