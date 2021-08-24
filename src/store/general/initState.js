@@ -7,6 +7,8 @@ export const initState = {
   user: {
     isConnected: false,
     accountId: null,
+    walletType: '',
+    publicKey: null,
   },
   selectors: {
     hasSavedMultisafes: false,
@@ -16,5 +18,8 @@ export const initState = {
     archivalRpc: null,
     wallet: null,
     indexerConnection: null,
+  },
+  temporary: {
+    redirectAction: null,
   },
 };

@@ -1,15 +1,11 @@
-import { onInitNear } from './onInitNear';
+import { onInitApp } from './onInitApp/onInitApp';
 import { onRouteChange } from './onRouteChange';
 import { onConnectNearWallet } from './onConnectNearWallet';
 import { onDisconnect } from './onDisconnect';
-import { onHandleWalletRedirect } from './onHandleWalletRedirect';
-import { onConnectToIndexer } from './onConnectToIndexer';
 
 export const thunks = {
-  onInitNear,
+  onInitApp,
   onRouteChange,
   onConnectNearWallet,
   onDisconnect,
-  onHandleWalletRedirect,
-  onConnectToIndexer,
 };

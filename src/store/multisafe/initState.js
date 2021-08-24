@@ -1,5 +1,3 @@
-import { persist } from 'easy-peasy';
-
 export const initState = {
   general: {
     name: '',
@@ -24,8 +22,3 @@ export const initState = {
     contract: null,
   },
 };
-
-export const initPersistentState = persist(initState, {
-  allow: ['multisafes', 'general'],
-  storage: 'localStorage',
-});
