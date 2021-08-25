@@ -4,10 +4,12 @@ import { MoreVertOutlined, EditOutlined, DeleteOutline } from '@material-ui/icon
 import { MenuItem } from './MenuItem/MenuItem';
 import { useStyles } from './More.styles';
 import { RemoveModal } from './RemoveModal/RemoveModal';
+import { EditModal } from './EditModal/EditModal';
 
 export const More = ({ name, multisafeId }) => {
   const [isOpen, setOpen] = useState(false);
   const [isOpenRemoveModal, setOpenRemoveModal] = useState(false);
+  const [isOpenEditModal, setOpenEditModal] = useState(false);
   const buttonRef = useRef(null);
 
   const onOpen = (e) => {
@@ -20,16 +22,22 @@ export const More = ({ name, multisafeId }) => {
     setOpen(false);
   };
 
-  const exportCampaignCSV = () => {};
   const stopPropagation = (e) => e.stopPropagation();
 
   const openRemoveModal = () => {
     setOpenRemoveModal(true);
     setOpen(false);
   };
-
   const closeRemoveModal = () => {
     setOpenRemoveModal(false);
+  };
+
+  const openEditModal = () => {
+    setOpenEditModal(true);
+    setOpen(false);
+  };
+  const closeEditModal = () => {
+    setOpenEditModal(false);
   };
 
   const classes = useStyles();
@@ -64,7 +72,7 @@ export const More = ({ name, multisafeId }) => {
             icon={EditOutlined}
             classNames={{ icon: classes.exportCsv }}
             text="Edit"
-            onClick={exportCampaignCSV}
+            onClick={openEditModal}
           />
           <MenuItem
             icon={DeleteOutline}
@@ -78,6 +86,15 @@ export const More = ({ name, multisafeId }) => {
         <RemoveModal
           isOpenRemoveModal={isOpenRemoveModal}
           closeRemoveModal={closeRemoveModal}
+          stopPropagation={stopPropagation}
+          multisafeId={multisafeId}
+          name={name}
+        />
+      )}
+      {isOpenEditModal && (
+        <EditModal
+          isOpenEditModal={isOpenEditModal}
+          closeEditModal={closeEditModal}
           stopPropagation={stopPropagation}
           multisafeId={multisafeId}
           name={name}
