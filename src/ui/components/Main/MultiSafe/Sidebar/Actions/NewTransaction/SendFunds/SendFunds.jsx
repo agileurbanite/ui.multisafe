@@ -18,7 +18,7 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
   const classes = useStyles();
 
   const onSubmit = handleSubmit((data) => {
-    onTransferTokens({ data });
+    onTransferTokens({ data, onClose });
   });
 
   return (

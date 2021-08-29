@@ -1,16 +1,19 @@
 import { thunk } from 'easy-peasy';
 import { utils } from 'near-api-js';
 
-export const onTransferTokens = thunk(async (_, payload, { getState }) => {
+export const onTransferTokens = thunk(async (_, payload, { getStoreState }) => {
+  const { onClose } = payload;
   const { recipientId, amount, withApprove } = payload.data;
-  const store = getState();
-  const contract = store.entities.contract;
+
+
+  const state = getStoreState();
+  const contract = state.multisafe.entities.contract;
 
   const method = withApprove ? 'add_request_and_confirm' : 'add_request';
 
   try {
     await contract[method]({
-      payload: {
+      args: {
         request: {
           receiver_id: recipientId,
           actions: [{ type: 'Transfer', amount: utils.format.parseNearAmount(amount) }],
@@ -18,6 +21,8 @@ export const onTransferTokens = thunk(async (_, payload, { getState }) => {
       },
     });
   } catch (e) {
-    throw new Error(e);
+    // throw new Error(e);
   }
+
+  onClose();
 });

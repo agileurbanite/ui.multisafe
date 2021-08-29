@@ -4,8 +4,8 @@ import { config } from '../../../../near/config';
 
 const { networkId, nodeUrl, walletUrl, archivalRpcUrl } = config;
 
-const getNearConnectConfig = (connectionType) => {
-  if (connectionType === 'near-wallet')
+const getNearConnectConfig = ({ connectionType, getStoreState }) => {
+  if (connectionType === 'rpc_near-wallet')
     return {
       networkId,
       nodeUrl,
@@ -13,14 +13,14 @@ const getNearConnectConfig = (connectionType) => {
       keyStore: new keyStores.BrowserLocalStorageKeyStore(),
     };
 
-  if (connectionType === 'ledger')
+  if (connectionType === 'rpc_ledger')
     return {
       networkId,
       nodeUrl,
-      signer: new LedgerSigner(),
+      signer: new LedgerSigner(getStoreState),
     };
 
-  if (connectionType === 'archival-rpc')
+  if (connectionType === 'archival-rpc_read-only')
     return {
       networkId,
       nodeUrl: archivalRpcUrl,
@@ -28,16 +28,29 @@ const getNearConnectConfig = (connectionType) => {
     };
 
   throw new Error(
-    `Wrong connection type, must be 'near-wallet', 'ledger' or 'archival-rpc',
+    `Wrong connection type, must be 'rpc_near-wallet', 'rpc_ledger' or 'archival-rpc_read-only',
      got '${connectionType}' instead`,
   );
 };
 
-export const getNearEntities = async () => {
-  const near = await connect(getNearConnectConfig('near-wallet'));
-  const archivalRpc = await connect(getNearConnectConfig('archival-rpc'));
+export const getNearEntities = async (getStoreState) => {
+  const state = getStoreState();
+  const walletType = state.general.user.walletType;
 
-  const wallet = new WalletConnection(near, 'multisafe');
+  const near = await connect(
+    getNearConnectConfig({
+      connectionType: `rpc_${walletType}`,
+      getStoreState,
+    }),
+  );
+
+  const archivalRpc = await connect(
+    getNearConnectConfig({
+      connectionType: 'archival-rpc_read-only',
+    }),
+  );
+
+  const wallet = walletType === 'near-wallet' ? new WalletConnection(near, 'multisafe') : null;
 
   return {
     near,

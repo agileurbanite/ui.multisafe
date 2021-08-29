@@ -7,6 +7,9 @@ import { connectToIndexer } from './connectToIndexer';
 import { setTemporaryData } from './setTemporaryData';
 import { deleteTemporaryData } from './deleteTemporaryData';
 import { setUserData } from './setUserData';
+import { openModal } from './openModal';
+import { setModalData } from './setModalData';
+import { closeModal } from './closeModal';
 
 export const actions = {
   initApp,
@@ -18,4 +21,7 @@ export const actions = {
   setTemporaryData,
   deleteTemporaryData,
   setUserData,
+  openModal,
+  setModalData,
+  closeModal,
 };

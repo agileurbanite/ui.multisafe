@@ -22,12 +22,12 @@ const getAddRequestTxs = async (connection, multisafeId) =>
   ]);
 
 export const onMountDashboard = thunk(async (_, __, { getStoreState, getStoreActions }) => {
-  const store = getStoreState();
-  const accountId = store.general.user.accountId;
-  const archivalRpc = store.general.entities.archivalRpc;
-  const indexerConnection = store.general.entities.indexerConnection;
-  const contract = store.multisafe.entities.contract;
-  const multisafeId = store.multisafe.general.multisafeId;
+  const state = getStoreState();
+  const accountId = state.general.user.accountId;
+  const archivalRpc = state.general.entities.archivalRpc;
+  const indexerConnection = state.general.entities.indexerConnection;
+  const contract = state.multisafe.entities.contract;
+  const multisafeId = state.multisafe.general.multisafeId;
 
   const actions = getStoreActions();
   const mountDashboard = actions.multisafe.mountDashboard;

@@ -13,7 +13,7 @@ export const onInitApp = thunk(async (_, payload, { getStoreState, getStoreActio
   const initApp = actions.general.initApp;
 
   const [nearEntities, indexerConnection] = await Promise.all([
-    getNearEntities(),
+    getNearEntities(getStoreState),
     getIndexerConnection(),
   ]);
 
