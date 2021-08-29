@@ -1,31 +1,52 @@
-/* eslint-disable */
+import TransportWebHID from '@ledgerhq/hw-transport-webhid';
 import { Signer } from 'near-api-js';
 import { PublicKey } from 'near-api-js/lib/utils';
-import TransportWebHID from '@ledgerhq/hw-transport-webhid';
 import { createClient } from 'near-ledger-js';
 
+const defaultHooks = {
+  onBeforeSignTx: () => {},
+  onAfterSignTx: () => {},
+};
+
 export class LedgerSigner extends Signer {
-  async getPublicKey(accountId, networkId) {
-    console.log('getPublicKey', accountId, networkId);
-    return PublicKey.from('ed25519:Cehn9GS2TfVmLycaATBmB58mooxRizRWBEr9r85epPV');
+  constructor(getStoreState) {
+    super();
+    this.client = null;
+    this.hooks = defaultHooks;
+    this.getStoreState = getStoreState;
   }
 
-  async signMessage(message, accountId, networkId) {
-    // TODO Check errors
-    const transport = await TransportWebHID.create();
+  setHooks(hooks) {
+    this.hooks = { ...this.hooks, ...hooks };
+  }
 
-    const client = await createClient(transport);
+  resetHooks() {
+    this.hooks = defaultHooks;
+  }
 
-    // TODO Add error handling
-    const signature = await client.sign(message);
-    const publicKey = await this.getPublicKey(accountId, networkId);
+  async getPublicKey() {
+    return PublicKey.from(this.getStoreState().general.user.publicKey);
+  }
 
-    console.log('signMessage');
-    await client.transport.close();
+  async signMessage(message) {
+    try {
+      const transport = await TransportWebHID.create();
+      this.client = await createClient(transport);
 
-    return {
-      signature,
-      publicKey,
-    };
+      this.hooks.onBeforeSignTx();
+      const signature = await this.client.sign(message);
+      const publicKey = await this.getPublicKey();
+      this.hooks.onAfterSignTx();
+
+      return {
+        signature,
+        publicKey,
+      };
+    } catch (error) {
+      error.fromLedgerSigner = true;
+      throw error;
+    } finally {
+      await this.client?.transport?.close();
+    }
   }
 }

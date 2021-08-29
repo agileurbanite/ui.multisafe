@@ -30,6 +30,7 @@ export const Status = ({ request, onConfirmRequest, onDeleteRequest }) => {
 
   const confirmRequest = () => onConfirmRequest({ requestId });
   const deleteRequest = () => onDeleteRequest({ requestId });
+
   return (
     <TableCell className={classes.tableCell}>
       <div className={classes.container}>
