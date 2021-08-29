@@ -4,14 +4,7 @@ export const initState = {
     isError: false,
     description: '',
   },
-  // modals: {},
-  modals: {
-    // confirmActionOnLedger: {
-    //   actionName: 'Delete request',
-    //   // showLoader: true,
-    //   // error: 'NEAR app is not running on the Ledger',
-    // }
-  },
+  modals: {},
   // user: {
   //   isConnected: false,
   //   accountId: null,
