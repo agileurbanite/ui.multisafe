@@ -2,6 +2,7 @@ import { Button, Typography } from '@material-ui/core';
 import { useStoreActions } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useHistory } from 'react-router-dom';
 import { useStyles } from './Form.styles';
 import { MembersField } from './MembersField/MembersField';
 import { AccountId } from './AccountId/AccountId';
@@ -12,14 +13,14 @@ import { createMultisafeSchema } from '../../../../../../utils/validation/Create
 
 export const Form = () => {
   const onCreateMultisafe = useStoreActions((a) => a.startWork.onCreateMultisafe);
-
   const { control, handleSubmit, getValues, errors } = useForm({
     resolver: yupResolver(createMultisafeSchema),
     mode: 'all',
   });
+  const history = useHistory();
   const classes = useStyles();
 
-  const onSubmit = handleSubmit((data) => onCreateMultisafe({ data }));
+  const onSubmit = handleSubmit((data) => onCreateMultisafe({ data, history }));
 
   return (
     <form autoComplete="off" className={classes.form} onSubmit={onSubmit}>
