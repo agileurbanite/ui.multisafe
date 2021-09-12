@@ -1,17 +1,17 @@
 import { thunk } from 'easy-peasy';
-import { Contract } from '../../../near/api/Сontract';
-import { config } from '../../../near/config';
+import { getMultisafeContract } from '../helpers/getMultisafeContract';
 
 export const onMountMultisafe = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
   const { multisafeId } = payload;
-  const store = getStoreState();
-  const near = store.general.entities.near;
-  const wallet = store.general.entities.wallet;
-  const multisafes = store.multisafe.multisafes;
+
+  const state = getStoreState();
+  const near = state.general.entities.near;
+  const multisafes = state.multisafe.multisafes;
+
   const actions = getStoreActions();
   const mountMultisafe = actions.multisafe.mountMultisafe;
 
-  const contract = new Contract(wallet.account(), multisafeId, config.multisafe.methods);
+  const contract = getMultisafeContract(state, multisafeId);
   const localMultisafe = multisafes.find((multisafe) => multisafe.multisafeId === multisafeId);
 
   try {

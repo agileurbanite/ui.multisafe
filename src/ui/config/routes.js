@@ -1,9 +1,11 @@
+import qs from 'query-string';
+
 export const routes = {
+  // Technical
   root: '/',
+  redirectFromWallet: '/redirect-from-wallet',
+  // Pages
   welcome: '/welcome',
-  connectWallet: '/connect-wallet',
-  connectLedger: '/connect-wallet/ledger',
-  selectLedgerAccount:  '/connect-wallet/ledger/select-account',
   getStarted: '/get-started',
   createMultisafe: '/create-multisafe',
   loadMultisafe: '/load-multisafe',
@@ -16,4 +18,5 @@ export const getRoute = {
   dashboard: (multisafeId) => `/multisafe/${multisafeId}/dashboard`,
   history: (multisafeId) => `/multisafe/${multisafeId}/history`,
   members: (multisafeId) => `/multisafe/${multisafeId}/members`,
+  callbackUrl: (params) => `${window.location.origin}/redirect-from-wallet?${qs.stringify(params)}`,
 };

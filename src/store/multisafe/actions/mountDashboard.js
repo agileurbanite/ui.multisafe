@@ -29,7 +29,7 @@ export const mountDashboard = action((state, payload) => {
       const confirms = requests[index][1].map((confirm) => JSON.parse(confirm));
       return {
         requestId,
-        createdAt: convertNanoToMilli(requestsTxs[requestId].createdAt),
+        createdAt: convertNanoToMilli(requestsTxs[requestId]?.createdAt),
         type: request.actions[0].type,
         amount: request.actions[0].amount,
         recipient: request.receiver_id,
