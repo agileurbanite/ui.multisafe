@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const styles = {
+const styles = theme => ({
   header: {
     fontSize: 20,
     color: 'rgba(0, 0, 0, 0.87)',
@@ -17,6 +17,13 @@ const styles = {
     justifyContent: 'center',
     marginTop: 24,
   },
+  supportError: {
+    margin: 0,
+    marginTop: 24,
+  },
+  linkToCanIUse: {
+    color: theme.palette.primary.main,
+  },
   footer: {
     display: 'flex',
     justifyContent: 'flex-end',
@@ -30,6 +37,6 @@ const styles = {
     // marginRight: 24,
     fontWeight: 700,
   },
-};
+});
 
 export const useStyles = makeStyles(styles, { name: 'ConnectLedger' });

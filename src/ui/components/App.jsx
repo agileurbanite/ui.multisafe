@@ -4,6 +4,7 @@ import { Main } from './Main/Main';
 import { PageNotFound } from './PageNotFound/PageNotFound';
 import { Error } from './Error/Error';
 import { ConfirmActionOnLedger } from './ConfirmActionOnLedger/ConfirmActionOnLedger';
+import { SelectLedgerAccount } from './SelectLedgerAccount/SelectLedgerAccount';
 import { routes } from '../config/routes';
 
 export const App = () => (
@@ -26,5 +27,6 @@ export const App = () => (
     </Switch>
     <Error />
     <ConfirmActionOnLedger />
+    <SelectLedgerAccount />
   </>
 );

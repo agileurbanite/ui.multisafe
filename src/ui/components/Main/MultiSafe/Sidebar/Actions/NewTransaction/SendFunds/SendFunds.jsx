@@ -3,7 +3,7 @@ import { Button, Paper } from '@material-ui/core';
 import { useStoreActions } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Checkbox } from '../../../../../general/Checkbox/Checkbox';
+import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
 import { Amount } from './Amount/Amount';
 import { Recipient } from './Recipient/Recipient';
 import { useStyles } from './SendFunds.styles';

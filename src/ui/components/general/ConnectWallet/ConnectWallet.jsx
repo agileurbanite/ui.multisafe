@@ -15,7 +15,7 @@ export const ConnectWallet = ({ setModalOpen }) => {
       <Paper className={classes.container}>
         <div className={classes.wrapper}>
           {step === 1 && <ChooseWallet onCloseModal={onCloseModal} setStep={setStep} />}
-          {step === 2 && <ConnectLedger onCloseModal={onCloseModal} setStep={setStep} />}
+          {step === 2 && <ConnectLedger onCloseModal={onCloseModal} />}
         </div>
       </Paper>
     </Modal>
