@@ -4,18 +4,15 @@ export const initState = {
     isError: false,
     description: '',
   },
-  modals: {},
-  // user: {
-  //   isConnected: false,
-  //   accountId: null,
-  //   walletType: 'near-wallet',
-  //   publicKey: null,
-  // },
+  modals: {
+    confirmActionOnLedger: null,
+    selectLedgerAccount: null,
+  },
   user: {
-    isConnected: true,
-    accountId: 'eclipser.testnet',
-    walletType: 'ledger',
-    publicKey: 'ed25519:Cehn9GS2TfVmLycaATBmB58mooxRizRWBEr9r85epPV',
+    isConnected: false,
+    accountId: null,
+    walletType: 'near-wallet',
+    publicKey: null,
   },
   selectors: {
     hasSavedMultisafes: false,
