@@ -22,7 +22,7 @@ export const Members = () => {
           <TableHead>
             <TableRow>
               <TableCell>Member Name</TableCell>
-              <TableCell colSpan={2}>Member Address</TableCell>
+              <TableCell colSpan={2}>Member Account ID</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

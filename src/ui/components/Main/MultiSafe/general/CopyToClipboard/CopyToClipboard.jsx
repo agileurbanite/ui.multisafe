@@ -8,7 +8,7 @@ export const CopyToClipboard = ({ accountId, classNames }) => {
 
   return (
     <IconButton onClick={onClick} className={classNames?.iconButton}>
-      <Tooltip title="Copy account id to clipboard" placement="top">
+      <Tooltip title="Copy Account ID to clipboard" placement="top">
         <FileCopyOutlined className={classNames?.icon} />
       </Tooltip>
     </IconButton>

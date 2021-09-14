@@ -50,10 +50,6 @@ const styles = {
     width: '100%',
     marginTop: 25,
   },
-  fee: {
-    marginTop: 16,
-    fontSize: 12,
-  },
 };
 
 export const useStyles = makeStyles(styles, { name: 'Form' });

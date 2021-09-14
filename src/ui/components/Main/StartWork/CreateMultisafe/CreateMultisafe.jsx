@@ -2,7 +2,6 @@ import { useStoreState } from 'easy-peasy';
 import { useHistory } from 'react-router-dom';
 import { IconButton } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
-import { Headline } from '../../../general/Headline/Headline';
 import { useStyles } from './CreateMultisafe.styles';
 import { Form } from './Form/Form';
 import { redirectBack } from '../general/redirectBack';
@@ -18,10 +17,10 @@ export const CreateMultisafe = () => {
   return (
     <div className={classes.container}>
       <div className={classes.headerWrapper}>
-        <IconButton onClick={goBack}>
-          <ArrowBack />
+        <IconButton onClick={goBack} className={classes.goBack}>
+          <ArrowBack className={classes.icon} />
         </IconButton>
-        <Headline is={1}>Create New Multi Safe.</Headline>
+        <h1 className={classes.title}>Create New Multi Safe</h1>
       </div>
       <Form />
     </div>
