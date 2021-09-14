@@ -1,7 +1,7 @@
 import { thunk } from 'easy-peasy';
 import { routes } from '../../../ui/config/routes';
 import { getIndexerConnection } from './onInitApp/getIndexerConnection';
-import { getNearEntities } from './onInitApp/getNearEntities';
+import { getNearEntities } from './helpers/getNearEntities';
 
 export const onDisconnect = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
   const { history } = payload;
@@ -14,8 +14,8 @@ export const onDisconnect = thunk(async (_, payload, { getStoreState, getStoreAc
   const initApp = actions.general.initApp;
 
   connection.close();
-  resetState();
   localStorage.clear();
+  resetState();
 
   history.push(routes.welcome);
 

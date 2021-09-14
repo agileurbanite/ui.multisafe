@@ -10,6 +10,7 @@ import { setUserData } from './setUserData';
 import { openModal } from './openModal';
 import { setModalData } from './setModalData';
 import { closeModal } from './closeModal';
+import { setNearEntities } from './setNearEntities';
 
 export const actions = {
   initApp,
@@ -24,4 +25,5 @@ export const actions = {
   openModal,
   setModalData,
   closeModal,
+  setNearEntities,
 };
