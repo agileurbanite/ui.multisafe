@@ -1,6 +1,6 @@
 import { thunk } from 'easy-peasy';
 import { getDataBeforeRenderPage } from '../helpers/getDataBeforeRenderPage';
-import { getNearEntities } from './getNearEntities';
+import { getNearEntities } from '../helpers/getNearEntities';
 import { getIndexerConnection } from './getIndexerConnection';
 import { isRedirect } from './isRedirect';
 import { manageNavigation } from './manageNavigation';

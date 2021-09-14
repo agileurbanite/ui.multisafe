@@ -5,13 +5,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory } from 'react-router-dom';
 import { TextField } from '../../../general/TextField/TextField';
 import { useStyles } from './Form.styles';
-import { loadMultisafeSchema } from '../../../../../../utils/validation/LoadMultisafePage'
+import { loadMultisafeSchema } from '../../../../../../utils/validation/LoadMultisafePage';
 
 export const Form = () => {
   const onLoadMultisafe = useStoreActions((actions) => actions.startWork.onLoadMultisafe);
-  const { control, handleSubmit, errors } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(loadMultisafeSchema),
-    mode: "all"
+    mode: 'all',
   });
   const { push } = useHistory();
   const classes = useStyles();

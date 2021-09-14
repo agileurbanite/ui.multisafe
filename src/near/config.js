@@ -1,3 +1,9 @@
+import BN from 'bn.js';
+
+const general = {
+  maxGas: new BN(300000000000000),
+};
+
 const testnet = {
   networkId: 'testnet',
   nodeUrl: 'https://rpc.testnet.near.org',
@@ -29,6 +35,7 @@ const createHelpers = (config) => ({
 const getNearConfig = () => {
   const config = testnet;
   return {
+    ...general,
     ...config,
     ...createHelpers(config),
   };
