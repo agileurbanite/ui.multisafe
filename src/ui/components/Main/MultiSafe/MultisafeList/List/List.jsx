@@ -1,7 +1,7 @@
 import { Item } from './Item/Item';
 import { useStyles } from './List.styles';
 
-export const List = ({ multisafes, title }) => {
+export const List = ({ multisafes, title, onListClose }) => {
   const classes = useStyles();
 
   if (multisafes.length === 0) return null;
@@ -11,7 +11,7 @@ export const List = ({ multisafes, title }) => {
       <h4 className={classes.title}>{title}</h4>
       <div>
         {multisafes.map((multisafe) => (
-          <Item key={multisafe.multisafeId} multisafe={multisafe} />
+          <Item key={multisafe.multisafeId} multisafe={multisafe} onListClose={onListClose} />
         ))}
       </div>
     </div>
