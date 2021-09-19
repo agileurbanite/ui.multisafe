@@ -34,6 +34,12 @@ export const mountDashboard = action((slice, payload) => {
 
   const requestsTxs = getRequestsTxs(addRequestTxs, txsStatuses);
 
+  const isMember = members.some((member) => member.account_id === accountId)
+
+  slice.general.name = localMultisafe.name;
+  slice.general.multisafeId = localMultisafe.multisafeId;
+  slice.general.balance = accountState.amount;
+
   slice.dashboard.pendingRequests = requestIds
     .map((requestId, index) => {
       const request = requests[index][0];
@@ -50,16 +56,11 @@ export const mountDashboard = action((slice, payload) => {
           hasUserConfirm: confirms.some((confirm) => confirm.account_id === accountId),
         },
         // We need this to avoid rerender Status component when we load read-only multisafe
-        isMember: slice.selectors.isMember,
+        isMember,
       };
     })
     .sort((a, b) => b.requestId - a.requestId);
 
-  slice.general.name = localMultisafe.name;
-  slice.general.multisafeId = localMultisafe.multisafeId;
-  slice.general.balance = accountState.amount;
-
   slice.members = members.map(({ account_id }) => ({ accountId: account_id }));
-
   slice.entities.contract = contract;
 });
