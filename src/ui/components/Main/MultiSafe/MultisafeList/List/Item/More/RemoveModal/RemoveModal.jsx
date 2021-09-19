@@ -1,6 +1,7 @@
 import { Button, Paper, Modal } from '@material-ui/core';
 import cn from 'classnames';
 import { useStoreActions } from 'easy-peasy';
+import { useHistory } from 'react-router-dom';
 import { useStyles } from './RemoveModal.styles';
 
 export const RemoveModal = ({
@@ -10,10 +11,13 @@ export const RemoveModal = ({
   multisafeId,
   name,
 }) => {
-  const removeMultisafe = useStoreActions((actions) => actions.multisafe.removeMultisafe);
+  const onRemoveLocalMultisafe = useStoreActions(
+    (actions) => actions.multisafe.onRemoveLocalMultisafe,
+  );
+  const history = useHistory();
   const classes = useStyles();
 
-  const onRemoveMultisafe = () => removeMultisafe(multisafeId);
+  const onRemoveMultisafe = () => onRemoveLocalMultisafe({ history, multisafeId });
 
   return (
     <Modal
