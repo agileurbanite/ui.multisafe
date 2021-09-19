@@ -1,5 +1,6 @@
 import { thunk } from 'easy-peasy';
 import { config } from '../../../near/config';
+import { getMultisafeContract } from '../helpers/getMultisafeContract';
 
 const getAddRequestTxs = async (connection, multisafeId) =>
   connection.session.call(config.getExplorerSelectCommand(), [
@@ -21,50 +22,64 @@ const getAddRequestTxs = async (connection, multisafeId) =>
     },
   ]);
 
-export const onMountDashboard = thunk(async (_, __, { getStoreState, getStoreActions }) => {
-  const state = getStoreState();
-  const accountId = state.general.user.accountId;
-  const archivalRpc = state.general.entities.archivalRpc;
-  const indexerConnection = state.general.entities.indexerConnection;
-  const contract = state.multisafe.entities.contract;
-  const multisafeId = state.multisafe.general.multisafeId;
+export const onMountDashboard = thunk(
+  async (_, multisafeId, { getStoreState, getStoreActions }) => {
+    const state = getStoreState();
+    const accountId = state.general.user.accountId;
+    const near = state.general.entities.near;
+    const archivalRpc = state.general.entities.archivalRpc;
+    const indexerConnection = state.general.entities.indexerConnection;
+    const multisafes = state.multisafe.multisafes;
 
-  const actions = getStoreActions();
-  const mountDashboard = actions.multisafe.mountDashboard;
-  const setError = actions.general.setError;
+    const actions = getStoreActions();
+    const mountDashboard = actions.multisafe.mountDashboard;
+    const setError = actions.general.setError;
 
-  try {
-    const [requestIds, numConfirmations, addRequestTxs] = await Promise.all([
-      contract.list_request_ids(),
-      contract.get_num_confirmations(),
-      getAddRequestTxs(indexerConnection, multisafeId),
-    ]);
+    const contract = getMultisafeContract(state, multisafeId);
+    const localMultisafe = multisafes.find((multisafe) => multisafe.multisafeId === multisafeId);
 
-    const [requests, txsStatuses] = await Promise.all([
-      Promise.all(
-        requestIds.map((request_id) =>
-          Promise.all([
-            contract.get_request({ request_id }),
-            contract.get_confirmations({ request_id }),
-          ]),
+    try {
+      const account = await near.account(multisafeId);
+
+      const [accountState, members, requestIds, numConfirmations, addRequestTxs] =
+        await Promise.all([
+          account.state(),
+          contract.get_members(),
+          contract.list_request_ids(),
+          contract.get_num_confirmations(),
+          getAddRequestTxs(indexerConnection, multisafeId),
+        ]);
+
+      const [requests, txsStatuses] = await Promise.all([
+        Promise.all(
+          requestIds.map((request_id) =>
+            Promise.all([
+              contract.get_request({ request_id }),
+              contract.get_confirmations({ request_id }),
+            ]),
+          ),
         ),
-      ),
-      Promise.all(
-        addRequestTxs.map(({ transaction_hash, signer_account_id }) =>
-          archivalRpc.connection.provider.txStatus(transaction_hash, signer_account_id),
+        Promise.all(
+          addRequestTxs.map(({ transaction_hash, signer_account_id }) =>
+            archivalRpc.connection.provider.txStatus(transaction_hash, signer_account_id),
+          ),
         ),
-      ),
-    ]);
+      ]);
 
-    mountDashboard({
-      requests,
-      requestIds,
-      addRequestTxs,
-      txsStatuses,
-      accountId,
-      numConfirmations,
-    });
-  } catch (e) {
-    setError({ isError: true, description: e });
-  }
-});
+      mountDashboard({
+        requests,
+        requestIds,
+        addRequestTxs,
+        txsStatuses,
+        accountId,
+        numConfirmations,
+        localMultisafe,
+        contract,
+        accountState,
+        members,
+      });
+    } catch (e) {
+      setError({ isError: true, description: e });
+    }
+  },
+);

@@ -28,10 +28,9 @@ export const getDataBeforeRenderPage = async ({
 
   withLoading && enableLoading();
 
-  // TODO maybe we can unite these 2 thunks into one
   if (ifRouteIs(dashboard)) {
-    await onMountMultisafe({ multisafeId });
-    await onMountDashboard();
+    // await onMountMultisafe({ multisafeId });
+    await onMountDashboard(multisafeId);
   }
 
   if (ifRouteIs(history)) {
