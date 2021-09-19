@@ -1,4 +1,5 @@
 import { Button, Paper, Modal } from '@material-ui/core';
+import cn from 'classnames';
 import { useStoreActions } from 'easy-peasy';
 import { useStyles } from './RemoveModal.styles';
 
@@ -23,8 +24,8 @@ export const RemoveModal = ({
     >
       <Paper className={classes.container}>
         <div className={classes.wrapper}>
-          <h2 className={classes.header}>Remove multisafe</h2>
-          <div className={classes.adornmentText}>
+          <h2 className={classes.header}>Remove Multi Safe</h2>
+          <div className={classes.warning}>
             {`Are you sure to remove "${name}" from list?
            Notice that it is be removed only locally
            from your browser - you won't delete it from
@@ -34,7 +35,11 @@ export const RemoveModal = ({
             <Button onClick={closeRemoveModal} className={classes.cancel}>
               Cancel
             </Button>
-            <Button color="secondary" onClick={onRemoveMultisafe}>
+            <Button
+              color="secondary"
+              onClick={onRemoveMultisafe}
+              className={cn(classes.cancel, classes.remove)}
+            >
               Remove
             </Button>
           </div>

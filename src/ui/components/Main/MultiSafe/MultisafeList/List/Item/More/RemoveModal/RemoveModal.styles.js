@@ -1,6 +1,11 @@
 import { makeStyles } from '@material-ui/core';
 
-const styles = {
+const styles = theme => ({
+  modal: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
     width: 380,
     display: 'flex',
@@ -10,36 +15,38 @@ const styles = {
     borderRadius: 8,
   },
   wrapper: {
-    width: 'calc(100% - 32px)',
+    margin: '24px 24px 16px 24px',
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
   },
   header: {
-    margin: '30px 0 30px 10px',
+    fontSize: 20,
     color: 'rgba(0, 0, 0, 0.87)',
-    fontWeight: 900,
+    margin: 0,
+  },
+  warning: {
+    color: theme.colors.textGrey,
+    margin: 0,
+    marginTop: 20,
   },
   footer: {
-    height: 70,
     display: 'flex',
     justifyContent: 'flex-end',
-    alignItems: 'center',
+    marginTop: 24,
   },
   cancel: {
-    color: 'grey',
-    marginRight: 16,
+    color: theme.colors.textGrey,
+    minWidth: 'auto',
+    letterSpacing: 1.25,
+    padding: 0,
+    fontSize: 12,
+    fontWeight: 700,
   },
-  modal: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+  remove: {
+    color: theme.palette.primary.main,
+    marginLeft: 14,
   },
-  adornmentText: {
-    color: 'rgba(0, 0, 0, 0.6)',
-    margin: '0 10px 0 10px',
-    fontWeight: 500,
-    userSelect: 'none',
-  },
-};
+});
 
 export const useStyles = makeStyles(styles, { name: 'RemoveModal' });
