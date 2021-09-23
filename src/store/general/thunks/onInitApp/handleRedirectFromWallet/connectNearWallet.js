@@ -9,7 +9,7 @@ const getDestination = (origin) => {
   return origin;
 };
 
-const onSuccess = async (state, actions, browserHistory, query) => {
+const onSuccess = (state, actions, browserHistory, query) => {
   const destination = getDestination(state.general.temporary.origin);
 
   actions.general.setUserData({
@@ -33,6 +33,6 @@ const onError = (state, actions, browserHistory) => {
 
 export const connectNearWallet = async ({ state, actions, history: browserHistory, query }) => {
   actions.general.deleteTemporaryData();
-  if (query.account_id) await onSuccess(state, actions, browserHistory, query);
+  if (query.account_id) onSuccess(state, actions, browserHistory, query);
   if (query.errorCode) onError(state, actions, browserHistory);
 };

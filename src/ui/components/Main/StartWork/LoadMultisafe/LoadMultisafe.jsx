@@ -17,10 +17,10 @@ export const LoadMultisafe = () => {
   return (
     <div className={classes.container}>
       <div className={classes.headerWrapper}>
-        <IconButton onClick={goBack}>
-          <ArrowBack />
+        <IconButton onClick={goBack} className={classes.goBack}>
+          <ArrowBack className={classes.icon} />
         </IconButton>
-        <Typography variant="h4">Load existing Multi Safe</Typography>
+        <h1 className={classes.title}>Load existing Multi Safe</h1>
       </div>
       <Typography variant="h5" className={classes.subheader}>
         Multi Safe Name and Address

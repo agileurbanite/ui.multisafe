@@ -1,10 +1,11 @@
 import { Button, Modal, Paper } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
+import cn from 'classnames';
 import { useStoreActions } from 'easy-peasy';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useStyles } from './EditModal.styles';
 import { MultisafeName } from './MultisafeName/MultisafeName';
-import { editSchema } from '../../../../../../../../../utils/validation/editSchema';
+import { validationSchema } from './validationSchema';
 
 export const EditModal = ({
   isOpenEditModal,
@@ -16,9 +17,12 @@ export const EditModal = ({
   const changeMultisafeName = useStoreActions((actions) => actions.multisafe.changeMultisafeName);
   const classes = useStyles();
 
-  const { control, handleSubmit, formState: { errors }, } = useForm(
-    {
-    resolver: yupResolver(editSchema),
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(validationSchema),
     mode: 'all',
   });
 
@@ -36,8 +40,8 @@ export const EditModal = ({
     >
       <Paper className={classes.container}>
         <div className={classes.wrapper}>
-          <h2 className={classes.header}>Edit Multisafe Name</h2>
-          <form onSubmit={onSubmit}>
+          <h2 className={classes.header}>Edit Multi Safe</h2>
+          <form onSubmit={onSubmit} className={classes.form}>
             <MultisafeName
               name={name}
               control={control}
@@ -48,7 +52,7 @@ export const EditModal = ({
               <Button className={classes.cancel} onClick={closeEditModal}>
                 Cancel
               </Button>
-              <Button type="submit" color="primary">
+              <Button type="submit" color="primary" className={cn(classes.cancel, classes.send)}>
                 Save
               </Button>
             </div>

@@ -8,7 +8,8 @@ export const Amount = ({ control, classNames, hasError, errorMessage }) => (
   <>
     <BulletHeading>Deposit funds</BulletHeading>
     <Typography className={classNames?.description}>
-      To start work with your Multi Safe please deposit funds.
+      To start work with your Multi Safe please deposit funds. To create Multi Safe you need
+      to have at least 5 NEAR
     </Typography>
     <section className={classNames?.createMultisafeBlock}>
       <TextField

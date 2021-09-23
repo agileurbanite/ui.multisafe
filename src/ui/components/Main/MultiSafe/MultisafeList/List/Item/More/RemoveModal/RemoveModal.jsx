@@ -1,5 +1,7 @@
 import { Button, Paper, Modal } from '@material-ui/core';
+import cn from 'classnames';
 import { useStoreActions } from 'easy-peasy';
+import { useHistory } from 'react-router-dom';
 import { useStyles } from './RemoveModal.styles';
 
 export const RemoveModal = ({
@@ -9,10 +11,13 @@ export const RemoveModal = ({
   multisafeId,
   name,
 }) => {
-  const removeMultisafe = useStoreActions((actions) => actions.multisafe.removeMultisafe);
+  const onRemoveLocalMultisafe = useStoreActions(
+    (actions) => actions.multisafe.onRemoveLocalMultisafe,
+  );
+  const history = useHistory();
   const classes = useStyles();
 
-  const onRemoveMultisafe = () => removeMultisafe(multisafeId);
+  const onRemoveMultisafe = () => onRemoveLocalMultisafe({ history, multisafeId });
 
   return (
     <Modal
@@ -23,8 +28,8 @@ export const RemoveModal = ({
     >
       <Paper className={classes.container}>
         <div className={classes.wrapper}>
-          <h2 className={classes.header}>Remove multisafe</h2>
-          <div className={classes.adornmentText}>
+          <h2 className={classes.header}>Remove Multi Safe</h2>
+          <div className={classes.warning}>
             {`Are you sure to remove "${name}" from list?
            Notice that it is be removed only locally
            from your browser - you won't delete it from
@@ -34,7 +39,11 @@ export const RemoveModal = ({
             <Button onClick={closeRemoveModal} className={classes.cancel}>
               Cancel
             </Button>
-            <Button color="secondary" onClick={onRemoveMultisafe}>
+            <Button
+              color="secondary"
+              onClick={onRemoveMultisafe}
+              className={cn(classes.cancel, classes.remove)}
+            >
               Remove
             </Button>
           </div>

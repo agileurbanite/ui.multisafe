@@ -9,11 +9,15 @@ import { useStyles } from './Item.styles';
 
 export const Item = ({
   multisafe: { name, emoji = emojiConfig.foxMuzzle, multisafeId, balance },
+  onListClose,
 }) => {
   const history = useHistory();
   const classes = useStyles();
 
-  const goToMultisafe = () => history.push(getRoute.dashboard(multisafeId));
+  const goToMultisafe = () => {
+    history.push(getRoute.dashboard(multisafeId));
+    onListClose();
+  };
 
   return (
     <div className={classes.container} onClick={goToMultisafe} role="button">

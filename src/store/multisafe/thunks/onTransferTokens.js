@@ -15,15 +15,24 @@ const addTransferRequest = (contract, withApprove, recipientId, amount) => {
   });
 };
 
-const signTxByLedger = async (contract, withApprove, recipientId, amount, state, actions) => {
+const signTxByLedger = async (
+  contract,
+  withApprove,
+  recipientId,
+  amount,
+  multisafeId,
+  state,
+  actions,
+) => {
   await signTransactionByLedger({
     actionName: 'Transfer',
     state,
     actions,
     contractMethod: () => addTransferRequest(contract, withApprove, recipientId, amount),
     callback: async () => {
+      // Here we load data to update UI according to the last changes
       // TODO move onMountDashboard functions into helper - it can mislead devs in the future
-      await actions.multisafe.onMountDashboard();
+      await actions.multisafe.onMountDashboard(multisafeId);
     },
   });
 };
@@ -35,12 +44,13 @@ export const onTransferTokens = thunk(async (_, payload, { getStoreState, getSto
   const state = getStoreState();
   const isNearWallet = state.general.selectors.isNearWallet;
   const contract = state.multisafe.entities.contract;
+  const multisafeId = state.multisafe.general.multisafeId;
 
   const actions = getStoreActions();
 
   isNearWallet
     ? addTransferRequest(contract, withApprove, recipientId, amount)
-    : await signTxByLedger(contract, withApprove, recipientId, amount, state, actions);
+    : await signTxByLedger(contract, withApprove, recipientId, amount, multisafeId, state, actions);
 
   onClose();
 });

@@ -44,7 +44,7 @@ export const MembersField = ({
                 control={control}
                 name={`members[${idx}].account_id`}
                 variant="filled"
-                label="Member Address*"
+                label="Member Account ID*"
                 className={classes.memberAddress}
                 fullWidth
                 error={!!errors?.members?.[idx]?.account_id}
@@ -61,7 +61,7 @@ export const MembersField = ({
             </ListItem>
           ))}
         </List>
-        <section className={classes.buttonContainer}>
+        <section>
           <Button
             startIcon={<AddIcon />}
             type="button"

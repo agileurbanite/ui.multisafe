@@ -8,6 +8,7 @@ export const theme = createMuiTheme({
     },
   },
   colors: {
+    textGrey: 'rgba(0, 0, 0, 0.6)',
     dashboardGrey: '#989898',
     dashboardHoverBgGrey: '#ffffff28',
     dividerOnWhite: '#dfdfdf',

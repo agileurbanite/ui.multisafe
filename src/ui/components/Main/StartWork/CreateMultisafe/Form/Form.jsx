@@ -1,5 +1,5 @@
-import { Button, Typography } from '@material-ui/core';
-import { useStoreActions } from 'easy-peasy';
+import { Button } from '@material-ui/core';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory } from 'react-router-dom';
@@ -12,13 +12,24 @@ import { Amount } from './Amount/Amount';
 import { createMultisafeSchema } from '../../../../../../utils/validation/CreateMultisafePage';
 
 export const Form = () => {
-  const onCreateMultisafe = useStoreActions((a) => a.startWork.onCreateMultisafe);
-  const { control, handleSubmit, getValues, errors } = useForm({
-    resolver: yupResolver(createMultisafeSchema),
-    mode: 'all',
-  });
+  const accountId = useStoreState((store) => store.general.user.accountId);
+  const onCreateMultisafe = useStoreActions((actions) => actions.startWork.onCreateMultisafe);
   const history = useHistory();
   const classes = useStyles();
+
+  const {
+    control,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(createMultisafeSchema),
+    mode: 'all',
+    defaultValues: {
+      members: [{ account_id: accountId }],
+      num_confirmations: '1',
+    },
+  });
 
   const onSubmit = handleSubmit((data) => onCreateMultisafe({ data, history }));
 
@@ -58,9 +69,6 @@ export const Form = () => {
       <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
         Create Multi Safe
       </Button>
-      <Typography className={classes.fee} align="center">
-        To create Multi Safe you need to have at least 5 NEAR
-      </Typography>
     </form>
   );
 };

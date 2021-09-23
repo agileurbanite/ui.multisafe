@@ -8,15 +8,16 @@ const signTxByNearWallet = (contract, requestId) => {
   deleteRequest(contract, requestId);
 };
 
-const signTxByLedger = async (contract, requestId, state, actions) => {
+const signTxByLedger = async (contract, requestId, multisafeId, state, actions) => {
   await signTransactionByLedger({
     actionName: 'Delete Request',
     state,
     actions,
     contractMethod: () => deleteRequest(contract, requestId),
     callback: async () => {
+      // Here we load data to update UI according to the last changes
       // TODO move onMountDashboard functions into helper - it can mislead devs in the future
-      await actions.multisafe.onMountDashboard();
+      await actions.multisafe.onMountDashboard(multisafeId);
     },
   });
 };
@@ -27,10 +28,11 @@ export const onDeleteRequest = thunk(async (_, payload, { getStoreState, getStor
   const state = getStoreState();
   const isNearWallet = state.general.selectors.isNearWallet;
   const contract = state.multisafe.entities.contract;
+  const multisafeId = state.multisafe.general.multisafeId;
 
   const actions = getStoreActions();
 
   isNearWallet
     ? signTxByNearWallet(contract, requestId)
-    : await signTxByLedger(contract, requestId, state, actions);
+    : await signTxByLedger(contract, requestId, multisafeId, state, actions);
 });

@@ -17,7 +17,11 @@ export const Status = ({ request, onConfirmRequest, onDeleteRequest }) => {
   useEffect(() => {
     if (!isMember || canDelete) return () => {};
 
-    const cooldownRemains = createdAt + config.multisafe.deleteRequestCooldown - Date.now();
+    // Sometimes indexer does not have time to add a new record about last transaction (add_request)
+    // into the database and 'createdAt' will be NaN
+    const cooldownRemains = Number.isNaN(createdAt)
+      ? config.multisafe.deleteRequestCooldown
+      : createdAt + config.multisafe.deleteRequestCooldown - Date.now();
 
     const timeout = setTimeout(() => {
       setCanDelete(true);
