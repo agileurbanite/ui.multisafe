@@ -16,11 +16,13 @@ const styles = {
     border: '1px solid rgba(0, 0, 0, 0.14)',
     borderRadius: '8px',
   },
+  // We have a bug with JSS and Material UI on the prod - this class embedding into 'head' before
+  // MaterialUi-root general icon class
   icon: {
-    height: 56,
-    width: 56,
-    fill: 'rgba(0, 0, 0, 0.87)'
+    height: '56px!important',
+    width: '56px!important',
+    fill: 'rgba(0, 0, 0, 0.87)!important'
   },
 };
 
-export const useStyles = makeStyles(styles, { name: 'Icon' });
+export const useStyles = makeStyles(styles, { order: 1, name: 'Icon' });
