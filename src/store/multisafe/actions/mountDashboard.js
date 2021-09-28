@@ -28,17 +28,17 @@ export const mountDashboard = action((slice, payload) => {
     numConfirmations,
     localMultisafe,
     contract,
-    accountState,
+    balance,
     members,
   } = payload;
 
   const requestsTxs = getRequestsTxs(addRequestTxs, txsStatuses);
 
-  const isMember = members.some((member) => member.account_id === accountId)
+  const isMember = members.some((member) => member.account_id === accountId);
 
   slice.general.name = localMultisafe.name;
   slice.general.multisafeId = localMultisafe.multisafeId;
-  slice.general.balance = accountState.amount;
+  slice.general.balance = balance.available;
 
   slice.dashboard.pendingRequests = requestIds
     .map((requestId, index) => {

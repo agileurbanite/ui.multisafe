@@ -33,7 +33,7 @@ const mainnet = {
   walletUrl: 'https://wallet.near.org',
   helperUrl: 'https://helper.mainnet.near.org',
   explorerUrl: 'https://explorer.near.org',
-  multisafeFactoryId: 'need to create',
+  multisafeFactoryId: 'multisafe.dev-eclipseeer.near',
 };
 
 const configs = {
