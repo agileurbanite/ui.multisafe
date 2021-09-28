@@ -20,10 +20,12 @@ const styles = (theme) => ({
   },
   name: {
     gridArea: '1 / 2 / 2 / 3',
+    width: '90%',
     fontWeight: 700,
     lineHeight: 1.5,
     alignSelf: 'end',
     marginTop: 8,
+    overflowWrap:"anywhere"
   },
   balance: {
     gridArea: '2 / 2 / 3 / 3',

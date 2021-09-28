@@ -19,7 +19,10 @@ export const onMountList = thunk(async (_, payload, { getStoreState, getStoreAct
 
     const data = await Promise.all(
       accounts.map((account) =>
-        Promise.all([account.state(), account.viewFunction(account.accountId, 'get_members')]),
+        Promise.all([
+          account.getAccountBalance(),
+          account.viewFunction(account.accountId, 'get_members'),
+        ]),
       ),
     );
 

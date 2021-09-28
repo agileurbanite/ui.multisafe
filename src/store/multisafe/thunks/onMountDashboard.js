@@ -1,4 +1,5 @@
 import { thunk } from 'easy-peasy';
+import { Account } from 'near-api-js';
 import { config } from '../../../near/config';
 import { getMultisafeContract } from '../helpers/getMultisafeContract';
 
@@ -39,16 +40,13 @@ export const onMountDashboard = thunk(
     const localMultisafe = multisafes.find((multisafe) => multisafe.multisafeId === multisafeId);
 
     try {
-      const account = await near.account(multisafeId);
-
-      const [accountState, members, requestIds, numConfirmations, addRequestTxs] =
-        await Promise.all([
-          account.state(),
-          contract.get_members(),
-          contract.list_request_ids(),
-          contract.get_num_confirmations(),
-          getAddRequestTxs(indexerConnection, multisafeId),
-        ]);
+      const [balance, members, requestIds, numConfirmations, addRequestTxs] = await Promise.all([
+        new Account(near.connection, multisafeId).getAccountBalance(),
+        contract.get_members(),
+        contract.list_request_ids(),
+        contract.get_num_confirmations(),
+        getAddRequestTxs(indexerConnection, multisafeId),
+      ]);
 
       const [requests, txsStatuses] = await Promise.all([
         Promise.all(
@@ -75,7 +73,7 @@ export const onMountDashboard = thunk(
         numConfirmations,
         localMultisafe,
         contract,
-        accountState,
+        balance,
         members,
       });
     } catch (e) {

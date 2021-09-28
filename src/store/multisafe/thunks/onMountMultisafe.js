@@ -1,4 +1,5 @@
 import { thunk } from 'easy-peasy';
+import { Account } from 'near-api-js';
 import { getMultisafeContract } from '../helpers/getMultisafeContract';
 
 export const onMountMultisafe = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
@@ -15,13 +16,15 @@ export const onMountMultisafe = thunk(async (_, payload, { getStoreState, getSto
   const localMultisafe = multisafes.find((multisafe) => multisafe.multisafeId === multisafeId);
 
   try {
-    const account = await near.account(multisafeId);
-    const [accountState, members] = await Promise.all([account.state(), contract.get_members()]);
+    const [balance, members] = await Promise.all([
+      new Account(near.connection, multisafeId).getAccountBalance(),
+      contract.get_members(),
+    ]);
 
     mountMultisafe({
       localMultisafe,
       contract,
-      accountState,
+      balance,
       members,
     });
   } catch (e) {
