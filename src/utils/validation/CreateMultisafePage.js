@@ -1,7 +1,7 @@
 import * as R from 'ramda';
 import * as yup from 'yup';
 import { config } from '../../near/config';
-import { debounceAsync } from '../debounceAsync';
+import { debounce } from '../debounce';
 
 const requiredMessageType = {
   name: 'Please enter multisafe name',
@@ -26,7 +26,7 @@ const patterns = {
   amount: /^([5-9]|0?[1-9][0-9]+)$/g,
 };
 
-const isUserExist = debounceAsync(async (value) => {
+const isUserExist = debounce(async (value) => {
   const response = await fetch(config.nodeUrl, {
     method: 'POST',
     headers: {

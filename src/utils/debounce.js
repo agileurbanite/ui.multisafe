@@ -1,4 +1,4 @@
-export const debounceAsync = (inner, ms = 0) => {
+export const debounce = (inner, ms = 0) => {
   let timeout = null;
   let resolves = [];
 
