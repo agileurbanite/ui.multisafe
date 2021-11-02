@@ -28,6 +28,6 @@ export const onMountMultisafe = thunk(async (_, payload, { getStoreState, getSto
       members,
     });
   } catch (e) {
-    throw new Error(e);
+    actions.general.setError({ isError: true, description: e.message });
   }
 });

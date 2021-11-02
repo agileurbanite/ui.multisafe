@@ -52,6 +52,6 @@ export const onMountHistory = thunk(async (_, __, { getStoreState, getStoreActio
       requestTxStatuses: toCamelCase(requestTxStatuses),
     });
   } catch (e) {
-    setError({ isError: true, description: e });
+    setError({ isError: true, description: e.message });
   }
 });
