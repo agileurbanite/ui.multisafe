@@ -1,4 +1,4 @@
-import { Dashboard, People } from '@material-ui/icons';
+import { Dashboard, People, History } from '@material-ui/icons';
 import { routes, getRoute } from '../../../../../config/routes';
 
 const items = [
@@ -7,6 +7,12 @@ const items = [
     route: routes.dashboard,
     getPath: getRoute.dashboard,
     icon: Dashboard,
+  },
+  {
+    name: 'History',
+    route: routes.history,
+    getPath: getRoute.history,
+    icon: History,
   },
   {
     name: 'Members',

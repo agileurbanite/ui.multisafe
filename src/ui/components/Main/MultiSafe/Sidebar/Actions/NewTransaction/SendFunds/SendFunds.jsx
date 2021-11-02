@@ -2,8 +2,9 @@ import { forwardRef } from 'react';
 import { Button, Paper } from '@material-ui/core';
 import { useStoreActions } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
+import cn from 'classnames';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Checkbox } from '../../../../../general/Checkbox/Checkbox';
+import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
 import { Amount } from './Amount/Amount';
 import { Recipient } from './Recipient/Recipient';
 import { useStyles } from './SendFunds.styles';
@@ -13,12 +14,12 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
   const onTransferTokens = useStoreActions((actions) => actions.multisafe.onTransferTokens);
   const { control, handleSubmit, setValue, errors } = useForm({
     resolver: yupResolver(sendFundsSchema),
-    mode: "all"
+    mode: 'all',
   });
   const classes = useStyles();
 
   const onSubmit = handleSubmit((data) => {
-    onTransferTokens({ data });
+    onTransferTokens({ data, onClose });
   });
 
   return (
@@ -51,7 +52,7 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
             <Button color="secondary" className={classes.cancel} onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit" color="primary" className={classes.send}>
+            <Button type="submit" color="primary" className={cn(classes.cancel, classes.send)}>
               Send
             </Button>
           </div>

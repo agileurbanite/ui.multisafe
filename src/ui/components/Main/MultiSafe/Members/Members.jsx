@@ -21,8 +21,8 @@ export const Members = () => {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell>Member Name</TableCell>
-              <TableCell colSpan={2}>Member Address</TableCell>
+              <TableCell>Member Account ID</TableCell>
+              <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>

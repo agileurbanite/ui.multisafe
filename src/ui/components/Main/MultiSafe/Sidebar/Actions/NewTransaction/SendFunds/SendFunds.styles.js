@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const styles = {
+const styles = (theme) => ({
   container: {
     width: 380,
     display: 'flex',
@@ -10,14 +10,18 @@ const styles = {
     borderRadius: 8,
   },
   wrapper: {
-    width: 'calc(100% - 32px)',
+    margin: '24px 24px 16px 24px',
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
   },
   header: {
-    margin: '30px 0',
+    fontSize: 20,
     color: 'rgba(0, 0, 0, 0.87)',
-    fontWeight: 900,
+    margin: 0,
+  },
+  form: {
+    marginTop: 20,
   },
   textField: {
     marginBottom: 24,
@@ -33,17 +37,25 @@ const styles = {
   },
   checkboxLabel: {
     fontWeight: 700,
+    fontSize: 14,
   },
   footer: {
-    height: 70,
     display: 'flex',
     justifyContent: 'flex-end',
-    alignItems: 'center',
+    marginTop: 24,
   },
   cancel: {
-    color: 'grey',
-    marginRight: 16,
+    color: theme.colors.textGrey,
+    minWidth: 'auto',
+    letterSpacing: 1.25,
+    padding: 0,
+    fontSize: 12,
+    fontWeight: 700,
   },
-};
+  send: {
+    color: theme.palette.primary.main,
+    marginLeft: 14,
+  },
+});
 
 export const useStyles = makeStyles(styles, { name: 'SendFunds' });

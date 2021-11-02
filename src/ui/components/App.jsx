@@ -3,6 +3,8 @@ import { Welcome } from './Welcome/Welcome';
 import { Main } from './Main/Main';
 import { PageNotFound } from './PageNotFound/PageNotFound';
 import { Error } from './Error/Error';
+import { ConfirmActionOnLedger } from './ConfirmActionOnLedger/ConfirmActionOnLedger';
+import { SelectLedgerAccount } from './SelectLedgerAccount/SelectLedgerAccount';
 import { routes } from '../config/routes';
 
 export const App = () => (
@@ -16,6 +18,7 @@ export const App = () => (
           routes.createMultisafe,
           routes.loadMultisafe,
           routes.dashboard,
+          routes.history,
           routes.members,
         ]}
         component={Main}
@@ -23,5 +26,7 @@ export const App = () => (
       <Route path="*" component={PageNotFound} />
     </Switch>
     <Error />
+    <ConfirmActionOnLedger />
+    <SelectLedgerAccount />
   </>
 );
