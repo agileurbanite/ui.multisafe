@@ -77,7 +77,7 @@ export const onMountDashboard = thunk(
         members,
       });
     } catch (e) {
-      setError({ isError: true, description: e });
+      setError({ isError: true, description: e.message });
     }
   },
 );
