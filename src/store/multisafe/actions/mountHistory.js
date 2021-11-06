@@ -45,7 +45,7 @@ const getRequests = (requestTxs, successTxs, activeRequestIds, deletedRequestIds
         status: deletedRequestIds[requestId] ? 'deleted' : 'completed',
       };
     })
-    .filter(({ requestId }) => !activeRequestIds[requestId])
+    .filter(({ requestId }) => typeof activeRequestIds[requestId] === 'undefined')
     .sort((a, b) => b.requestId - a.requestId);
 
 export const mountHistory = action((state, payload) => {
