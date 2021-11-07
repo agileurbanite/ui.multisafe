@@ -6,7 +6,7 @@ import { isAccountExist } from '../../../../../../utils/isAccountExist';
 
 const errors = {
   name: 'Please enter multisafe local name',
-  multisafeId: 'Please enter a valid multisafe name',
+  multisafeId: 'Please enter a valid multisafe ID',
   isMultisafeExists: 'There is no multisafe with such ID',
   isMultisafeLoaded: 'This multisafe has been loaded already',
 };

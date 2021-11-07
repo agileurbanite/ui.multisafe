@@ -1,29 +1,16 @@
-import { useFieldArray, useWatch } from 'react-hook-form'
-import { List, ListItem, Button, IconButton, Typography, FormHelperText } from '@material-ui/core';
+import { useFieldArray } from 'react-hook-form';
+import { List, ListItem, Button, IconButton, Typography } from '@material-ui/core';
 import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
 import { useStyles } from './MembersField.styles';
 import { BulletHeading } from '../../../../general/BulletHeading/BulletHeading';
 import { ContentSeparator } from '../../../../../general/ContentSeparator/ContentSeparator';
 import { TextField } from '../../../../general/TextField/TextField';
 
-export const MembersField = ({
-  control,
-  getValues,
-  name,
-  classNames,
-  errors,
-}) => {
+export const MembersField = ({ control, classNames, errors }) => {
+  const { fields, append, remove } = useFieldArray({ control, name: 'members' });
   const classes = useStyles();
-  const { fields, append, remove } = useFieldArray({ control, name });
-  const watchedMembers =
-    useWatch({
-      control,
-      name: 'members',
-    }) || [];
 
-  const appendMember = () => append([{ account_id: getValues('account_id') }]);
-
-  const removeMember = (idx) => remove(idx);
+  const addMember = () => append({ account_id: '' });
 
   return (
     <>
@@ -38,26 +25,28 @@ export const MembersField = ({
       </Typography>
       <section className={classNames?.createMultisafeBlock}>
         <List>
-          {fields.map((item, idx) => (
+          {fields.map((item, index) => (
             <ListItem key={item.id} disableGutters>
               <TextField
                 control={control}
-                name={`members[${idx}].account_id`}
+                name={`members[${index}].account_id`}
                 variant="filled"
                 label="Member Account ID*"
                 className={classes.memberAddress}
                 fullWidth
-                error={!!errors?.members?.[idx]?.account_id}
-                helperText={!!errors?.members && errors?.members?.[idx]?.account_id.message}
+                error={Boolean(errors?.members?.[index]?.account_id)}
+                helperText={errors?.members?.[index]?.account_id.message}
                 InputProps={{
                   classes: {
                     root: classes.memberAddressInput,
                   },
                 }}
               />
-              <IconButton className={classes.iconButton} onClick={removeMember}>
-                <DeleteIcon className={classes.icon} />
-              </IconButton>
+              {fields.length > 1 && (
+                <IconButton className={classes.iconButton} onClick={() => remove(index)}>
+                  <DeleteIcon className={classes.icon} />
+                </IconButton>
+              )}
             </ListItem>
           ))}
         </List>
@@ -68,12 +57,10 @@ export const MembersField = ({
             variant="outlined"
             color="primary"
             className={classes.addButton}
-            onClick={appendMember}>
+            onClick={addMember}
+          >
             Add Member
           </Button>
-          <FormHelperText id="members-validation-field" error={watchedMembers < 1}>
-            {watchedMembers < 1 && errors?.members?.message}
-          </FormHelperText>
         </section>
       </section>
       <ContentSeparator bg="rgba(0, 0, 0, 0.87)" height={1} margin="24px 0" />

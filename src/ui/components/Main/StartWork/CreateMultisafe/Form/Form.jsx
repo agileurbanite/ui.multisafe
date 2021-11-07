@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+
 import { useHistory } from 'react-router-dom';
 import { useStyles } from './Form.styles';
 import { MembersField } from './MembersField/MembersField';
@@ -9,9 +9,10 @@ import { AccountId } from './AccountId/AccountId';
 import { MultisafeName } from './MultisafeName/MultisafeName';
 import { Confirmations } from './Confirmations/Confirmations';
 import { Amount } from './Amount/Amount';
-import { createMultisafeSchema } from '../../../../../../utils/validation/CreateMultisafePage';
+import { resolver } from './validation';
 
 export const Form = () => {
+  const near = useStoreState((state) => state.general.entities.near);
   const accountId = useStoreState((store) => store.general.user.accountId);
   const onCreateMultisafe = useStoreActions((actions) => actions.startWork.onCreateMultisafe);
   const history = useHistory();
@@ -20,15 +21,14 @@ export const Form = () => {
   const {
     control,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(createMultisafeSchema),
-    mode: 'all',
+    resolver,
     defaultValues: {
       members: [{ account_id: accountId }],
       num_confirmations: '1',
     },
+    context: { near },
   });
 
   const onSubmit = handleSubmit((data) => onCreateMultisafe({ data, history }));
@@ -44,16 +44,10 @@ export const Form = () => {
       <AccountId
         control={control}
         classNames={classes}
-        hasError={!!errors?.multisafeId}
-        errorMessage={!!errors?.multisafeId && errors?.multisafeId?.message}
+        hasError={Boolean(errors?.multisafeId)}
+        errorMessage={errors?.multisafeId?.message}
       />
-      <MembersField
-        control={control}
-        getValues={getValues}
-        classNames={classes}
-        name="members"
-        errors={errors}
-      />
+      <MembersField control={control} classNames={classes} errors={errors} />
       <Confirmations
         control={control}
         classNames={classes}
