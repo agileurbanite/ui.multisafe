@@ -23,11 +23,11 @@ export const LoadMultisafe = () => {
         <h1 className={classes.title}>Load existing Multi Safe</h1>
       </div>
       <Typography variant="h5" className={classes.subheader}>
-        Multi Safe Name and Address
+        Multi Safe Name and Account ID
       </Typography>
       <Typography className={classes.description}>
         You are about to load an existing Multi Safe. First, choose a name and enter the Safe
-        address. The name is only stored locally and will never be shared with NEAR or any third
+        Account ID. The name is only stored locally and will never be shared with NEAR or any third
         parties. Your connected wallet does not have to be the owner of this Safe. In this case, the
         interface will provide you a read-only view.
       </Typography>

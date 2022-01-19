@@ -36,7 +36,9 @@ export const onMountHistory = thunk(async (_, __, { getStoreState, getStoreActio
   try {
     const [requestIds, _requestTxs] = await Promise.all([
       contract.list_request_ids(),
-      getRequestTxs(indexerConnection, multisafeId),
+      // TODO fix this request
+      //getRequestTxs(indexerConnection, multisafeId),
+      []
     ]);
     const requestTxs = toCamelCase(_requestTxs);
 
