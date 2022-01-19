@@ -6,6 +6,7 @@ import { formatNearBalance } from '../../../../../../utils/format';
 import { useStyles } from './Actions.styles';
 
 export const Actions = () => {
+
   const balance = useStoreState((s) => s.multisafe.general.balance);
   const multisafeId = useStoreState((s) => s.multisafe.general.multisafeId);
   const isMember = useStoreState((s) => s.multisafe.selectors.isMember);
