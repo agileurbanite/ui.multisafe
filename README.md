@@ -102,3 +102,15 @@ Also, we upload data before the page will be rendered.
 ### Testing
 
 Currently, we have no tests.
+
+### Environment variables
+
+There are THREE environment variables to know about:
+
+1. REACT_APP_BACKEND_URL_TESTNET — URL to the backend that will connect to the testnet database
+2. REACT_APP_BACKEND_URL_MAINNET — URL to the backend that will connect to the mainnet database
+3. REACT_APP_NETWORK — mainnet or testnet
+
+For instance, you might use this command:
+
+    REACT_APP_BACKEND_URL_TESTNET=https://example.com ./node_modules/.bin/react-scripts start

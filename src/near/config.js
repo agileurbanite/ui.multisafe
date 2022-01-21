@@ -4,7 +4,7 @@ const general = {
   maxGas: new BN(300000000000000),
   endpoint: {
     jsonrpc: '2.0',
-    id: 'dontcare',
+    id: 'viewacct',
     method: 'query',
     setParams({ account_id }) {
       return { ...this, params: { request_type: 'view_account', finality: 'final', account_id } };
@@ -12,8 +12,7 @@ const general = {
   },
   multisafe: {
     deleteRequestCooldown: 15 * 60 * 1000, // 15 minutes in milliseconds
-  },
-  indexerUrl: 'wss://near-explorer-wamp.onrender.com/ws',
+  }
 };
 
 const testnet = {
@@ -23,7 +22,8 @@ const testnet = {
   walletUrl: 'https://wallet.testnet.near.org',
   helperUrl: 'https://helper.testnet.near.org',
   explorerUrl: 'https://explorer.testnet.near.org',
-  multisafeFactoryId: 'dev-1612259671980-4872321',
+  multisafeFactoryId: 'dev-1612259671980-4872321', // TODO: deploy another one
+  backendURL: process.env.REACT_APP_BACKEND_URL_TESTNET || 'http://localhost:8666'
 };
 
 const mainnet = {
@@ -33,7 +33,8 @@ const mainnet = {
   walletUrl: 'https://wallet.near.org',
   helperUrl: 'https://helper.mainnet.near.org',
   explorerUrl: 'https://explorer.near.org',
-  multisafeFactoryId: 'multisafe.dev-eclipseeer.near',
+  multisafeFactoryId: 'multisafe.dev-eclipseeer.near', // TODO: deploy another one
+  backendURL: process.env.REACT_APP_BACKEND_URL_MAINNET || 'http://localhost:8666'
 };
 
 const configs = {
@@ -42,9 +43,7 @@ const configs = {
 };
 
 const createHelpers = (config) => ({
-  getCheckAccountInExplorerUrl: (accountId) => `${config.explorerUrl}/accounts/${accountId}`,
-  getExplorerSelectCommand: () =>
-    `com.nearprotocol.${config.networkId}.explorer.select:INDEXER_BACKEND`,
+  getCheckAccountInExplorerUrl: (accountId) => `${config.explorerUrl}/accounts/${accountId}`
 });
 
 const getNearConfig = (network = 'testnet') => {

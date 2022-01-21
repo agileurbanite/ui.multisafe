@@ -1,7 +1,6 @@
 import { thunk } from 'easy-peasy';
 import { getDataBeforeRenderPage } from '../helpers/getDataBeforeRenderPage';
 import { getNearEntities } from '../helpers/getNearEntities';
-import { getIndexerConnection } from './getIndexerConnection';
 import { isRedirect } from './isRedirect';
 import { manageNavigation } from './manageNavigation';
 import { handleRedirectFromWallet } from './handleRedirectFromWallet/handleRedirectFromWallet';
@@ -12,12 +11,9 @@ export const onInitApp = thunk(async (_, payload, { getStoreState, getStoreActio
   const actions = getStoreActions();
   const initApp = actions.general.initApp;
 
-  const [nearEntities, indexerConnection] = await Promise.all([
-    getNearEntities(getStoreState),
-    getIndexerConnection(),
-  ]);
+  const nearEntities = await getNearEntities(getStoreState);
 
-  initApp({ nearEntities, indexerConnection });
+  initApp({ nearEntities });
 
   const state = getStoreState();
 
