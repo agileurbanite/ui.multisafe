@@ -3,7 +3,6 @@ import { enableLoading } from './enableLoading';
 import { disableLoading } from './disableLoading';
 import { setError } from './setError';
 import { removeError } from './removeError';
-import { connectToIndexer } from './connectToIndexer';
 import { setTemporaryData } from './setTemporaryData';
 import { deleteTemporaryData } from './deleteTemporaryData';
 import { setUserData } from './setUserData';
@@ -18,7 +17,6 @@ export const actions = {
   disableLoading,
   setError,
   removeError,
-  connectToIndexer,
   setTemporaryData,
   deleteTemporaryData,
   setUserData,
