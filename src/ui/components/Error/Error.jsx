@@ -17,7 +17,7 @@ export const Error = () => {
       onClose={removeError}
       BackdropProps={{ invisible: true }}>
       <Paper className={classes.container} elevation={5}>
-        <h2 className={classes.header}>Ooops...</h2>
+        <h2 className={classes.header}>Error</h2>
         <p>{description}</p>
         <div className={classes.footer}>
           <Button color="primary" className={classes.button} onClick={removeError}>

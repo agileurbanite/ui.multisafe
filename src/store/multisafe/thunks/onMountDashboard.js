@@ -1,27 +1,20 @@
 import { thunk } from 'easy-peasy';
 import { Account } from 'near-api-js';
-import { config } from '../../../near/config';
 import { getMultisafeContract } from '../helpers/getMultisafeContract';
+import { config } from '../../../near/config';
 
-const getAddRequestTxs = async (connection, multisafeId) =>
-  connection.session.call(config.getExplorerSelectCommand(), [
-    `SELECT
-       t.transaction_hash,
-       t.block_timestamp,
-       t.status,
-       t.signer_account_id,
-       ta.args
-     FROM transactions t
-     INNER JOIN transaction_actions ta ON t.transaction_hash = ta.transaction_hash
-     WHERE t.receiver_account_id = :multisafeId
-     AND (
-       ta.args ->> 'method_name' = 'add_request'
-       OR ta.args ->> 'method_name' = 'add_request_and_confirm'
-     )`,
-    {
-      multisafeId,
-    },
-  ]);
+const getAddRequestTxs = async (multisafeId) => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+  const response = await fetch(`${config.backendURL}/getAddRequestTxs?${new URLSearchParams({
+    multisafeId
+  })}`, requestOptions);
+
+  const body = await response.json();
+  return body
+}
 
 export const onMountDashboard = thunk(
   async (_, multisafeId, { getStoreState, getStoreActions }) => {
@@ -29,7 +22,6 @@ export const onMountDashboard = thunk(
     const accountId = state.general.user.accountId;
     const near = state.general.entities.near;
     const archivalRpc = state.general.entities.archivalRpc;
-    const indexerConnection = state.general.entities.indexerConnection;
     const multisafes = state.multisafe.multisafes;
 
     const actions = getStoreActions();
@@ -45,7 +37,7 @@ export const onMountDashboard = thunk(
         contract.get_members(),
         contract.list_request_ids(),
         contract.get_num_confirmations(),
-        getAddRequestTxs(indexerConnection, multisafeId),
+        getAddRequestTxs(multisafeId),
       ]);
 
       const [requests, txsStatuses] = await Promise.all([
