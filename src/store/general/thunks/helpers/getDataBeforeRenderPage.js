@@ -8,7 +8,7 @@ export const getDataBeforeRenderPage = async ({
   history: browserHistory,
   withLoading,
 }) => {
-  console.log('aloha0')
+  console.log('aloha0 browserHistory.location.pathname', browserHistory.location.pathname)
   const enableLoading = actions.general.enableLoading;
   const disableLoading = actions.general.disableLoading;
   const onMountMultisafe = actions.multisafe.onMountMultisafe;
@@ -29,7 +29,7 @@ export const getDataBeforeRenderPage = async ({
 
   withLoading && enableLoading();
 
-  console.log('aloha in getDataBeforerenderPage')
+  console.log('aloha in getDataBeforerenderPage, route')
 
   if (ifRouteIs(dashboard) || ifRouteIs(redirectFromWallet)) {
     // await onMountMultisafe({ multisafeId });
