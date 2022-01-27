@@ -5,6 +5,7 @@ import { getNearEntities } from './helpers/getNearEntities';
 
 export const onSelectLedgerAccount = thunk(
   async (_, payload, { getStoreState, getStoreActions }) => {
+    console.log('aloha5')
     const { accountId, pk, history } = payload;
 
     const actions = getStoreActions();

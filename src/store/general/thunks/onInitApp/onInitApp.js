@@ -17,12 +17,16 @@ export const onInitApp = thunk(async (_, payload, { getStoreState, getStoreActio
 
   const state = getStoreState();
 
+  console.log('aloha state', state);
+  console.log('aloha history', history);
   // All redirect from NEAR Wallet leads to /redirect-from-wallet route. If it is the case,
   // handle it and redirect the user to the appropriate page. If not - check if a user has access
   // to the page and redirect to the proper page
   if (isRedirect(state, history)) {
+    console.log('aloha before handleRedirectFromWallet')
     await handleRedirectFromWallet(state, actions, history);
   } else {
+    console.log('aloha before manageNavigation')
     manageNavigation(state, history);
   }
 

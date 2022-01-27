@@ -4,6 +4,7 @@ import { routes } from '../../../../../ui/config/routes';
 const { welcome, getStarted } = routes;
 
 const getDestination = (origin) => {
+  console.log('aloha2')
   const match = matchPath(origin, { path: [welcome], exact: true });
   if (match?.path === welcome) return getStarted;
   return origin;
@@ -23,6 +24,7 @@ const onSuccess = (state, actions, browserHistory, query) => {
 };
 
 const onError = (state, actions, browserHistory) => {
+  console.log('aloha3')
   actions.general.setError({
     isError: true,
     description: 'You have not connected your wallet',

@@ -11,7 +11,7 @@ export const StartWork = () => {
   return (
     <div className={classes.container}>
       <Switch>
-        <Route exact path={routes.getStarted} component={GetStarted} />
+        <Route exact path={[routes.getStarted, routes.redirectFromWallet]} component={GetStarted} />
         <Route exact path={routes.createMultisafe} component={CreateMultisafe} />
         <Route exact path={routes.loadMultisafe} component={LoadMultisafe} />
       </Switch>

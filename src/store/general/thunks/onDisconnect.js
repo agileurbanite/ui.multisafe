@@ -4,6 +4,7 @@ import { getNearEntities } from './helpers/getNearEntities';
 
 export const onDisconnect = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
   const { history } = payload;
+  console.log('aloha1')
 
   const actions = getStoreActions();
   const resetState = actions.resetState;

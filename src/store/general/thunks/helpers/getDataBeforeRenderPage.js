@@ -1,13 +1,14 @@
 import { matchPath } from 'react-router';
 import { routes } from '../../../../ui/config/routes';
 
-const { createMultisafe, dashboard, history, members } = routes;
+const { createMultisafe, dashboard, history, members, redirectFromWallet } = routes;
 
 export const getDataBeforeRenderPage = async ({
   actions,
   history: browserHistory,
   withLoading,
 }) => {
+  console.log('aloha0')
   const enableLoading = actions.general.enableLoading;
   const disableLoading = actions.general.disableLoading;
   const onMountMultisafe = actions.multisafe.onMountMultisafe;
@@ -28,7 +29,9 @@ export const getDataBeforeRenderPage = async ({
 
   withLoading && enableLoading();
 
-  if (ifRouteIs(dashboard)) {
+  console.log('aloha in getDataBeforerenderPage')
+
+  if (ifRouteIs(dashboard) || ifRouteIs(redirectFromWallet)) {
     // await onMountMultisafe({ multisafeId });
     await onMountDashboard(multisafeId);
   }
@@ -41,6 +44,8 @@ export const getDataBeforeRenderPage = async ({
   if (ifRouteIs(members)) {
     await onMountMultisafe({ multisafeId });
   }
+
+
 
   withLoading && disableLoading();
 };

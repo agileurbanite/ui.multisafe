@@ -10,7 +10,7 @@ export const Main = () => (
     <Switch>
       <Route
         exact
-        path={[routes.getStarted, routes.createMultisafe, routes.loadMultisafe]}
+        path={[routes.getStarted, routes.createMultisafe, routes.loadMultisafe, routes.redirectFromWallet]}
         component={StartWork}
       />
       <Route

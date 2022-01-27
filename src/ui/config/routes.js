@@ -2,8 +2,8 @@ import qs from 'query-string';
 
 export const routes = {
   // Technical
-  root: '/',
   redirectFromWallet: '/redirect-from-wallet',
+  root: '/',
   // Pages
   welcome: '/welcome',
   getStarted: '/get-started',
