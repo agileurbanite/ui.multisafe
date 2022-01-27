@@ -14,6 +14,11 @@ export const Topbar = () => {
   return (
     <>
       <div className={classes.container}>
+          <button type="button" className={classes.menu_toggle } title="Click to open mobile nav">
+              <span />
+              <span />
+              <span />
+          </button>
         <img className={classes.logo} src={logo} alt="Logo of Multisafe" />
         {isConnected ? <Account accountId={accountId} /> : <NonConnected />}
       </div>
