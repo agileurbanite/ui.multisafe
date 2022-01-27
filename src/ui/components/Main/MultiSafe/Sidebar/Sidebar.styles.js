@@ -15,6 +15,11 @@ const styles = {
         overflow: 'auto'
       },
   },
+  active: {
+    ['@media (max-width:767px)']: { // eslint-disable-line no-useless-computed-key
+      left: '0',
+    },
+  },
   divider: {
     backgroundColor: '#434343',
     marginTop: 24,
