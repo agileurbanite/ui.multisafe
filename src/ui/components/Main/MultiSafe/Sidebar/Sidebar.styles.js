@@ -12,7 +12,8 @@ const styles = {
         top: '73px',
         bottom: '0',
         transition: 'all .35s ease',
-        overflow: 'auto'
+        overflow: 'auto',
+        width: '350px'
       },
   },
   active: {
