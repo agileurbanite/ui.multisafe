@@ -4,6 +4,7 @@ import { onConnectNearWallet } from './onConnectNearWallet';
 import { onConnectLedger } from './onConnectLedger';
 import { onDisconnect } from './onDisconnect';
 import { onSelectLedgerAccount } from './onSelectLedgerAccount';
+import { onMobileMenuClick } from './onMobileMenuClick';
 
 export const thunks = {
   onInitApp,
@@ -12,4 +13,5 @@ export const thunks = {
   onConnectLedger,
   onDisconnect,
   onSelectLedgerAccount,
+  onMobileMenuClick
 };

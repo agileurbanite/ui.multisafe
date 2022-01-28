@@ -27,4 +27,5 @@ export const initState = {
   temporary: {
     redirectAction: null,
   },
+  isMobileMenuOpen: false
 };
