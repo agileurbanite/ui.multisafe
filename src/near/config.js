@@ -15,7 +15,6 @@ const general = {
   }
 };
 
-
 const testnet = {
   networkId: 'testnet',
   nodeUrl: 'https://rpc.testnet.near.org',
