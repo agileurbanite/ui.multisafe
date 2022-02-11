@@ -10,6 +10,7 @@ import { openModal } from './openModal';
 import { setModalData } from './setModalData';
 import { closeModal } from './closeModal';
 import { setNearEntities } from './setNearEntities';
+import { toggleMobileMenu } from './toggleMobileMenu';
 
 export const actions = {
   initApp,
@@ -24,4 +25,5 @@ export const actions = {
   setModalData,
   closeModal,
   setNearEntities,
+  toggleMobileMenu
 };
