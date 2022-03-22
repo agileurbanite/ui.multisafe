@@ -1,42 +1,73 @@
 import { thunk } from 'easy-peasy';
 import { utils } from 'near-api-js';
-import qs from 'query-string';
 import { spaceToSnake } from '../../../utils/format';
+import { signTransactionByLedger } from '../../multisafe/helpers/signTransactionByLedger';
+import { getMultisafeFactoryContract } from '../helpers/getMultisafeFactoryContract';
 import { config } from '../../../near/config';
+import { redirectActions } from '../../../config/redirectActions';
+import { getRoute } from '../../../ui/config/routes';
 
 const serializeData = ({ name, multisafeId, members, num_confirmations, amount }) => ({
   name,
   multisafeId: spaceToSnake(multisafeId),
-  num_confirmations: Number(num_confirmations),
+  multisafeAccountId: `${spaceToSnake(multisafeId)}.${config.multisafeFactoryId}`,
+  numConfirmations: Number(num_confirmations),
   amount: utils.format.parseNearAmount(amount),
   members: members.map(({ account_id }) => ({ account_id })),
-  gas: 1e14,
 });
 
-const getCallbackUrl = (queryParams) => `${window.location.href}?${qs.stringify(queryParams)}`;
+const createMultisafe = (contract, values) => {
+  const { multisafeId, members, numConfirmations, amount } = values;
 
-export const onCreateMultisafe = thunk(async (_, payload, { getStoreState }) => {
-  const { data } = payload;
-  const store = getStoreState();
-  const factoryContract = store.startWork.entities.factoryContract;
+  return contract.create({
+    args: {
+      name: multisafeId,
+      members,
+      num_confirmations: numConfirmations,
+    },
+    gas: config.maxGas,
+    amount,
+    callbackUrl: getRoute.callbackUrl({ redirectAction: redirectActions.createMultisafe }),
+  });
+};
 
-  const { name, multisafeId, members, num_confirmations, amount, gas } = serializeData(data);
+const signByNearWallet = (contract, values, actions) => {
+  actions.general.setTemporaryData({
+    redirectAction: redirectActions.createMultisafe,
+    name: values.name,
+    multisafeId: values.multisafeAccountId,
+  });
 
-  try {
-    await factoryContract.create({
-      payload: {
-        name: multisafeId,
-        members,
-        num_confirmations,
-      },
-      gas,
-      amount,
-      callbackUrl: getCallbackUrl({
-        name,
-        multisafeId: `${multisafeId}.${config.multisafeFactory.contractId}`,
-      }),
-    });
-  } catch (error) {
-    throw new Error(error);
-  }
+  createMultisafe(contract, values);
+};
+
+const signTxByLedger = async (contract, values, state, actions, history) => {
+  await signTransactionByLedger({
+    actionName: 'Create Multi Safe',
+    state,
+    actions,
+    contractMethod: () => createMultisafe(contract, values),
+    callback: () => {
+      actions.multisafe.addMultisafe({
+        name: values.name,
+        multisafeId: values.multisafeAccountId,
+      });
+      history.push(getRoute.dashboard(values.multisafeAccountId));
+    },
+  });
+};
+
+export const onCreateMultisafe = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
+  const { data, history } = payload;
+
+  const state = getStoreState();
+  const isNearWallet = state.general.selectors.isNearWallet;
+
+  const actions = getStoreActions();
+  const factoryContract = getMultisafeFactoryContract(state);
+  const values = serializeData(data);
+
+  isNearWallet
+    ? signByNearWallet(factoryContract, values, actions)
+    : await signTxByLedger(factoryContract, values, state, actions, history);
 });

@@ -5,6 +5,7 @@ import { Footer } from '../../general/Footer/Footer';
 import { Sidebar } from './Sidebar/Sidebar';
 import { MultisafeList } from './MultisafeList/MultisafeList';
 import { Dashboard } from './Dashboard/Dashboard';
+import { History } from './History/History';
 import { Members } from './Members/Members';
 import { routes } from '../../../config/routes';
 import { useStyles } from './MultiSafe.styles';
@@ -25,6 +26,7 @@ export const MultiSafe = () => {
       <div className={classes.content}>
         <Switch>
           <Route exact path={routes.dashboard} component={Dashboard} />
+          <Route exact path={routes.history} component={History} />
           <Route exact path={routes.members} component={Members} />
         </Switch>
         <Footer />

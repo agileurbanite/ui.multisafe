@@ -6,6 +6,20 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'rgba(0, 0, 0, 0.87)',
+      ['@media (max-width:767px)']: { // eslint-disable-line no-useless-computed-key
+        position: 'fixed',
+        left: '-150%',
+        top: '73px',
+        bottom: '0',
+        transition: 'all .35s ease',
+        overflow: 'auto',
+        width: '350px'
+      },
+  },
+  active: {
+    ['@media (max-width:767px)']: { // eslint-disable-line no-useless-computed-key
+      left: '0',
+    },
   },
   divider: {
     backgroundColor: '#434343',

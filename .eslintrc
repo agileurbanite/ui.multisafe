@@ -1,6 +1,6 @@
 {
-  "extends": ["react-app", "airbnb", "plugin:jsx-a11y/recommended", "prettier", "prettier/react"],
-  "plugins": ["react", "react-hooks", "jsx-a11y", "prettier"],
+  "extends": ["react-app", "airbnb", "prettier"],
+  "plugins": ["react", "react-hooks", "prettier"],
   "rules": {
     "import/prefer-default-export": 0,
     "no-param-reassign": 0,
@@ -11,10 +11,11 @@
     "prefer-destructuring": 0,
     "camelcase": 0,
     "no-alert": 0,
+    "spaced-comment": 0,
     "react/react-in-jsx-scope": 0,
     "react/jsx-uses-react": 0,
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": 0,
     "react/prop-types": 0,
     "react/jsx-props-no-spreading": 0
   },

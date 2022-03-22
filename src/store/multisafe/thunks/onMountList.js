@@ -5,6 +5,7 @@ export const onMountList = thunk(async (_, payload, { getStoreState, getStoreAct
   const store = getStoreState();
   const near = store.general.entities.near;
   const multisafes = store.multisafe.multisafes;
+
   const actions = getStoreActions();
   const enableLoading = actions.general.enableLoading;
   const disableLoading = actions.general.disableLoading;
@@ -19,14 +20,17 @@ export const onMountList = thunk(async (_, payload, { getStoreState, getStoreAct
 
     const data = await Promise.all(
       accounts.map((account) =>
-        Promise.all([account.state(), account.viewFunction(account.accountId, 'get_members')]),
+        Promise.all([
+          account.getAccountBalance(),
+          account.viewFunction(account.accountId, 'get_members'),
+        ]),
       ),
     );
 
     mountList({ data });
     setListOpen(true);
   } catch (e) {
-    throw new Error(e);
+    actions.general.setError({ isError: true, description: e.message });
   }
 
   disableLoading();

@@ -1,11 +1,11 @@
-import { Transactions } from './Transactions/Transactions';
+import { PendingRequests } from './Transactions/PendingRequests';
 import { useStyles } from './Dashboard.styles';
 
 export const Dashboard = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <Transactions />
+      <PendingRequests />
     </div>
   );
 };

@@ -5,12 +5,33 @@ const styles = {
     width: '620px',
   },
   headerWrapper: {
-    display: 'flex',
+    display: 'grid',
+    gridTemplateColumns: '10% 80% 10%',
+    gridTemplateRows: 'auto',
+    gridTemplateAreas: `
+      'a b .'
+    `,
     alignItems: 'center',
     marginTop: 36,
   },
-  subheader: {
-    marginTop: 25,
+  goBack: {
+    gridArea: 'a',
+    justifySelf: 'start',
+    padding: 0,
+  },
+  icon: {
+    height: 28,
+    width: 28,
+    padding: 0,
+    color: 'rgba(0, 0, 0, 87)',
+
+  },
+  title: {
+    gridArea: 'b',
+    justifySelf: 'center',
+    fontSize: 34,
+    fontWeight: 900,
+    margin: 0,
   },
 };
 

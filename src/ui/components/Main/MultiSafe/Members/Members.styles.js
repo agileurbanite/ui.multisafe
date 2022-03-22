@@ -8,13 +8,7 @@ const styles = {
     margin: '30px 12px',
     fontWeight: 900,
   },
-  tableRow: {
-    '&:hover': {
-      backgroundColor: 'rgba(0, 0, 0, 0.04)',
-    },
-  },
   table: {
-    tableLayout: 'fixed',
     minWidth: 620,
   },
   tableCell: {

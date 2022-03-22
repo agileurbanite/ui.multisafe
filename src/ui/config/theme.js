@@ -8,12 +8,21 @@ export const theme = createMuiTheme({
     },
   },
   colors: {
+    textGrey: 'rgba(0, 0, 0, 0.6)',
     dashboardGrey: '#989898',
     dashboardHoverBgGrey: '#ffffff28',
     dividerOnWhite: '#dfdfdf',
     red: '#e40029',
   },
   overrides: {
+    MuiIconButton: {
+      root: {
+        transition: 'none',
+        '&:hover': {
+          backgroundColor: 'inherit',
+        }
+      }
+    },
     MuiButton: {
       containedPrimary: {
         color: 'white',

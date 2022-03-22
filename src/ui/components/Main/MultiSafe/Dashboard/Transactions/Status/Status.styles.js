@@ -1,6 +1,9 @@
 import { makeStyles } from '@material-ui/core';
 
-const isConfirmed = (yes, no) => ({ hasUserConfirm }) => (hasUserConfirm ? yes : no);
+const isConfirmed =
+  (yes, no) =>
+  ({ hasUserConfirm }) =>
+    hasUserConfirm ? yes : no;
 
 const styles = (theme) => ({
   tableCell: {
@@ -23,6 +26,12 @@ const styles = (theme) => ({
     cursor: isConfirmed('inherit', 'pointer'),
     '&:hover': {
       borderColor: theme.palette.primary.main,
+    },
+  },
+  disabledButton: {
+    cursor: 'default!important',
+    '&:hover': {
+      borderColor: 'rgba(0, 0, 0, 0.12)',
     },
   },
   doneIcon: {
@@ -52,7 +61,7 @@ const styles = (theme) => ({
   cancelIcon: {
     height: 20,
     width: 20,
-    color: theme.colors.red,
+    color: ({ canDelete }) => (canDelete ? theme.colors.red : theme.colors.dashboardGrey),
   },
 });
 

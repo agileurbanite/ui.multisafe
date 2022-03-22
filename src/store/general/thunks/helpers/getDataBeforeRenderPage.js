@@ -1,33 +1,44 @@
 import { matchPath } from 'react-router';
 import { routes } from '../../../../ui/config/routes';
 
-const { createMultisafe, dashboard, members } = routes;
+const { createMultisafe, dashboard, history, members } = routes;
 
-export const getDataBeforeRenderPage = async (actions, history, withLoading) => {
+export const getDataBeforeRenderPage = async ({
+  actions,
+  history: browserHistory,
+  withLoading,
+}) => {
   const enableLoading = actions.general.enableLoading;
   const disableLoading = actions.general.disableLoading;
   const onMountMultisafe = actions.multisafe.onMountMultisafe;
   const onMountDashboard = actions.multisafe.onMountDashboard;
-  const onMountCreateMultisafe = actions.startWork.onMountCreateMultisafe;
+  const onMountHistory = actions.multisafe.onMountHistory;
 
-  const match = matchPath(history.location.pathname, [createMultisafe, dashboard, members]);
+  const match = matchPath(browserHistory.location.pathname, [
+    createMultisafe,
+    dashboard,
+    history,
+    members,
+  ]);
+
   if (!match) return;
 
-  withLoading && enableLoading();
-  const { path, params } = match;
-  const ifRouteIs = (route) => route === path;
+  const { multisafeId } = match?.params;
+  const ifRouteIs = (route) => route === match.path;
 
-  ifRouteIs(createMultisafe) && (await onMountCreateMultisafe());
+  withLoading && enableLoading();
 
   if (ifRouteIs(dashboard)) {
-    const { multisafeId } = params;
-    // TODO maybe we can unite these 2 thunks into one
+    // await onMountMultisafe({ multisafeId });
+    await onMountDashboard(multisafeId);
+  }
+
+  if (ifRouteIs(history)) {
     await onMountMultisafe({ multisafeId });
-    await onMountDashboard();
+    await onMountHistory();
   }
 
   if (ifRouteIs(members)) {
-    const { multisafeId } = params;
     await onMountMultisafe({ multisafeId });
   }
 

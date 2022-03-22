@@ -1,35 +1,58 @@
-import { TableCell } from '@material-ui/core';
+import { useState, useEffect } from 'react';
+import { TableCell, IconButton } from '@material-ui/core';
 import { Done, Close } from '@material-ui/icons';
+import cn from 'classnames';
+import { config } from '../../../../../../../near/config';
 import { useStyles } from './Status.styles';
 
-export const Status = ({ transaction, onConfirmRequest, onDeleteRequest }) => {
-  const { requestId, isMember } = transaction;
-  const { hasUserConfirm, totalNum, currentNum } = transaction.confirms;
+const canDeleteRequest = (createdAt) =>
+  Date.now() > createdAt + config.multisafe.deleteRequestCooldown;
 
-  const classes = useStyles({ hasUserConfirm });
+export const Status = ({ request, onConfirmRequest, onDeleteRequest }) => {
+  const { requestId, isMember, createdAt } = request;
+  const { hasUserConfirm, totalNum, currentNum } = request.confirms;
+  const [canDelete, setCanDelete] = useState(canDeleteRequest(createdAt));
+  const classes = useStyles({ hasUserConfirm, canDelete, isMember });
+
+  useEffect(() => {
+    if (!isMember || canDelete) return () => {};
+
+    // Sometimes indexer does not have time to add a new record about last transaction (add_request)
+    // into the database and 'createdAt' will be NaN
+    const cooldownRemains = Number.isNaN(createdAt)
+      ? config.multisafe.deleteRequestCooldown
+      : createdAt + config.multisafe.deleteRequestCooldown - Date.now();
+
+    const timeout = setTimeout(() => {
+      setCanDelete(true);
+    }, cooldownRemains);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
 
   const confirmRequest = () => onConfirmRequest({ requestId });
   const deleteRequest = () => onDeleteRequest({ requestId });
 
   return (
     <TableCell className={classes.tableCell}>
-      {isMember ? (
-        <div className={classes.container}>
-          <button
-            type="button"
-            className={classes.button}
-            onClick={confirmRequest}
-            disabled={hasUserConfirm}>
-            <Done className={classes.doneIcon} />
-            <span className={classes.description}>{`${currentNum}/${totalNum}`}</span>
-          </button>
-          <button type="button" className={classes.cancel} onClick={deleteRequest}>
+      <div className={classes.container}>
+        <button
+          type="button"
+          className={cn(classes.button, { [classes.disabledButton]: !isMember })}
+          onClick={confirmRequest}
+          disabled={!isMember || hasUserConfirm}
+        >
+          <Done className={classes.doneIcon} />
+          <span className={classes.description}>{`${currentNum}/${totalNum}`}</span>
+        </button>
+        {isMember && (
+          <IconButton className={classes.cancel} onClick={deleteRequest} disabled={!canDelete}>
             <Close className={classes.cancelIcon} />
-          </button>
-        </div>
-      ) : (
-        <span>Pending</span>
-      )}
+          </IconButton>
+        )}
+      </div>
     </TableCell>
   );
 };

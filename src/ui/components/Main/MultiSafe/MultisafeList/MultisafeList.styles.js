@@ -6,6 +6,7 @@ const styles = (theme) => ({
     width: 360,
     backgroundColor: '#fafafa',
     zIndex: 2,
+    position: 'relative'
   },
   topbar: {
     height: 64,

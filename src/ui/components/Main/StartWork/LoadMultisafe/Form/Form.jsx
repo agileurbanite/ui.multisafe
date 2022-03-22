@@ -1,17 +1,18 @@
 import { Button, Divider, Typography } from '@material-ui/core';
-import { useStoreActions } from 'easy-peasy';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory } from 'react-router-dom';
 import { TextField } from '../../../general/TextField/TextField';
+import { resolver } from './validations';
 import { useStyles } from './Form.styles';
-import { loadMultisafeSchema } from '../../../../../../utils/validation/LoadMultisafePage'
 
 export const Form = () => {
+  const near = useStoreState((state) => state.general.entities.near);
+  const multisafes = useStoreState((state) => state.multisafe.multisafes);
   const onLoadMultisafe = useStoreActions((actions) => actions.startWork.onLoadMultisafe);
-  const { control, handleSubmit, errors } = useForm({
-    resolver: yupResolver(loadMultisafeSchema),
-    mode: "all"
+  const { control, handleSubmit, formState } = useForm({
+    resolver,
+    context: { near, multisafes: new Set(multisafes.map((multisafe) => multisafe.multisafeId)) },
   });
   const { push } = useHistory();
   const classes = useStyles();
@@ -28,8 +29,8 @@ export const Form = () => {
         variant="outlined"
         placeholder="MultiSafe Name"
         className={classes.textField}
-        error={!!errors?.name}
-        helperText={!!errors?.name && errors?.name?.message}
+        error={formState.errors?.name}
+        helperText={formState.errors?.name?.message}
       />
       <TextField
         control={control}
@@ -37,8 +38,8 @@ export const Form = () => {
         variant="outlined"
         placeholder="MultiSafe Account ID"
         className={classes.textField}
-        error={!!errors?.multisafeId}
-        helperText={!!errors?.multisafeId && errors?.multisafeId?.message}
+        error={formState.errors?.multisafeId}
+        helperText={formState.errors?.multisafeId?.message}
       />
       <Typography className={classes.terms}>
         By continuing you consent to the terms of use and privacy policy.
