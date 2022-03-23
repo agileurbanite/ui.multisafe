@@ -22,7 +22,7 @@ const testnet = {
   walletUrl: 'https://wallet.testnet.near.org',
   helperUrl: 'https://helper.testnet.near.org',
   explorerUrl: 'https://explorer.testnet.near.org',
-  multisafeFactoryId: 'dev-1612259671980-4872321', // TODO: deploy another one
+  multisafeFactoryId: 'multisafe.testnet',
   backendURL: process.env.REACT_APP_BACKEND_URL_TESTNET || 'http://localhost:8666'
 };
 
@@ -33,7 +33,7 @@ const mainnet = {
   walletUrl: 'https://wallet.near.org',
   helperUrl: 'https://helper.mainnet.near.org',
   explorerUrl: 'https://explorer.near.org',
-  multisafeFactoryId: 'multisafe.dev-eclipseeer.near', // TODO: deploy another one
+  multisafeFactoryId: 'multisafe.near',
   backendURL: process.env.REACT_APP_BACKEND_URL_MAINNET || 'http://localhost:8666'
 };
 
