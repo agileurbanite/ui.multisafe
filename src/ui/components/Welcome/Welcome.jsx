@@ -39,14 +39,14 @@ export const Welcome = () => {
           >
             Get Started
           </Button>
-          <Button
-            className={classes.tryDemo}
-            variant="outlined"
-            color="primary"
-            onClick={goToGetStarted}
-          >
-            Try Demo
-          </Button>
+          {/*<Button*/}
+          {/*  className={classes.tryDemo}*/}
+          {/*  variant="outlined"*/}
+          {/*  color="primary"*/}
+          {/*  onClick={goToGetStarted}*/}
+          {/*>*/}
+          {/*  Try Demo*/}
+          {/*</Button>*/}
         </div>
         <img className={classes.laptop} src={laptop} alt="laptop with multisafe app" />
         <Footer classNames={{ container: classes.footer }} variant="dark" />
