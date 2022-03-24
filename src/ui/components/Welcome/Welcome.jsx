@@ -1,19 +1,15 @@
 import { Button } from '@material-ui/core';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { ConnectWallet } from '../general/ConnectWallet/ConnectWallet';
 import { Footer } from '../general/Footer/Footer';
 import { useStyles } from './Welcome.styles';
-import { routes } from '../../config/routes';
 import logo from '../../images/logo/logo-white.svg';
 import laptop from '../../images/welcome-page/laptop@2x.png';
 
 export const Welcome = () => {
   const [isOpenConnectWallet, setOpenConnectWallet] = useState(false);
-  const { push } = useHistory();
   const classes = useStyles();
 
-  const goToGetStarted = () => push(routes.getStarted);
   const openConnectWallet = () => setOpenConnectWallet(true);
 
   return (
