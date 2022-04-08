@@ -1,6 +1,6 @@
 import { Account } from 'near-api-js';
+import { config } from '../near/config'
 
-const code_hash_multiSave = 'EPGksnjsxBjaZkXp63ZqdXK9bFpUzrn4UfW8FrehhRQT'
 
 export const isAccountExist = async ({ state, near, accountId }) => {
   if (!accountId) return false;
@@ -10,7 +10,7 @@ export const isAccountExist = async ({ state, near, accountId }) => {
   try {
     const { code_hash } = await new Account(connection, accountId).state();
     
-    if(code_hash === code_hash_multiSave) return true;
+    if(config.multisafeContractHashes.includes(code_hash)) return true;
     
   } catch (e) {
     return false;
