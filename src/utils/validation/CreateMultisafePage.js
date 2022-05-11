@@ -22,7 +22,7 @@ const validationMessageType = {
 
 const patterns = {
   memberAddress:
-    /^[a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]/g,
+  /^[a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]\.?(testnet|betanet|localnet|guildnet|near)?/g,
   amount: /^([5-9]|0?[1-9][0-9]+)$/g,
 };
 
