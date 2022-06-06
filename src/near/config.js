@@ -24,7 +24,8 @@ const testnet = {
   explorerUrl: 'https://explorer.testnet.near.org',
   multisafeFactoryId: 'multisafe.testnet',
   multisafeContractHashes:['EPGksnjsxBjaZkXp63ZqdXK9bFpUzrn4UfW8FrehhRQT'],
-  backendURL: process.env.REACT_APP_BACKEND_URL_TESTNET || 'http://localhost:8666'
+  backendURL: process.env.REACT_APP_BACKEND_URL_TESTNET || 'http://localhost:8666',
+  indexerServiceUrl: 'https://testnet-api.kitwallet.app'
 };
 
 const mainnet = {
@@ -36,7 +37,8 @@ const mainnet = {
   explorerUrl: 'https://explorer.near.org',
   multisafeFactoryId: 'multisafe.near',
   multisafeContractHashes:['EPGksnjsxBjaZkXp63ZqdXK9bFpUzrn4UfW8FrehhRQT'],
-  backendURL: process.env.REACT_APP_BACKEND_URL_MAINNET || 'http://localhost:8666'
+  backendURL: process.env.REACT_APP_BACKEND_URL_MAINNET || 'http://localhost:8666',
+  indexerServiceUrl: 'https://api.kitwallet.app'
 };
 
 const configs = {

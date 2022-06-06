@@ -2,7 +2,7 @@ import { useStoreState } from 'easy-peasy';
 import { CopyToClipboard } from '../../general/CopyToClipboard/CopyToClipboard';
 import { OpenInExplorer } from '../../general/OpenInExplorer/OpenInExplorer';
 import { NewTransaction } from './NewTransaction/NewTransaction';
-import { formatNearBalance } from '../../../../../../utils/format';
+import { formatNearBalance, formatOtherBalance } from '../../../../../../utils/format';
 import { useStyles } from './Actions.styles';
 
 export const Actions = () => {
@@ -10,6 +10,7 @@ export const Actions = () => {
   const balance = useStoreState((s) => s.multisafe.general.balance);
   const multisafeId = useStoreState((s) => s.multisafe.general.multisafeId);
   const isMember = useStoreState((s) => s.multisafe.selectors.isMember);
+  const fungibleTokens = useStoreState((s) => s.multisafe.general.fungibleTokens);
   const classes = useStyles();
 
   return (
@@ -28,6 +29,7 @@ export const Actions = () => {
 
       <div className={classes.balance}>
         <span>{formatNearBalance(balance)}</span>
+        {fungibleTokens.map((token) => <span key={token.name}>{formatOtherBalance(token)}</span>)}
       </div>
 
       {isMember ? <NewTransaction /> : <div className={classes.readOnly}>READ ONLY</div>}
