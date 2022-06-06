@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import { Button, Paper } from '@material-ui/core';
 import { useStoreActions } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
@@ -11,6 +11,7 @@ import { useStyles } from './SendFunds.styles';
 import { sendFundsSchema } from '../../../../../../../../utils/validation/SendFundsModal';
 
 export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
+  const [token, setToken] = useState('near');
   const onTransferTokens = useStoreActions((actions) => actions.multisafe.onTransferTokens);
   const { control, handleSubmit, setValue, errors } = useForm({
     resolver: yupResolver(sendFundsSchema),
@@ -37,6 +38,8 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
             control={control}
             classNames={classes}
             setValue={setValue}
+            token={token}
+            setToken={setToken}
             hasError={!!errors?.amount}
             errorMessage={!!errors?.amount && errors?.amount?.message}
           />
