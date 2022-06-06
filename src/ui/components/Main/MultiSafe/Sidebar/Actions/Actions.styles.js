@@ -31,8 +31,9 @@ const styles = (theme) => ({
   },
   balance: {
     gridArea: 'b',
-    height: '32px',
+    padding: '10px',
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#434343',
