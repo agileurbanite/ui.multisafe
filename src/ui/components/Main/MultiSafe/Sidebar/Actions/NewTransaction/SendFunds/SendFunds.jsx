@@ -1,6 +1,6 @@
 import { forwardRef, useState } from 'react';
 import { Button, Paper } from '@material-ui/core';
-import { useStoreActions } from 'easy-peasy';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import cn from 'classnames';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,6 +13,7 @@ import { sendFundsSchema } from '../../../../../../../../utils/validation/SendFu
 export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
   const [token, setToken] = useState('near');
   const onTransferTokens = useStoreActions((actions) => actions.multisafe.onTransferTokens);
+  const fungibleTokens = useStoreState((store) => store.multisafe.general.fungibleTokens);
   const { control, handleSubmit, setValue, errors } = useForm({
     resolver: yupResolver(sendFundsSchema),
     mode: 'all',
@@ -20,7 +21,10 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
   const classes = useStyles();
 
   const onSubmit = handleSubmit((data) => {
-    onTransferTokens({ data, onClose });
+    const contractName = fungibleTokens.find(({name}) => name === token) ? 
+      fungibleTokens.find(({name}) => name === token).contractName :
+      undefined
+    onTransferTokens({ data, onClose, contractName });
   });
 
   return (

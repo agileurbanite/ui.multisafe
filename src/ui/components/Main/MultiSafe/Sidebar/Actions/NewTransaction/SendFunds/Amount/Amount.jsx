@@ -3,7 +3,7 @@ import { useStoreState } from 'easy-peasy';
 import { formatNearAmount } from 'near-api-js/lib/utils/format';
 import { Near } from '../../../../../../../general/icons/Near';
 import { TextField } from '../../../../../../general/TextField/TextField';
-import { formatNearBalance, formatOtherBalance, formatOtherBalanceWithoutSymbol } from '../../../../../../../../../utils/format';
+import { formatNearBalance, formatOtherBalance, formatOtherAmount } from '../../../../../../../../../utils/format';
 import { useStyles } from './Amount.styles';
 
 export const Amount = ({ control, classNames, setValue, token, setToken, hasError, errorMessage}) => {
@@ -16,7 +16,7 @@ export const Amount = ({ control, classNames, setValue, token, setToken, hasErro
       setValue('amount', formatNearAmount(balance));
     }
     else {
-      setValue('amount', formatOtherBalanceWithoutSymbol(selectedToken))
+      setValue('amount', formatOtherAmount(selectedToken))
     }
   };
 
@@ -44,7 +44,7 @@ export const Amount = ({ control, classNames, setValue, token, setToken, hasErro
                   <Near className={classes.icon} />
                   <span className={classes.adornmentText}>NEAR</span>
                 </MenuItem>
-                {fungibleTokens.map(({ name }) => <MenuItem value={name}>{name}</MenuItem>)}
+                {fungibleTokens.map(({ name }) => <MenuItem key={name} value={name}>{name}</MenuItem>)}
               </Select>
             </InputAdornment>
           ),
