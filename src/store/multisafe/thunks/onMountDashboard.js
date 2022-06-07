@@ -44,7 +44,7 @@ export const onMountDashboard = thunk(
         'ft_balance_of',
         { account_id: multisafeId }
       );
-      return { ...tokenMetadata, tokenBalance };
+      return { ...tokenMetadata, tokenBalance, contractName: token };
     }));
 
     try {
