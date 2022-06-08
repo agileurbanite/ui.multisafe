@@ -1,7 +1,6 @@
 import { config } from '../near/config';
 
 export async function listLikelyNfts(accountId) {
-    // not tested yet
     // const requestOptions = {
     //     method: 'GET',
     //     headers: { 'Content-Type': 'application/json' },
@@ -11,7 +10,6 @@ export async function listLikelyNfts(accountId) {
 }
 
 export async function listLikelyTokens(accountId) {
-    // return ['usdn.testnet', 'wrap.testnet']
     const requestOptions = {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

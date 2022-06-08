@@ -3,7 +3,6 @@ import { Account } from 'near-api-js';
 import { getMultisafeContract } from '../helpers/getMultisafeContract';
 import { config } from '../../../near/config';
 
-
 const getAddRequestTxs = async (multisafeId) => {
   const requestOptions = {
     method: 'GET',
@@ -31,11 +30,10 @@ export const onMountDashboard = thunk(
 
     const contract = getMultisafeContract(state, multisafeId);
     const localMultisafe = multisafes.find((multisafe) => multisafe.multisafeId === multisafeId);
-    const account = new Account(near.connection, multisafeId);
 
     try {
       const [balance, members, requestIds, numConfirmations, addRequestTxs] = await Promise.all([
-        account.getAccountBalance(),
+        new Account(near.connection, multisafeId).getAccountBalance(),
         contract.get_members(),
         contract.list_request_ids(),
         contract.get_num_confirmations(),

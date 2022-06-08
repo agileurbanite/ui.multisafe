@@ -9,5 +9,4 @@ export const formatOtherBalance = ({tokenBalance, decimals, symbol}) => `${token
 export const formatOtherAmountHumanReadable = ({tokenBalance, decimals}) => `${tokenBalance* 10**-decimals}`;
 
 // Convert human readable amount to internal indivisible units
-// export const parseOtherAmount = ({decimals}, amount) => `${amount* 10**decimals}`;
 export const parseOtherAmount = ({decimals = 18}, value) => value && Big(value).times(Big(10).pow(decimals)).toFixed();
