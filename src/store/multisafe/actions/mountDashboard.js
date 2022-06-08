@@ -39,6 +39,7 @@ export const mountDashboard = action((slice, payload) => {
   slice.general.name = localMultisafe.name;
   slice.general.multisafeId = localMultisafe.multisafeId;
   slice.general.balance = balance.available;
+
   slice.dashboard.pendingRequests = requestIds
     .map((requestId, index) => {
       const request = requests[index][0];
