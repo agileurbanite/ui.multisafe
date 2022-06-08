@@ -2,7 +2,7 @@ import { thunk } from 'easy-peasy';
 import { Account } from 'near-api-js';
 import { getMultisafeContract } from '../helpers/getMultisafeContract';
 import { config } from '../../../near/config';
-import { listLikelyTokens } from '../../../utils/listLikelyAssets';
+
 
 const getAddRequestTxs = async (multisafeId) => {
   const requestOptions = {
@@ -32,20 +32,6 @@ export const onMountDashboard = thunk(
     const contract = getMultisafeContract(state, multisafeId);
     const localMultisafe = multisafes.find((multisafe) => multisafe.multisafeId === multisafeId);
     const account = new Account(near.connection, multisafeId);
-
-    const likelyTokens = await listLikelyTokens(multisafeId);
-    const fungibleTokens = await Promise.all(await likelyTokens.map(async (token) => {
-      const tokenMetadata = await account.viewFunction(
-        token,
-        'ft_metadata'
-      );
-      const tokenBalance = await account.viewFunction(
-        token,
-        'ft_balance_of',
-        { account_id: multisafeId }
-      );
-      return { ...tokenMetadata, tokenBalance, contractName: token };
-    }));
 
     try {
       const [balance, members, requestIds, numConfirmations, addRequestTxs] = await Promise.all([
@@ -83,7 +69,6 @@ export const onMountDashboard = thunk(
         contract,
         balance,
         members,
-        fungibleTokens,
       });
     } catch (e) {
       setError({ isError: true, description: e.message });

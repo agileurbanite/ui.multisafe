@@ -55,7 +55,7 @@ export const onTransferTokens = thunk(async (_, payload, { getStoreState, getSto
   const contract = state.multisafe.entities.contract;
   const multisafeId = state.multisafe.general.multisafeId;
   const actions = getStoreActions();
-  const mountDashboard = actions.multisafe.mountDashboard;
+  const mountTokenList = actions.multisafe.mountTokenList;
   const fungibleTokensService = new FungibleTokens(near.connection);
 
   const isNearTransaction = !token;
@@ -86,9 +86,8 @@ export const onTransferTokens = thunk(async (_, payload, { getStoreState, getSto
     );
     return { ...tokenMetadata, tokenBalance, contractName };
   }));
-  mountDashboard({
-    fungibleTokens: updatedTokens,
-    refreshFungibleTokensOnly: true
-  })
+  mountTokenList({
+    fungibleTokens: updatedTokens
+  });
   onClose();
 });

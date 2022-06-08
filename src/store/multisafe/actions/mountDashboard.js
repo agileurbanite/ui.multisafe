@@ -30,14 +30,7 @@ export const mountDashboard = action((slice, payload) => {
     contract,
     balance,
     members,
-    fungibleTokens,
-    refreshFungibleTokensOnly = false,
   } = payload;
-
-  slice.general.fungibleTokens = fungibleTokens;
-  if (refreshFungibleTokensOnly) {
-    return;
-  }
 
   const requestsTxs = getRequestsTxs(addRequestTxs, txsStatuses);
 
