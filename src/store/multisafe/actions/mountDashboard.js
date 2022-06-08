@@ -30,8 +30,14 @@ export const mountDashboard = action((slice, payload) => {
     contract,
     balance,
     members,
-    fungibleTokens
+    fungibleTokens,
+    refreshFungibleTokensOnly = false,
   } = payload;
+
+  slice.general.fungibleTokens = fungibleTokens;
+  if (refreshFungibleTokensOnly) {
+    return;
+  }
 
   const requestsTxs = getRequestsTxs(addRequestTxs, txsStatuses);
 
@@ -40,8 +46,6 @@ export const mountDashboard = action((slice, payload) => {
   slice.general.name = localMultisafe.name;
   slice.general.multisafeId = localMultisafe.multisafeId;
   slice.general.balance = balance.available;
-  slice.general.fungibleTokens = fungibleTokens;
-
   slice.dashboard.pendingRequests = requestIds
     .map((requestId, index) => {
       const request = requests[index][0];

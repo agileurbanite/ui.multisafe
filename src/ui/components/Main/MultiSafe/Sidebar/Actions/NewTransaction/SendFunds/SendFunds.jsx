@@ -11,7 +11,7 @@ import { useStyles } from './SendFunds.styles';
 import { sendFundsSchema } from '../../../../../../../../utils/validation/SendFundsModal';
 
 export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
-  const [token, setToken] = useState('near');
+  const [tokenName, setTokenName] = useState('near');
   const onTransferTokens = useStoreActions((actions) => actions.multisafe.onTransferTokens);
   const fungibleTokens = useStoreState((store) => store.multisafe.general.fungibleTokens);
   const { control, handleSubmit, setValue, errors } = useForm({
@@ -21,10 +21,10 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
   const classes = useStyles();
 
   const onSubmit = handleSubmit((data) => {
-    const contractName = fungibleTokens.find(({name}) => name === token) ? 
-      fungibleTokens.find(({name}) => name === token).contractName :
+    const token = fungibleTokens.find(({name}) => name === tokenName) ? 
+      fungibleTokens.find(({name}) => name === tokenName) :
       undefined
-    onTransferTokens({ data, onClose, contractName });
+    onTransferTokens({ data, onClose, token});
   });
 
   return (
@@ -42,8 +42,8 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
             control={control}
             classNames={classes}
             setValue={setValue}
-            token={token}
-            setToken={setToken}
+            tokenName={tokenName}
+            setTokenName={setTokenName}
             hasError={!!errors?.amount}
             errorMessage={!!errors?.amount && errors?.amount?.message}
           />
