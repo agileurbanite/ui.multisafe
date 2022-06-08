@@ -24,7 +24,7 @@ export const getDataBeforeRenderPage = async ({
   const onMountDashboard = actions.multisafe.onMountDashboard;
   const onMountHistory = actions.multisafe.onMountHistory;
   const onMountTokenList = actions.multisafe.onMountTokenList;
-  
+
   const match = matchPath(browserHistory.location.pathname, [
     createMultisafe,
     dashboard,
