@@ -29,6 +29,10 @@ export const getDataBeforeRenderPage = async ({
 
   withLoading && enableLoading();
 
+  if ([dashboard, history, members].includes(match.path)) {
+    await onMountTokenList(multisafeId);
+  }
+
   if (ifRouteIs(dashboard)) {
     // await onMountMultisafe({ multisafeId });
     await onMountDashboard(multisafeId);
@@ -42,7 +46,6 @@ export const getDataBeforeRenderPage = async ({
   if (ifRouteIs(members)) {
     await onMountMultisafe({ multisafeId });
   }
-
-  await onMountTokenList(multisafeId);
+  
   withLoading && disableLoading();
 };
