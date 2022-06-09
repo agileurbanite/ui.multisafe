@@ -75,19 +75,14 @@ export const onTransferTokens = thunk(async (_, payload, { getStoreState, getSto
   const fungibleTokens = state.multisafe.general.fungibleTokens;
 
   const updatedTokens = await Promise.all(await fungibleTokens.map(async ({contractName}) => {
-    const tokenMetadata = await contract.account.viewFunction(
-      contractName,
-      'ft_metadata'
-    );
-    const tokenBalance = await contract.account.viewFunction(
-      contractName,
-      'ft_balance_of',
-      { account_id: multisafeId }
-    );
+    const tokenMetadata = await fungibleTokensService.getMetadata({ contractName });
+    const tokenBalance = await fungibleTokensService.getBalanceOf({ contractName, accountId: multisafeId }); 
     return { ...tokenMetadata, tokenBalance, contractName };
   }));
+
   mountTokenList({
     fungibleTokens: updatedTokens
   });
+
   onClose();
 });
