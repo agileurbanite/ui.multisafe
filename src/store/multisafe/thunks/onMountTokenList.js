@@ -11,8 +11,8 @@ export const onMountTokenList = thunk(
 
     const fungibleTokensService = new FungibleTokens(near.connection);
     const likelyTokens = await listLikelyTokens(multisafeId);
-    const fungibleTokens = await Promise.all(await likelyTokens.map(async (token) => {
 
+    const fungibleTokens = await Promise.all(await likelyTokens.map(async (token) => {
       const tokenMetadata = await fungibleTokensService.getMetadata({ contractName: token });
       const tokenBalance = await fungibleTokensService.getBalanceOf({ contractName: token, accountId: multisafeId }); 
       return { ...tokenMetadata, tokenBalance, contractName: token };

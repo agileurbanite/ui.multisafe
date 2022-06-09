@@ -1,4 +1,5 @@
 import * as nearApiJs from 'near-api-js';
+import BN from 'bn.js';
 
 const {
     utils: {
@@ -15,6 +16,8 @@ const FT_STORAGE_DEPOSIT_GAS = parseNearAmount('0.00000000003');
 
 // set this to the same value as we use for creating an account and the remainder is refunded
 const FT_TRANSFER_GAS = parseNearAmount('0.00000000003');
+
+const ADD_REQUEST_AND_CONFIRM_GAS = new BN('40000000000000')
 
 // contract might require an attached depositof of at least 1 yoctoNear on transfer methods
 // "This 1 yoctoNEAR is not enforced by this standard, but is encouraged to do. While ability to receive attached deposit is enforced by this token."
@@ -109,18 +112,22 @@ export default class FungibleTokens {
         const method = withApprove ? 'add_request_and_confirm' : 'add_request';
         const args = Buffer.from(`{"amount": "${amount}", "receiver_id": "${recipientId}"}`)
           .toString('base64')
-        return multisafeContract[method]({
-            args: {
-                request: {
-                    receiver_id: contractName,
-                actions: [{
-                    type: 'FunctionCall',
-                    method_name: 'ft_transfer',
-                    args,
-                    deposit: FT_TRANSFER_DEPOSIT,
-                    gas: FT_TRANSFER_GAS,
-                }]},
-            }
-        });
+        return multisafeContract[method](
+            {
+                args: {
+                    request: {
+                        receiver_id: contractName,
+                        actions: [{
+                            type: 'FunctionCall',
+                            method_name: 'ft_transfer',
+                            args,
+                            deposit: FT_TRANSFER_DEPOSIT,
+                            gas: FT_TRANSFER_GAS,
+                        }]
+                    },
+                },
+                gas: ADD_REQUEST_AND_CONFIRM_GAS 
+            },
+        );
     };
 }
