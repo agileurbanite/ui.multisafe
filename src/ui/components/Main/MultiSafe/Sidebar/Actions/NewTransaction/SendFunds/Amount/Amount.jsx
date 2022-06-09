@@ -44,7 +44,7 @@ export const Amount = ({ control, classNames, setValue, tokenName, setTokenName,
                   <Near className={classes.icon} />
                   <span className={classes.adornmentText}>NEAR</span>
                 </MenuItem>
-                {fungibleTokens.map(({ name }) => <MenuItem key={name} value={name}>{name}</MenuItem>)}
+                {fungibleTokens && fungibleTokens.map(({ name }) => <MenuItem key={name} value={name}>{name}</MenuItem>)}
               </Select>
             </InputAdornment>
           ),

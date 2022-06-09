@@ -29,7 +29,7 @@ export const Actions = () => {
 
       <div className={classes.balance}>
         <span>{formatNearBalance(balance)}</span>
-        {fungibleTokens.map((token) => <span key={token.name}>{formatOtherBalance(token)}</span>)}
+        {fungibleTokens && fungibleTokens.map((token) => <span key={token.name}>{formatOtherBalance(token)}</span>)}
       </div>
 
       {isMember ? <NewTransaction /> : <div className={classes.readOnly}>READ ONLY</div>}
