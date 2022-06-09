@@ -29,7 +29,7 @@ export default class FungibleTokens {
     constructor(connection) {
         this.connection = connection;
         this.viewFunctionAccount = new nearApiJs.Account(this.connection, 'dontcare');;
-    }
+    };
 
     getStorageBalance = async ({ contractName, accountId }) => this.viewFunctionAccount.viewFunction(
         contractName,
@@ -37,22 +37,19 @@ export default class FungibleTokens {
         { account_id: accountId }
     );
 
-    async getMetadata({ contractName }) {
-        return this.viewFunctionAccount.viewFunction(
-            contractName,
-            'ft_metadata'
-        );
-    }
+    getMetadata = async({ contractName }) => this.viewFunctionAccount.viewFunction(
+        contractName,
+        'ft_metadata'
+    );
+    
 
-    async getBalanceOf({ contractName, accountId }) {
-        return this.viewFunctionAccount.viewFunction(
-            contractName,
-            'ft_balance_of',
-            { account_id: accountId }
-        );
-    }
+    getBalanceOf = async ({ contractName, accountId }) => this.viewFunctionAccount.viewFunction(
+        contractName,
+        'ft_balance_of',
+        { account_id: accountId }
+    );
 
-    async isStorageBalanceAvailable({ contractName, accountId }) {
+    isStorageBalanceAvailable = async ({ contractName, accountId }) => {
         const storageBalance = await this.getStorageBalance({
             contractName,
             accountId,
@@ -82,12 +79,11 @@ export default class FungibleTokens {
         });
     }
 
-    async addTransferRequest({multisafeContract, withApprove, recipientId, amount, contractName}) {
+    addTransferRequest = async ({multisafeContract, withApprove, recipientId, amount, contractName}) => {
         const storageAvailable = await this.isStorageBalanceAvailable({
             contractName,
             accountId: recipientId,
         });
-        console.log("storageAvailable", storageAvailable)
         if (!storageAvailable) {
             try {
                 await this.transferStorageDeposit({
@@ -110,7 +106,6 @@ export default class FungibleTokens {
                 }
             }
         }
-        console.log("fin")
         const method = withApprove ? 'add_request_and_confirm' : 'add_request';
         const args = Buffer.from(`{"amount": "${amount}", "receiver_id": "${recipientId}"}`)
           .toString('base64')
