@@ -46,6 +46,6 @@ export const getDataBeforeRenderPage = async ({
   if (ifRouteIs(members)) {
     await onMountMultisafe({ multisafeId });
   }
-  
+
   withLoading && disableLoading();
 };
