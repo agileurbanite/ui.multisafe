@@ -37,14 +37,14 @@ export default class FungibleTokens {
         { account_id: accountId }
     );
 
-    static async getMetadata({ contractName }) {
+    async getMetadata({ contractName }) {
         return this.viewFunctionAccount.viewFunction(
             contractName,
             'ft_metadata'
         );
     }
 
-    static async getBalanceOf({ contractName, accountId }) {
+    async getBalanceOf({ contractName, accountId }) {
         return this.viewFunctionAccount.viewFunction(
             contractName,
             'ft_balance_of',
