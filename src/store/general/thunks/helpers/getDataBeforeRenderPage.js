@@ -10,6 +10,7 @@ const {
   numberConfirmations,
   editName,
   remove,
+  disconnect
 } = routes;
 
 export const getDataBeforeRenderPage = async ({
@@ -32,6 +33,7 @@ export const getDataBeforeRenderPage = async ({
     numberConfirmations,
     editName,
     remove,
+    disconnect
   ]);
 
   if (!match) return;
@@ -70,5 +72,10 @@ export const getDataBeforeRenderPage = async ({
   if (ifRouteIs(remove)) {
     await onMountMultisafe({ multisafeId });
   }
+
+  if (ifRouteIs(disconnect)) {
+    await onMountMultisafe({ multisafeId });
+  }
+
   withLoading && disableLoading();
 };
