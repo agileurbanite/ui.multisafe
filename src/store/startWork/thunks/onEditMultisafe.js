@@ -95,14 +95,19 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
 
   const membersActions = generateMembersActions(values, members)
   const confirmationsActions = generateConfirmationsActions(values)
+
+  if (values.numConfirmations === numConfirmations) {
+    return;
+  }
+
+  if (!values.numConfirmations && values.members && !membersActions.length) {
+    return;
+  }
+
   const contractActions = [
     ...confirmationsActions,
     ...membersActions
   ]
-
-  if (values.members && !contractActions.length) {
-    return;
-  }
 
   isNearWallet
     ? addEditRequest(contract, contractActions)
