@@ -15,6 +15,7 @@ export const routes = {
   membersEdit: '/multisafe/:multisafeId/edit-members',
   numberConfirmations: '/multisafe/:multisafeId/edit-confirmations',
   editName: '/multisafe/:multisafeId/edit-name',
+  remove: '/multisafe/:multisafeId/remove',
 };
 
 export const getRoute = {
@@ -25,4 +26,5 @@ export const getRoute = {
   membersEdit: (multisafeId) => `/multisafe/${multisafeId}/edit-members`,
   numberConfirmations: (multisafeId) => `/multisafe/${multisafeId}/edit-confirmations`,
   editName: (multisafeId) => `/multisafe/${multisafeId}/edit-name`,
+  remove: (multisafeId) => `/multisafe/${multisafeId}/remove`,
 };
