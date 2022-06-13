@@ -21,6 +21,7 @@ export const App = () => (
           routes.history,
           routes.members,
           routes.membersEdit,
+          routes.numberConfirmations,
         ]}
         component={Main}
       />
