@@ -7,18 +7,20 @@ import { config } from '../../../near/config';
 import { redirectActions } from '../../../config/redirectActions';
 import { getRoute } from '../../../ui/config/routes';
 
-// TEN PLIK PRZENIESC do multisafe/thunks
-
 const serializeData = ({ name, members, num_confirmations }) => ({
   name,
   numConfirmations: Number(num_confirmations),
   members: members.map(({ account_id }) => ({ account_id })),
 });
 
-const signByNearWallet = (contract, values, currentMembers, numConfirmations) => {
+const generateConfirmationsActions = (values) => values.numConfirmations
+    ? [{ type: 'SetNumConfirmations', num_confirmations: values.numConfirmations }]
+    : []
+
+const generateMembersActions = (values, currentMembers) => {
+
   const currentMembersIds = currentMembers.map(({ accountId }) => accountId)
   const membersIds = values.members?.map(({ account_id }) => account_id) || []
-  const method = 'add_request_and_confirm';
 
   const addMembersActions = membersIds.length
     ? values.members.reduce((x, member) => [
@@ -44,19 +46,20 @@ const signByNearWallet = (contract, values, currentMembers, numConfirmations) =>
     ], [])
     : []
 
-  const changeConfirmations = values.numConfirmations
-    ? [{ type: 'SetNumConfirmations', num_confirmations: values.numConfirmations }]
-    : []
+    return [
+      ...addMembersActions,
+      ...deleteMembersActions
+    ]
+}
+
+const addEditRequest = (contract, contractActions) => {
+  const method = 'add_request_and_confirm';
 
   const args = {
     args: {
       request: {
         receiver_id: contract.contractId,
-        actions: [
-            ...changeConfirmations,
-            ...addMembersActions,
-            ...deleteMembersActions
-        ],
+        actions: contractActions,
       },
     },
   }
@@ -64,12 +67,12 @@ const signByNearWallet = (contract, values, currentMembers, numConfirmations) =>
   return contract[method](args);
 };
 
-const signTxByLedger = async (contract, values, members, numConfirmations, actions, multisafeId, state, history) => {
+const signTxByLedger = async (contract, contractActions, actions, multisafeId, state, history) => {
   await signTransactionByLedger({
     actionName: 'Edit Multi Safe',
     state,
     actions,
-    contractMethod: () => signByNearWallet(contract, values, actions, members, numConfirmations),
+    contractMethod: () => addEditRequest(contract, contractActions),
     callback: async () => {
       await actions.multisafe.onMountDashboard(multisafeId);
       history.push(getRoute.dashboard(multisafeId));
@@ -79,18 +82,25 @@ const signTxByLedger = async (contract, values, members, numConfirmations, actio
 
 export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
   const { data, history } = payload;
-  const state = getStoreState();
-  const isNearWallet = state.general.selectors.isNearWallet;
 
+  const state = getStoreState();
   const actions = getStoreActions();
   const values = serializeData(data);
-
+  
+  const isNearWallet = state.general.selectors.isNearWallet;
   const contract = state.multisafe.entities.contract;
   const members = state.multisafe.members;
   const numConfirmations = state.multisafe.general.numConfirmations;
   const multisafeId = state.multisafe.general.multisafeId;
 
+  const membersActions = generateMembersActions(values, members)
+  const confirmationsActions = generateConfirmationsActions(values)
+  const contractActions = [
+    ...confirmationsActions,
+    ...membersActions
+  ]
+
   isNearWallet
-    ? signByNearWallet(contract, values, members, numConfirmations, actions)
-    : await signTxByLedger(contract, values, members, numConfirmations, actions, multisafeId, state, history);
+    ? addEditRequest(contract, contractActions)
+    : await signTxByLedger(contract, contractActions, actions, multisafeId, state, history);
 });
