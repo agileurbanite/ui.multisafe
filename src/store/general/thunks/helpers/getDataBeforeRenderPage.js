@@ -7,6 +7,7 @@ const {
   history,
   members,
   membersEdit,
+  numberConfirmations,
 } = routes;
 
 export const getDataBeforeRenderPage = async ({
@@ -26,6 +27,7 @@ export const getDataBeforeRenderPage = async ({
     history,
     members,
     membersEdit,
+    numberConfirmations,
   ]);
 
   if (!match) return;
@@ -53,5 +55,8 @@ export const getDataBeforeRenderPage = async ({
     await onMountMultisafe({ multisafeId });
   }
 
+  if (ifRouteIs(numberConfirmations)) {
+    await onMountMultisafe({ multisafeId });
+  }
   withLoading && disableLoading();
 };
