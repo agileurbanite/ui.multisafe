@@ -42,7 +42,7 @@ export const FormMembers = () => {
         errors={errors}
       />
       <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
-        Edit Multi Safe
+        Send Request
       </Button>
     </form>
   );
