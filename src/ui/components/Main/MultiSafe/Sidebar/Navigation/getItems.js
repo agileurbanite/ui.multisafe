@@ -42,7 +42,7 @@ const items = [
       route: routes.remove,
       getPath: getRoute.remove,
     }, {
-      name: 'Disconnect',
+      name: 'Disconnect Account',
       route: routes.disconnect,
       getPath: getRoute.disconnect,
     }]
