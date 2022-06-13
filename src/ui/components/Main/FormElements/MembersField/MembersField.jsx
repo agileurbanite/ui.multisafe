@@ -78,7 +78,8 @@ export const MembersField = ({
             variant="outlined"
             color="primary"
             className={classes.addButton}
-            onClick={appendMember}>
+            onClick={appendMember}
+          >
             Add Member
           </Button>
           <FormHelperText id="members-validation-field" error={watchedMembers < 1}>

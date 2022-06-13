@@ -1,10 +1,5 @@
 import { thunk } from 'easy-peasy';
-import { utils } from 'near-api-js';
-import { spaceToSnake } from '../../../utils/format';
 import { signTransactionByLedger } from '../../multisafe/helpers/signTransactionByLedger';
-import { getMultisafeFactoryContract } from '../helpers/getMultisafeFactoryContract';
-import { config } from '../../../near/config';
-import { redirectActions } from '../../../config/redirectActions';
 import { getRoute } from '../../../ui/config/routes';
 
 const serializeData = ({ name, members, num_confirmations }) => ({
