@@ -22,6 +22,7 @@ export const App = () => (
           routes.members,
           routes.membersEdit,
           routes.numberConfirmations,
+          routes.editName,
         ]}
         component={Main}
       />

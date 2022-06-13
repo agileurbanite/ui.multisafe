@@ -25,6 +25,7 @@ export const Main = () => (
           routes.members,
           routes.membersEdit,
           routes.numberConfirmations,
+          routes.editName,
         ]}
         component={MultiSafe}
       />
