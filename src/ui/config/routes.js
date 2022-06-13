@@ -29,5 +29,4 @@ export const getRoute = {
   editName: (multisafeId) => `/multisafe/${multisafeId}/edit-name`,
   remove: (multisafeId) => `/multisafe/${multisafeId}/remove`,
   disconnect: (multisafeId) => `/multisafe/${multisafeId}/disconnect`,
-  
 };
