@@ -20,6 +20,7 @@ export const App = () => (
           routes.dashboard,
           routes.history,
           routes.members,
+          routes.membersEdit,
         ]}
         component={Main}
       />
