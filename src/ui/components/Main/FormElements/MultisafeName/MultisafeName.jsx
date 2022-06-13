@@ -6,11 +6,15 @@ import { ContentSeparator } from '../../../general/ContentSeparator/ContentSepar
 export const MultisafeName = ({ control, classNames, hasError, errorMessage, editVersion = false }) => (
   <>
     <BulletHeading>Multi Safe Name</BulletHeading>
-    {!editVersion && 
+    {editVersion ? (
+      <Typography className={classNames?.description}>
+        This name is only stored locally and will never be shared.
+      </Typography>
+    ) : (
       <Typography className={classNames?.description}>
         First, let&apos;s give your new Safe a name. This name is only stored locally and will never be shared.
       </Typography>
-    }
+    )}
     <section className={classNames?.createMultisafeBlock}>
       <TextField
         control={control}

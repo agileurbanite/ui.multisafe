@@ -1,5 +1,5 @@
 import { useStyles } from './EditMultisafe.styles';
-import { FormConfirmations } from './Form/FormConfirmations';
+import { FormName } from './Form/FormName';
 
 export const EditName = () => {
   const classes = useStyles();
@@ -9,7 +9,7 @@ export const EditName = () => {
       <div className={classes.headerWrapper}>
         <h1 className={classes.title}>Edit Existing Multi Safe</h1>
       </div>
-      <FormConfirmations />
+      <FormName />
     </div>
   );
 };
