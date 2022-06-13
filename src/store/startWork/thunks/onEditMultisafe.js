@@ -100,6 +100,10 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
     ...membersActions
   ]
 
+  if (values.members && !contractActions.length) {
+    return;
+  }
+
   isNearWallet
     ? addEditRequest(contract, contractActions)
     : await signTxByLedger(contract, contractActions, actions, multisafeId, state, history);
