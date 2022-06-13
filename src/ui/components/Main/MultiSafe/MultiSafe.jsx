@@ -12,6 +12,7 @@ import { useStyles } from './MultiSafe.styles';
 import { EditMembers } from './EditMultisafe/EditMembers';
 import { EditConfirmations } from './EditMultisafe/EditConfirmations';
 import { EditName } from './EditMultisafe/EditName';
+import { Remove } from './EditMultisafe/Remove';
 
 export const MultiSafe = () => {
   const [isListOpen, setListOpen] = useState(false);
@@ -34,6 +35,7 @@ export const MultiSafe = () => {
           <Route exact path={routes.membersEdit} component={EditMembers} />
           <Route exact path={routes.numberConfirmations} component={EditConfirmations} />
           <Route exact path={routes.editName} component={EditName} />
+          <Route exact path={routes.remove} component={Remove} />
         </Switch>
         <Footer />
       </div>
