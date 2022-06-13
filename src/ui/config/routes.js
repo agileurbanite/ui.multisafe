@@ -13,6 +13,7 @@ export const routes = {
   history: '/multisafe/:multisafeId/history',
   members: '/multisafe/:multisafeId/members',
   membersEdit: '/multisafe/:multisafeId/edit-members',
+  numberConfirmations: '/multisafe/:multisafeId/edit-confirmations',
 };
 
 export const getRoute = {
@@ -21,4 +22,5 @@ export const getRoute = {
   members: (multisafeId) => `/multisafe/${multisafeId}/members`,
   callbackUrl: (params) => `${window.location.origin}/redirect-from-wallet?${qs.stringify(params)}`,
   membersEdit: (multisafeId) => `/multisafe/${multisafeId}/edit-members`,
+  numberConfirmations: (multisafeId) => `/multisafe/${multisafeId}/edit-confirmations`,
 };
