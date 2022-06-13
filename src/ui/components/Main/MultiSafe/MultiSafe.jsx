@@ -10,6 +10,7 @@ import { Members } from './Members/Members';
 import { routes } from '../../../config/routes';
 import { useStyles } from './MultiSafe.styles';
 import { EditMembers } from './EditMultisafe/EditMembers';
+import { EditConfirmations } from './EditMultisafe/EditConfirmations';
 
 export const MultiSafe = () => {
   const [isListOpen, setListOpen] = useState(false);
@@ -30,6 +31,7 @@ export const MultiSafe = () => {
           <Route exact path={routes.history} component={History} />
           <Route exact path={routes.members} component={Members} />
           <Route exact path={routes.membersEdit} component={EditMembers} />
+          <Route exact path={routes.numberConfirmations} component={EditConfirmations} />
         </Switch>
         <Footer />
       </div>
