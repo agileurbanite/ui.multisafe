@@ -14,6 +14,7 @@ export const routes = {
   members: '/multisafe/:multisafeId/members',
   membersEdit: '/multisafe/:multisafeId/edit-members',
   numberConfirmations: '/multisafe/:multisafeId/edit-confirmations',
+  editName: '/multisafe/:multisafeId/edit-name',
 };
 
 export const getRoute = {
@@ -23,4 +24,5 @@ export const getRoute = {
   callbackUrl: (params) => `${window.location.origin}/redirect-from-wallet?${qs.stringify(params)}`,
   membersEdit: (multisafeId) => `/multisafe/${multisafeId}/edit-members`,
   numberConfirmations: (multisafeId) => `/multisafe/${multisafeId}/edit-confirmations`,
+  editName: (multisafeId) => `/multisafe/${multisafeId}/edit-name`,
 };
