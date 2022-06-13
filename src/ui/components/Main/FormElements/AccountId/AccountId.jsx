@@ -1,14 +1,16 @@
 import { Typography } from '@material-ui/core';
-import { TextField } from '../../../../general/TextField/TextField';
-import { BulletHeading } from '../../../../general/BulletHeading/BulletHeading';
-import { ContentSeparator } from '../../../../../general/ContentSeparator/ContentSeparator';
+import { TextField } from '../../general/TextField/TextField';
+import { BulletHeading } from '../../general/BulletHeading/BulletHeading';
+import { ContentSeparator } from '../../../general/ContentSeparator/ContentSeparator';
 
-export const AccountId = ({ control, classNames, hasError, errorMessage }) => (
+export const AccountId = ({ control, classNames, hasError, errorMessage, editVersion = false }) => (
   <>
     <BulletHeading>Multi Safe ID</BulletHeading>
-    <Typography className={classNames?.description}>
-      Second, choose Multi Safe ID. It is public and should be unique in the blockchain.
-    </Typography>
+    {!editVersion && 
+      <Typography className={classNames?.description}>
+        Second, choose Multi Safe ID. It is public and should be unique in the blockchain.
+      </Typography>
+    }
     <section className={classNames?.createMultisafeBlock}>
       <TextField
         control={control}
