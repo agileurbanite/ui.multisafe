@@ -16,6 +16,7 @@ export const routes = {
   numberConfirmations: '/multisafe/:multisafeId/edit-confirmations',
   editName: '/multisafe/:multisafeId/edit-name',
   remove: '/multisafe/:multisafeId/remove',
+  disconnect: '/multisafe/:multisafeId/disconnect',
 };
 
 export const getRoute = {
@@ -27,4 +28,6 @@ export const getRoute = {
   numberConfirmations: (multisafeId) => `/multisafe/${multisafeId}/edit-confirmations`,
   editName: (multisafeId) => `/multisafe/${multisafeId}/edit-name`,
   remove: (multisafeId) => `/multisafe/${multisafeId}/remove`,
+  disconnect: (multisafeId) => `/multisafe/${multisafeId}/disconnect`,
+  
 };
