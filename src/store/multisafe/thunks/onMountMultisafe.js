@@ -16,9 +16,10 @@ export const onMountMultisafe = thunk(async (_, payload, { getStoreState, getSto
   const localMultisafe = multisafes.find((multisafe) => multisafe.multisafeId === multisafeId);
 
   try {
-    const [balance, members] = await Promise.all([
+    const [balance, members, numConfirmations] = await Promise.all([
       new Account(near.connection, multisafeId).getAccountBalance(),
       contract.get_members(),
+      contract.get_num_confirmations(),
     ]);
 
     mountMultisafe({
@@ -26,6 +27,7 @@ export const onMountMultisafe = thunk(async (_, payload, { getStoreState, getSto
       contract,
       balance,
       members,
+      numConfirmations
     });
   } catch (e) {
     actions.general.setError({ isError: true, description: e.message });
