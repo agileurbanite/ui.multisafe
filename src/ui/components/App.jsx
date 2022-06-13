@@ -24,6 +24,7 @@ export const App = () => (
           routes.numberConfirmations,
           routes.editName,
           routes.remove,
+          routes.disconnect,
         ]}
         component={Main}
       />
