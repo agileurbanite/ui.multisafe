@@ -1,3 +1,4 @@
+// import { useEffect } from 'react';
 import { Button } from '@material-ui/core';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
@@ -8,7 +9,7 @@ import { Confirmations } from '../../../FormElements/Confirmations/Confirmations
 import { EditMembersPage } from '../../../../../../utils/validation/EditMembersPage';
 
 export const FormConfirmations = () => {
-  const onEditMultisafe = useStoreActions((actions) => actions.startWork.onEditMultisafe);
+  const onEditMultisafe = useStoreActions((actions) => actions.multisafe.onEditMultisafe);
   const history = useHistory();
   const classes = useStyles();
 
@@ -18,6 +19,7 @@ export const FormConfirmations = () => {
   const {
     control,
     handleSubmit,
+    getValues,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(EditMembersPage),
@@ -41,7 +43,7 @@ export const FormConfirmations = () => {
         errorMessage={!!errors?.num_confirmations && errors?.num_confirmations?.message}
       />
       <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
-        Edit Multi Safe
+        Send Request
       </Button>
     </form>
   );
