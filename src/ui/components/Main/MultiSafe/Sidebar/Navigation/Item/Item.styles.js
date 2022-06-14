@@ -14,7 +14,7 @@ const styles = (theme) => ({
     height: 36,
     display: 'flex',
     alignItems: 'center',
-    marginLeft: 48,
+    paddingLeft: 48,
     color: ({ isActive }) => (isActive ? theme.palette.primary.main : theme.colors.dashboardGrey),
     '&:hover': {
       backgroundColor: theme.colors.dashboardHoverBgGrey,
