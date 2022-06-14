@@ -55,5 +55,8 @@ export const EditMembersPage = yup.object().shape({
     )
     .required(requiredMessageType.members)
     .min(1, validationMessageType.members),
+});
+
+export const EditConfirmationsPage = yup.object().shape({
   num_confirmations: yup.string().required(requiredMessageType.num_confirmations),
 });

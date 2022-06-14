@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory } from 'react-router-dom';
 import { useStyles } from './Form.styles';
 import { Confirmations } from '../../../FormElements/Confirmations/Confirmations';
-import { EditMembersPage } from '../../../../../../utils/validation/EditMembersPage';
+import { EditConfirmationsPage } from '../../../../../../utils/validation/EditMembersPage';
 
 export const FormConfirmations = () => {
   const onEditMultisafe = useStoreActions((actions) => actions.multisafe.onEditMultisafe);
@@ -21,7 +21,7 @@ export const FormConfirmations = () => {
     handleSubmit,
     formState: { errors }
   } = useForm({
-    resolver: yupResolver(EditMembersPage),
+    resolver: yupResolver(EditConfirmationsPage),
     mode: 'all',
     defaultValues: {
       num_confirmations: numConfirmations,

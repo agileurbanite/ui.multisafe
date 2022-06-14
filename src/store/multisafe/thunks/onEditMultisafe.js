@@ -78,9 +78,6 @@ const signTxByLedger = async (contract, contractActions, actions, multisafeId, s
 };
 
 export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
-
-  // TESTOWAC DLA KILKU MULTISAFOW NA RAZ, jak jest kilka dodanych czy to dalej dziala poprawnie
-
   const { data, history } = payload;
 
   const state = getStoreState();
