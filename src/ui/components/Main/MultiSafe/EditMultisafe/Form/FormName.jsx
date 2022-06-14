@@ -17,7 +17,6 @@ export const FormName = () => {
   const {
     control,
     handleSubmit,
-    getValues,
     formState: { errors }
   } = useForm({
     mode: 'all',
