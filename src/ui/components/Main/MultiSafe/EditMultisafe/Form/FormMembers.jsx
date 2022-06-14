@@ -9,7 +9,7 @@ import { MembersField } from '../../../FormElements/MembersField/MembersField';
 
 export const FormMembers = () => {
   const editVersion = true;
-  const onEditMultisafe = useStoreActions((actions) => actions.startWork.onEditMultisafe);
+  const onEditMultisafe = useStoreActions((actions) => actions.multisafe.onEditMultisafe);
   const history = useHistory();
   const classes = useStyles();
   const members = useStoreState((state) => state.multisafe.members || []);
