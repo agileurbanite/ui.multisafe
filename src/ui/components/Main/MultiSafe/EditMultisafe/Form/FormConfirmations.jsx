@@ -19,7 +19,6 @@ export const FormConfirmations = () => {
   const {
     control,
     handleSubmit,
-    getValues,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(EditMembersPage),

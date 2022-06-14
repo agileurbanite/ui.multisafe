@@ -3,16 +3,19 @@ import { routes, getRoute } from '../../../../../config/routes';
 
 const items = [
   {
-    name: 'Dashboard',
+    name: 'Requests',
     route: routes.dashboard,
     getPath: getRoute.dashboard,
     icon: Dashboard,
-  },
-  {
-    name: 'History',
-    route: routes.history,
-    getPath: getRoute.history,
-    icon: History,
+    subItems: [{
+      name: 'Pending',
+      route: routes.dashboard,
+      getPath: getRoute.dashboard,
+    },{
+      name: 'Completed',
+      route: routes.history,
+      getPath: getRoute.history,
+    }]
   },
   {
     name: 'Members',
