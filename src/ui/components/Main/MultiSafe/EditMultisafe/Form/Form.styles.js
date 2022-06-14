@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
 const styles = {
-  form: {},
   textField: {
     fontSize: 20,
     fontWeight: 900,

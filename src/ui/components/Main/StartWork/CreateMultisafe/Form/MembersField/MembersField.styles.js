@@ -4,7 +4,6 @@ const styles = {
   container: {
     width: 620,
   },
-  addMemberInput: {},
   memberAddress: {
     width: '100%',
   },
