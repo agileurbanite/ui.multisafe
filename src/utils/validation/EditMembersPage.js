@@ -39,8 +39,6 @@ const isUserExist = debounce(async (value) => {
 }, 500);
 
 export const EditMembersPage = yup.object().shape({
-  // name: yup.string().required(requiredMessageType.name),
-  // multisafeId: yup.string().required(requiredMessageType.multisafeId),
   members: yup
     .array()
     .of(
@@ -57,9 +55,5 @@ export const EditMembersPage = yup.object().shape({
     )
     .required(requiredMessageType.members)
     .min(1, validationMessageType.members),
-  // num_confirmations: yup.string().required(requiredMessageType.num_confirmations),
-  // amount: yup
-  //   .string()
-  //   .required(requiredMessageType.amount)
-  //   .matches(patterns.amount, validationMessageType.amount),
+  num_confirmations: yup.string().required(requiredMessageType.num_confirmations),
 });
