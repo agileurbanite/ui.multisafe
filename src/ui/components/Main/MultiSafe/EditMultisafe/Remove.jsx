@@ -1,5 +1,5 @@
 import { useStyles } from './EditMultisafe.styles';
-import { FormConfirmations } from './Form/FormConfirmations';
+import { FormRemove } from './Form/FormRemove';
 
 export const Remove = () => {
   const classes = useStyles();
@@ -7,9 +7,9 @@ export const Remove = () => {
   return (
     <div className={classes.container}>
       <div className={classes.headerWrapper}>
-        <h1 className={classes.title}>Edit Existing Multi Safe</h1>
+        <h1 className={classes.title}>Remove Multi Safe</h1>
       </div>
-      <FormConfirmations />
+      <FormRemove />
     </div>
   );
 };
