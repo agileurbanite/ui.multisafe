@@ -5,7 +5,7 @@ const styles = (theme) => ({
     gridArea: 'b',
     width: 360,
     backgroundColor: '#fafafa',
-    zIndex: 2,
+    zIndex: 102,
     position: 'relative'
   },
   topbar: {
