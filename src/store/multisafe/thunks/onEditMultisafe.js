@@ -97,7 +97,7 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
     return;
   }
 
-  if (!values.numConfirmations && values.members && !membersActions.length) {
+  if (!values.numConfirmations && !membersActions.length) {
     return;
   }
 
