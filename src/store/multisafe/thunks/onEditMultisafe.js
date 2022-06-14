@@ -1,6 +1,8 @@
 import { thunk } from 'easy-peasy';
-import { signTransactionByLedger } from '../../multisafe/helpers/signTransactionByLedger';
+import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 import { getRoute } from '../../../ui/config/routes';
+
+// TEN PLIK PRZENIESC do multisafe/thunks
 
 const serializeData = ({ name, members, num_confirmations }) => ({
   name,
@@ -76,6 +78,9 @@ const signTxByLedger = async (contract, contractActions, actions, multisafeId, s
 };
 
 export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
+
+  // TESTOWAC DLA KILKU MULTISAFOW NA RAZ, jak jest kilka dodanych czy to dalej dziala poprawnie
+
   const { data, history } = payload;
 
   const state = getStoreState();

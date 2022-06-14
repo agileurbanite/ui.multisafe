@@ -6,6 +6,7 @@ import { onTransferTokens } from './onTransferTokens';
 import { onConfirmRequest } from './onConfirmRequest';
 import { onDeleteRequest } from './onDeleteRequest';
 import { onRemoveLocalMultisafe } from './onRemoveLocalMultisafe';
+import { onEditMultisafe } from './onEditMultisafe';
 
 export const thunks = {
   onMountMultisafe,
@@ -16,4 +17,5 @@ export const thunks = {
   onConfirmRequest,
   onDeleteRequest,
   onRemoveLocalMultisafe,
+  onEditMultisafe
 };
