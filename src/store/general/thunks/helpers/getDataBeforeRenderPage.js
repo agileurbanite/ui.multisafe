@@ -10,7 +10,8 @@ const {
   numberConfirmations,
   editName,
   remove,
-  disconnect
+  disconnect,
+  nonFungibleTokens
 } = routes;
 
 export const getDataBeforeRenderPage = async ({
@@ -24,6 +25,7 @@ export const getDataBeforeRenderPage = async ({
   const onMountDashboard = actions.multisafe.onMountDashboard;
   const onMountHistory = actions.multisafe.onMountHistory;
   const onMountTokenList = actions.multisafe.onMountTokenList;
+  const onMountNonFungibleTokenList = actions.multisafe.onMountNonFungibleTokenList;
 
   const match = matchPath(browserHistory.location.pathname, [
     createMultisafe,
@@ -34,7 +36,8 @@ export const getDataBeforeRenderPage = async ({
     numberConfirmations,
     editName,
     remove,
-    disconnect
+    disconnect,
+    nonFungibleTokens,
   ]);
 
   if (!match) return;
@@ -76,6 +79,11 @@ export const getDataBeforeRenderPage = async ({
 
   if (ifRouteIs(disconnect)) {
     await onMountMultisafe({ multisafeId });
+  }
+  
+  if (ifRouteIs(nonFungibleTokens)) {
+    await onMountDashboard(multisafeId);
+    await onMountNonFungibleTokenList(multisafeId);
   }
 
   withLoading && disableLoading();

@@ -8,6 +8,8 @@ import { onDeleteRequest } from './onDeleteRequest';
 import { onRemoveLocalMultisafe } from './onRemoveLocalMultisafe';
 import { onEditMultisafe } from './onEditMultisafe';
 import { onMountTokenList } from './onMountTokenList';
+import { onMountNonFungibleTokenList } from './onMountNonFungibleTokenList';
+import { onTransferNFT } from './onTransferNFT';
 
 export const thunks = {
   onMountMultisafe,
@@ -20,4 +22,6 @@ export const thunks = {
   onRemoveLocalMultisafe,
   onEditMultisafe,
   onMountTokenList,
+  onMountNonFungibleTokenList,
+  onTransferNFT,
 };

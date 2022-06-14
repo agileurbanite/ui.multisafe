@@ -9,3 +9,7 @@ export const sendFundsSchema = yup.object().shape({
   recipientId: yup.string().required(requiredMessageType.recipientId),
   amount: yup.string().required(requiredMessageType.amount),
 });
+
+export const transferNFTSchema = yup.object().shape({
+  recipientId: yup.string().required(requiredMessageType.recipientId)
+});

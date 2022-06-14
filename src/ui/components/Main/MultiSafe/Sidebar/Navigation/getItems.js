@@ -1,4 +1,4 @@
-import { Dashboard, People, Settings } from '@material-ui/icons';
+import { Dashboard, People, Settings, PhotoLibrary } from '@material-ui/icons';
 import { routes, getRoute } from '../../../../../config/routes';
 
 const items = [
@@ -49,6 +49,12 @@ const items = [
       route: routes.disconnect,
       getPath: getRoute.disconnect,
     }]
+  },
+  {
+    name: 'Collectibles',
+    route: routes.nonFungibleTokens,
+    getPath: getRoute.nonFungibleTokens,
+    icon: PhotoLibrary,
   },
 ];
 

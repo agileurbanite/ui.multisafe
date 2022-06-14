@@ -5,6 +5,7 @@ export const initState = {
     balance: 0,
     fungibleTokens: [],
     fungibleTokensMetadata: {},
+    nonFungibleTokens: [],
   },
   dashboard: {
     pendingRequests: [],

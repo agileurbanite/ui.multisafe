@@ -7,6 +7,7 @@ import { MultisafeList } from './MultisafeList/MultisafeList';
 import { Dashboard } from './Dashboard/Dashboard';
 import { History } from './History/History';
 import { Members } from './Members/Members';
+import { NonFungibleTokens } from './NonFungibleTokens/NonFungibleTokens';
 import { routes } from '../../../config/routes';
 import { useStyles } from './MultiSafe.styles';
 import { EditMembers } from './EditMultisafe/EditMembers';
@@ -38,6 +39,7 @@ export const MultiSafe = () => {
           <Route exact path={routes.editName} component={EditName} />
           <Route exact path={routes.remove} component={Remove} />
           <Route exact path={routes.disconnect} component={Disconnect} />
+          <Route exact path={routes.nonFungibleTokens} component={NonFungibleTokens} />
         </Switch>
         <Footer />
       </div>
