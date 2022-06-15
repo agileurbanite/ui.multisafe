@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { InputAdornment, Button, Select, MenuItem } from '@material-ui/core';
 import { useStoreState } from 'easy-peasy';
 import { formatNearAmount } from 'near-api-js/lib/utils/format';
@@ -6,11 +7,34 @@ import { TextField } from '../../../../../../general/TextField/TextField';
 import { formatNearBalance, formatOtherBalance, formatOtherAmountHumanReadable } from '../../../../../../../../../utils/format';
 import { useStyles } from './Amount.styles';
 
+const initState = {
+  contractName: '',
+  decimals: 0,
+  name: '',
+  symbol: '',
+  tokenBalance: '',
+}
+
 export const Amount = ({ control, classNames, setValue, tokenName, setTokenName, hasError, errorMessage}) => {
   const balance = useStoreState((store) => store.multisafe.general.balance);
-  const fungibleTokens = useStoreState((store) => store.multisafe.general.fungibleTokens);
+  const fungibleTokensBalances = useStoreState((store) => store.multisafe.general.fungibleTokensBalances);
+  const fungibleTokensMetadata = useStoreState((s) => s.multisafe.general.fungibleTokensMetadata);
   const classes = useStyles();
-  const selectedToken = fungibleTokens.find(({name}) => name === tokenName)
+  const [selectedToken, setSelectedToken] = useState(initState)
+
+  useEffect(() => {
+    // constructs a selectedToken needed to format max amount
+    const token = tokenName !== 'near' ? 
+      fungibleTokensBalances.find(({name}) => name === tokenName) : 
+      initState;
+      
+    const selectedTokenMetadata = fungibleTokensMetadata[token.contractName];
+    token.decimals = selectedTokenMetadata?.decimals;
+    token.symbol = selectedTokenMetadata?.symbol;
+    
+    setSelectedToken(token);
+  }, [tokenName])
+
   const sendMax = () => {
     if (tokenName === 'near') {
       setValue('amount', formatNearAmount(balance));
@@ -44,7 +68,15 @@ export const Amount = ({ control, classNames, setValue, tokenName, setTokenName,
                   <Near className={classes.icon} />
                   <span className={classes.adornmentText}>NEAR</span>
                 </MenuItem>
-                {fungibleTokens && fungibleTokens.map(({ name }) => <MenuItem key={name} value={name}>{name}</MenuItem>)}
+                {fungibleTokensBalances &&
+                 fungibleTokensMetadata &&
+                 fungibleTokensBalances.map(({ contractName }) => 
+                  <MenuItem 
+                    key={contractName}
+                    value={fungibleTokensMetadata[contractName].name}
+                  >
+                    {fungibleTokensMetadata[contractName].name}
+                  </MenuItem>)}
               </Select>
             </InputAdornment>
           ),

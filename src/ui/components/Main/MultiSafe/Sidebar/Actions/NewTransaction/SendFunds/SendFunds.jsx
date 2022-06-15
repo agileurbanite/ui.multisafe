@@ -13,7 +13,9 @@ import { sendFundsSchema } from '../../../../../../../../utils/validation/SendFu
 export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
   const [tokenName, setTokenName] = useState('near');
   const onTransferTokens = useStoreActions((actions) => actions.multisafe.onTransferTokens);
-  const fungibleTokens = useStoreState((store) => store.multisafe.general.fungibleTokens);
+  const fungibleTokensBalances = useStoreState((store) => store.multisafe.general.fungibleTokensBalances);
+  const fungibleTokensMetadata = useStoreState((store) => store.multisafe.general.fungibleTokensMetadata);
+
   const { control, handleSubmit, setValue, errors } = useForm({
     resolver: yupResolver(sendFundsSchema),
     mode: 'all',
@@ -21,10 +23,11 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
   const classes = useStyles();
 
   const onSubmit = handleSubmit((data) => {
-    const token = fungibleTokens.find(({name}) => name === tokenName) ? 
-      fungibleTokens.find(({name}) => name === tokenName) :
+    const tokenContractName = fungibleTokensBalances.find(({name}) => name === tokenName) ? 
+    fungibleTokensBalances.find(({name}) => name === tokenName).contractName :
       undefined
-    onTransferTokens({ data, onClose, token});
+    const tokenMetadata = fungibleTokensMetadata[tokenContractName];
+    onTransferTokens({ data, onClose, tokenMetadata, tokenContractName});
   });
 
   return (

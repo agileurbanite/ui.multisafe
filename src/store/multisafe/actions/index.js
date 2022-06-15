@@ -5,7 +5,8 @@ import { mountDashboard } from './mountDashboard';
 import { mountHistory } from './mountHistory';
 import { removeMultisafe } from './removeMultisafe';
 import { changeMultisafeName } from './changeMultisafeName';
-import { mountTokenList } from './mountTokenList';
+import { mountTokensBalances } from './mountTokensBalances';
+import { mountTokensMetadata } from './mountTokensMetadata';
 
 export const actions = {
   mountMultisafe,
@@ -15,5 +16,6 @@ export const actions = {
   mountHistory,
   removeMultisafe,
   changeMultisafeName,
-  mountTokenList,
+  mountTokensBalances,
+  mountTokensMetadata,
 };

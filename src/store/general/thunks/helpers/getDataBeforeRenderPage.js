@@ -24,7 +24,7 @@ export const getDataBeforeRenderPage = async ({
   const onMountDashboard = actions.multisafe.onMountDashboard;
   const onMountHistory = actions.multisafe.onMountHistory;
   const onMountTokenList = actions.multisafe.onMountTokenList;
-
+  
   const match = matchPath(browserHistory.location.pathname, [
     createMultisafe,
     dashboard,
@@ -44,12 +44,7 @@ export const getDataBeforeRenderPage = async ({
 
   withLoading && enableLoading();
 
-  if ([dashboard, history, members].includes(match.path)) {
-    await onMountTokenList(multisafeId);
-  }
-
   if (ifRouteIs(dashboard)) {
-    // await onMountMultisafe({ multisafeId });
     await onMountDashboard(multisafeId);
     await onMountTokenList(multisafeId);
   }
