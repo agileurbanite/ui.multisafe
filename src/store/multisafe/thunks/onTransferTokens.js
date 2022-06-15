@@ -38,8 +38,6 @@ const signTxByLedger = async (
     actions,
     contractMethod: () => addTransferNearRequest(contract, withApprove, recipientId, amount),
     callback: async () => {
-      // Here we load data to update UI according to the last changes
-      // TODO move onMountDashboard functions into helper - it can mislead devs in the future
       await actions.multisafe.onMountDashboard(multisafeId);
     },
   });
@@ -55,7 +53,6 @@ export const onTransferTokens = thunk(async (_, payload, { getStoreState, getSto
   const contract = state.multisafe.entities.contract;
   const multisafeId = state.multisafe.general.multisafeId;
   const actions = getStoreActions();
-  const mountTokenList = actions.multisafe.mountTokenList;
   const fungibleTokensService = new FungibleTokens(near.connection);
 
   const isNearTransaction = !token;
@@ -71,18 +68,6 @@ export const onTransferTokens = thunk(async (_, payload, { getStoreState, getSto
       // to do:
       // : await signTxByLedger(fungibleTokensService, contract, withApprove, recipientId, amount, multisafeId, state, actions, contractName);
   }
-
-  const fungibleTokens = state.multisafe.general.fungibleTokens;
-
-  const updatedTokens = await Promise.all(await fungibleTokens.map(async ({contractName}) => {
-    const tokenMetadata = await fungibleTokensService.getMetadata({ contractName });
-    const tokenBalance = await fungibleTokensService.getBalanceOf({ contractName, accountId: multisafeId }); 
-    return { ...tokenMetadata, tokenBalance, contractName };
-  }));
-
-  mountTokenList({
-    fungibleTokens: updatedTokens
-  });
 
   onClose();
 });

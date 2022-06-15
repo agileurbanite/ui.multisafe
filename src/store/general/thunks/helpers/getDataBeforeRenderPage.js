@@ -1,26 +1,17 @@
-import { matchPath } from 'react-router';
 import { routes } from '../../../../ui/config/routes';
 
-const { createMultisafe, dashboard, history, members } = routes;
+const { dashboard, history, members } = routes;
 
 export const getDataBeforeRenderPage = async ({
   actions,
-  history: browserHistory,
   withLoading,
+  match
 }) => {
   const enableLoading = actions.general.enableLoading;
   const disableLoading = actions.general.disableLoading;
   const onMountMultisafe = actions.multisafe.onMountMultisafe;
   const onMountDashboard = actions.multisafe.onMountDashboard;
   const onMountHistory = actions.multisafe.onMountHistory;
-  const onMountTokenList = actions.multisafe.onMountTokenList;
-
-  const match = matchPath(browserHistory.location.pathname, [
-    createMultisafe,
-    dashboard,
-    history,
-    members,
-  ]);
 
   if (!match) return;
 
@@ -28,10 +19,6 @@ export const getDataBeforeRenderPage = async ({
   const ifRouteIs = (route) => route === match.path;
 
   withLoading && enableLoading();
-
-  if ([dashboard, history, members].includes(match.path)) {
-    await onMountTokenList(multisafeId);
-  }
 
   if (ifRouteIs(dashboard)) {
     // await onMountMultisafe({ multisafeId });
