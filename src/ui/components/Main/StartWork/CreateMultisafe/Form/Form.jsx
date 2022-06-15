@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory } from 'react-router-dom';
 import { useStyles } from './Form.styles';
-import { MembersField } from './MembersField/MembersField';
-import { AccountId } from './AccountId/AccountId';
-import { MultisafeName } from './MultisafeName/MultisafeName';
-import { Confirmations } from './Confirmations/Confirmations';
-import { Amount } from './Amount/Amount';
+import { MembersField } from '../../../FormElements/MembersField/MembersField';
+import { AccountId } from '../../../FormElements/AccountId/AccountId';
+import { MultisafeName } from '../../../FormElements/MultisafeName/MultisafeName';
+import { Confirmations } from '../../../FormElements/Confirmations/Confirmations';
+import { Amount } from '../../../FormElements/Amount/Amount';
 import { createMultisafeSchema } from '../../../../../../utils/validation/CreateMultisafePage';
 
 export const Form = () => {

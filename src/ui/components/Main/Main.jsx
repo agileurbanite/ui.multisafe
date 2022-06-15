@@ -10,12 +10,25 @@ export const Main = () => (
     <Switch>
       <Route
         exact
-        path={[routes.getStarted, routes.createMultisafe, routes.loadMultisafe]}
+        path={[
+          routes.getStarted,
+          routes.createMultisafe,
+          routes.loadMultisafe
+        ]}
         component={StartWork}
       />
       <Route
         exact
-        path={[routes.dashboard, routes.history, routes.members]}
+        path={[
+          routes.dashboard,
+          routes.history,
+          routes.members,
+          routes.membersEdit,
+          routes.numberConfirmations,
+          routes.editName,
+          routes.remove,
+          routes.disconnect
+        ]}
         component={MultiSafe}
       />
     </Switch>

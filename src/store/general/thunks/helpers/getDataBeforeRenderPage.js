@@ -1,7 +1,17 @@
 import { matchPath } from 'react-router';
 import { routes } from '../../../../ui/config/routes';
 
-const { createMultisafe, dashboard, history, members } = routes;
+const { 
+  createMultisafe,
+  dashboard,
+  history,
+  members,
+  membersEdit,
+  numberConfirmations,
+  editName,
+  remove,
+  disconnect
+} = routes;
 
 export const getDataBeforeRenderPage = async ({
   actions,
@@ -19,6 +29,11 @@ export const getDataBeforeRenderPage = async ({
     dashboard,
     history,
     members,
+    membersEdit,
+    numberConfirmations,
+    editName,
+    remove,
+    disconnect
   ]);
 
   if (!match) return;
@@ -39,6 +54,26 @@ export const getDataBeforeRenderPage = async ({
   }
 
   if (ifRouteIs(members)) {
+    await onMountMultisafe({ multisafeId });
+  }
+
+  if (ifRouteIs(membersEdit)) {
+    await onMountMultisafe({ multisafeId });
+  }
+
+  if (ifRouteIs(numberConfirmations)) {
+    await onMountMultisafe({ multisafeId });
+  }
+
+  if (ifRouteIs(editName)) {
+    await onMountMultisafe({ multisafeId });
+  }
+
+  if (ifRouteIs(remove)) {
+    await onMountMultisafe({ multisafeId });
+  }
+
+  if (ifRouteIs(disconnect)) {
     await onMountMultisafe({ multisafeId });
   }
 

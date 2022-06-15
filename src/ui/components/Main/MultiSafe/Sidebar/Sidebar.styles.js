@@ -15,6 +15,7 @@ const styles = {
         overflow: 'auto',
         width: '350px'
       },
+    zIndex: 100
   },
   active: {
     ['@media (max-width:767px)']: { // eslint-disable-line no-useless-computed-key

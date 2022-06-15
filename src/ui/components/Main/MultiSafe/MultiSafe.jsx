@@ -9,6 +9,11 @@ import { History } from './History/History';
 import { Members } from './Members/Members';
 import { routes } from '../../../config/routes';
 import { useStyles } from './MultiSafe.styles';
+import { EditMembers } from './EditMultisafe/EditMembers';
+import { EditConfirmations } from './EditMultisafe/EditConfirmations';
+import { EditName } from './EditMultisafe/EditName';
+import { Remove } from './EditMultisafe/Remove';
+import { Disconnect } from './EditMultisafe/Disconnect';
 
 export const MultiSafe = () => {
   const [isListOpen, setListOpen] = useState(false);
@@ -28,6 +33,11 @@ export const MultiSafe = () => {
           <Route exact path={routes.dashboard} component={Dashboard} />
           <Route exact path={routes.history} component={History} />
           <Route exact path={routes.members} component={Members} />
+          <Route exact path={routes.membersEdit} component={EditMembers} />
+          <Route exact path={routes.numberConfirmations} component={EditConfirmations} />
+          <Route exact path={routes.editName} component={EditName} />
+          <Route exact path={routes.remove} component={Remove} />
+          <Route exact path={routes.disconnect} component={Disconnect} />
         </Switch>
         <Footer />
       </div>
