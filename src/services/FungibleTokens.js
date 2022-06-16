@@ -98,7 +98,7 @@ export default class FungibleTokens {
         });
     }
 
-    addTransferRequest = async ({multisafeContract, withApprove, recipientId, amount, contractName}) => {
+    addTransferRequest = async ({ multisafeContract, withApprove, recipientId, amount, contractName }) => {
         const storageAvailable = await this.isStorageBalanceAvailable({
             contractName,
             accountId: recipientId,

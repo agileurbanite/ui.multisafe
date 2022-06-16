@@ -8,13 +8,15 @@ export const onMountTokenList = thunk(
     const near = state.general.entities.near;
     const tokensMetadata = state.multisafe.general.fungibleTokensMetadata;
     const actions = getStoreActions();
-    const mountTokensBalances = actions.multisafe.mountTokensBalances;
+    const mountTokenList = actions.multisafe.mountTokenList;
     const mountTokensMetadata = actions.multisafe.mountTokensMetadata;
     const fungibleTokensService = new FungibleTokens(near.connection);
     const likelyTokens = await listLikelyTokens(multisafeId);
-    // make it so that: newFungibleTokenMetadata = {} and if it has something, then call mountTokensMetadata with a spread of previousmetadata and newmetadata
+
     const fungibleTokensMetadata = {};
-    const fungibleTokensBalances = await Promise.all(await likelyTokens.map(async (token) => {
+    const fungibleTokens = await Promise.all(await likelyTokens.map(async (token) => {
+      // fetch balance for each token
+      const tokenBalance = await fungibleTokensService.getBalanceOf({ contractName: token, accountId: multisafeId });
       // checks if metadata exists, if not we fetch it, else we just pull from cache
       if (!tokensMetadata[token]) {
         const fetchedMetadata = await fungibleTokensService.getMetadata({ contractName: token });
@@ -23,14 +25,14 @@ export const onMountTokenList = thunk(
       else {
         fungibleTokensMetadata[token] = tokensMetadata[token];
       }
-      // fetch balance for each token
-      const tokenBalance = await fungibleTokensService.getBalanceOf({ contractName: token, accountId: multisafeId }); 
-      return { tokenBalance, contractName: token, name: fungibleTokensMetadata[token].name };
+      return { ...fungibleTokensMetadata[token], tokenBalance, contractName: token };
     }));
     
-    mountTokensBalances({
-      fungibleTokensBalances
-    });
+    // keeping metadata within the fungibleTokens as well for easier access, leads to duplicated information but cleaner code
+    mountTokenList({
+      fungibleTokens
+    })
+    // keeping metadata separate for quick check on whether we need to update metadata
     mountTokensMetadata({
       fungibleTokensMetadata
     });
