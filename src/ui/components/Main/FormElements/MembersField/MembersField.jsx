@@ -65,7 +65,7 @@ export const MembersField = ({
                   },
                 }}
               />
-              <IconButton className={classes.iconButton} onClick={removeMember}>
+              <IconButton className={classes.iconButton} onClick={() => removeMember(idx)}>
                 <DeleteIcon className={classes.icon} />
               </IconButton>
             </ListItem>
