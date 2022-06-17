@@ -4,6 +4,14 @@ const styles = {
   container: {
     width: 'calc(100% - 48px)',
   },
+  media: {
+    margin: 'auto',
+    display: 'flex',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    width: 400,
+    height: 260,
+  },
   header: {
     margin: '30px 12px',
     fontWeight: 900,
