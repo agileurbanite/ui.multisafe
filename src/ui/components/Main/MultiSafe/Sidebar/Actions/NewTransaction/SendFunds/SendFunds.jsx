@@ -1,6 +1,6 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import { Button, Paper } from '@material-ui/core';
-import { useStoreActions } from 'easy-peasy';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import cn from 'classnames';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -11,7 +11,10 @@ import { useStyles } from './SendFunds.styles';
 import { sendFundsSchema } from '../../../../../../../../utils/validation/SendFundsModal';
 
 export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
+  const [tokenName, setTokenName] = useState('near');
   const onTransferTokens = useStoreActions((actions) => actions.multisafe.onTransferTokens);
+  const fungibleTokens = useStoreState((store) => store.multisafe.general.fungibleTokens);
+
   const { control, handleSubmit, setValue, errors } = useForm({
     resolver: yupResolver(sendFundsSchema),
     mode: 'all',
@@ -19,7 +22,10 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
   const classes = useStyles();
 
   const onSubmit = handleSubmit((data) => {
-    onTransferTokens({ data, onClose });
+    const token = fungibleTokens.find(({name}) => name === tokenName) 
+    ? fungibleTokens.find(({name}) => name === tokenName) 
+    : undefined;
+    onTransferTokens({ data, onClose, token});
   });
 
   return (
@@ -37,6 +43,8 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
             control={control}
             classNames={classes}
             setValue={setValue}
+            tokenName={tokenName}
+            setTokenName={setTokenName}
             hasError={!!errors?.amount}
             errorMessage={!!errors?.amount && errors?.amount?.message}
           />
