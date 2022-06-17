@@ -23,7 +23,7 @@ export const MembersField = ({
       name: 'members',
     }) || [];
 
-  const appendMember = () => append([{ account_id: getValues('account_id') }]);
+  const appendMember = () => append([{ account_id: '' }]);
 
   const removeMember = (idx) => remove(idx);
 
