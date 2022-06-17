@@ -23,7 +23,7 @@ export const MembersField = ({
       name: 'members',
     }) || [];
 
-  const appendMember = () => append([{ account_id: '' }]);
+  const appendMember = () => append();
 
   const removeMember = (idx) => remove(idx);
 

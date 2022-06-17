@@ -1,7 +1,6 @@
 import * as R from 'ramda';
 import * as yup from 'yup';
 import { config } from '../../near/config';
-import { debounce } from '../debounce';
 
 const requiredMessageType = {
   name: 'Please enter multisafe name',
@@ -26,7 +25,7 @@ const patterns = {
   amount: /^([5-9]|0?[1-9][0-9]+)$/g,
 };
 
-const isUserExist = debounce(async (value) => {
+const isUserExist = async (value) => {
   const response = await fetch(config.nodeUrl, {
     method: 'POST',
     headers: {
@@ -36,7 +35,7 @@ const isUserExist = debounce(async (value) => {
   });
   const result = await response.json();
   return R.has('result', result);
-}, 500);
+};
 
 export const EditMembersPage = yup.object().shape({
   members: yup
@@ -49,7 +48,10 @@ export const EditMembersPage = yup.object().shape({
           .matches(patterns.memberAddress, validationMessageType.account_id)
           .test({
             message: 'Oops! The user is not found :(',
-            test: isUserExist,
+            test: async (e) => {
+              const res = await isUserExist(e)
+              return res;
+            },
           }),
       }),
     )
