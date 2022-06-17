@@ -6,6 +6,7 @@ export const initState = {
     fungibleTokens: [],
     fungibleTokensMetadata: {},
     nonFungibleTokens: [],
+    nonFungibleTokensMetadata: {},
   },
   dashboard: {
     pendingRequests: [],
