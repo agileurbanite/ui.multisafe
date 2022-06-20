@@ -21,41 +21,41 @@ export const Requests = () => {
 
     const hasHistoryRequests = requests.length > 0;
 
-    return (
-        <>
-            <h2 className={classes.header}>Request History</h2>
-            {hasHistoryRequests ? (
-                <TableContainer>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>ID</TableCell>
-                                <TableCell>Created At</TableCell>
-                                <TableCell>Type</TableCell>
-                                <TableCell>Recipient</TableCell>
-                                <TableCell>Amount</TableCell>
-                                <TableCell>Status</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {requests.map((request) => (
-                                <TableRow key={request.requestId}>
-                                    <TableCell>{request.requestId}</TableCell>
-                                    <TableCell>{dateFormat(request.createdAt, 'd mmm yyyy - HH:MM')}</TableCell>
-                                    <Type />
-                                    <Recipient recipient={request.recipient} />
-                                    <TableCell>{formatNearBalance(request.amount)}</TableCell>
-                                    <Status status={request.status} />
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            ) : (
-                <div className={classes.noHistoryContainer}>
-                    <p>No history data</p>
-                </div>
-            )}
-        </>
-    );
+  return (
+    <>
+      <h2 className={classes.header}>Request History</h2>
+      {hasHistoryRequests ? (
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell>Created At</TableCell>
+                <TableCell>Type</TableCell>
+                <TableCell>Recipient</TableCell>
+                <TableCell>Amount</TableCell>
+                <TableCell>Status</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {requests.map((request) => (
+                <TableRow key={request.requestId}>
+                  <TableCell>{request.requestId}</TableCell>
+                  <TableCell>{dateFormat(request.createdAt, 'd mmm yyyy - HH:MM')}</TableCell>
+                  <Type type={request.type} />
+                  <Recipient recipient={request.recipient} transactionHash={request.transactionHash} />
+                  <TableCell>{formatNearBalance(request.amount)}</TableCell>
+                  <Status status={request.status} />
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <div className={classes.noHistoryContainer}>
+          <p>No history data</p>
+        </div>
+      )}
+    </>
+  );
 };

@@ -23,45 +23,45 @@ export const PendingRequests = () => {
 
     const hasActiveRequests = pendingRequests.length > 0;
 
-    return (
-        <>
-            <h2 className={classes.header}>Pending Requests</h2>
-            {hasActiveRequests ? (
-                <TableContainer>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>ID</TableCell>
-                                <TableCell>Created At</TableCell>
-                                <TableCell>Type</TableCell>
-                                <TableCell>Recipient</TableCell>
-                                <TableCell>Amount</TableCell>
-                                <TableCell>Actions</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {pendingRequests.map((request) => (
-                                <TableRow key={request.requestId}>
-                                    <TableCell>{request.requestId}</TableCell>
-                                    <TableCell>{dateFormat(request.createdAt, 'd mmm yyyy - HH:MM')}</TableCell>
-                                    <Type />
-                                    <Recipient recipient={request.recipient} />
-                                    <TableCell>{formatNearBalance(request.amount)}</TableCell>
-                                    <Status
-                                        request={request}
-                                        onConfirmRequest={onConfirmRequest}
-                                        onDeleteRequest={onDeleteRequest}
-                                    />
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            ) : (
-                <div className={classes.noRequestsContainer}>
-                    <p>No active requests</p>
-                </div>
-            )}
-        </>
-    );
+  return (
+    <>
+      <h2 className={classes.header}>Pending Requests</h2>
+      {hasActiveRequests ? (
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell>Created At</TableCell>
+                <TableCell>Type</TableCell>
+                <TableCell>Recipient</TableCell>
+                <TableCell>Amount</TableCell>
+                <TableCell>Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {pendingRequests.map((request) => (
+                <TableRow key={request.requestId}>
+                  <TableCell>{request.requestId}</TableCell>
+                  <TableCell>{dateFormat(request.createdAt, 'd mmm yyyy - HH:MM')}</TableCell>
+                  <Type type={request.type} />
+                  <Recipient recipient={request.recipient} />
+                  <TableCell>{formatNearBalance(request.amount)}</TableCell>
+                  <Status
+                    request={request}
+                    onConfirmRequest={onConfirmRequest}
+                    onDeleteRequest={onDeleteRequest}
+                  />
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <div className={classes.noRequestsContainer}>
+          <p>No active requests</p>
+        </div>
+      )}
+    </>
+  );
 };
