@@ -5,16 +5,15 @@ import { useStyles } from './Actions.styles';
 export const Actions = ({ accountId }) => {
     const classes = useStyles();
 
-    return (
-        <div className={classes.container}>
-            <div className={classes.tools}>
-                <CopyToClipboard classNames={{ icon: classes.icon }} accountId={accountId} />
-                <OpenInExplorer
-                    classNames={{ icon: classes.icon }}
-                    accountId={accountId}
-                    accountType="account"
-                />
-            </div>
-        </div>
-    );
+  return (
+    <div className={classes.container}>
+      <div className={classes.tools}>
+        <CopyToClipboard classNames={{ icon: classes.icon }} accountId={accountId} />
+        <OpenInExplorer
+          classNames={{ icon: classes.icon }}
+          accountId={accountId}
+        />
+      </div>
+    </div>
+  );
 };

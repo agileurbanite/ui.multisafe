@@ -17,24 +17,23 @@ export const Actions = () => {
   
     const classes = useStyles();
 
-    return (
-        <div className={classes.container}>
-            <div className={classes.tools}>
-                <CopyToClipboard
-                    classNames={{ iconButton: classes.iconButton, icon: classes.icon }}
-                    accountId={multisafeId}
-                />
-                <OpenInExplorer
-                    classNames={{ iconButton: classes.iconButton, icon: classes.icon }}
-                    accountId={multisafeId}
-                    accountType="contract"
-                />
-                <RefreshFungibleTokens
-                    classNames={{ iconButton: classes.iconButton, icon: classes.icon }}
-                    refreshFungibleTokens={refreshFungibleTokens}
-                    accountId={multisafeId}
-                />
-            </div>
+  return (
+    <div className={classes.container}>
+      <div className={classes.tools}>
+        <CopyToClipboard
+          classNames={{ iconButton: classes.iconButton, icon: classes.icon }}
+          accountId={multisafeId}
+        />
+        <OpenInExplorer
+          classNames={{ iconButton: classes.iconButton, icon: classes.icon }}
+          accountId={multisafeId}
+        />
+        <RefreshFungibleTokens
+          classNames={{ iconButton: classes.iconButton, icon: classes.icon }}
+          refreshFungibleTokens={refreshFungibleTokens}
+          accountId={multisafeId}
+        />
+      </div>
 
             <div className={classes.balance}>
                 <span>{formatNearBalance(balance)}</span>
