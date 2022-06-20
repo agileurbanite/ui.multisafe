@@ -5,7 +5,7 @@ export const Arguments = ({ control, classNames, hasError, errorMessage }) => (
     control={control}
     name="args"
     variant="outlined"
-    placeholder={`{"account_id": "satoshi.testnet"}`}
+    placeholder={`{"account_id": "satoshi.near"}`}
     fullWidth
     helperText={hasError ? errorMessage : "Arguments (JSON)"}
     className={classNames.textField}
