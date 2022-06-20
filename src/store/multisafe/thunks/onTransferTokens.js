@@ -1,8 +1,11 @@
 import * as nearApiJs from 'near-api-js';
 import { thunk } from 'easy-peasy';
+import BN from 'bn.js';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 import FungibleTokens from '../../../services/FungibleTokens';
 import { parseOtherAmount } from '../../../utils/format';
+
+const ATTACHED_GAS = new BN('100000000000000');
 
 const {
   utils: {
@@ -19,6 +22,7 @@ const addTransferNearRequest = ({ contract, withApprove, recipientId, amount }) 
         receiver_id: recipientId,
         actions: [{ type: 'Transfer', amount: parseNearAmount(amount) }],
       },
+      gas: ATTACHED_GAS,
     },
   });
 };

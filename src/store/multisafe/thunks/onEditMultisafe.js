@@ -1,8 +1,9 @@
 import { thunk } from 'easy-peasy';
+import BN from 'bn.js';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 import { getRoute } from '../../../ui/config/routes';
 
-// TEN PLIK PRZENIESC do multisafe/thunks
+const ATTACHED_GAS = new BN('100000000000000');
 
 const serializeData = ({ name, members, num_confirmations }) => ({
   name,
@@ -59,6 +60,7 @@ const addEditRequest = (contract, contractActions) => {
         actions: contractActions,
       },
     },
+    gas: ATTACHED_GAS
   }
 
   return contract[method](args);
