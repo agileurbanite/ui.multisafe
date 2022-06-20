@@ -4,6 +4,7 @@ import { onMountHistory } from './onMountHistory';
 import { onMountList } from './onMountList';
 import { onTransferTokens } from './onTransferTokens';
 import { onConfirmRequest } from './onConfirmRequest';
+import { onMakeFunctionCall } from './onMakeFunctionCall';
 import { onDeleteRequest } from './onDeleteRequest';
 import { onRemoveLocalMultisafe } from './onRemoveLocalMultisafe';
 import { onEditMultisafe } from './onEditMultisafe';
@@ -16,6 +17,7 @@ export const thunks = {
   onMountList,
   onTransferTokens,
   onConfirmRequest,
+  onMakeFunctionCall,
   onDeleteRequest,
   onRemoveLocalMultisafe,
   onEditMultisafe,
