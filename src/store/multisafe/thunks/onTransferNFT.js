@@ -13,7 +13,6 @@ const signTxByLedger = async (
   tokenId,
   contractName
 ) => {
-  // to do: check that sign tx by ledger works
   await signTransactionByLedger({
     actionName: 'Transfer NFT',
     state,
