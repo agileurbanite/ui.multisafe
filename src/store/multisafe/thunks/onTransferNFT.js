@@ -2,7 +2,7 @@ import { thunk } from 'easy-peasy';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 import NonFungibleTokens from '../../../services/NonFungibleTokens';
 
-const signTxByLedger = async (
+const signTxByLedger = async ({
   nonFungibleTokensService,
   contract,
   withApprove,
@@ -12,7 +12,7 @@ const signTxByLedger = async (
   actions,
   tokenId,
   contractName
-) => {
+}) => {
   await signTransactionByLedger({
     actionName: 'Transfer NFT',
     state,
@@ -51,7 +51,7 @@ export const onTransferNFT = thunk(async (_, payload, { getStoreState, getStoreA
         tokenId, 
         contractName 
     })
-    : await signTxByLedger(nonFungibleTokensService, contract, withApprove, recipientId, multisafeId, state, actions, tokenId, contractName);
+    : await signTxByLedger({ nonFungibleTokensService, contract, withApprove, recipientId, multisafeId, state, actions, tokenId, contractName });
 
   onClose();
 });
