@@ -7,8 +7,8 @@ export const NFTMedia = ({ nft, classes, autoPlay = false}) => {
     const [isVideo, mimeType] = useMemo(() => {
         let type;
         // check mediaUrl string for .webm or .mp4 endings (case-insensitive)
-        if (nft.metadata.mediaUrl.match(/\.webm$/i)) type = "webm";
-        else if (nft.metadata.mediaUrl.match(/\.mp4$/i)) type = "mp4";
+        if (nft.metadata.mediaUrl && nft.metadata.mediaUrl.match(/\.webm$/i)) type = "webm";
+        else if (nft.metadata.mediaUrl && nft.metadata.mediaUrl.match(/\.mp4$/i)) type = "mp4";
         // if there is a mediaUrl and a truthy mimeType (webm or mp4), we have a video
         const video = !!nft.metadata.mediaUrl && type;
         return [video, type];
