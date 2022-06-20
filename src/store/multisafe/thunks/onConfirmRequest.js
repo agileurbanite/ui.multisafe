@@ -2,7 +2,7 @@ import { thunk } from 'easy-peasy';
 import BN from 'bn.js';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 
-const ATTACHED_GAS = new BN('40000000000000');
+const ATTACHED_GAS = new BN('100000000000000');
 
 const callContractChangeMethod = (contract, requestId) =>
   contract.confirm({ args: { request_id: requestId }, gas: ATTACHED_GAS });
