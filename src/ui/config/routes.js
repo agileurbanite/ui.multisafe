@@ -17,12 +17,14 @@ export const routes = {
   editName: '/multisafe/:multisafeId/edit-name',
   remove: '/multisafe/:multisafeId/remove',
   disconnect: '/multisafe/:multisafeId/disconnect',
+  nonFungibleTokens: '/multisafe/:multisafeId/nonFungibleTokens',
 };
 
 export const getRoute = {
   dashboard: (multisafeId) => `/multisafe/${multisafeId}/dashboard`,
   history: (multisafeId) => `/multisafe/${multisafeId}/history`,
   members: (multisafeId) => `/multisafe/${multisafeId}/members`,
+  nonFungibleTokens: (multisafeId) => `/multisafe/${multisafeId}/nonFungibleTokens`,
   callbackUrl: (params) => `${window.location.origin}/redirect-from-wallet?${qs.stringify(params)}`,
   membersEdit: (multisafeId) => `/multisafe/${multisafeId}/edit-members`,
   numberConfirmations: (multisafeId) => `/multisafe/${multisafeId}/edit-confirmations`,

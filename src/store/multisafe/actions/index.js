@@ -7,6 +7,7 @@ import { removeMultisafe } from './removeMultisafe';
 import { changeMultisafeName } from './changeMultisafeName';
 import { mountTokensMetadata } from './mountTokensMetadata';
 import { mountTokenList } from './mountTokenList';
+import { mountNonFungibleTokenList } from './mountNonFungibleTokenList';
 
 export const actions = {
   mountMultisafe,
@@ -18,4 +19,5 @@ export const actions = {
   changeMultisafeName,
   mountTokensMetadata,
   mountTokenList,
+  mountNonFungibleTokenList,
 };

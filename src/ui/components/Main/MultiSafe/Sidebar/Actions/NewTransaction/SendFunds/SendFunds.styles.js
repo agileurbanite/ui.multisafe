@@ -35,6 +35,10 @@ const styles = (theme) => ({
   textFieldInputNotchedOutline: {
     border: 'none',
   },
+  readOnlyField: {
+    minWidth: 332,
+    marginBottom: 24,
+  },
   checkboxLabel: {
     fontWeight: 700,
     fontSize: 14,
