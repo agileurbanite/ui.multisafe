@@ -14,6 +14,7 @@ export const TextField = ({
   fullWidth,
   helperText,
   error,
+  multiline
 }) => {
   const { field } = useController({ name, control, defaultValue });
   return (
@@ -31,6 +32,7 @@ export const TextField = ({
       helperText={helperText}
       fullWidth={fullWidth}
       error={Boolean(error)}
+      multiline={multiline}
     />
   );
 };

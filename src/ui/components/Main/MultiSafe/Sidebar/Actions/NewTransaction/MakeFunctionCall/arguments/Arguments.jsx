@@ -10,6 +10,7 @@ export const Arguments = ({ control, classNames, hasError, errorMessage }) => (
     helperText={hasError ? errorMessage : "Arguments (JSON)"}
     className={classNames.textField}
     error={hasError}
+    multiline
     InputProps={{
       classes: {
         root: classNames.textFieldInputRoot,
