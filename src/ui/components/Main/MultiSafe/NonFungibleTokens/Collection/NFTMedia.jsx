@@ -1,5 +1,6 @@
 import { CardMedia } from '@material-ui/core';
 import { useMemo } from 'react';
+
 import FailedToLoad from '../../../../../images/failed_to_load.svg';
 
 export const NFTMedia = ({ nft, classes, autoPlay = false}) => {
@@ -7,12 +8,12 @@ export const NFTMedia = ({ nft, classes, autoPlay = false}) => {
     const [isVideo, mimeType] = useMemo(() => {
         let type;
         // check mediaUrl string for .webm or .mp4 endings (case-insensitive)
-        if (nft.metadata.mediaUrl && nft.metadata.mediaUrl.match(/\.webm$/i)) type = "webm";
-        else if (nft.metadata.mediaUrl && nft.metadata.mediaUrl.match(/\.mp4$/i)) type = "mp4";
+        if (nft.metadata.mediaUrl && nft.metadata.mediaUrl.match(/\.webm$/i)) type = 'webm';
+        else if (nft.metadata.mediaUrl && nft.metadata.mediaUrl.match(/\.mp4$/i)) type = 'mp4';
         // if there is a mediaUrl and a truthy mimeType (webm or mp4), we have a video
         const video = !!nft.metadata.mediaUrl && type;
         return [video, type];
-      }, [nft.metadata.mediaUrl]);
+    }, [nft.metadata.mediaUrl]);
 
     return (
         <CardMedia>
@@ -24,7 +25,7 @@ export const NFTMedia = ({ nft, classes, autoPlay = false}) => {
                         onError={(e) => {
                             e.target.onerror = null;
                             e.target.parentElement.setAttribute(
-                                "poster",
+                                'poster',
                                 FailedToLoad
                             );
                         }}
@@ -41,6 +42,6 @@ export const NFTMedia = ({ nft, classes, autoPlay = false}) => {
                     }}
                 />
             )}
-          </CardMedia>
-    )
+        </CardMedia>
+    );
 };

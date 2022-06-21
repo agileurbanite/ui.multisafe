@@ -1,5 +1,5 @@
-import * as nearApiJs from 'near-api-js';
 import BN from 'bn.js';
+import * as nearApiJs from 'near-api-js';
 
 const {
     utils: {
@@ -70,29 +70,29 @@ export default class FungibleTokens {
         transferAmount,
     }) => {
         const method = withApprove ? 'add_request_and_confirm' : 'add_request';
-        const storageArgs = Buffer.from(`{"account_id": "${recipientId}", "registration_only": true}`).toString('base64')
+        const storageArgs = Buffer.from(`{"account_id": "${recipientId}", "registration_only": true}`).toString('base64');
         const transferArgs = Buffer.from(`{"amount": "${transferAmount}", "receiver_id": "${recipientId}"}`)
-        .toString('base64')
+            .toString('base64');
         return multisafeContract[method]({
             args: {
                 request: {
                     receiver_id: contractName,
-                actions: [
-                    {
-                        type: 'FunctionCall',
-                        method_name: 'storage_deposit',
-                        args: storageArgs,
-                        gas: FT_STORAGE_DEPOSIT_GAS,
-                        deposit: storageDepositAmount
-                    },
-                    {
-                        type: 'FunctionCall',
-                        method_name: 'ft_transfer',
-                        args: transferArgs,
-                        deposit: FT_TRANSFER_DEPOSIT,
-                        gas: FT_TRANSFER_GAS,
-                    }
-                ]},
+                    actions: [
+                        {
+                            type: 'FunctionCall',
+                            method_name: 'storage_deposit',
+                            args: storageArgs,
+                            gas: FT_STORAGE_DEPOSIT_GAS,
+                            deposit: storageDepositAmount
+                        },
+                        {
+                            type: 'FunctionCall',
+                            method_name: 'ft_transfer',
+                            args: transferArgs,
+                            deposit: FT_TRANSFER_DEPOSIT,
+                            gas: FT_TRANSFER_GAS,
+                        }
+                    ]},
             },
             gas: GAS_FOR_TWO_CALLS
         });
@@ -131,7 +131,7 @@ export default class FungibleTokens {
         }
         const method = withApprove ? 'add_request_and_confirm' : 'add_request';
         const args = Buffer.from(`{"amount": "${amount}", "receiver_id": "${recipientId}"}`)
-          .toString('base64');
+            .toString('base64');
 
         return multisafeContract[method](
             {
