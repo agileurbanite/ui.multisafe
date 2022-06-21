@@ -9,6 +9,9 @@ import {
 import dateFormat from 'dateformat';
 import { useStoreState } from 'easy-peasy';
 
+import { Type } from '../../general/Type/Type';
+import { Status } from './Status/Status';
+import { Recipient } from './Recipient/Recipient';
 import { formatNearBalance } from '../../../../../../utils/format';
 import { Recipient } from './Recipient/Recipient';
 import { useStyles } from './Requests.styles';

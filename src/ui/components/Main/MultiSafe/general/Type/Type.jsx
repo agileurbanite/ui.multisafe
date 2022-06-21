@@ -1,15 +1,19 @@
 import { TableCell } from '@material-ui/core';
-// import { CallMade } from '@material-ui/icons';
 import { useStyles } from './Type.styles';
+import { MULT_SIG_REQUEST_ACTIONS } from '../../../../../../utils/multiSegRequestActions';
 
 export const Type = ({ type }) => {
   const classes = useStyles();
+  const {
+    label = type,
+    icon: Icon,
+  } = MULT_SIG_REQUEST_ACTIONS[type] || {};
+
   return (
     <TableCell>
       <div className={classes.container}>
-        {/* <CallMade className={classes.icon} /> */}
-        {/* TODO: Create a list of known type and corresponding icon */}
-        <span> {type} </span>
+        { Icon && <Icon className={classes.icon} /> }
+        <span> {label} </span>
       </div>
     </TableCell>
   );
