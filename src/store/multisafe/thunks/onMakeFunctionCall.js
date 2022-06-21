@@ -1,9 +1,9 @@
 import { thunk } from 'easy-peasy';
 import { Buffer } from 'buffer';
-import BN from 'bn.js';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
+import { formatTGasValue } from '../../../utils/format';
 
-const ADD_REQUEST_AND_CONFIRM_GAS = new BN('40000000000000');
+const ADD_REQUEST_AND_CONFIRM_GAS = '40000000000000'; // TODO: Reference from config
 
 const addFunctionCallRequest = async ({
   multisafeContract,
@@ -15,6 +15,7 @@ const addFunctionCallRequest = async ({
   tGas
 }) => {
   const method = withApprove ? 'add_request_and_confirm' : 'add_request';
+
   return multisafeContract[method](
     {
       args: {
@@ -25,7 +26,7 @@ const addFunctionCallRequest = async ({
             method_name: methodName,
             args: Buffer.from(args).toString('base64'),
             deposit: deposit.toString(),
-            gas: tGas.toString(),
+            gas: formatTGasValue(tGas),
           }]
         },
       },
