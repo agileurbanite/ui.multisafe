@@ -1,7 +1,8 @@
-import * as R from 'ramda';
 import Big from 'big.js';
 import { utils } from 'near-api-js';
 import BN from 'bn.js';
+import * as R from 'ramda';
+
 
 // Space 2 snake case
 export const spaceToSnake = (str) => R.compose(R.join('_'), R.split(' '), R.trim, R.toLower)(str);

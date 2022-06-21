@@ -41,8 +41,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src/",
-    "pretty": "prettier --write ./src"
+    "lint": "eslint --ext .js --ext .jsx .",
+    "fix": "eslint --ext .js --ext .jsx . --fix"
   },
   "browserslist": {
     "production": [

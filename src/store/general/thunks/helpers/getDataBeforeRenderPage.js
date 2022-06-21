@@ -1,31 +1,8 @@
 import { matchPath } from 'react-router';
+
 import { routes } from '../../../../ui/config/routes';
 
 const { 
-  createMultisafe,
-  dashboard,
-  history,
-  members,
-  membersEdit,
-  numberConfirmations,
-  editName,
-  remove,
-  disconnect
-} = routes;
-
-export const getDataBeforeRenderPage = async ({
-  actions,
-  history: browserHistory,
-  withLoading,
-}) => {
-  const enableLoading = actions.general.enableLoading;
-  const disableLoading = actions.general.disableLoading;
-  const onMountMultisafe = actions.multisafe.onMountMultisafe;
-  const onMountDashboard = actions.multisafe.onMountDashboard;
-  const onMountHistory = actions.multisafe.onMountHistory;
-  const onMountTokenList = actions.multisafe.onMountTokenList;
-  
-  const match = matchPath(browserHistory.location.pathname, [
     createMultisafe,
     dashboard,
     history,
@@ -34,49 +11,81 @@ export const getDataBeforeRenderPage = async ({
     numberConfirmations,
     editName,
     remove,
-    disconnect
-  ]);
+    disconnect,
+    nonFungibleTokens
+} = routes;
 
-  if (!match) return;
+export const getDataBeforeRenderPage = async ({
+    actions,
+    history: browserHistory,
+    withLoading,
+}) => {
+    const enableLoading = actions.general.enableLoading;
+    const disableLoading = actions.general.disableLoading;
+    const onMountMultisafe = actions.multisafe.onMountMultisafe;
+    const onMountDashboard = actions.multisafe.onMountDashboard;
+    const onMountHistory = actions.multisafe.onMountHistory;
+    const onMountTokenList = actions.multisafe.onMountTokenList;
+    const onMountNonFungibleTokenList = actions.multisafe.onMountNonFungibleTokenList;
 
-  const { multisafeId } = match?.params;
-  const ifRouteIs = (route) => route === match.path;
+    const match = matchPath(browserHistory.location.pathname, [
+        createMultisafe,
+        dashboard,
+        history,
+        members,
+        membersEdit,
+        numberConfirmations,
+        editName,
+        remove,
+        disconnect,
+        nonFungibleTokens,
+    ]);
 
-  withLoading && enableLoading();
+    if (!match) return;
 
-  if (ifRouteIs(dashboard)) {
-    await onMountDashboard(multisafeId);
-    await onMountTokenList(multisafeId);
-  }
+    const { multisafeId } = match?.params;
+    const ifRouteIs = (route) => route === match.path;
 
-  if (ifRouteIs(history)) {
-    await onMountMultisafe({ multisafeId });
-    await onMountHistory();
-  }
+    withLoading && enableLoading();
 
-  if (ifRouteIs(members)) {
-    await onMountMultisafe({ multisafeId });
-  }
+    if (ifRouteIs(dashboard)) {
+        await onMountDashboard(multisafeId);
+        await onMountTokenList(multisafeId);
+    }
 
-  if (ifRouteIs(membersEdit)) {
-    await onMountMultisafe({ multisafeId });
-  }
+    if (ifRouteIs(history)) {
+        await onMountMultisafe({ multisafeId });
+        await onMountHistory();
+    }
 
-  if (ifRouteIs(numberConfirmations)) {
-    await onMountMultisafe({ multisafeId });
-  }
+    if (ifRouteIs(members)) {
+        await onMountMultisafe({ multisafeId });
+    }
 
-  if (ifRouteIs(editName)) {
-    await onMountMultisafe({ multisafeId });
-  }
+    if (ifRouteIs(membersEdit)) {
+        await onMountMultisafe({ multisafeId });
+    }
 
-  if (ifRouteIs(remove)) {
-    await onMountMultisafe({ multisafeId });
-  }
+    if (ifRouteIs(numberConfirmations)) {
+        await onMountMultisafe({ multisafeId });
+    }
 
-  if (ifRouteIs(disconnect)) {
-    await onMountMultisafe({ multisafeId });
-  }
+    if (ifRouteIs(editName)) {
+        await onMountMultisafe({ multisafeId });
+    }
 
-  withLoading && disableLoading();
+    if (ifRouteIs(remove)) {
+        await onMountMultisafe({ multisafeId });
+    }
+
+    if (ifRouteIs(disconnect)) {
+        await onMountMultisafe({ multisafeId });
+    }
+  
+    if (ifRouteIs(nonFungibleTokens)) {
+        await onMountDashboard(multisafeId);
+        await onMountNonFungibleTokenList(multisafeId);
+    }
+
+    withLoading && disableLoading();
 };

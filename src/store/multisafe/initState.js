@@ -1,26 +1,28 @@
 export const initState = {
-  general: {
-    name: '',
-    multisafeId: '',
-    balance: 0,
-    fungibleTokens: [],
-    fungibleTokensMetadata: {},
-  },
-  dashboard: {
-    pendingRequests: [],
-  },
-  history: {
-    requests: [],
-  },
-  members: [],
-  multisafes: [],
-  selectors: {
-    multisafes: {
-      membership: [],
-      readOnly: [],
+    general: {
+        name: '',
+        multisafeId: '',
+        balance: 0,
+        fungibleTokens: [],
+        fungibleTokensMetadata: {},
+        nonFungibleTokens: [],
+        nonFungibleTokensMetadata: {},
     },
-  },
-  entities: {
-    contract: null,
-  },
+    dashboard: {
+        pendingRequests: [],
+    },
+    history: {
+        requests: [],
+    },
+    members: [],
+    multisafes: [],
+    selectors: {
+        multisafes: {
+            membership: [],
+            readOnly: [],
+        },
+    },
+    entities: {
+        contract: null,
+    },
 };
