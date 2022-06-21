@@ -8,7 +8,6 @@ import { TextField } from '../../general/TextField/TextField';
 
 export const MembersField = ({
   control,
-  getValues,
   name,
   classNames,
   errors,
