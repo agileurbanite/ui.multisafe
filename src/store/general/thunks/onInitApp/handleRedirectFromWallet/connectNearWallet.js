@@ -1,38 +1,39 @@
 import { matchPath } from 'react-router';
+
 import { routes } from '../../../../../ui/config/routes';
 
 const { welcome, getStarted } = routes;
 
 const getDestination = (origin) => {
-  const match = matchPath(origin, { path: [welcome], exact: true });
-  if (match?.path === welcome) return getStarted;
-  return origin;
+    const match = matchPath(origin, { path: [welcome], exact: true });
+    if (match?.path === welcome) return getStarted;
+    return origin;
 };
 
 const onSuccess = (state, actions, browserHistory, query) => {
-  const destination = getDestination(state.general.temporary.origin);
+    const destination = getDestination(state.general.temporary.origin);
 
-  actions.general.setUserData({
-    accountId: query.account_id,
-    isConnected: true,
-    walletType: 'near-wallet',
-    publicKey: null,
-  });
+    actions.general.setUserData({
+        accountId: query.account_id,
+        isConnected: true,
+        walletType: 'near-wallet',
+        publicKey: null,
+    });
 
-  browserHistory.replace(destination);
+    browserHistory.replace(destination);
 };
 
 const onError = (state, actions, browserHistory) => {
-  actions.general.setError({
-    isError: true,
-    description: 'You have not connected your wallet',
-  });
+    actions.general.setError({
+        isError: true,
+        description: 'You have not connected your wallet',
+    });
 
-  browserHistory.replace(state.general.temporary.origin);
+    browserHistory.replace(state.general.temporary.origin);
 };
 
 export const connectNearWallet = async ({ state, actions, history: browserHistory, query }) => {
-  actions.general.deleteTemporaryData();
-  if (query.account_id) onSuccess(state, actions, browserHistory, query);
-  if (query.errorCode) onError(state, actions, browserHistory);
+    actions.general.deleteTemporaryData();
+    if (query.account_id) onSuccess(state, actions, browserHistory, query);
+    if (query.errorCode) onError(state, actions, browserHistory);
 };
