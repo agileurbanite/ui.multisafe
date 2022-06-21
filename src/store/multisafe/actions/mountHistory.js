@@ -34,21 +34,21 @@ const getRequests = (requestTxs, successTxs, activeRequestIds, deletedRequestIds
             ({ args, transactionHash }) =>
                 (args.methodName === 'add_request' || args.methodName === 'add_request_and_confirm') &&
         typeof successTxs[transactionHash] === 'string',
-    )
-    .map(({ args, blockTimestamp, transactionHash }) => {
-      const requestId = Number(successTxs[transactionHash]);
-      return {
-        requestId,
-        createdAt: convertNanoToMilli(blockTimestamp),
-        type: args.argsJson.request.actions[0].type,
-        recipient: args.argsJson.request.receiverId,
-        amount: args.argsJson.request.actions[0].amount,
-        status: deletedRequestIds[requestId] ? 'deleted' : 'completed',
-        transactionHash,
-      };
-    })
-    .filter(({ requestId }) => !activeRequestIds[requestId])
-    .sort((a, b) => b.requestId - a.requestId);
+        )
+        .map(({ args, blockTimestamp, transactionHash }) => {
+            const requestId = Number(successTxs[transactionHash]);
+            return {
+                requestId,
+                createdAt: convertNanoToMilli(blockTimestamp),
+                type: args.argsJson.request.actions[0].type,
+                recipient: args.argsJson.request.receiverId,
+                amount: args.argsJson.request.actions[0].amount,
+                status: deletedRequestIds[requestId] ? 'deleted' : 'completed',
+                transactionHash,
+            };
+        })
+        .filter(({ requestId }) => !activeRequestIds[requestId])
+        .sort((a, b) => b.requestId - a.requestId);
 
 export const mountHistory = action((state, payload) => {
     const { requestIds, requestTxs, requestTxStatuses } = payload;

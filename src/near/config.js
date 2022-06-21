@@ -45,8 +45,8 @@ const configs = {
 };
 
 const createHelpers = (config) => ({
-  getCheckAccountInExplorerUrl: (accountId) => `${config.explorerUrl}/accounts/${accountId}`,
-  getCheckTransactionInExplorerUrl: (transactionHash) => `${config.explorerUrl}/transactions/${transactionHash}`,
+    getCheckAccountInExplorerUrl: (accountId) => `${config.explorerUrl}/accounts/${accountId}`,
+    getCheckTransactionInExplorerUrl: (transactionHash) => `${config.explorerUrl}/transactions/${transactionHash}`,
 });
 
 const getNearConfig = (network = 'testnet') => {

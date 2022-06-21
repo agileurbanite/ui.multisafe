@@ -9,14 +9,11 @@ import {
 import dateFormat from 'dateformat';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
-import { Type } from '../../general/Type/Type';
-import { Status } from './Status/Status';
-import { Recipient } from './Recipient/Recipient';
 import { formatNearBalance } from '../../../../../../utils/format';
+import { Type } from '../../general/Type/Type';
 import { useStyles } from './PendingRequests.styles';
 import { Recipient } from './Recipient/Recipient';
 import { Status } from './Status/Status';
-import { Type } from './Type/Type';
 
 export const PendingRequests = () => {
     const pendingRequests = useStoreState((store) => store.multisafe.dashboard.pendingRequests);
@@ -26,45 +23,45 @@ export const PendingRequests = () => {
 
     const hasActiveRequests = pendingRequests.length > 0;
 
-  return (
-    <>
-      <h2 className={classes.header}>Pending Requests</h2>
-      {hasActiveRequests ? (
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>ID</TableCell>
-                <TableCell>Created At</TableCell>
-                <TableCell>Type</TableCell>
-                <TableCell>Recipient</TableCell>
-                <TableCell>Amount</TableCell>
-                <TableCell>Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {pendingRequests.map((request) => (
-                <TableRow key={request.requestId}>
-                  <TableCell>{request.requestId}</TableCell>
-                  <TableCell>{dateFormat(request.createdAt, 'd mmm yyyy - HH:MM')}</TableCell>
-                  <Type type={request.type} />
-                  <Recipient recipient={request.recipient} />
-                  <TableCell>{formatNearBalance(request.amount)}</TableCell>
-                  <Status
-                    request={request}
-                    onConfirmRequest={onConfirmRequest}
-                    onDeleteRequest={onDeleteRequest}
-                  />
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      ) : (
-        <div className={classes.noRequestsContainer}>
-          <p>No active requests</p>
-        </div>
-      )}
-    </>
-  );
+    return (
+        <>
+            <h2 className={classes.header}>Pending Requests</h2>
+            {hasActiveRequests ? (
+                <TableContainer>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>ID</TableCell>
+                                <TableCell>Created At</TableCell>
+                                <TableCell>Type</TableCell>
+                                <TableCell>Recipient</TableCell>
+                                <TableCell>Amount</TableCell>
+                                <TableCell>Actions</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {pendingRequests.map((request) => (
+                                <TableRow key={request.requestId}>
+                                    <TableCell>{request.requestId}</TableCell>
+                                    <TableCell>{dateFormat(request.createdAt, 'd mmm yyyy - HH:MM')}</TableCell>
+                                    <Type type={request.type} />
+                                    <Recipient recipient={request.recipient} />
+                                    <TableCell>{formatNearBalance(request.amount)}</TableCell>
+                                    <Status
+                                        request={request}
+                                        onConfirmRequest={onConfirmRequest}
+                                        onDeleteRequest={onDeleteRequest}
+                                    />
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            ) : (
+                <div className={classes.noRequestsContainer}>
+                    <p>No active requests</p>
+                </div>
+            )}
+        </>
+    );
 };
