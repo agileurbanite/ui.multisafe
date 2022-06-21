@@ -14,7 +14,7 @@ import { useStyles } from './MakeFunctionCall.styles';
 import { makeFunctionCallSchema } from '../../../../../../../../utils/validation/makeFunctionCallModal';
 
 export const MakeFunctionCall = forwardRef(({ onClose, tabIndex }, ref) => {
-  const onTransferTokens = useStoreActions((actions) => actions.multisafe.onMakeFunctionCall);
+  const onMakeFunctionCall = useStoreActions((actions) => actions.multisafe.onMakeFunctionCall);
   const { control, handleSubmit, errors } = useForm({
     resolver: yupResolver(makeFunctionCallSchema),
     mode: 'all',
@@ -22,7 +22,7 @@ export const MakeFunctionCall = forwardRef(({ onClose, tabIndex }, ref) => {
   const classes = useStyles();
 
   const onSubmit = handleSubmit((data) => {
-    onTransferTokens({ data, onClose });
+    onMakeFunctionCall({ data, onClose });
   });
 
   return (
