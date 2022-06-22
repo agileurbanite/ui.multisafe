@@ -18,6 +18,9 @@ const general = {
         add_and_confirm: '40000000000000', // 40 TGas
         two_calls: '80000000000000', // 80 TGas
         transfer: '0.00000000003', // pass into parseNearAmount
+        storage_deposit: '0.00125', // pass into parseNearAmount
+        storage_deposit_large: '0.0125', // pass into parseNearAmount
+        storage_gas: '0.00000000003', // pass into parseNearAmount
     }
 };
 
