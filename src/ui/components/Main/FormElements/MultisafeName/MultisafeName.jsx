@@ -34,11 +34,6 @@ export const MultisafeName = ({ control, classNames, hasError, errorMessage, edi
                 }}
             />
         </section>
-        {!editVersion && 
-      <Typography className={classNames?.description}>
-        By continuing you consent to the terms of use and privacy policy.
-      </Typography>
-        }
         <ContentSeparator bg="rgba(0, 0, 0, 0.87)" height={1} margin="24px 0" />
     </>
 );

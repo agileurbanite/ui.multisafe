@@ -49,6 +49,11 @@ const styles = {
         width: '100%',
         marginTop: 25,
     },
+    policy: {
+        marginTop: 25,
+        fontSize: 14,
+        textAlign: 'center',
+    },
 };
 
 export const useStyles = makeStyles(styles, { name: 'Form' });

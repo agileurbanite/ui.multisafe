@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
@@ -68,8 +68,11 @@ export const Form = () => {
                 errorMessage={!!errors?.amount && errors?.amount?.message}
             />
             <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
-        Create Multi Safe
+                Create Multi Safe
             </Button>
+            <Typography className={classes.policy}>
+                By continuing you consent to the terms of use and privacy policy.
+            </Typography>
         </form>
     );
 };
