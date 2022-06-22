@@ -2,10 +2,11 @@ import { Buffer } from 'buffer';
 
 import { thunk } from 'easy-peasy';
 
+import { config } from '../../../near/config';
 import { formatTGasValue } from '../../../utils/format';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 
-const ADD_REQUEST_AND_CONFIRM_GAS = '40000000000000'; // TODO: Reference from config
+const ADD_REQUEST_AND_CONFIRM_GAS = config.gas.add_and_confirm;
 
 const addFunctionCallRequest = async ({
     multisafeContract,

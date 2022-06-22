@@ -1,5 +1,6 @@
-import BN from 'bn.js';
 import * as nearApiJs from 'near-api-js';
+
+import { config } from '../near/config';
 
 const {
     utils: {
@@ -15,10 +16,10 @@ export const FT_MINIMUM_STORAGE_BALANCE_LARGE = parseNearAmount('0.0125');
 const FT_STORAGE_DEPOSIT_GAS = parseNearAmount('0.00000000003');
 
 // set this to the same value as we use for creating an account and the remainder is refunded
-const FT_TRANSFER_GAS = parseNearAmount('0.00000000003');
+const FT_TRANSFER_GAS = parseNearAmount(config.gas.transfer);
 
-const ADD_REQUEST_AND_CONFIRM_GAS = new BN('40000000000000');
-const GAS_FOR_TWO_CALLS = new BN('80000000000000');
+const ADD_REQUEST_AND_CONFIRM_GAS = config.gas.add_and_confirm;
+const GAS_FOR_TWO_CALLS = config.gas.two_calls;
 
 // contract might require an attached depositof of at least 1 yoctoNear on transfer methods
 // "This 1 yoctoNEAR is not enforced by this standard, but is encouraged to do. While ability to receive attached deposit is enforced by this token."

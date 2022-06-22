@@ -1,10 +1,10 @@
-import BN from 'bn.js';
 import { thunk } from 'easy-peasy';
 
+import { config } from '../../../near/config';
 import { getRoute } from '../../../ui/config/routes';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 
-const ATTACHED_GAS = new BN('100000000000000');
+const ATTACHED_GAS = config.gas.default;
 
 const serializeData = ({ name, members, num_confirmations }) => ({
     name,

@@ -1,12 +1,12 @@
-import BN from 'bn.js';
 import { thunk } from 'easy-peasy';
 import * as nearApiJs from 'near-api-js';
 
+import { config } from '../../../near/config';
 import FungibleTokens from '../../../services/FungibleTokens';
 import { parseOtherAmount } from '../../../utils/format';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 
-const ATTACHED_GAS = new BN('100000000000000');
+const ATTACHED_GAS = config.gas.default;
 
 const {
     utils: {
