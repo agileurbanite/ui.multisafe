@@ -1,6 +1,7 @@
 import { onConfirmRequest } from './onConfirmRequest';
 import { onDeleteRequest } from './onDeleteRequest';
 import { onEditMultisafe } from './onEditMultisafe';
+import { onMakeFunctionCall } from './onMakeFunctionCall';
 import { onMountDashboard } from './onMountDashboard';
 import { onMountHistory } from './onMountHistory';
 import { onMountList } from './onMountList';
@@ -18,10 +19,11 @@ export const thunks = {
     onMountList,
     onTransferTokens,
     onConfirmRequest,
+    onMakeFunctionCall,
     onDeleteRequest,
     onRemoveLocalMultisafe,
     onEditMultisafe,
     onMountTokenList,
     onMountNonFungibleTokenList,
-    onTransferNFT,
+    onTransferNFT
 };

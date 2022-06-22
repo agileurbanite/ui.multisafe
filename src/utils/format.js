@@ -1,6 +1,8 @@
 import Big from 'big.js';
+import BN from 'bn.js';
 import { utils } from 'near-api-js';
 import * as R from 'ramda';
+
 
 // Space 2 snake case
 export const spaceToSnake = (str) => R.compose(R.join('_'), R.split(' '), R.trim, R.toLower)(str);
@@ -10,3 +12,5 @@ export const formatOtherAmountHumanReadable = ({tokenBalance, decimals}) => `${t
 
 // Convert human readable amount to internal indivisible units
 export const parseOtherAmount = ({decimals = 18}, value) => value && Big(value).times(Big(10).pow(decimals)).toFixed();
+
+export const formatTGasValue = (tGas) => new BN(tGas * 10 ** 12).toString();
