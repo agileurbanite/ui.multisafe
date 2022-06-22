@@ -4,7 +4,7 @@ const styles = (theme) => ({
     container: {
         display: 'grid',
         gridTemplateColumns: '24px auto 24px',
-        gridTemplateRows: '12px auto 12px auto 24px auto',
+        gridTemplateRows: '12px auto 12px auto 24px auto 12px auto',
         gridTemplateAreas: `
       '. . .'
       '. a .'
@@ -12,6 +12,8 @@ const styles = (theme) => ({
       '. b .'
       '. . .'
       '. c .'
+      '. . .'
+      '. d .'
     `,
     },
     tools: {
@@ -59,6 +61,19 @@ const styles = (theme) => ({
         borderRadius: 8,
         userSelect: 'none',
     },
+    addBalance: {
+        gridArea: 'c',
+        height: 34,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 14,
+        fontWeight: 700,
+        letterSpacing: '1.5px',
+        border: '1px solid #ffffff1e',
+        borderRadius: 8,
+        userSelect: 'none',
+    }
 });
 
 export const useStyles = makeStyles(styles, { name: 'Actions' });

@@ -7,7 +7,7 @@ const styles = {
         alignItems: 'center',
     },
     button: {
-        gridArea: 'c',
+        gridArea: 'd',
         height: 36,
     },
 };
