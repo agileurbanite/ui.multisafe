@@ -37,7 +37,7 @@ const addFunctionCallRequest = async ({
     );
 };
 
-const signTxByLedger = async (
+const signTxByLedger = async ({
     multisafeContract,
     withApprove,
     smartContractAddress,
@@ -48,7 +48,7 @@ const signTxByLedger = async (
     tGas,
     state,
     actions
-) => {
+}) => {
     await signTransactionByLedger({
         actionName: methodName,
         state,
@@ -96,7 +96,7 @@ export const onMakeFunctionCall = thunk(async (_, payload, { getStoreState, getS
             deposit,
             tGas
         })
-        : await signTxByLedger(
+        : await signTxByLedger({
             multisafeContract,
             withApprove,
             smartContractAddress,
@@ -107,7 +107,7 @@ export const onMakeFunctionCall = thunk(async (_, payload, { getStoreState, getS
             tGas,
             state,
             actions
-        );
+        });
 
     onClose();
 });
