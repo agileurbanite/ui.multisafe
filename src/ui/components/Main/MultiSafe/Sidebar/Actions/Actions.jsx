@@ -1,5 +1,7 @@
+import { Button } from '@material-ui/core';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
+import { config } from '../../../../../../near/config';
 import { formatNearBalance, formatOtherBalance } from '../../../../../../utils/format';
 import { CopyToClipboard } from '../../general/CopyToClipboard/CopyToClipboard';
 import { OpenInExplorer } from '../../general/OpenInExplorer/OpenInExplorer';
@@ -40,7 +42,24 @@ export const Actions = () => {
                 {fungibleTokens && fungibleTokens.map((token) => <span key={token.name}>{formatOtherBalance(token)}</span>)}
             </div>
 
-            {isMember ? <NewTransaction /> : <div className={classes.readOnly}>READ ONLY</div>}
+            {isMember
+                ? <>
+                    <Button
+                        component="button"
+                        href={`${config.walletUrl}/send-money/${multisafeId}`}
+                        variant='contained'
+                        color='primary'
+                        target="_blank"
+                        className={classes.addBalance}
+                    >
+                        ADD BALANCE
+                    </Button>
+                    <NewTransaction />
+                </>
+                : <div className={classes.readOnly}>
+                    READ ONLY
+                </div>
+            }
         </div>
     );
 };
