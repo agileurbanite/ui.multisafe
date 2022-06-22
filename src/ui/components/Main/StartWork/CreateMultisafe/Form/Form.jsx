@@ -67,12 +67,12 @@ export const Form = () => {
                 hasError={!!errors?.amount}
                 errorMessage={!!errors?.amount && errors?.amount?.message}
             />
-            <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
-                Create Multi Safe
-            </Button>
             <Typography className={classes.policy}>
                 By continuing you consent to the terms of use and privacy policy.
             </Typography>
+            <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
+                Create Multi Safe
+            </Button>
         </form>
     );
 };
