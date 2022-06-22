@@ -1,10 +1,10 @@
 import { Button, Modal, Menu, MenuItem } from '@material-ui/core';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useState } from 'react';
-import { SendFunds } from './SendFunds/SendFunds';
-import { MakeFunctionCall } from './MakeFunctionCall/MakeFunctionCall';
 
+import { MakeFunctionCall } from './MakeFunctionCall/MakeFunctionCall';
 import { useStyles } from './NewTransaction.styles';
+import { SendFunds } from './SendFunds/SendFunds';
 
 const TYPE = {
     SEND_FUNDS: 'sendFunds',
@@ -33,11 +33,11 @@ export const NewTransaction = () => {
         if (type === TYPE.SEND_FUNDS) {
             fetchFungibleTokens(multisafeId);
         }
-    }
+    };
 
     const onCloseTransaction = () => {
         setTransactionType('');
-    }
+    };
 
     return (
         <>

@@ -1,7 +1,7 @@
 import { onConfirmRequest } from './onConfirmRequest';
-import { onMakeFunctionCall } from './onMakeFunctionCall';
 import { onDeleteRequest } from './onDeleteRequest';
 import { onEditMultisafe } from './onEditMultisafe';
+import { onMakeFunctionCall } from './onMakeFunctionCall';
 import { onMountDashboard } from './onMountDashboard';
 import { onMountHistory } from './onMountHistory';
 import { onMountList } from './onMountList';

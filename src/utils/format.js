@@ -1,6 +1,6 @@
 import Big from 'big.js';
-import { utils } from 'near-api-js';
 import BN from 'bn.js';
+import { utils } from 'near-api-js';
 import * as R from 'ramda';
 
 
