@@ -44,6 +44,7 @@ const getRequests = (requestTxs, successTxs, activeRequestIds, deletedRequestIds
                 recipient: args.argsJson.request.receiverId,
                 amount: args.argsJson.request.actions[0].amount,
                 status: deletedRequestIds[requestId] ? 'deleted' : 'completed',
+                transactionHash,
             };
         })
         .filter(({ requestId }) => !activeRequestIds[requestId])

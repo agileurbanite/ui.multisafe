@@ -4,7 +4,7 @@ import { CopyToClipboard } from '../../../general/CopyToClipboard/CopyToClipboar
 import { OpenInExplorer } from '../../../general/OpenInExplorer/OpenInExplorer';
 import { useStyles } from './Recipient.styles';
 
-export const Recipient = ({ recipient }) => {
+export const Recipient = ({ recipient, transactionHash }) => {
     const classes = useStyles();
     return (
         <TableCell>
@@ -15,6 +15,8 @@ export const Recipient = ({ recipient }) => {
             />
             <OpenInExplorer
                 accountId={recipient}
+                type="transaction"
+                transactionHash={transactionHash}
                 classNames={{ iconButton: classes.openInExplorer, icon: classes.icon }}
             />
         </TableCell>

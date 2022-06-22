@@ -27,7 +27,6 @@ export const Actions = () => {
                 <OpenInExplorer
                     classNames={{ iconButton: classes.iconButton, icon: classes.icon }}
                     accountId={multisafeId}
-                    accountType="contract"
                 />
                 <RefreshFungibleTokens
                     classNames={{ iconButton: classes.iconButton, icon: classes.icon }}

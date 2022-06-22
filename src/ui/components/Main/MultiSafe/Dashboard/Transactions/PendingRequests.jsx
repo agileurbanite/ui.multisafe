@@ -10,10 +10,10 @@ import dateFormat from 'dateformat';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 
 import { formatNearBalance } from '../../../../../../utils/format';
+import { Type } from '../../general/Type/Type';
 import { useStyles } from './PendingRequests.styles';
 import { Recipient } from './Recipient/Recipient';
 import { Status } from './Status/Status';
-import { Type } from './Type/Type';
 
 export const PendingRequests = () => {
     const pendingRequests = useStoreState((store) => store.multisafe.dashboard.pendingRequests);
@@ -44,7 +44,7 @@ export const PendingRequests = () => {
                                 <TableRow key={request.requestId}>
                                     <TableCell>{request.requestId}</TableCell>
                                     <TableCell>{dateFormat(request.createdAt, 'd mmm yyyy - HH:MM')}</TableCell>
-                                    <Type />
+                                    <Type type={request.type} />
                                     <Recipient recipient={request.recipient} />
                                     <TableCell>{formatNearBalance(request.amount)}</TableCell>
                                     <Status

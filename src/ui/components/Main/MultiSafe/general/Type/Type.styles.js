@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const styles = (theme) => ({
+const styles = () => ({
     container: {
         display: 'flex',
         alignItems: 'center',
@@ -8,7 +8,6 @@ const styles = (theme) => ({
     icon: {
         height: 18,
         width: 18,
-        color: theme.colors.red,
         marginRight: 9,
     },
 });

@@ -12,7 +12,6 @@ export const Actions = ({ accountId }) => {
                 <OpenInExplorer
                     classNames={{ icon: classes.icon }}
                     accountId={accountId}
-                    accountType="account"
                 />
             </div>
         </div>

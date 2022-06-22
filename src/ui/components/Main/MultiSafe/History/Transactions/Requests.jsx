@@ -10,10 +10,10 @@ import dateFormat from 'dateformat';
 import { useStoreState } from 'easy-peasy';
 
 import { formatNearBalance } from '../../../../../../utils/format';
+import { Type } from '../../general/Type/Type';
 import { Recipient } from './Recipient/Recipient';
 import { useStyles } from './Requests.styles';
 import { Status } from './Status/Status';
-import { Type } from './Type/Type';
 
 export const Requests = () => {
     const requests = useStoreState((store) => store.multisafe.history.requests);
@@ -42,8 +42,8 @@ export const Requests = () => {
                                 <TableRow key={request.requestId}>
                                     <TableCell>{request.requestId}</TableCell>
                                     <TableCell>{dateFormat(request.createdAt, 'd mmm yyyy - HH:MM')}</TableCell>
-                                    <Type />
-                                    <Recipient recipient={request.recipient} />
+                                    <Type type={request.type} />
+                                    <Recipient recipient={request.recipient} transactionHash={request.transactionHash} />
                                     <TableCell>{formatNearBalance(request.amount)}</TableCell>
                                     <Status status={request.status} />
                                 </TableRow>
