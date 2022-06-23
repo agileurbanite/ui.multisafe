@@ -31,7 +31,7 @@ export const Status = ({ request, onConfirmRequest, onDeleteRequest }) => {
         return () => {
             clearTimeout(timeout);
         };
-    }, []);
+    }, [isMember, canDelete, createdAt]);
 
     const confirmRequest = () => onConfirmRequest({ requestId });
     const deleteRequest = () => onDeleteRequest({ requestId });

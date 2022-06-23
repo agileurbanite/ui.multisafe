@@ -13,7 +13,7 @@ export const Initializer = ({ store, history, children }) => {
             await store.persist.resolveRehydration();
             await actions.general.onInitApp({ history, setInit });
         })();
-    }, []);
+    }, [actions.general, history, store.persist]);
 
     return isInit ? cloneElement(children, { history }) : <Loader />;
 };
