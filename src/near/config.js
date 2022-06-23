@@ -17,10 +17,10 @@ const general = {
         default: '100000000000000', // 100 TGas
         add_and_confirm: '40000000000000', // 40 TGas
         two_calls: '80000000000000', // 80 TGas
-        transfer: '0.00000000003', // pass into parseNearAmount
-        storage_deposit: '0.00125', // pass into parseNearAmount
-        storage_deposit_large: '0.0125', // pass into parseNearAmount
-        storage_gas: '0.00000000003', // pass into parseNearAmount
+        transfer: '30000000000000', // 30 TGas
+        storage_deposit: '1250000000000000000000', // yoctoNear
+        storage_deposit_large: '12500000000000000000000', // yoctoNear: nUSDC, nUSDT require minimum 0.0125 NEAR. Came to this conclusion using trial and error.
+        storage_gas: '30000000000000', // 30 TGas
     }
 };
 

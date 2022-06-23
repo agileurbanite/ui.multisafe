@@ -2,15 +2,7 @@ import * as nearApiJs from 'near-api-js';
 
 import { config } from '../near/config';
 
-const {
-    utils: {
-        format: { parseNearAmount },
-    },
-} = nearApiJs;
-
-// set this to the same value as we use for creating an account and the remainder is refunded
-const NFT_TRANSFER_GAS = parseNearAmount(config.gas.transfer);
-
+const NFT_TRANSFER_GAS = config.gas.transfer;
 const ADD_REQUEST_AND_CONFIRM_GAS = config.gas.add_and_confirm;
 
 // contract might require an attached depositof of at least 1 yoctoNear on transfer methods
