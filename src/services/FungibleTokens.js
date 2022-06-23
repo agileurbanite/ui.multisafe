@@ -2,22 +2,10 @@ import * as nearApiJs from 'near-api-js';
 
 import { config } from '../near/config';
 
-const {
-    utils: {
-        format: { parseNearAmount },
-    },
-} = nearApiJs;
-
-// account creation costs 0.00125 NEAR for storage, 0.00000000003 NEAR for gas
-// https://docs.near.org/docs/api/naj-cookbook#wrap-and-unwrap-near
-const FT_MINIMUM_STORAGE_BALANCE = parseNearAmount(config.gas.storage_deposit);
-// FT_MINIMUM_STORAGE_BALANCE: nUSDC, nUSDT require minimum 0.0125 NEAR. Came to this conclusion using trial and error.
-export const FT_MINIMUM_STORAGE_BALANCE_LARGE = parseNearAmount(config.gas.storage_deposit_large);
-const FT_STORAGE_DEPOSIT_GAS = parseNearAmount(config.gas.storage_gas);
-
-// set this to the same value as we use for creating an account and the remainder is refunded
-const FT_TRANSFER_GAS = parseNearAmount(config.gas.transfer);
-
+const FT_MINIMUM_STORAGE_BALANCE = config.gas.storage_deposit;
+const FT_MINIMUM_STORAGE_BALANCE_LARGE = config.gas.storage_deposit_large;
+const FT_STORAGE_DEPOSIT_GAS = config.gas.storage_gas;
+const FT_TRANSFER_GAS = config.gas.transfer;
 const ADD_REQUEST_AND_CONFIRM_GAS = config.gas.add_and_confirm;
 const GAS_FOR_TWO_CALLS = config.gas.two_calls;
 
