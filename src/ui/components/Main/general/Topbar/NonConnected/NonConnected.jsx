@@ -4,6 +4,7 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { useWalletSelector } from '../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { ConnectWallet } from '../../../../general/ConnectWallet/ConnectWallet';
 import { useStyles } from './NonConnected.styles';
 
@@ -14,7 +15,15 @@ export const NonConnected = () => {
     const history = useHistory();
     const classes = useStyles();
 
-    const disconnect = () => onDisconnect({ history });
+    const { selector } = useWalletSelector();
+    const { selectedWalletId } = selector.store.getState();
+
+    const disconnect = async () => {
+        const wallet = await selector.wallet(selectedWalletId);
+        wallet.signOut();
+        onDisconnect({ history });
+    };
+
     const openConnectWallet = () => setOpenConnectWallet(true);
 
     return (

@@ -3,6 +3,7 @@ import { useStoreActions } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
+import { useWalletSelector } from '../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import FormButton from '../../../FormElements/FormButton/FormButton';
 import { useStyles } from './Form.styles';
 
@@ -10,6 +11,8 @@ export const FormDisconnect = () => {
     const history = useHistory();
     const classes = useStyles();
     const onDisconnect = useStoreActions((actions) => actions.general.onDisconnect);
+    const { selector } = useWalletSelector();
+    const { selectedWalletId } = selector.store.getState();
 
     const {
         handleSubmit,
@@ -17,7 +20,11 @@ export const FormDisconnect = () => {
         mode: 'all',
     });
 
-    const onSubmit = handleSubmit(() => onDisconnect({ history }));
+    const onSubmit = handleSubmit(async () => {
+        const wallet = await selector.wallet(selectedWalletId);
+        wallet.signOut();
+        onDisconnect({ history });
+    });
 
     return (
         <form autoComplete="off" className={classes.form} onSubmit={onSubmit}>
