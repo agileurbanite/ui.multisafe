@@ -1,17 +1,35 @@
 import { Button } from '@material-ui/core';
-import { useState } from 'react';
+import { useStoreActions } from 'easy-peasy';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router';
 
 import logo from '../../images/logo/logo-white.svg';
 import laptop from '../../images/welcome-page/laptop@2x.png';
-import { ConnectWallet } from '../general/ConnectWallet/ConnectWallet';
+import { useWalletSelector } from '../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { Footer } from '../general/Footer/Footer';
 import { useStyles } from './Welcome.styles';
 
 export const Welcome = () => {
-    const [isOpenConnectWallet, setOpenConnectWallet] = useState(false);
     const classes = useStyles();
+    const { modal, selector, accountId } = useWalletSelector();
+    const openConnectWallet = () => modal.show();  
 
-    const openConnectWallet = () => setOpenConnectWallet(true);
+    const signedIn = selector.isSignedIn();
+    const onConnectSuccess = useStoreActions((actions) => actions.general.setUserData);
+    const history = useHistory();
+
+    useEffect(() => {
+        if (signedIn) {
+            const { selectedWalletId } = selector.store.getState();
+            onConnectSuccess({
+                accountId,
+                isConnected: true,
+                walletType: selectedWalletId,
+                publicKey: null,
+            });
+            history.push('/get-started');
+        }
+    }, signedIn);
 
     return (
         <>
@@ -48,7 +66,6 @@ export const Welcome = () => {
                 <img className={classes.laptop} src={laptop} alt="laptop with multisafe app" />
                 <Footer classNames={{ container: classes.footer }} variant="dark" />
             </div>
-            {isOpenConnectWallet && <ConnectWallet setModalOpen={setOpenConnectWallet} />}
         </>
     );
 };

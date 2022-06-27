@@ -6,7 +6,7 @@ import { LedgerSigner } from '../../../../near/LedgerSigner';
 const { networkId, nodeUrl, walletUrl, archivalRpcUrl } = config;
 
 const getNearConnectConfig = ({ connectionType, getStoreState }) => {
-    if (connectionType === 'rpc_near-wallet')
+    if (connectionType === 'rpc_near-wallet' || connectionType === 'rpc_my-near-wallet')
         return {
             networkId,
             nodeUrl,
