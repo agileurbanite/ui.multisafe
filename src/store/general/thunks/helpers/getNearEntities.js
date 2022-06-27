@@ -51,7 +51,7 @@ export const getNearEntities = async (getStoreState) => {
         }),
     );
 
-    const wallet = walletType === 'near-wallet' ? new WalletConnection(near, 'multisafe') : null;
+    const wallet = walletType === 'near-wallet' ? new WalletConnection(near, 'near_app') : null;
 
     return {
         near,

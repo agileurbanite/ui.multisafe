@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core';
-import { useStoreActions } from 'easy-peasy';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 
@@ -12,14 +12,15 @@ import { useStyles } from './Welcome.styles';
 export const Welcome = () => {
     const classes = useStyles();
     const { modal, selector, accountId } = useWalletSelector();
-    const openConnectWallet = () => modal.show();  
+    const openConnectWallet = () => modal.show();
 
     const signedIn = selector.isSignedIn();
     const onConnectSuccess = useStoreActions((actions) => actions.general.setUserData);
     const history = useHistory();
+    const multisafeId = useStoreState((state) => state.multisafe.general.multisafeId);
 
-    useEffect(() => {
-        if (signedIn) {
+    useEffect(() => {   
+        if (signedIn && !multisafeId) {
             const { selectedWalletId } = selector.store.getState();
             onConnectSuccess({
                 accountId,
@@ -29,7 +30,7 @@ export const Welcome = () => {
             });
             history.push('/get-started');
         }
-    }, signedIn);
+    }, [signedIn]);
 
     return (
         <>
