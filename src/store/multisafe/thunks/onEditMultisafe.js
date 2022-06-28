@@ -13,7 +13,7 @@ const serializeData = ({ name, members, num_confirmations }) => ({
     members: members.map(({ account_id }) => ({ account_id })),
 });
 
-const generateConfirmationsActions = (values) => values.numConfirmations
+const generateConfirmationsActions = (values, numConfirmations) => values.numConfirmations !== numConfirmations
     ? [{ type: 'SetNumConfirmations', num_confirmations: values.numConfirmations }]
     : [];
 
