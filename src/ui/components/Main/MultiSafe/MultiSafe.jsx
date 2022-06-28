@@ -9,6 +9,7 @@ import { Disconnect } from './EditMultisafe/Disconnect';
 import { EditConfirmations } from './EditMultisafe/EditConfirmations';
 import { EditMembers } from './EditMultisafe/EditMembers';
 import { EditName } from './EditMultisafe/EditName';
+import { EditSafe } from './EditMultisafe/EditSafe';
 import { Remove } from './EditMultisafe/Remove';
 import { History } from './History/History';
 import { Members } from './Members/Members';
@@ -41,6 +42,7 @@ export const MultiSafe = () => {
                     <Route exact path={routes.remove} component={Remove} />
                     <Route exact path={routes.disconnect} component={Disconnect} />
                     <Route exact path={routes.nonFungibleTokens} component={NonFungibleTokens} />
+                    <Route exact path={routes.safeEdit} component={EditSafe} />
                 </Switch>
                 <Footer />
             </div>
