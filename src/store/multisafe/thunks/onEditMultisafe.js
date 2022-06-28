@@ -1,5 +1,6 @@
 import { thunk } from 'easy-peasy';
 
+import { redirectActions } from '../../../config/redirectActions';
 import { config } from '../../../near/config';
 import { getRoute } from '../../../ui/config/routes';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
@@ -90,26 +91,63 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
     const isNearWallet = state.general.selectors.isNearWallet;
     const contract = state.multisafe.entities.contract;
     const members = state.multisafe.members;
+    const name = state.multisafe.general.name;
     const numConfirmations = state.multisafe.general.numConfirmations;
     const multisafeId = state.multisafe.general.multisafeId;
 
     const membersActions = generateMembersActions(values, members);
-    const confirmationsActions = generateConfirmationsActions(values);
+    const confirmationsActions = generateConfirmationsActions(values, numConfirmations);
 
-    if (values.numConfirmations === numConfirmations) {
+    if (
+        values.numConfirmations === numConfirmations
+        && !membersActions.length
+        && values.name === name
+    ) {
         return;
     }
 
-    if (!values.numConfirmations && !membersActions.length) {
-        return;
+    if (!!confirmationsActions.length && !!confirmationsActions.length) {
+        const method = 'add_request_and_confirm';
+
+        actions.general.setTemporaryData({
+            redirectAction: redirectActions.batchRequest,
+            multisafeId: multisafeId,
+            batchRequest: {
+                args: {
+                    args: {
+                        request: {
+                            receiver_id: contract.contractId,
+                            actions: confirmationsActions,
+                        },
+                    },
+                    gas: ATTACHED_GAS,
+                    callbackUrl: `${window.location.origin}${getRoute.dashboard(multisafeId)}`
+                },
+                method
+            },
+        });
+
+        const args = {
+            args: {
+                request: {
+                    receiver_id: contract.contractId,
+                    actions: membersActions,
+                },
+            },
+            gas: ATTACHED_GAS,
+            callbackUrl: getRoute.callbackUrl({ redirectAction: redirectActions.batchRequest }),
+        };
+
+        return contract[method](args);
+
+    } else {
+        const contractActions = [
+            ...confirmationsActions,
+            ...membersActions
+        ];
+
+        isNearWallet
+            ? addEditRequest(contract, contractActions)
+            : await signTxByLedger(contract, contractActions, actions, multisafeId, state, history);
     }
-
-    const contractActions = [
-        ...confirmationsActions,
-        ...membersActions
-    ];
-
-    isNearWallet
-        ? addEditRequest(contract, contractActions)
-        : await signTxByLedger(contract, contractActions, actions, multisafeId, state, history);
 });
