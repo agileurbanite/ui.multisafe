@@ -18,7 +18,6 @@ const generateConfirmationsActions = (values, numConfirmations) => values.numCon
     : [];
 
 const generateMembersActions = (values, currentMembers) => {
-
     const currentMembersIds = currentMembers.map(({ accountId }) => accountId);
     const membersIds = values.members?.map(({ account_id }) => account_id) || [];
 
@@ -52,7 +51,7 @@ const generateMembersActions = (values, currentMembers) => {
     ];
 };
 
-const addEditRequest = (contract, contractActions) => {
+const addEditRequest = (contract, contractActions, callbackUrl) => {
     const method = 'add_request_and_confirm';
 
     const args = {
@@ -63,7 +62,7 @@ const addEditRequest = (contract, contractActions) => {
             },
         },
         gas: ATTACHED_GAS,
-        callbackUrl: `${window.location.origin}${getRoute.dashboard(contract.contractId)}`
+        callbackUrl
     };
 
     return contract[method](args);
@@ -80,6 +79,51 @@ const signTxByLedger = async (contract, contractActions, actions, multisafeId, s
             history.push(getRoute.dashboard(multisafeId));
         },
     });
+};
+
+const signBatchTxByLedger = async (contract, confirmationsActions, membersActions, actions, multisafeId, state, history) => {
+    await signTransactionByLedger({
+        actionName: 'Edit Multi Safe',
+        state,
+        actions,
+        contractMethod: () => addEditRequest(contract, membersActions)
+    });
+
+    await signTransactionByLedger({
+        actionName: 'Edit Multi Safe',
+        state,
+        actions,
+        contractMethod: () => addEditRequest(contract, confirmationsActions),
+        callback: async () => {
+            await actions.multisafe.onMountDashboard(multisafeId);
+            history.push(getRoute.dashboard(multisafeId));
+        },
+    });
+};
+
+const prepareBatchRequest = (contract, confirmationsActions, membersActions, actions) => {
+    const method = 'add_request_and_confirm';
+
+    actions.general.setTemporaryData({
+        redirectAction: redirectActions.batchRequest,
+        multisafeId: contract.contractId,
+        batchRequest: {
+            args: {
+                args: {
+                    request: {
+                        receiver_id: contract.contractId,
+                        actions: confirmationsActions,
+                    },
+                },
+                gas: ATTACHED_GAS,
+                callbackUrl: `${window.location.origin}${getRoute.dashboard(contract.contractId)}`
+            },
+            method
+        },
+    });
+
+    const callbackUrl = getRoute.callbackUrl({ redirectAction: redirectActions.batchRequest });
+    addEditRequest(contract, membersActions, callbackUrl);
 };
 
 export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
@@ -99,56 +143,38 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
     const membersActions = generateMembersActions(values, members);
     const confirmationsActions = generateConfirmationsActions(values, numConfirmations);
 
-    if (
-        values.numConfirmations === numConfirmations
-        && !membersActions.length
-        && values.name === name
-    ) {
+    const nameChanged = values.name !== name;
+    const membersChanged = !!membersActions.length;
+    const confirmationsChanged = !!confirmationsActions.length;
+    const nothingChanged = !nameChanged && !membersChanged && !confirmationsChanged;
+    const onlyNameChanged = nameChanged && !membersChanged && !confirmationsChanged;
+
+    if (nothingChanged) {
         return;
     }
 
-    if (!!confirmationsActions.length && !!confirmationsActions.length) {
-        const method = 'add_request_and_confirm';
+    if (nameChanged) {
+        actions.multisafe.changeMultisafeName({ multisafeId, data });
+    }
 
-        actions.general.setTemporaryData({
-            redirectAction: redirectActions.batchRequest,
-            multisafeId: multisafeId,
-            batchRequest: {
-                args: {
-                    args: {
-                        request: {
-                            receiver_id: contract.contractId,
-                            actions: confirmationsActions,
-                        },
-                    },
-                    gas: ATTACHED_GAS,
-                    callbackUrl: `${window.location.origin}${getRoute.dashboard(multisafeId)}`
-                },
-                method
-            },
-        });
-
-        const args = {
-            args: {
-                request: {
-                    receiver_id: contract.contractId,
-                    actions: membersActions,
-                },
-            },
-            gas: ATTACHED_GAS,
-            callbackUrl: getRoute.callbackUrl({ redirectAction: redirectActions.batchRequest }),
-        };
-
-        return contract[method](args);
-
-    } else {
+    if (onlyNameChanged) {
+        history.push(getRoute.dashboard(multisafeId));
+        return;
+    }
+    
+    if (membersChanged && confirmationsChanged) {
+        isNearWallet
+            ? prepareBatchRequest(contract, confirmationsActions, membersActions, actions)
+            : await signBatchTxByLedger(contract, confirmationsActions, membersActions, actions, multisafeId, state, history);
+    } else if (membersChanged || confirmationsChanged) {
         const contractActions = [
             ...confirmationsActions,
             ...membersActions
         ];
+        const callbackUrl = `${window.location.origin}${getRoute.dashboard(contract.contractId)}`;
 
         isNearWallet
-            ? addEditRequest(contract, contractActions)
+            ? addEditRequest(contract, contractActions, callbackUrl)
             : await signTxByLedger(contract, contractActions, actions, multisafeId, state, history);
     }
 });
