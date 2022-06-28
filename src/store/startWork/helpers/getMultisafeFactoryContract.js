@@ -9,7 +9,7 @@ export const getMultisafeFactoryContract = (state) => {
     const wallet = state.general.entities.wallet;
 
     const account =
-    walletType === 'near-wallet' ? wallet.account() : new Account(near.connection, accountId);
+    walletType === 'my-near-wallet' ? wallet.account() : new Account(near.connection, accountId);
 
     return new Contract(account, config.multisafeFactoryId, {
         viewMethods: [],
