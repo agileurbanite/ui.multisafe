@@ -27,6 +27,7 @@ export const App = () => (
                     routes.remove,
                     routes.disconnect,
                     routes.nonFungibleTokens,
+                    routes.safeEdit
                 ]}
                 component={Main}
             />
