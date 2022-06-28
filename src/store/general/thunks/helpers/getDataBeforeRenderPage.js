@@ -12,7 +12,8 @@ const {
     editName,
     remove,
     disconnect,
-    nonFungibleTokens
+    nonFungibleTokens,
+    safeEdit
 } = routes;
 
 export const getDataBeforeRenderPage = async ({
@@ -39,6 +40,7 @@ export const getDataBeforeRenderPage = async ({
         remove,
         disconnect,
         nonFungibleTokens,
+        safeEdit
     ]);
 
     if (!match) return;
@@ -85,6 +87,10 @@ export const getDataBeforeRenderPage = async ({
     if (ifRouteIs(nonFungibleTokens)) {
         await onMountDashboard(multisafeId);
         await onMountNonFungibleTokenList(multisafeId);
+    }
+
+    if (ifRouteIs(safeEdit)) {
+        await onMountMultisafe({ multisafeId });
     }
 
     withLoading && disableLoading();
