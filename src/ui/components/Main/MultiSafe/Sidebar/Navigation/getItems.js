@@ -30,6 +30,10 @@ const items = [
         getPath: getRoute.membersEdit,
         icon: Settings,
         subItems: [{
+            name: 'Edit Safe',
+            route: routes.safeEdit,
+            getPath: getRoute.safeEdit
+        }, {
             name: 'Edit Members',
             route: routes.membersEdit,
             getPath: getRoute.membersEdit

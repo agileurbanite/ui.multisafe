@@ -29,7 +29,8 @@ export const Main = () => (
                     routes.editName,
                     routes.remove,
                     routes.disconnect,
-                    routes.nonFungibleTokens
+                    routes.nonFungibleTokens,
+                    routes.safeEdit
                 ]}
                 component={MultiSafe}
             />
