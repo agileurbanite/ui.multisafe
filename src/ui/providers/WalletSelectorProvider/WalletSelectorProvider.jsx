@@ -47,7 +47,7 @@ export const WalletSelectorContextProvider = ({ children }) => {
 
     const init = useCallback(async () => {
         const _selector = await setupWalletSelector({
-            network: 'testnet',
+            network: config.networkId,
             debug: true,
             modules: [
                 setupNearWallet({
