@@ -62,3 +62,28 @@ export const EditMembersPage = yup.object().shape({
 export const EditConfirmationsPage = yup.object().shape({
     num_confirmations: yup.string().required(requiredMessageType.num_confirmations),
 });
+
+
+export const EditSafeSchema = yup.object().shape({
+    name: yup.string().required(requiredMessageType.name),
+    members: yup
+        .array()
+        .of(
+            yup.object().shape({
+                account_id: yup
+                    .string()
+                    .required(requiredMessageType.account_id)
+                    .matches(patterns.memberAddress, validationMessageType.account_id)
+                    .test({
+                        message: 'Oops! The user is not found :(',
+                        test: async (e) => {
+                            const res = await isUserExist(e);
+                            return res;
+                        },
+                    }),
+            }),
+        )
+        .required(requiredMessageType.members)
+        .min(1, validationMessageType.members),
+    num_confirmations: yup.string().required(requiredMessageType.num_confirmations)
+});
