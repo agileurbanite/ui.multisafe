@@ -7,11 +7,40 @@ import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 
 const ATTACHED_GAS = config.gas.default;
 
+const prepareRequestArgs = ({
+    receiver_id,
+    actions,
+    gas,
+    callbackUrl
+}) => ({
+    args: {
+        request: {
+            receiver_id,
+            actions,
+        },
+    },
+    gas,
+    callbackUrl
+});
+
 const serializeData = ({ name, members, num_confirmations }) => ({
     name,
     numConfirmations: Number(num_confirmations),
     members: members.map(({ account_id }) => ({ account_id })),
 });
+
+const addEditRequest = (contract, contractActions, callbackUrl) => {
+    const method = 'add_request_and_confirm';
+
+    const args = prepareRequestArgs({
+        receiver_id: contract.contractId,
+        actions: contractActions,
+        gas: ATTACHED_GAS,
+        callbackUrl
+    });
+
+    return contract[method](args);
+};
 
 const generateConfirmationsActions = (values, numConfirmations) => values.numConfirmations !== numConfirmations
     ? [{ type: 'SetNumConfirmations', num_confirmations: values.numConfirmations }]
@@ -49,23 +78,6 @@ const generateMembersActions = (values, currentMembers) => {
         ...addMembersActions,
         ...deleteMembersActions
     ];
-};
-
-const addEditRequest = (contract, contractActions, callbackUrl) => {
-    const method = 'add_request_and_confirm';
-
-    const args = {
-        args: {
-            request: {
-                receiver_id: contract.contractId,
-                actions: contractActions,
-            },
-        },
-        gas: ATTACHED_GAS,
-        callbackUrl
-    };
-
-    return contract[method](args);
 };
 
 const signTxByLedger = async (contract, contractActions, actions, multisafeId, state, history) => {
@@ -108,16 +120,12 @@ const prepareBatchRequest = (contract, confirmationsActions, membersActions, act
         redirectAction: redirectActions.batchRequest,
         multisafeId: contract.contractId,
         batchRequest: {
-            args: {
-                args: {
-                    request: {
-                        receiver_id: contract.contractId,
-                        actions: confirmationsActions,
-                    },
-                },
+            args: prepareRequestArgs({
+                receiver_id: contract.contractId,
+                actions: confirmationsActions,
                 gas: ATTACHED_GAS,
                 callbackUrl: `${window.location.origin}${getRoute.dashboard(contract.contractId)}`
-            },
+            }),
             method
         },
     });
@@ -148,6 +156,7 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
     const confirmationsChanged = !!confirmationsActions.length;
     const nothingChanged = !nameChanged && !membersChanged && !confirmationsChanged;
     const onlyNameChanged = nameChanged && !membersChanged && !confirmationsChanged;
+    const isBatchedRequest = membersChanged && confirmationsChanged;
 
     if (nothingChanged) {
         return;
@@ -161,20 +170,22 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
         history.push(getRoute.dashboard(multisafeId));
         return;
     }
-    
-    if (membersChanged && confirmationsChanged) {
+
+    if (isBatchedRequest) {
         isNearWallet
             ? prepareBatchRequest(contract, confirmationsActions, membersActions, actions)
             : await signBatchTxByLedger(contract, confirmationsActions, membersActions, actions, multisafeId, state, history);
-    } else if (membersChanged || confirmationsChanged) {
-        const contractActions = [
-            ...confirmationsActions,
-            ...membersActions
-        ];
-        const callbackUrl = `${window.location.origin}${getRoute.dashboard(contract.contractId)}`;
+        return;
+    } 
 
-        isNearWallet
-            ? addEditRequest(contract, contractActions, callbackUrl)
-            : await signTxByLedger(contract, contractActions, actions, multisafeId, state, history);
-    }
+    // single request
+    const contractActions = [
+        ...confirmationsActions,
+        ...membersActions
+    ];
+    const callbackUrl = `${window.location.origin}${getRoute.dashboard(contract.contractId)}`;
+
+    isNearWallet
+        ? addEditRequest(contract, contractActions, callbackUrl)
+        : await signTxByLedger(contract, contractActions, actions, multisafeId, state, history);
 });
