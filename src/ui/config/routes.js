@@ -18,6 +18,7 @@ export const routes = {
     remove: '/multisafe/:multisafeId/remove',
     disconnect: '/multisafe/:multisafeId/disconnect',
     nonFungibleTokens: '/multisafe/:multisafeId/nonFungibleTokens',
+    safeEdit: '/multisafe/:multisafeId/edit-safe'
 };
 
 export const getRoute = {
@@ -31,4 +32,5 @@ export const getRoute = {
     editName: (multisafeId) => `/multisafe/${multisafeId}/edit-name`,
     remove: (multisafeId) => `/multisafe/${multisafeId}/remove`,
     disconnect: (multisafeId) => `/multisafe/${multisafeId}/disconnect`,
+    safeEdit: (multisafeId) => `/multisafe/${multisafeId}/edit-safe`,
 };
