@@ -62,7 +62,8 @@ const addEditRequest = (contract, contractActions) => {
                 actions: contractActions,
             },
         },
-        gas: ATTACHED_GAS
+        gas: ATTACHED_GAS,
+        callbackUrl: `${window.location.origin}${getRoute.dashboard(contract.contractId)}`
     };
 
     return contract[method](args);
