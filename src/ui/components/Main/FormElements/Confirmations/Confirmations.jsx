@@ -6,8 +6,7 @@ import { ContentSeparator } from '../../../general/ContentSeparator/ContentSepar
 import { BulletHeading } from '../../general/BulletHeading/BulletHeading';
 
 export const Confirmations = ({ control, classNames, hasError, errorMessage }) => {
-    const watchedMembers =
-    useWatch({
+    const watchedMembers = useWatch({
         control,
         name: 'members',
     }) || [];
