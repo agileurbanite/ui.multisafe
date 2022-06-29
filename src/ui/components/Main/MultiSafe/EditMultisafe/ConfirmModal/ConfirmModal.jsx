@@ -8,14 +8,18 @@ import { useStyles } from './ConfirmModal.styles';
 export const ConfirmModal = ({
     isOpenConfirmModal,
     closeRemoveModal,
-    formData
+    formData,
+    requests
 }) => {
     const classes = useStyles();
     const history = useHistory();
 
     const onEditMultisafe = useStoreActions((actions) => actions.multisafe.onEditMultisafe);
+    const onConfirmBatchRequest = useStoreActions((actions) => actions.multisafe.onConfirmBatchRequest);
 
-    const onConfirm = () => onEditMultisafe({ data: formData, history });
+    const onConfirm = () => formData
+        ? onEditMultisafe({ data: formData, history })
+        : onConfirmBatchRequest({ requests });
 
     return (
         <Modal
