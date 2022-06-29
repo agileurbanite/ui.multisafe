@@ -1,6 +1,8 @@
 import { thunk } from 'easy-peasy';
 
+import { redirectActions } from '../../../config/redirectActions';
 import { config } from '../../../near/config';
+import { getRoute } from '../../../ui/config/routes';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 
 const ATTACHED_GAS = config.gas.default;
@@ -85,4 +87,19 @@ export const onConfirmRequest = thunk(async (_, payload, { getStoreState, getSto
     isNearWallet
         ? signTxByNearWallet(contract, requestId)
         : await signTxByLedger(contract, requestId, multisafeId, state, actions);
+});
+
+export const onConfirmBatchRequest = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
+    const { requests } = payload;
+
+    const state = getStoreState();
+    const isNearWallet = state.general.selectors.isNearWallet;
+    const contract = state.multisafe.entities.contract;
+    const multisafeId = state.multisafe.general.multisafeId;
+
+    const actions = getStoreActions();
+
+    isNearWallet
+        ? prepareBatchConfirmation({ contract, requests, actions })
+        : await signBatchConfirmByLedger({ contract, requests, multisafeId, state, actions });
 });
