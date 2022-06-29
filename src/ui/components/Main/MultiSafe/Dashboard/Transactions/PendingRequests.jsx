@@ -15,7 +15,7 @@ import { formatNearBalance } from '../../../../../../utils/format';
 import { Type } from '../../general/Type/Type';
 import { useStyles } from './PendingRequests.styles';
 import { Recipient } from './Recipient/Recipient';
-// import { BatchStatus } from './Status/BatchStatus';
+import { BatchStatus } from './Status/BatchStatus';
 import { Status } from './Status/Status';
 
 export const PendingRequests = () => {
@@ -63,6 +63,8 @@ export const PendingRequests = () => {
         toggleBatchRequestView();
     };
 
+    console.log('requestsList', requestsList);
+
     return (
         <>
             <div className={classes.header}>
@@ -98,13 +100,11 @@ export const PendingRequests = () => {
                                 ? (
                                     <Fragment key={`batch-${i}`}>
                                         <TableRow className={classes.batchRequest}>
-                                            <TableCell colSpan={2}>Batch Request</TableCell>
-                                            <TableCell colSpan={4}>We recognize these two requests as a Batch Request, please confirm in the shown order</TableCell>
-                                            {/* <BatchStatus
-                                                request={request.requests[0]}
-                                                onConfirmRequest={onConfirmRequest}
-                                                onDeleteRequest={onDeleteRequest}
-                                            /> */}
+                                            <TableCell colSpan={2} className={classes.bold}>Batch Request</TableCell>
+                                            <TableCell colSpan={3} className={classes.gray}>We recognize these two requests as a Batch Request, please confirm in the shown order</TableCell>
+                                            <BatchStatus
+                                                requests={request.requests}
+                                            />
                                         </TableRow>
                                         {request.requests.map((request) => (
                                             <TableRow key={request.requestId} className={classes.batchRequest}>
@@ -115,7 +115,6 @@ export const PendingRequests = () => {
                                                 <TableCell>{formatNearBalance(request.amount)}</TableCell>
                                                 <Status
                                                     request={request}
-                                                    onConfirmRequest={onConfirmRequest}
                                                     onDeleteRequest={onDeleteRequest}
                                                 />
                                             </TableRow>
