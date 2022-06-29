@@ -20,4 +20,10 @@ export const handleRedirectFromWallet = async (state, actions, history) => {
         const contract = getMultisafeContract(state, multisafeId);
         contract[method](args);
     }
+
+    if (redirectAction === redirectActions.batchConfirm) {
+        const { multisafeId, batchConfirm: { args } } = state.general.temporary;
+        const contract = getMultisafeContract(state, multisafeId);
+        contract.confirm(args);
+    }
 };
