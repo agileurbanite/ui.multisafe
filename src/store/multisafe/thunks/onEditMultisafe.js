@@ -189,3 +189,22 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
         ? addEditRequest(contract, contractActions, callbackUrl)
         : await signTxByLedger(contract, contractActions, actions, multisafeId, state, history);
 });
+
+export const isBatchRequest = thunk(async (_, payload, { getStoreState }) => {
+    const { data } = payload;
+
+    const state = getStoreState();
+    const values = serializeData(data);
+  
+    const members = state.multisafe.members;
+    const numConfirmations = state.multisafe.general.numConfirmations;
+
+    const membersActions = generateMembersActions(values, members);
+    const confirmationsActions = generateConfirmationsActions(values, numConfirmations);
+
+    const membersChanged = !!membersActions.length;
+    const confirmationsChanged = !!confirmationsActions.length;
+    const isBatchRequest = membersChanged && confirmationsChanged;
+
+    return isBatchRequest;
+});
