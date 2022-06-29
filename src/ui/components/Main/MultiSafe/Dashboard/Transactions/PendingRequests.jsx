@@ -23,6 +23,18 @@ export const PendingRequests = () => {
 
     const hasActiveRequests = pendingRequests.length > 0;
 
+    const isBatchRequest = (candidate, newRequest) => {
+        if (
+            !candidate.batchRequest
+            && candidate.requestId - newRequest.requestId === 1
+            && candidate.createdAt - newRequest.createdAt < 120000
+            && candidate.type === 'SetNumConfirmations'
+            && ['DeleteMember', 'AddMember'].includes(newRequest.type)
+        ) {
+            return true;
+        }
+        return false;
+    };
     return (
         <>
             <h2 className={classes.header}>Pending Requests</h2>
