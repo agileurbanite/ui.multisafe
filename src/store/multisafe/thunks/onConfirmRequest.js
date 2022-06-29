@@ -32,6 +32,26 @@ const signTxByLedger = async (contract, requestId, multisafeId, state, actions) 
     });
 };
 
+const signBatchConfirmByLedger = async ({ contract, requests, multisafeId, state, actions }) => {
+    await signTransactionByLedger({
+        actionName: 'Confirm Request',
+        state,
+        actions,
+        contractMethod: () => callContractChangeMethod(contract, requests[0].requestId),
+        callback: async () => {
+        },
+    });
+
+    await signTransactionByLedger({
+        actionName: 'Confirm Request',
+        state,
+        actions,
+        contractMethod: () => callContractChangeMethod(contract, requests[1].requestId),
+        callback: async () => {
+            await actions.multisafe.onMountDashboard(multisafeId);
+        },
+    });
+};
 
 const prepareBatchConfirmation = ({ contract, requests, actions }) => {
     actions.general.setTemporaryData({
@@ -51,6 +71,7 @@ const prepareBatchConfirmation = ({ contract, requests, actions }) => {
     const callbackUrl = getRoute.callbackUrl({ redirectAction: redirectActions.batchConfirm });
     callContractChangeMethod(contract, requests[0].requestId, callbackUrl);
 };
+
 export const onConfirmRequest = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
     const { requestId } = payload;
 
