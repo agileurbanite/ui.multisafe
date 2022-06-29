@@ -13,7 +13,7 @@ export const Status = ({ request, onConfirmRequest, onDeleteRequest }) => {
     const { requestId, isMember, createdAt } = request;
     const { hasUserConfirm, totalNum, currentNum } = request.confirms;
     const [canDelete, setCanDelete] = useState(canDeleteRequest(createdAt));
-    const classes = useStyles({ hasUserConfirm, canDelete, isMember });
+    const classes = useStyles({ hasUserConfirm, canDelete, isMember, hideConfirm: !onConfirmRequest });
 
     useEffect(() => {
         if (!isMember || canDelete) return () => {};
@@ -39,15 +39,17 @@ export const Status = ({ request, onConfirmRequest, onDeleteRequest }) => {
     return (
         <TableCell className={classes.tableCell}>
             <div className={classes.container}>
-                <button
-                    type="button"
-                    className={cn(classes.button, { [classes.disabledButton]: !isMember })}
-                    onClick={confirmRequest}
-                    disabled={!isMember || hasUserConfirm}
-                >
-                    <Done className={classes.doneIcon} />
-                    <span className={classes.description}>{`${currentNum}/${totalNum}`}</span>
-                </button>
+                {onConfirmRequest && 
+                    <button
+                        type="button"
+                        className={cn(classes.button, { [classes.disabledButton]: !isMember })}
+                        onClick={confirmRequest}
+                        disabled={!isMember || hasUserConfirm}
+                    >
+                        <Done className={classes.doneIcon} />
+                        <span className={classes.description}>{`${currentNum}/${totalNum}`}</span>
+                    </button>
+                }
                 {isMember && (
                     <IconButton className={classes.cancel} onClick={deleteRequest} disabled={!canDelete}>
                         <Close className={classes.cancelIcon} />
