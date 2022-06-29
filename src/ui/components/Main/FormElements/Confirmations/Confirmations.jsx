@@ -26,8 +26,8 @@ export const Confirmations = ({ control, classNames, hasError, errorMessage }) =
         <>
             <BulletHeading>Confirmations</BulletHeading>
             <Typography className={classNames?.description}>
-        Specify how many of them have to confirm a transaction before it gets executed. In general,
-        the more confirmations required, the more secure is your Safe.
+                Specify how many of them have to confirm a transaction before it gets executed. In general,
+                the more confirmations required, the more secure is your Safe.
             </Typography>
             <section className={classNames?.createMultisafeBlock}>
                 <TextField

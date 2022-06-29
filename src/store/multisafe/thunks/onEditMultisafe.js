@@ -156,7 +156,7 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
     const confirmationsChanged = !!confirmationsActions.length;
     const nothingChanged = !nameChanged && !membersChanged && !confirmationsChanged;
     const onlyNameChanged = nameChanged && !membersChanged && !confirmationsChanged;
-    const isBatchedRequest = membersChanged && confirmationsChanged;
+    const isBatchRequest = membersChanged && confirmationsChanged;
 
     if (nothingChanged) {
         return;
@@ -171,7 +171,7 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
         return;
     }
 
-    if (isBatchedRequest) {
+    if (isBatchRequest) {
         isNearWallet
             ? prepareBatchRequest(contract, confirmationsActions, membersActions, actions)
             : await signBatchTxByLedger(contract, confirmationsActions, membersActions, actions, multisafeId, state, history);

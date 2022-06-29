@@ -32,20 +32,20 @@ export const RemoveModal = ({
                     <h2 className={classes.header}>Remove Multi Safe</h2>
                     <div className={classes.warning}>
                         {`Are you sure to remove "${name}" from list?
-           Notice that it is be removed only locally
-           from your browser - you won't delete it from
-           the blockchain.`}
+                        Notice that it is be removed only locally
+                        from your browser - you won't delete it from
+                        the blockchain.`}
                     </div>
                     <div className={classes.footer}>
                         <Button onClick={closeRemoveModal} className={classes.cancel}>
-              Cancel
+                            Cancel
                         </Button>
                         <Button
                             color="secondary"
                             onClick={onRemoveMultisafe}
                             className={cn(classes.cancel, classes.remove)}
                         >
-              Remove
+                            Remove
                         </Button>
                     </div>
                 </div>
