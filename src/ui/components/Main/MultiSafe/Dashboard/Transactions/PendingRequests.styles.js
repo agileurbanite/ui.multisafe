@@ -27,6 +27,12 @@ const styles = (theme) => ({
     },
     batchRequest: {
         backgroundColor: '#dff7f0'
+    },
+    bold: {
+        fontWeight: 900
+    },
+    gray: {
+        color: '#777'
     }
 });
 
