@@ -31,7 +31,7 @@ export const ConfirmActionOnLedger = () => {
                         {!showLoader && !error && <h3 className={classes.actionName}>{modal.actionName}</h3>}
                         {showLoader && !error && (
                             <div className={classes.loaderWrapper}>
-                Transaction in progress... <CircularProgress size={16}/>
+                                 Transaction in progress... <CircularProgress size={16}/>
                             </div>
                         )}
                         {error && <p className={classes.error}>{error}</p>}
@@ -39,7 +39,7 @@ export const ConfirmActionOnLedger = () => {
                     <div className={classes.footer}>
                         {error && (
                             <Button className={classes.gotIt} onClick={onCloseModal}>
-                Got It
+                                Got It
                             </Button>
                         )}
                     </div>
