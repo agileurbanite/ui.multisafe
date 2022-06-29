@@ -5,8 +5,14 @@ import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 
 const ATTACHED_GAS = config.gas.default;
 
-const callContractChangeMethod = (contract, requestId) =>
-    contract.confirm({ args: { request_id: requestId }, gas: ATTACHED_GAS });
+const callContractChangeMethod = (contract, requestId, callbackUrl) =>
+    contract.confirm({ 
+        args: {
+            request_id: requestId
+        },
+        gas: ATTACHED_GAS,
+        callbackUrl
+    });
 
 const signTxByNearWallet = (contract, requestId) => {
     callContractChangeMethod(contract, requestId);
