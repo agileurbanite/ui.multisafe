@@ -53,31 +53,39 @@ export const Form = () => {
     });
 
     return (
-        <form autoComplete="off" className={classes.form} onSubmit={onSubmit}>
-            <MultisafeName
-                control={control}
-                classNames={classes}
-                hasError={!!errors?.name}
-                errorMessage={!!errors?.name && errors?.name?.message}
-                editVersion={editVersion}
+        <>
+            <ConfirmModal
+                isOpenConfirmModal={isOpenConfirmModal}
+                closeRemoveModal={() => setOpenConfirmModal(false)}
+                formData={formData}
             />
-            <MembersField
-                editVersion={editVersion}
-                control={control}
-                getValues={getValues}
-                classNames={classes}
-                name="members"
-                errors={errors}
-            />
-            <Confirmations
-                control={control}
-                classNames={classes}
-                hasError={!!errors?.num_confirmations}
-                errorMessage={!!errors?.num_confirmations && errors?.num_confirmations?.message}
-            />
-            <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
-                Send Request
-            </Button>
-        </form>
+        
+            <form autoComplete="off" className={classes.form} onSubmit={onSubmit}>
+                <MultisafeName
+                    control={control}
+                    classNames={classes}
+                    hasError={!!errors?.name}
+                    errorMessage={!!errors?.name && errors?.name?.message}
+                    editVersion={editVersion}
+                />
+                <MembersField
+                    editVersion={editVersion}
+                    control={control}
+                    getValues={getValues}
+                    classNames={classes}
+                    name="members"
+                    errors={errors}
+                />
+                <Confirmations
+                    control={control}
+                    classNames={classes}
+                    hasError={!!errors?.num_confirmations}
+                    errorMessage={!!errors?.num_confirmations && errors?.num_confirmations?.message}
+                />
+                <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
+                    Send Request
+                </Button>
+            </form>
+        </>
     );
 };
