@@ -32,6 +32,25 @@ const signTxByLedger = async (contract, requestId, multisafeId, state, actions) 
     });
 };
 
+
+const prepareBatchConfirmation = ({ contract, requests, actions }) => {
+    actions.general.setTemporaryData({
+        redirectAction: redirectActions.batchConfirm,
+        multisafeId: contract.contractId,
+        batchConfirm: {
+            args: {
+                args: {
+                    request_id: requests[1].requestId
+                }, 
+                gas: ATTACHED_GAS,
+                callbackUrl: `${window.location.origin}${getRoute.dashboard(contract.contractId)}`
+            }
+        },
+    });
+
+    const callbackUrl = getRoute.callbackUrl({ redirectAction: redirectActions.batchConfirm });
+    callContractChangeMethod(contract, requests[0].requestId, callbackUrl);
+};
 export const onConfirmRequest = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
     const { requestId } = payload;
 
