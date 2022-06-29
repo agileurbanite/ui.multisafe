@@ -35,6 +35,22 @@ export const PendingRequests = () => {
         }
         return false;
     };
+
+    const batchRequest = pendingRequests.reduce((x, request, i) => {
+        if (i && isBatchRequest(x[x.length-1], request)) {
+            const first = x.pop();
+            x.push({
+                batchRequest: true,
+                requests: [
+                    request,
+                    first
+                ]
+            });
+        } else {
+            x.push(request);
+        }
+        return x;
+    }, []);
     return (
         <>
             <h2 className={classes.header}>Pending Requests</h2>
