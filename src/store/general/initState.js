@@ -27,5 +27,6 @@ export const initState = {
     temporary: {
         redirectAction: null,
     },
-    isMobileMenuOpen: false
+    isMobileMenuOpen: false,
+    batchRequestView: true
 };
