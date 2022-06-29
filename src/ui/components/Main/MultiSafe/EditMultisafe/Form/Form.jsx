@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@material-ui/core';
 import { useStoreActions, useStoreState } from 'easy-peasy';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
@@ -8,16 +9,21 @@ import { EditSafeSchema } from '../../../../../../utils/validation/EditMembersPa
 import { Confirmations } from '../../../FormElements/Confirmations/Confirmations';
 import { MembersField } from '../../../FormElements/MembersField/MembersField';
 import { MultisafeName } from '../../../FormElements/MultisafeName/MultisafeName';
+import { ConfirmModal } from '../ConfirmModal/ConfirmModal';
 import { useStyles } from './Form.styles';
 
 export const Form = () => {
     const editVersion = true;
     const onEditMultisafe = useStoreActions((actions) => actions.multisafe.onEditMultisafe);
+    const isBatchRequest = useStoreActions((actions) => actions.multisafe.isBatchRequest);
     const history = useHistory();
     const classes = useStyles();
     const name = useStoreState((state) => state.multisafe.general.name);
     const members = useStoreState((state) => state.multisafe.members || []);
     const numConfirmations = useStoreState((state) => state.multisafe.general.numConfirmations);
+
+    const [isOpenConfirmModal, setOpenConfirmModal] = useState(false);
+    const [formData, setFormData] = useState();
 
     const {
         control,
@@ -36,7 +42,15 @@ export const Form = () => {
         }
     });
 
-    const onSubmit = handleSubmit((data) => onEditMultisafe({ data, history }));
+    const onSubmit = handleSubmit(async (data) => {
+        if (await isBatchRequest({ data, history })) {
+            setOpenConfirmModal(true);
+            setFormData(data);
+            return;
+        }
+
+        onEditMultisafe({ data, history });
+    });
 
     return (
         <form autoComplete="off" className={classes.form} onSubmit={onSubmit}>
