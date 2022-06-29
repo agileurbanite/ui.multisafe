@@ -1,4 +1,4 @@
-import { onConfirmRequest } from './onConfirmRequest';
+import { onConfirmRequest, onConfirmBatchRequest } from './onConfirmRequest';
 import { onDeleteRequest } from './onDeleteRequest';
 import { onEditMultisafe, isBatchRequest } from './onEditMultisafe';
 import { onMakeFunctionCall } from './onMakeFunctionCall';
@@ -19,6 +19,7 @@ export const thunks = {
     onMountList,
     onTransferTokens,
     onConfirmRequest,
+    onConfirmBatchRequest,
     onMakeFunctionCall,
     onDeleteRequest,
     onRemoveLocalMultisafe,
