@@ -7,9 +7,6 @@ const {
     dashboard,
     history,
     members,
-    membersEdit,
-    numberConfirmations,
-    editName,
     remove,
     disconnect,
     nonFungibleTokens,
@@ -34,9 +31,6 @@ export const getDataBeforeRenderPage = async ({
         dashboard,
         history,
         members,
-        membersEdit,
-        numberConfirmations,
-        editName,
         remove,
         disconnect,
         nonFungibleTokens,
@@ -64,17 +58,17 @@ export const getDataBeforeRenderPage = async ({
         await onMountMultisafe({ multisafeId });
     }
 
-    if (ifRouteIs(membersEdit)) {
-        await onMountMultisafe({ multisafeId });
-    }
+    // if (ifRouteIs(membersEdit)) {
+    //     await onMountMultisafe({ multisafeId });
+    // }
 
-    if (ifRouteIs(numberConfirmations)) {
-        await onMountMultisafe({ multisafeId });
-    }
+    // if (ifRouteIs(numberConfirmations)) {
+    //     await onMountMultisafe({ multisafeId });
+    // }
 
-    if (ifRouteIs(editName)) {
-        await onMountMultisafe({ multisafeId });
-    }
+    // if (ifRouteIs(editName)) {
+    //     await onMountMultisafe({ multisafeId });
+    // }
 
     if (ifRouteIs(remove)) {
         await onMountMultisafe({ multisafeId });
