@@ -46,11 +46,8 @@ const generateConfirmationsActions = (values, numConfirmations) => values.numCon
     ? [{ type: 'SetNumConfirmations', num_confirmations: values.numConfirmations }]
     : [];
 
-const generateMembersActions = (values, currentMembers) => {
-    const currentMembersIds = currentMembers.map(({ accountId }) => accountId);
-    const membersIds = values.members?.map(({ account_id }) => account_id) || [];
-
-    const addMembersActions = membersIds.length
+const generateAddMembersActions = ({ membersIds, currentMembersIds, values }) => 
+    membersIds.length
         ? values.members.reduce((x, member) => [
             ...x,
             ...(!currentMembersIds.includes(member.account_id) ? [{
@@ -62,7 +59,8 @@ const generateMembersActions = (values, currentMembers) => {
         ], [])
         : [];
 
-    const deleteMembersActions = membersIds.length
+const generateDeleteMembersActions = ({ membersIds, currentMembers }) => 
+    membersIds.length
         ? currentMembers.reduce((x, currentMember) => [
             ...x,
             ...(!membersIds.includes(currentMember.accountId) ? [{
@@ -73,6 +71,14 @@ const generateMembersActions = (values, currentMembers) => {
             }] : [])
         ], [])
         : [];
+
+
+const generateMembersActions = (values, currentMembers) => {
+    const currentMembersIds = currentMembers.map(({ accountId }) => accountId);
+    const membersIds = values.members?.map(({ account_id }) => account_id) || [];
+
+    const addMembersActions = generateAddMembersActions({ membersIds, currentMembersIds, values });
+    const deleteMembersActions = generateDeleteMembersActions({ membersIds, currentMembers });
 
     return [
         ...addMembersActions,
@@ -93,19 +99,24 @@ const signTxByLedger = async (contract, contractActions, actions, multisafeId, s
     });
 };
 
-const signBatchTxByLedger = async (contract, confirmationsActions, membersActions, actions, multisafeId, state, history) => {
+const signBatchTxByLedger = async (contract, confirmationsActions, membersActions, actions, multisafeId, state, history, values, currentMembers) => {
+    let requestOrder = [membersActions, confirmationsActions];
+    if (checkChangeOrder({ currentMembers, values })) {
+        requestOrder = [confirmationsActions, membersActions];
+    }
+
     await signTransactionByLedger({
         actionName: 'Edit Multi Safe',
         state,
         actions,
-        contractMethod: () => addEditRequest(contract, membersActions)
+        contractMethod: () => addEditRequest(contract, requestOrder[0])
     });
 
     await signTransactionByLedger({
         actionName: 'Edit Multi Safe',
         state,
         actions,
-        contractMethod: () => addEditRequest(contract, confirmationsActions),
+        contractMethod: () => addEditRequest(contract, requestOrder[1]),
         callback: async () => {
             await actions.multisafe.onMountDashboard(multisafeId);
             history.push(getRoute.dashboard(multisafeId));
@@ -113,8 +124,23 @@ const signBatchTxByLedger = async (contract, confirmationsActions, membersAction
     });
 };
 
-const prepareBatchRequest = (contract, confirmationsActions, membersActions, actions) => {
+const checkChangeOrder = ({ currentMembers, values, }) => {
+    const currentMembersIds = currentMembers.map(({ accountId }) => accountId);
+    const membersIds = values.members?.map(({ account_id }) => account_id) || [];
+    const addMembersActions = generateAddMembersActions({ membersIds, currentMembersIds, values });
+    const deleteMembersActions = generateDeleteMembersActions({ membersIds, currentMembers });
+
+    return deleteMembersActions.length >= 1 && addMembersActions.length < deleteMembersActions.length;
+};
+
+const prepareBatchRequest = (contract, confirmationsActions, membersActions, actions, values, currentMembers) => {
     const method = 'add_request_and_confirm';
+
+    // in few cases we need to revert the orger of actions
+    let requestOrder = [membersActions, confirmationsActions];
+    if (checkChangeOrder({ currentMembers, values })) {
+        requestOrder = [confirmationsActions, membersActions];
+    }
 
     actions.general.setTemporaryData({
         redirectAction: redirectActions.batchRequest,
@@ -122,7 +148,7 @@ const prepareBatchRequest = (contract, confirmationsActions, membersActions, act
         batchRequest: {
             args: prepareRequestArgs({
                 receiver_id: contract.contractId,
-                actions: confirmationsActions,
+                actions: requestOrder[1],
                 gas: ATTACHED_GAS,
                 callbackUrl: `${window.location.origin}${getRoute.dashboard(contract.contractId)}`
             }),
@@ -131,7 +157,7 @@ const prepareBatchRequest = (contract, confirmationsActions, membersActions, act
     });
 
     const callbackUrl = getRoute.callbackUrl({ redirectAction: redirectActions.batchRequest });
-    addEditRequest(contract, membersActions, callbackUrl);
+    addEditRequest(contract, requestOrder[0], callbackUrl);
 };
 
 export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
@@ -173,8 +199,8 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
 
     if (isBatchRequest) {
         isNearWallet
-            ? prepareBatchRequest(contract, confirmationsActions, membersActions, actions)
-            : await signBatchTxByLedger(contract, confirmationsActions, membersActions, actions, multisafeId, state, history);
+            ? prepareBatchRequest(contract, confirmationsActions, membersActions, actions, values, members)
+            : await signBatchTxByLedger(contract, confirmationsActions, membersActions, actions, multisafeId, state, history, values, members);
         return;
     } 
 

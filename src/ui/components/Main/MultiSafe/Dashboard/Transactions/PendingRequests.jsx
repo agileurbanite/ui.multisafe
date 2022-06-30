@@ -33,8 +33,6 @@ export const PendingRequests = () => {
             !candidate.batchRequest
             && candidate.requestId - newRequest.requestId === 1
             && candidate.createdAt - newRequest.createdAt < 120000
-            && candidate.type === 'SetNumConfirmations'
-            && ['DeleteMember', 'AddMember'].includes(newRequest.type)
         ) {
             return true;
         }
@@ -62,8 +60,6 @@ export const PendingRequests = () => {
     const switchBatchTransactions = () => {
         toggleBatchRequestView();
     };
-
-    console.log('requestsList', requestsList);
 
     return (
         <>
@@ -101,7 +97,7 @@ export const PendingRequests = () => {
                                     <Fragment key={`batch-${i}`}>
                                         <TableRow className={classes.batchRequest}>
                                             <TableCell colSpan={2} className={classes.bold}>Batch Request</TableCell>
-                                            <TableCell colSpan={3} className={classes.gray}>We recognize these two requests as a Batch Request, please confirm in the shown order</TableCell>
+                                            <TableCell colSpan={3} className={classes.gray}>We recognize these two requests as a Batch Request</TableCell>
                                             <BatchStatus
                                                 requests={request.requests}
                                             />
