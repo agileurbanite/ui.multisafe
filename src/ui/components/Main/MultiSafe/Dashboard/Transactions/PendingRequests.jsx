@@ -28,11 +28,19 @@ export const PendingRequests = () => {
 
     const hasActiveRequests = pendingRequests.length > 0;
 
+    // check if two request are probably batch request
     const isBatchRequest = (candidate, newRequest) => {
+        // requests were created one by one
+        const subsequentRequests = candidate.requestId - newRequest.requestId === 1;
+        // the time between creation time is no more than 2 minutes
+        const lowCreationDateDifference = candidate.createdAt - newRequest.createdAt < 120000;
+        // it's possible that the request candidate was already recognized as a batch request, in this case, we don't need to check further
+        const candidateIsRequest = !candidate.batchRequest;
+        
         if (
-            !candidate.batchRequest
-            && candidate.requestId - newRequest.requestId === 1
-            && candidate.createdAt - newRequest.createdAt < 120000
+            candidateIsRequest
+            && subsequentRequests
+            && lowCreationDateDifference
         ) {
             return true;
         }
