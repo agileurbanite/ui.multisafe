@@ -34,18 +34,6 @@ const items = [
             route: routes.safeEdit,
             getPath: getRoute.safeEdit
         }, {
-        //     name: 'Edit Members',
-        //     route: routes.membersEdit,
-        //     getPath: getRoute.membersEdit
-        // }, {
-        //     name: 'Edit Confirmations Num',
-        //     route: routes.numberConfirmations,
-        //     getPath: getRoute.numberConfirmations
-        // }, {
-        //     name: 'Edit Name',
-        //     route: routes.editName,
-        //     getPath: getRoute.editName
-        // }, {
             name: 'Remove Multi Safe',
             route: routes.remove,
             getPath: getRoute.remove
