@@ -7,12 +7,10 @@ const {
     dashboard,
     history,
     members,
-    membersEdit,
-    numberConfirmations,
-    editName,
     remove,
     disconnect,
-    nonFungibleTokens
+    nonFungibleTokens,
+    safeEdit
 } = routes;
 
 export const getDataBeforeRenderPage = async ({
@@ -33,12 +31,10 @@ export const getDataBeforeRenderPage = async ({
         dashboard,
         history,
         members,
-        membersEdit,
-        numberConfirmations,
-        editName,
         remove,
         disconnect,
         nonFungibleTokens,
+        safeEdit
     ]);
 
     if (!match) return;
@@ -62,18 +58,6 @@ export const getDataBeforeRenderPage = async ({
         await onMountMultisafe({ multisafeId });
     }
 
-    if (ifRouteIs(membersEdit)) {
-        await onMountMultisafe({ multisafeId });
-    }
-
-    if (ifRouteIs(numberConfirmations)) {
-        await onMountMultisafe({ multisafeId });
-    }
-
-    if (ifRouteIs(editName)) {
-        await onMountMultisafe({ multisafeId });
-    }
-
     if (ifRouteIs(remove)) {
         await onMountMultisafe({ multisafeId });
     }
@@ -85,6 +69,10 @@ export const getDataBeforeRenderPage = async ({
     if (ifRouteIs(nonFungibleTokens)) {
         await onMountDashboard(multisafeId);
         await onMountNonFungibleTokenList(multisafeId);
+    }
+
+    if (ifRouteIs(safeEdit)) {
+        await onMountMultisafe({ multisafeId });
     }
 
     withLoading && disableLoading();

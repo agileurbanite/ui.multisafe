@@ -24,12 +24,11 @@ export const Main = () => (
                     routes.dashboard,
                     routes.history,
                     routes.members,
-                    routes.membersEdit,
-                    routes.numberConfirmations,
-                    routes.editName,
                     routes.remove,
                     routes.disconnect,
-                    routes.nonFungibleTokens
+                    routes.nonFungibleTokens,
+                    routes.safeEdit,
+                    routes.redirectFromWallet
                 ]}
                 component={MultiSafe}
             />

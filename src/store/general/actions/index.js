@@ -10,6 +10,7 @@ import { setModalData } from './setModalData';
 import { setNearEntities } from './setNearEntities';
 import { setTemporaryData } from './setTemporaryData';
 import { setUserData } from './setUserData';
+import { toggleBatchRequestView } from './toggleBatchRequestView';
 import { toggleMobileMenu } from './toggleMobileMenu';
 
 export const actions = {
@@ -25,5 +26,6 @@ export const actions = {
     setModalData,
     closeModal,
     setNearEntities,
-    toggleMobileMenu
+    toggleMobileMenu,
+    toggleBatchRequestView
 };

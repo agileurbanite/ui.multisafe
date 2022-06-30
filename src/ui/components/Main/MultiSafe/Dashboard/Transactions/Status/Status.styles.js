@@ -27,6 +27,7 @@ const styles = (theme) => ({
         '&:hover': {
             borderColor: theme.palette.primary.main,
         },
+        marginLeft: ({ hideDelete }) => hideDelete ? 54 : 0,
     },
     disabledButton: {
         cursor: 'default!important',
@@ -53,7 +54,7 @@ const styles = (theme) => ({
         backgroundColor: '#ffffff',
         cursor: 'pointer',
         border: '1px solid rgba(0, 0, 0, 0.12)',
-        marginLeft: 10,
+        marginLeft: ({ hideConfirm }) => hideConfirm ? 92 : 10,
         '&:hover': {
             borderColor: theme.colors.red,
         },

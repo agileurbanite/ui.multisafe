@@ -11,9 +11,7 @@ export const isRedirect = (state, history) => {
         exact: true,
     });
 
-    return (
-        typeof redirectAction === 'string' &&
-    match &&
-    state.general.temporary.redirectAction === redirectAction
-    );
+    return typeof redirectAction === 'string' 
+        && match 
+        && state.general.temporary.redirectAction === redirectAction;
 };

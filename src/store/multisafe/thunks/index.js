@@ -1,6 +1,6 @@
-import { onConfirmRequest } from './onConfirmRequest';
+import { onConfirmRequest, onConfirmBatchRequest } from './onConfirmRequest';
 import { onDeleteRequest } from './onDeleteRequest';
-import { onEditMultisafe } from './onEditMultisafe';
+import { onEditMultisafe, isBatchRequest } from './onEditMultisafe';
 import { onMakeFunctionCall } from './onMakeFunctionCall';
 import { onMountDashboard } from './onMountDashboard';
 import { onMountHistory } from './onMountHistory';
@@ -19,10 +19,12 @@ export const thunks = {
     onMountList,
     onTransferTokens,
     onConfirmRequest,
+    onConfirmBatchRequest,
     onMakeFunctionCall,
     onDeleteRequest,
     onRemoveLocalMultisafe,
     onEditMultisafe,
+    isBatchRequest,
     onMountTokenList,
     onMountNonFungibleTokenList,
     onTransferNFT

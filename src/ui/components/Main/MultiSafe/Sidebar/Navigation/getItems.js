@@ -11,51 +11,43 @@ const items = [
         subItems: [{
             name: 'Pending',
             route: routes.dashboard,
-            getPath: getRoute.dashboard,
+            getPath: getRoute.dashboard
         },{
             name: 'Completed',
             route: routes.history,
-            getPath: getRoute.history,
+            getPath: getRoute.history
         }]
     },
     {
         name: 'Members',
         route: routes.members,
         getPath: getRoute.members,
-        icon: People,
+        icon: People
     },
     {
         name: 'Settings',
-        route: routes.membersEdit,
-        getPath: getRoute.membersEdit,
+        route: routes.safeEdit,
+        getPath: getRoute.safeEdit,
         icon: Settings,
         subItems: [{
-            name: 'Edit Members',
-            route: routes.membersEdit,
-            getPath: getRoute.membersEdit,
-        }, {
-            name: 'Edit Confirmations Num',
-            route: routes.numberConfirmations,
-            getPath: getRoute.numberConfirmations,
-        }, {
-            name: 'Edit Name',
-            route: routes.editName,
-            getPath: getRoute.editName,
+            name: 'Edit Safe',
+            route: routes.safeEdit,
+            getPath: getRoute.safeEdit
         }, {
             name: 'Remove Multi Safe',
             route: routes.remove,
-            getPath: getRoute.remove,
+            getPath: getRoute.remove
         }, {
             name: 'Disconnect Account',
             route: routes.disconnect,
-            getPath: getRoute.disconnect,
+            getPath: getRoute.disconnect
         }]
     },
     {
         name: 'Collectibles',
         route: routes.nonFungibleTokens,
         getPath: getRoute.nonFungibleTokens,
-        icon: PhotoLibrary,
+        icon: PhotoLibrary
     },
 ];
 

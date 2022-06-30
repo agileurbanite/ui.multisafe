@@ -1,40 +1,37 @@
 import { Button, Paper, Modal } from '@material-ui/core';
 import cn from 'classnames';
 import { useStoreActions } from 'easy-peasy';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
-import { useStyles } from './RemoveModal.styles';
+import { useStyles } from './ConfirmModal.styles';
 
-export const RemoveModal = ({
-    isOpenRemoveModal,
+export const ConfirmModal = ({
+    isOpenConfirmModal,
     closeRemoveModal,
-    stopPropagation,
-    multisafeId,
-    name,
+    formData,
+    requests
 }) => {
-    const onRemoveLocalMultisafe = useStoreActions(
-        (actions) => actions.multisafe.onRemoveLocalMultisafe,
-    );
-    const history = useHistory();
     const classes = useStyles();
+    const history = useHistory();
 
-    const onRemoveMultisafe = () => onRemoveLocalMultisafe({ history, multisafeId });
+    const onEditMultisafe = useStoreActions((actions) => actions.multisafe.onEditMultisafe);
+    const onConfirmBatchRequest = useStoreActions((actions) => actions.multisafe.onConfirmBatchRequest);
+
+    const onConfirm = () => formData
+        ? onEditMultisafe({ data: formData, history })
+        : onConfirmBatchRequest({ requests });
 
     return (
         <Modal
-            onClick={stopPropagation}
-            open={isOpenRemoveModal}
+            open={isOpenConfirmModal}
             onClose={closeRemoveModal}
             className={classes.modal}
         >
             <Paper className={classes.container}>
                 <div className={classes.wrapper}>
-                    <h2 className={classes.header}>Remove Multi Safe</h2>
+                    <h2 className={classes.header}>Confirm Batch Request</h2>
                     <div className={classes.warning}>
-                        {`Are you sure to remove "${name}" from list?
-                        Notice that it is be removed only locally
-                        from your browser - you won't delete it from
-                        the blockchain.`}
+                        {'Changing members and the number of confirmations needs to be a separate request. We can prepare two requests. After confirmation, you will need to confirm two requests, one by one.'}
                     </div>
                     <div className={classes.footer}>
                         <Button onClick={closeRemoveModal} className={classes.cancel}>
@@ -42,10 +39,10 @@ export const RemoveModal = ({
                         </Button>
                         <Button
                             color="secondary"
-                            onClick={onRemoveMultisafe}
+                            onClick={onConfirm}
                             className={cn(classes.cancel, classes.remove)}
                         >
-                            Remove
+                            Confirm
                         </Button>
                     </div>
                 </div>

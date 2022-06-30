@@ -6,8 +6,9 @@ export const getMultisafeContract = (state, multisafeId) => {
     const near = state.general.entities.near;
     const wallet = state.general.entities.wallet;
 
-    const account =
-    walletType === 'near-wallet' ? wallet.account() : new Account(near.connection, accountId);
+    const account = walletType === 'near-wallet' 
+        ? wallet.account()
+        : new Account(near.connection, accountId);
 
     return new Contract(account, multisafeId, {
         viewMethods: [

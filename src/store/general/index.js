@@ -13,7 +13,7 @@ export const general = persist(
         selectors,
     },
     {
-        allow: ['user', 'temporary'],
+        allow: ['user', 'temporary', 'batchRequestView'],
         storage: 'localStorage',
     },
 );

@@ -2,9 +2,17 @@ import { makeStyles } from '@material-ui/core';
 
 const styles = (theme) => ({
     header: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    h2: {
         margin: '30px 12px',
         fontSize: 24,
         fontWeight: 900,
+    },
+    button: {
+        height: 34,
     },
     noRequestsContainer: {
         height: '80%',
@@ -17,6 +25,15 @@ const styles = (theme) => ({
             color: theme.colors.textGrey,
         },
     },
+    batchRequest: {
+        backgroundColor: '#dff7f0'
+    },
+    bold: {
+        fontWeight: 900
+    },
+    gray: {
+        color: '#777'
+    }
 });
 
 export const useStyles = makeStyles(styles, { name: 'PendingRequests' });

@@ -25,10 +25,10 @@ export const FormRemove = () => {
                 {`Are you sure to remove "${name}" from list?`}
             </Typography>
             <Typography className={classes?.description}>
-        Notice that it will be removed only locally from your browser - you won&apos;t delete it from the blockchain.
+                Notice that it will be removed only locally from your browser - you won&apos;t delete it from the blockchain.
             </Typography>
             <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
-        Remove Multi Safe
+                Remove Multi Safe
             </Button>
         </form>
     );

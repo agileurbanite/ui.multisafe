@@ -3,12 +3,11 @@ import { useState } from 'react';
 import { Switch, Route } from 'react-router';
 
 import { routes } from '../../../config/routes';
+import { Loader } from '../../../providers/Initializer/Loader/Loader';
 import { Footer } from '../../general/Footer/Footer';
 import { Dashboard } from './Dashboard/Dashboard';
 import { Disconnect } from './EditMultisafe/Disconnect';
-import { EditConfirmations } from './EditMultisafe/EditConfirmations';
-import { EditMembers } from './EditMultisafe/EditMembers';
-import { EditName } from './EditMultisafe/EditName';
+import { EditSafe } from './EditMultisafe/EditSafe';
 import { Remove } from './EditMultisafe/Remove';
 import { History } from './History/History';
 import { Members } from './Members/Members';
@@ -35,12 +34,11 @@ export const MultiSafe = () => {
                     <Route exact path={routes.dashboard} component={Dashboard} />
                     <Route exact path={routes.history} component={History} />
                     <Route exact path={routes.members} component={Members} />
-                    <Route exact path={routes.membersEdit} component={EditMembers} />
-                    <Route exact path={routes.numberConfirmations} component={EditConfirmations} />
-                    <Route exact path={routes.editName} component={EditName} />
                     <Route exact path={routes.remove} component={Remove} />
                     <Route exact path={routes.disconnect} component={Disconnect} />
                     <Route exact path={routes.nonFungibleTokens} component={NonFungibleTokens} />
+                    <Route exact path={routes.safeEdit} component={EditSafe} />
+                    <Route exact path={routes.redirectFromWallet} component={Loader} />
                 </Switch>
                 <Footer />
             </div>
