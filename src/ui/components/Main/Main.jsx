@@ -30,7 +30,8 @@ export const Main = () => (
                     routes.remove,
                     routes.disconnect,
                     routes.nonFungibleTokens,
-                    routes.safeEdit
+                    routes.safeEdit,
+                    routes.redirectFromWallet
                 ]}
                 component={MultiSafe}
             />

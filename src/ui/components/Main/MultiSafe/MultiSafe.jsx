@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Switch, Route } from 'react-router';
 
 import { routes } from '../../../config/routes';
+import { Loader } from '../../../providers/Initializer/Loader/Loader';
 import { Footer } from '../../general/Footer/Footer';
 import { Dashboard } from './Dashboard/Dashboard';
 import { Disconnect } from './EditMultisafe/Disconnect';
@@ -43,6 +44,7 @@ export const MultiSafe = () => {
                     <Route exact path={routes.disconnect} component={Disconnect} />
                     <Route exact path={routes.nonFungibleTokens} component={NonFungibleTokens} />
                     <Route exact path={routes.safeEdit} component={EditSafe} />
+                    <Route exact path={routes.redirectFromWallet} component={Loader} />
                 </Switch>
                 <Footer />
             </div>
