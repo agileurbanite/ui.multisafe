@@ -124,6 +124,17 @@ const signBatchTxByLedger = async (contract, confirmationsActions, membersAction
     });
 };
 
+// It's possible that the member will be deleting 1 member and adding 2 members at a time, 
+// in this case, we don't want to change the order because the final number of confirmations might be increased and in this case, 
+// we need to add and delete members first, and increase the number of confirmation second, to avoid increasing the number of the confirmations above the number of members.
+// example 1:
+// 1. Safe is set to 2 members and 2 confirmations.
+// 2. member wants to: add 2 members, remove 1 member and increase the number of confirmations by 1
+// In this case, if we increase the number of confirmations first, the contract will throw an error because it cannot set num of confirmations to 3 when the number of members is still 2.
+// example 2:
+// 1. safe is set to 2 members and 2 confirmations.
+// 2. member wants to: remove 1 member and change num of confirmation to 1
+// In this case, we need to change the num of confirmations first, because if we would like to remove the member first, the contract will throw an error as the number of members cannot be lower then num of confirmations.
 const checkChangeOrder = ({ currentMembers, values, }) => {
     const currentMembersIds = currentMembers.map(({ accountId }) => accountId);
     const membersIds = values.members?.map(({ account_id }) => account_id) || [];
