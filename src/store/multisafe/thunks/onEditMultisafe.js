@@ -136,7 +136,7 @@ const checkChangeOrder = ({ currentMembers, values, }) => {
 const prepareBatchRequest = (contract, confirmationsActions, membersActions, actions, values, currentMembers) => {
     const method = 'add_request_and_confirm';
 
-    // in few cases we need to revert the orger of actions
+    // in few cases we need to revert the order of actions
     let requestOrder = [membersActions, confirmationsActions];
     if (checkChangeOrder({ currentMembers, values })) {
         requestOrder = [confirmationsActions, membersActions];
