@@ -5,29 +5,33 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import { forwardRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { sendFundsSchema } from '../../../../../../../../utils/validation/SendFundsModal';
+import { transferNFTSchema } from '../../../../../../../../utils/validation/SendFundsModal';
 import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
-import { Amount } from './Amount/Amount';
+import { NFTCollection } from './Collection/NFTCollection';
 import { Recipient } from './Recipient/Recipient';
 import { useStyles } from './SendFunds.styles';
 
-export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
-    const [tokenName, setTokenName] = useState('near');
-    const onTransferTokens = useStoreActions((actions) => actions.multisafe.onTransferTokens);
-    const fungibleTokens = useStoreState((store) => store.multisafe.general.fungibleTokens);
+export const SendNFTs = forwardRef(({ onClose, tabIndex }, ref) => {
+    const [tokenId, setTokenId] = useState('');
+    const [contractName, setContractName] = useState('');
+    
+    const nonFungibleTokens = useStoreState(({ multisafe }) => multisafe.general.nonFungibleTokens);
+    const onTransferNFT = useStoreActions((actions) => actions.multisafe.onTransferNFT);
 
-    const { control, handleSubmit, setValue, errors } = useForm({
-        resolver: yupResolver(sendFundsSchema),
+    const { control, handleSubmit, errors } = useForm({
+        resolver: yupResolver(transferNFTSchema),
         mode: 'all',
     });
     const classes = useStyles();
 
     const onSubmit = handleSubmit((data) => {
-        const token = fungibleTokens.find(({name}) => name === tokenName) 
-            ? fungibleTokens.find(({name}) => name === tokenName) 
-            : undefined;
-        onTransferTokens({ data, onClose, token});
+        onTransferNFT({ data, onClose, tokenId, contractName });
     });
+
+    const onClick = ({id, contract}) => {
+        setTokenId(id);
+        setContractName(contract);
+    };
 
     return (
         <Paper className={classes.container} ref={ref} tabIndex={tabIndex} elevation={5}>
@@ -39,15 +43,8 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
                         hasError={!!errors?.recipientId}
                         errorMessage={!!errors?.recipientId && errors?.recipientId?.message}
                     />
-                    <Amount
-                        control={control}
-                        classNames={classes}
-                        setValue={setValue}
-                        tokenName={tokenName}
-                        setTokenName={setTokenName}
-                        hasError={!!errors?.amount}
-                        errorMessage={!!errors?.amount && errors?.amount?.message}
-                    />
+                    {nonFungibleTokens && nonFungibleTokens.map((nftCollection) => 
+                        <NFTCollection key={nftCollection.name} tokenId={tokenId} nftCollection={nftCollection} handleClick={onClick} classes={classes}/>)}
                     <Checkbox
                         control={control}
                         name="withApprove"

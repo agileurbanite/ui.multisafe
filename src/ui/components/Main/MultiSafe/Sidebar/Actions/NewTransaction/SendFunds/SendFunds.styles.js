@@ -15,13 +15,36 @@ const styles = (theme) => ({
         display: 'flex',
         flexDirection: 'column',
     },
-    header: {
+    paper: {
+        position: 'fixed',
+        left: '40%',
+        top: '10%',
+    },
+    directory: {
+        display: 'flex',
+        flexDirection: 'row', 
+    },
+    sendFunds: {
+        padding: '24px',
+        cursor: 'pointer',
         fontSize: 20,
-        color: 'rgba(0, 0, 0, 0.87)',
+        color: ({isSendFundsActive}) => isSendFundsActive ?
+            theme.palette.primary.main :
+            'rgba(0, 0, 0, 0.87)',
+        margin: 0,
+    },
+    sendNFTs: {
+        padding: '24px',
+        cursor: 'pointer',
+        fontSize: 20,
+        color: ({isSendFundsActive}) => isSendFundsActive ?
+            'rgba(0, 0, 0, 0.87)':
+            theme.palette.primary.main,
         margin: 0,
     },
     form: {
         marginTop: 20,
+        width: 320,
     },
     textField: {
         marginBottom: 24,
