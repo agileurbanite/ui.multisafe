@@ -100,6 +100,7 @@ export const WalletSelectorContextProvider = ({ children }) => {
         return null;
     }
 
+    const selectedWalletId = selector.store.getState()?.selectedWalletId ?? null;
     return (
         <WalletSelectorContext.Provider
             value={{
@@ -108,6 +109,7 @@ export const WalletSelectorContextProvider = ({ children }) => {
                 accounts,
                 accountId,
                 setAccountId,
+                selectedWalletId,
             }}
         >
             {children}
