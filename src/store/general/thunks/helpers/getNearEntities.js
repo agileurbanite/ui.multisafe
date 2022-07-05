@@ -6,7 +6,7 @@ import { LedgerSigner } from '../../../../near/LedgerSigner';
 const { networkId, nodeUrl, walletUrl, archivalRpcUrl } = config;
 
 const getNearConnectConfig = ({ connectionType, getStoreState }) => {
-    if (connectionType === 'rpc_my-near-wallet') {
+    if (connectionType === 'rpc_my-near-wallet' || connectionType === 'rpc_near-wallet') {
         return {
             networkId,
             nodeUrl,
@@ -35,9 +35,8 @@ const getNearConnectConfig = ({ connectionType, getStoreState }) => {
     );
 };
 
-export const getNearEntities = async (getStoreState) => {
-    const state = getStoreState();
-    const walletType = state.general.user.walletType;
+export const getNearEntities = async (getStoreState, selector) => {
+    const walletType = await selector?.wallet()?.id;
 
     const near = await connect(
         getNearConnectConfig({
@@ -51,7 +50,11 @@ export const getNearEntities = async (getStoreState) => {
             connectionType: 'archival-rpc_read-only',
         }),
     );
-    const wallet = walletType === 'my-near-wallet' ? new WalletConnection(near, 'near_app') : null;
+
+    const wallet = (walletType === 'my-near-wallet' || walletType === 'near-wallet')
+        ? new WalletConnection(near, 'near_app')
+        : null;
+
     return {
         near,
         archivalRpc,

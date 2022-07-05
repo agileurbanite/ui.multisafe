@@ -16,12 +16,9 @@ export const NonConnected = () => {
     const classes = useStyles();
 
     const { selector } = useWalletSelector();
-    const { selectedWalletId } = selector.store.getState();
 
     const disconnect = async () => {
-        const wallet = await selector.wallet(selectedWalletId);
-        wallet.signOut();
-        onDisconnect({ history });
+        onDisconnect({ history, selector });
     };
 
     const openConnectWallet = () => setOpenConnectWallet(true);

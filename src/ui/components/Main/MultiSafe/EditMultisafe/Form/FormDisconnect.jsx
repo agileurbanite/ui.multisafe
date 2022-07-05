@@ -12,7 +12,6 @@ export const FormDisconnect = () => {
     const classes = useStyles();
     const onDisconnect = useStoreActions((actions) => actions.general.onDisconnect);
     const { selector } = useWalletSelector();
-    const { selectedWalletId } = selector.store.getState();
 
     const {
         handleSubmit,
@@ -21,9 +20,7 @@ export const FormDisconnect = () => {
     });
 
     const onSubmit = handleSubmit(async () => {
-        const wallet = await selector.wallet(selectedWalletId);
-        wallet.signOut();
-        onDisconnect({ history });
+        onDisconnect({ history, selector });
     });
 
     return (

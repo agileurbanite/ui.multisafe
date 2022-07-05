@@ -11,7 +11,6 @@ export const FormRemove = () => {
     const history = useHistory();
     const classes = useStyles();
     const { selector } = useWalletSelector();
-    const { selectedWalletId } = selector.store.getState();
 
     const onDisconnect = useStoreActions((actions) => actions.general.onDisconnect);
     const name = useStoreState((state) => state.multisafe.general.name);
@@ -23,9 +22,7 @@ export const FormRemove = () => {
     });
 
     const onSubmit = handleSubmit(async () => {
-        const wallet = await selector.wallet(selectedWalletId);
-        wallet.signOut();
-        onDisconnect({ history });
+        onDisconnect({ history, selector });
     });
 
     return (
