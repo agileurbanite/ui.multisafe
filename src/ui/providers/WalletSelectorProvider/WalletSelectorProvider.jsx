@@ -6,7 +6,9 @@ import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
 import myNearWalletIconUrl from '@near-wallet-selector/my-near-wallet/assets/my-near-wallet-icon.png';
 import { setupNearWallet } from '@near-wallet-selector/near-wallet';
 import nearWalletIconUrl from '@near-wallet-selector/near-wallet/assets/near-wallet-icon.png';
+import { useStoreActions } from 'easy-peasy';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 
 import { config } from '../../../near/config';
@@ -16,6 +18,8 @@ import '@near-wallet-selector/modal-ui/styles.css';
 const WalletSelectorContext = React.createContext(null);
 
 export const WalletSelectorContextProvider = ({ children }) => {
+    const history = useHistory();
+    const onDisconnect = useStoreActions((actions) => actions.general.onDisconnect);
     const [selector, setSelector] = useState(null);
     const [modal, setModal] = useState(null);
     const [accountId, setAccountId] = useState(null);
@@ -84,6 +88,15 @@ export const WalletSelectorContextProvider = ({ children }) => {
             return;
         }
 
+        // if legacy authKey found, remove and force logout
+        const oldAuthKey = localStorage.getItem('multisafe_wallet_auth_key');
+        if (oldAuthKey) {
+            localStorage.setItem('near_app_wallet_auth_key', oldAuthKey);
+            localStorage.removeItem('multisafe_wallet_auth_key');
+            onDisconnect({ history, selector });
+        }
+
+
         const subscription = selector.store.observable
             .pipe(
                 map((state) => state.accounts),
@@ -94,6 +107,7 @@ export const WalletSelectorContextProvider = ({ children }) => {
             });
 
         return () => subscription.unsubscribe();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selector, accountId]);
 
     if (!selector || !modal) {
