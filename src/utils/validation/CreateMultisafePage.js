@@ -2,6 +2,7 @@ import * as R from 'ramda';
 import * as yup from 'yup';
 
 import { config } from '../../near/config';
+import { debounce } from '../debounce';
 
 const requiredMessageType = {
     name: 'Please enter multisafe name',
@@ -38,9 +39,19 @@ const isUserExist = async (value) => {
     return R.has('result', result);
 };
 
+const isMultiSafeIdExist = debounce(isUserExist, 350);
+const debouncedIsUserExist = debounce(isUserExist, 350);
+
 export const createMultisafeSchema = yup.object().shape({
     name: yup.string().required(requiredMessageType.name),
-    multisafeId: yup.string().required(requiredMessageType.multisafeId),
+    multisafeId: yup.string().required(requiredMessageType.multisafeId)
+        .test({
+            message: 'Account already exists.',
+            test: async (multisafeId) => {
+                const response = await isMultiSafeIdExist(`${multisafeId}.multisafe.${config.networkId}`);
+                return !response;
+            },
+        }),
     members: yup
         .array()
         .of(
@@ -52,8 +63,7 @@ export const createMultisafeSchema = yup.object().shape({
                     .test({
                         message: 'Oops! The user is not found :(',
                         test: async (e) => {
-                            const res = await isUserExist(e);
-                            return res;
+                            return debouncedIsUserExist(e);
                         },
                     }),
             }),
