@@ -37,7 +37,9 @@ const getNearConnectConfig = ({ connectionType, getStoreState }) => {
 
 export const getNearEntities = async (getStoreState, selector) => {
     const state = getStoreState();
-    const walletType = await selector?.wallet()?.id ?? state.general.user.walletType;
+    const walletType = (selector && selector.isSignedIn())
+        ? await selector.wallet().id
+        : state.general.user.walletType;
 
     const near = await connect(
         getNearConnectConfig({

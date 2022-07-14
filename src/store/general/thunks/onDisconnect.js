@@ -10,7 +10,7 @@ export const onDisconnect = thunk(async (_, payload, { getStoreState, getStoreAc
     const resetState = actions.resetState;
     const initApp = actions.general.initApp;
 
-    if (selector) {
+    if (selector && selector.isSignedIn()) {
         const wallet = await selector.wallet();
         wallet?.signOut();
     }
