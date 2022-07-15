@@ -29,7 +29,7 @@ const serializeData = ({ name, members, num_confirmations }) => ({
     members: members.map(({ account_id }) => ({ account_id })),
 });
 
-const addEditRequest = async (contract, contractActions, signAndSendTransaction, multisafeId) => {
+const addEditRequest = async (contract, contractActions, callbackUrl, signAndSendTransaction, multisafeId) => {
     const method = 'add_request_and_confirm';
   
     return await signAndSendTransaction({
@@ -47,6 +47,7 @@ const addEditRequest = async (contract, contractActions, signAndSendTransaction,
                 gas: ATTACHED_GAS
             },
         }],
+        callbackUrl,
     });
 };
 
