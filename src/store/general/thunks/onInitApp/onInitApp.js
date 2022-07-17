@@ -12,6 +12,15 @@ export const onInitApp = thunk(async (_, payload, { getStoreState, getStoreActio
     const actions = getStoreActions();
     const initApp = actions.general.initApp;
 
+    // This part of code is to safely rollback wallet-selector
+    // https://github.com/near/ui.multisafe/pull/134
+    const authKey = localStorage.getItem('near_app_wallet_auth_key');
+    if (authKey) {
+        const onDisconnect = actions.general.onDisconnect;
+        localStorage.removeItem('near_app_wallet_auth_key');
+        onDisconnect({ history });
+    }
+
     const nearEntities = await getNearEntities(getStoreState);
 
     initApp({ nearEntities });
