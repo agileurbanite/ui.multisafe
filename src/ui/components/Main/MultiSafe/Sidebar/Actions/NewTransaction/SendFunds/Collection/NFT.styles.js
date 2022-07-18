@@ -25,6 +25,7 @@ const styles = (theme) => ({
         borderTop: '1px solid rgb(240, 240, 241)',
         '&:last-of-type': {
             borderBottom: '1px solid rgb(240, 240, 241)',
+            marginBottom: 20,
         },
         '& p, span': {
             color: ({isActive}) => isActive && 'white',

@@ -30,7 +30,7 @@ const styles = (theme) => ({
         fontSize: 20,
         color: ({isSendFundsActive}) => isSendFundsActive ?
             theme.palette.primary.main :
-            'rgba(0, 0, 0, 0.87)',
+            '#959595',
         margin: 0,
     },
     sendNFTs: {
@@ -38,7 +38,7 @@ const styles = (theme) => ({
         cursor: 'pointer',
         fontSize: 20,
         color: ({isSendFundsActive}) => isSendFundsActive ?
-            'rgba(0, 0, 0, 0.87)':
+            '#959595':
             theme.palette.primary.main,
         margin: 0,
     },

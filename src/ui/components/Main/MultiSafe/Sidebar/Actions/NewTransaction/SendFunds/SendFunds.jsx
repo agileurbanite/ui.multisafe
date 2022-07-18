@@ -33,12 +33,6 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
         <Paper className={classes.container} ref={ref} tabIndex={tabIndex} elevation={5}>
             <div className={classes.wrapper}>
                 <form className={classes.form} onSubmit={onSubmit}>
-                    <Recipient
-                        control={control}
-                        classNames={classes}
-                        hasError={!!errors?.recipientId}
-                        errorMessage={!!errors?.recipientId && errors?.recipientId?.message}
-                    />
                     <Amount
                         control={control}
                         classNames={classes}
@@ -47,6 +41,12 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
                         setTokenName={setTokenName}
                         hasError={!!errors?.amount}
                         errorMessage={!!errors?.amount && errors?.amount?.message}
+                    />
+                    <Recipient
+                        control={control}
+                        classNames={classes}
+                        hasError={!!errors?.recipientId}
+                        errorMessage={!!errors?.recipientId && errors?.recipientId?.message}
                     />
                     <Checkbox
                         control={control}
