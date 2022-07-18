@@ -13,7 +13,7 @@ export const onDisconnect = thunk(async (_, payload, { getStoreState, getStoreAc
     localStorage.clear();
     resetState();
 
-    history.push(routes.welcome);
+    history.replace(routes.welcome);
 
     const nearEntities = await getNearEntities(getStoreState);
 
