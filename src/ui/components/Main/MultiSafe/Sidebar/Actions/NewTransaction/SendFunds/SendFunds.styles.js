@@ -27,23 +27,12 @@ const styles = (theme) => ({
         display: 'flex',
         flexDirection: 'row', 
     },
-    sendFunds: {
-        padding: '24px',
-        cursor: 'pointer',
-        fontSize: 20,
-        color: ({isSendFundsActive}) => isSendFundsActive ?
-            theme.palette.primary.main :
-            '#959595',
-        margin: 0,
+    tabs: {
+        display: 'flex',
     },
-    sendNFTs: {
-        padding: '24px',
-        cursor: 'pointer',
-        fontSize: 20,
-        color: ({isSendFundsActive}) => isSendFundsActive ?
-            '#959595':
-            theme.palette.primary.main,
-        margin: 0,
+    tab: {
+        flex: '1',
+        textAlign: 'center',
     },
     form: {
         marginTop: 20,

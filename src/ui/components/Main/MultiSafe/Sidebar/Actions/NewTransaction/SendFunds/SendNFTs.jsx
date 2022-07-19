@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Paper } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import cn from 'classnames';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { forwardRef, useState } from 'react';
@@ -126,12 +126,10 @@ export const SendNFTs = forwardRef(({ onClose, tabIndex }, ref) => {
     };
 
     return (
-        <Paper className={classes.container} ref={ref} tabIndex={tabIndex} elevation={5}>
-            <div className={classes.wrapper}>
-                <form className={classes.form} onSubmit={onSubmit}>
-                    {TransferView({ nonFungibleTokens, currentView, setCurrentView, onClose, control, errors, classes, onClick, tokenId, contractName })}
-                </form>
-            </div>
-        </Paper>
+        <div className={classes.wrapper}>
+            <form className={classes.form} onSubmit={onSubmit}>
+                {TransferView({ nonFungibleTokens, currentView, setCurrentView, onClose, control, errors, classes, onClick, tokenId, contractName })}
+            </form>
+        </div>
     );
 });

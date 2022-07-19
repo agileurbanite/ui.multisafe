@@ -1,4 +1,4 @@
-import { Paper } from '@material-ui/core';
+import { Paper, Tabs, Tab } from '@material-ui/core';
 import { useState } from 'react';
 
 import { SendFunds } from './SendFunds';
@@ -10,10 +10,10 @@ export const TransferWrapper = ({onClose}) => {
     const classes = useStyles({ isSendFundsActive });
     return (
         <Paper className={classes.paper}>
-            <div className={classes.directory}>
-                <h2 className={classes.sendFunds} onClick={() => setSendFundsActive(true)}>Send Funds</h2>
-                <h2 className={classes.sendNFTs} onClick={() => setSendFundsActive(false)}>Transfer NFT</h2>
-            </div>
+            <Tabs aria-label="Transfer Assets" className={classes.tabs} >
+                <Tab label="Send Tokens" onClick={() => setSendFundsActive(true)} className={classes.tab}/>
+                <Tab label="Transfer NFT" onClick={() => setSendFundsActive(false)} className={classes.tab}/>
+            </Tabs>
             {isSendFundsActive ? 
                 <SendFunds onClose={onClose}/> :
                 <SendNFTs onClose={onClose}/>
