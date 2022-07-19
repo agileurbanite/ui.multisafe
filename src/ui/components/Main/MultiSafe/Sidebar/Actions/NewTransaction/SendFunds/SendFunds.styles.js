@@ -2,12 +2,14 @@ import { makeStyles } from '@material-ui/core';
 
 const styles = (theme) => ({
     container: {
-        width: 380,
+        width: 385,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         outline: 'none',
         borderRadius: 8,
+        maxHeight: '500px',
+        overflowY: 'auto',
     },
     wrapper: {
         margin: '24px 24px 16px 24px',
@@ -19,6 +21,7 @@ const styles = (theme) => ({
         position: 'fixed',
         left: '40%',
         top: '10%',
+        overflow: 'hidden',
     },
     directory: {
         display: 'flex',
@@ -68,8 +71,7 @@ const styles = (theme) => ({
     },
     footer: {
         display: 'flex',
-        justifyContent: 'flex-end',
-        marginTop: 24,
+        justifyContent: 'flex-end'
     },
     cancel: {
         color: theme.colors.textGrey,

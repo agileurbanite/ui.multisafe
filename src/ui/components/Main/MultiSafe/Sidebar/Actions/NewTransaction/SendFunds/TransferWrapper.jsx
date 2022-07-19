@@ -12,7 +12,7 @@ export const TransferWrapper = ({onClose}) => {
         <Paper className={classes.paper}>
             <div className={classes.directory}>
                 <h2 className={classes.sendFunds} onClick={() => setSendFundsActive(true)}>Send Funds</h2>
-                <h2 className={classes.sendNFTs} onClick={() => setSendFundsActive(false)}>Transfer NFTs</h2>
+                <h2 className={classes.sendNFTs} onClick={() => setSendFundsActive(false)}>Transfer NFT</h2>
             </div>
             {isSendFundsActive ? 
                 <SendFunds onClose={onClose}/> :

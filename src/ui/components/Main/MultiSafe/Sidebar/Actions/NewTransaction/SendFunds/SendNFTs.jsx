@@ -14,29 +14,48 @@ import { useStyles } from './SendFunds.styles';
 
 const VIEWS = {
     CHOOSE_NFT: 'chooseNFT',
-    CHOOSE_RECEIPIENT: 'chooseRecipient'
+    CHOOSE_RECIPIENT: 'chooseRecipient'
 };
 
 const TransferView = ({ nonFungibleTokens, currentView, setCurrentView, onClose, control, errors, classes, onClick, tokenId, contractName }) => {
     switch (currentView) {
-        case VIEWS.CHOOSE_NFT: 
+        case VIEWS.CHOOSE_NFT: {
+            const onClickNext = () => setCurrentView(VIEWS.CHOOSE_RECIPIENT);
             return (
                 <>
                     {nonFungibleTokens.length ? nonFungibleTokens.map((nftCollection) => 
-                        <NFTCollection key={nftCollection.name} tokenId={tokenId} nftCollection={nftCollection} handleClick={onClick} classes={classes}/>) :
+                        <NFTCollection 
+                            key={nftCollection.name}
+                            tokenId={tokenId}
+                            nftCollection={nftCollection}
+                            handleClick={onClick}
+                            classes={classes}
+                        />) :
                         'No NFTs were loaded'
                     }
                     <div className={classes.footer}>
-                        <Button color="secondary" className={classes.cancel} onClick={onClose}>
+                        <Button 
+                            color="secondary"
+                            className={classes.cancel}
+                            onClick={onClose}
+                        >
                             Cancel
                         </Button>
-                        <Button type="secondary" color="primary"  disabled={!tokenId} onClick={() => setCurrentView(VIEWS.CHOOSE_RECEIPIENT)} className={cn(classes.cancel, classes.send)}>
+                        <Button 
+                            type="secondary"
+                            color="primary"
+                            disabled={!tokenId}
+                            onClick={onClickNext}
+                            className={cn(classes.cancel, classes.send)}
+                        >
                             Next
                         </Button>
                     </div>
                 </>
             );
-        case VIEWS.CHOOSE_RECEIPIENT: {
+        }
+        case VIEWS.CHOOSE_RECIPIENT: {
+            const onClickBack = () => setCurrentView(VIEWS.CHOOSE_NFT);
             const collection = nonFungibleTokens.filter((nftCollection) => nftCollection.contractName === contractName);
             return (
                 <>
@@ -44,11 +63,11 @@ const TransferView = ({ nonFungibleTokens, currentView, setCurrentView, onClose,
                         control={control}
                         classNames={classes}
                         hasError={!!errors?.recipientId}
-                        errorMessage={!!errors?.recipientId && errors?.recipientId?.message}
+                        errorMessage={errors?.recipientId?.message}
                     />
                     {
-                        collection[0].tokens.map((nft) => nft.token_id === tokenId && 
-                        <NFT key={nft.metadata.title} tokenId={tokenId} nftCollection={collection} nft={nft} classes={classes} handleClick={() => {}}/>)
+                        collection?.[0]?.tokens?.map((nft) => nft.token_id === tokenId && 
+                        <NFT key={nft.metadata.title} tokenId={tokenId} nftCollection={collection} nft={nft} classes={classes} />)
                     }
                     <Checkbox
                         control={control}
@@ -59,10 +78,18 @@ const TransferView = ({ nonFungibleTokens, currentView, setCurrentView, onClose,
                         color="primary"
                     />
                     <div className={classes.footer}>
-                        <Button color="secondary" className={classes.cancel} onClick={() => setCurrentView(VIEWS.CHOOSE_NFT)}>
+                        <Button 
+                            color="secondary"
+                            className={classes.cancel}
+                            onClick={onClickBack}
+                        >
                             Previous
                         </Button>
-                        <Button type="submit" color="primary" className={cn(classes.cancel, classes.send)}>
+                        <Button
+                            type="submit"
+                            color="primary"
+                            className={cn(classes.cancel, classes.send)}
+                        >
                             Send
                         </Button>
                     </div>
@@ -95,6 +122,7 @@ export const SendNFTs = forwardRef(({ onClose, tabIndex }, ref) => {
     const onClick = ({id, contract}) => {
         setTokenId(id);
         setContractName(contract);
+        setCurrentView(VIEWS.CHOOSE_RECIPIENT);
     };
 
     return (

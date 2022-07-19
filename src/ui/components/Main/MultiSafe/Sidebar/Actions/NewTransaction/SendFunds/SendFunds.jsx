@@ -46,7 +46,7 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
                         control={control}
                         classNames={classes}
                         hasError={!!errors?.recipientId}
-                        errorMessage={!!errors?.recipientId && errors?.recipientId?.message}
+                        errorMessage={errors?.recipientId?.message}
                     />
                     <Checkbox
                         control={control}

@@ -12,20 +12,20 @@ import { NFTMedia } from './NFTMedia';
 
 export const Collection = ({ nftCollection, classes, handleClick }) => (
     <>
-        {nftCollection.tokens.map((nft) => (
-            <Card key={nft.metadata.title} className={classes.root}>
+        {nftCollection?.tokens?.map((nft) => (
+            <Card key={nft?.metadata?.title} className={classes.root}>
                 <CardHeader
                     avatar={
                         <Avatar className={classes.avatar}>
                             {emojiConfig.foxMuzzle}
                         </Avatar>
                     }
-                    title={nft.metadata.title}
-                    subheader={nftCollection.name}
+                    title={nft?.metadata?.title}
+                    subheader={nftCollection?.name}
                 />
                 <NFTMedia classes={classes} nft={nft} />
                 <CardActions disableSpacing>
-                    <IconButton onClick={() => handleClick({id: nft.token_id, contract: nftCollection.contractName, title: nft.metadata.title })}>
+                    <IconButton onClick={() => handleClick({id: nft?.token_id, contract: nftCollection?.contractName, title: nft?.metadata?.title })}>
                         <SendIcon/>
                     </IconButton>
                 </CardActions>
