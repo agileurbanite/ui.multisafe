@@ -2,12 +2,14 @@ import { makeStyles } from '@material-ui/core';
 
 const styles = (theme) => ({
     container: {
-        width: 380,
+        width: 385,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         outline: 'none',
         borderRadius: 8,
+        maxHeight: '500px',
+        overflowY: 'auto',
     },
     wrapper: {
         margin: '24px 24px 16px 24px',
@@ -15,13 +17,34 @@ const styles = (theme) => ({
         display: 'flex',
         flexDirection: 'column',
     },
-    header: {
-        fontSize: 20,
-        color: 'rgba(0, 0, 0, 0.87)',
-        margin: 0,
+    paper: {
+        position: 'fixed',
+        left: '40%',
+        top: '10%',
+        overflow: 'hidden',
+    },
+    directory: {
+        display: 'flex',
+        flexDirection: 'row', 
+    },
+    tabs: {
+        display: 'flex',
+    },
+    tab: {
+        flex: '1',
+        textAlign: 'center',
+    },
+    sendFunds: {
+        borderBottom: ({isSendFundsActive}) => isSendFundsActive &&
+            `2px solid ${theme.palette.primary.main}`
+    },
+    sendNFTs: {
+        borderBottom: ({isSendFundsActive}) => !isSendFundsActive &&
+            `2px solid ${theme.palette.primary.main}`
     },
     form: {
         marginTop: 20,
+        width: 320,
     },
     textField: {
         marginBottom: 24,
@@ -45,8 +68,7 @@ const styles = (theme) => ({
     },
     footer: {
         display: 'flex',
-        justifyContent: 'flex-end',
-        marginTop: 24,
+        justifyContent: 'flex-end'
     },
     cancel: {
         color: theme.colors.textGrey,

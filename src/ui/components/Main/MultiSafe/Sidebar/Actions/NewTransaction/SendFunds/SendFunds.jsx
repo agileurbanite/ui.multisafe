@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Paper } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import cn from 'classnames';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { forwardRef, useState } from 'react';
@@ -30,43 +30,40 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
     });
 
     return (
-        <Paper className={classes.container} ref={ref} tabIndex={tabIndex} elevation={5}>
-            <div className={classes.wrapper}>
-                <h2 className={classes.header}>Send Funds</h2>
-                <form className={classes.form} onSubmit={onSubmit}>
-                    <Recipient
-                        control={control}
-                        classNames={classes}
-                        hasError={!!errors?.recipientId}
-                        errorMessage={!!errors?.recipientId && errors?.recipientId?.message}
-                    />
-                    <Amount
-                        control={control}
-                        classNames={classes}
-                        setValue={setValue}
-                        tokenName={tokenName}
-                        setTokenName={setTokenName}
-                        hasError={!!errors?.amount}
-                        errorMessage={!!errors?.amount && errors?.amount?.message}
-                    />
-                    <Checkbox
-                        control={control}
-                        name="withApprove"
-                        label="Approve transaction"
-                        muiClasses={{ label: classes.checkboxLabel }}
-                        defaultValue
-                        color="primary"
-                    />
-                    <div className={classes.footer}>
-                        <Button color="secondary" className={classes.cancel} onClick={onClose}>
-              Cancel
-                        </Button>
-                        <Button type="submit" color="primary" className={cn(classes.cancel, classes.send)}>
-              Send
-                        </Button>
-                    </div>
-                </form>
-            </div>
-        </Paper>
+        <div className={classes.wrapper}>
+            <form className={classes.form} onSubmit={onSubmit}>
+                <Amount
+                    control={control}
+                    classNames={classes}
+                    setValue={setValue}
+                    tokenName={tokenName}
+                    setTokenName={setTokenName}
+                    hasError={!!errors?.amount}
+                    errorMessage={!!errors?.amount && errors?.amount?.message}
+                />
+                <Recipient
+                    control={control}
+                    classNames={classes}
+                    hasError={!!errors?.recipientId}
+                    errorMessage={errors?.recipientId?.message}
+                />
+                <Checkbox
+                    control={control}
+                    name="withApprove"
+                    label="Approve transaction"
+                    muiClasses={{ label: classes.checkboxLabel }}
+                    defaultValue
+                    color="primary"
+                />
+                <div className={classes.footer}>
+                    <Button color="secondary" className={classes.cancel} onClick={onClose}>
+                        Cancel
+                    </Button>
+                    <Button type="submit" color="primary" className={cn(classes.cancel, classes.send)}>
+                        Send
+                    </Button>
+                </div>
+            </form>
+        </div>
     );
 });

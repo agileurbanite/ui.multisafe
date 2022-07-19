@@ -37,7 +37,7 @@ export const NonFungibleTokens = () => {
                 justifyContent="center"
                 alignItems="center"
             >
-                {nonFungibleTokens.map((nftCollection) => 
+                {nonFungibleTokens.length && nonFungibleTokens.map((nftCollection) => 
                     <Collection nftCollection={nftCollection} handleClick={onOpen} classes={classes}/>)}
             </Grid>
             <Modal open={isOpen} onClose={onClose} className={classes.modal}>

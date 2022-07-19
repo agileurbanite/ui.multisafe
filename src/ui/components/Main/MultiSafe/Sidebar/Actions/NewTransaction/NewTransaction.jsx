@@ -4,16 +4,17 @@ import { useState } from 'react';
 
 import { MakeFunctionCall } from './MakeFunctionCall/MakeFunctionCall';
 import { useStyles } from './NewTransaction.styles';
-import { SendFunds } from './SendFunds/SendFunds';
+import { TransferWrapper } from './SendFunds/TransferWrapper';
 
 const TYPE = {
-    SEND_FUNDS: 'sendFunds',
+    TRANSFER: 'transfer',
     MAKE_FUNCTION_CALL: 'makeFunctionCall',
 };
 
 export const NewTransaction = () => {
     const multisafeId = useStoreState((s) => s.multisafe.general.multisafeId);
     const fetchFungibleTokens = useStoreActions((actions) => actions.multisafe.onMountTokenList);
+    const fetchNonFungibleTokens = useStoreActions((actions) => actions.multisafe.onMountNonFungibleTokenList);
     const [anchorEl, setAnchorEl] = useState(null);
     const isMenuOpen = Boolean(anchorEl);
     const [transactionType, setTransactionType] = useState('');
@@ -30,8 +31,9 @@ export const NewTransaction = () => {
     const handleSetTransactionType = (type) => {
         setTransactionType(type);
         onCloseMenu();
-        if (type === TYPE.SEND_FUNDS) {
+        if (type === TYPE.TRANSFER) {
             fetchFungibleTokens(multisafeId);
+            fetchNonFungibleTokens(multisafeId);
         }
     };
 
@@ -62,8 +64,8 @@ export const NewTransaction = () => {
                     'aria-labelledby': 'basic-button',
                 }}
             >
-                <MenuItem onClick={() => handleSetTransactionType(TYPE.SEND_FUNDS)}>Send Funds</MenuItem>
-                <MenuItem onClick={() => handleSetTransactionType(TYPE.MAKE_FUNCTION_CALL)}>Make Function Call</MenuItem>
+                <MenuItem onClick={() => handleSetTransactionType(TYPE.TRANSFER)}>Transfer</MenuItem>
+                <MenuItem onClick={() => handleSetTransactionType(TYPE.MAKE_FUNCTION_CALL)}>Custom Function</MenuItem>
             </Menu>
             <Modal open={!!transactionType} onClose={onCloseTransaction} className={classes.modal}>
                 <div>
@@ -79,8 +81,8 @@ export const NewTransaction = () => {
 
 const TransactionType = ({ type, onClose }) => {
     switch (type) {
-        case TYPE.SEND_FUNDS:
-            return <SendFunds onClose={onClose} />;
+        case TYPE.TRANSFER:
+            return <TransferWrapper onClose={onClose} />;
         case TYPE.MAKE_FUNCTION_CALL:
             return <MakeFunctionCall onClose={onClose} />;
         default:
