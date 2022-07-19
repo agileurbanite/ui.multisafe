@@ -34,6 +34,14 @@ const styles = (theme) => ({
         flex: '1',
         textAlign: 'center',
     },
+    sendFunds: {
+        borderBottom: ({isSendFundsActive}) => isSendFundsActive &&
+            `2px solid ${theme.palette.primary.main}`
+    },
+    sendNFTs: {
+        borderBottom: ({isSendFundsActive}) => !isSendFundsActive &&
+            `2px solid ${theme.palette.primary.main}`
+    },
     form: {
         marginTop: 20,
         width: 320,

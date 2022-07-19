@@ -11,8 +11,8 @@ export const TransferWrapper = ({onClose}) => {
     return (
         <Paper className={classes.paper}>
             <Tabs aria-label="Transfer Assets" className={classes.tabs} >
-                <Tab label="Send Tokens" onClick={() => setSendFundsActive(true)} className={classes.tab}/>
-                <Tab label="Transfer NFT" onClick={() => setSendFundsActive(false)} className={classes.tab}/>
+                <Tab label="Send Tokens" onClick={() => setSendFundsActive(true)} className={`${classes.tab} ${classes.sendFunds}`}/>
+                <Tab label="Transfer NFT" onClick={() => setSendFundsActive(false)} className={`${classes.tab} ${classes.sendNFTs}`}/>
             </Tabs>
             {isSendFundsActive ? 
                 <SendFunds onClose={onClose}/> :
