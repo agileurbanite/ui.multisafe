@@ -28,7 +28,7 @@ export const onInitApp = thunk(async (_, payload, { getStoreState, getStoreActio
 
     // Call onMount thunk for the page - we want to load data before the page will be mounted -
     // it allows us to avoid "screen blinking" or display the empty page to the user.
-    await getDataBeforeRenderPage({ actions, history, withLoading: false });
+    await getDataBeforeRenderPage({ actions, history, withLoading: false, state });
 
     // Finish initialization and hide loader
     setInit(true);
