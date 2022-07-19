@@ -6,7 +6,7 @@ import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
 import myNearWalletIconUrl from '@near-wallet-selector/my-near-wallet/assets/my-near-wallet-icon.png';
 import { setupNearWallet } from '@near-wallet-selector/near-wallet';
 import nearWalletIconUrl from '@near-wallet-selector/near-wallet/assets/near-wallet-icon.png';
-import { useStoreActions } from 'easy-peasy';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { distinctUntilChanged, map } from 'rxjs/operators';
@@ -20,6 +20,7 @@ const WalletSelectorContext = React.createContext(null);
 export const WalletSelectorContextProvider = ({ children }) => {
     const history = useHistory();
     const onDisconnect = useStoreActions((actions) => actions.general.onDisconnect);
+    const walletType = useStoreState((state) => state.general.user.walletType);
     const [selector, setSelector] = useState(null);
     const [modal, setModal] = useState(null);
     const [accountId, setAccountId] = useState(null);
@@ -88,10 +89,10 @@ export const WalletSelectorContextProvider = ({ children }) => {
             return;
         }
 
-        // if legacy authKey found, remove and force logout
-        const oldAuthKey = localStorage.getItem('multisafe_wallet_auth_key');
-        if (oldAuthKey) {
-            localStorage.setItem('near_app_wallet_auth_key', oldAuthKey);
+        // if legacy near-wallet or ledger auth instance found, remove and force logout
+        const oldNearWalletAuthKey = localStorage.getItem('multisafe_wallet_auth_key');
+        const newLedgerWalletAuthKey = localStorage.getItem('near-wallet-selector:ledger:accounts');
+        if (oldNearWalletAuthKey || (walletType === 'ledger' && !newLedgerWalletAuthKey)) {
             localStorage.removeItem('multisafe_wallet_auth_key');
             onDisconnect({ history, selector });
         }
