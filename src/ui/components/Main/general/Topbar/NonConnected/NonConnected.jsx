@@ -1,27 +1,24 @@
 import { Button } from '@material-ui/core';
 import { ExitToApp, DeleteOutline } from '@material-ui/icons';
 import { useStoreActions, useStoreState } from 'easy-peasy';
-import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { useWalletSelector } from '../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
-import { ConnectWallet } from '../../../../general/ConnectWallet/ConnectWallet';
 import { useStyles } from './NonConnected.styles';
 
 export const NonConnected = () => {
     const hasSavedMultisafes = useStoreState((store) => store.general.selectors.hasSavedMultisafes);
     const onDisconnect = useStoreActions((actions) => actions.general.onDisconnect);
-    const [isOpenConnectWallet, setOpenConnectWallet] = useState(false);
     const history = useHistory();
     const classes = useStyles();
 
-    const { selector } = useWalletSelector();
+    const { selector, modal } = useWalletSelector();
 
     const disconnect = async () => {
         onDisconnect({ history, selector });
     };
 
-    const openConnectWallet = () => setOpenConnectWallet(true);
+    const openConnectWallet = () => modal.show();
 
     return (
         <>
@@ -49,7 +46,6 @@ export const NonConnected = () => {
                     </span>
                 </Button>
             </div>
-            {isOpenConnectWallet && <ConnectWallet setModalOpen={setOpenConnectWallet} />}
         </>
     );
 };
