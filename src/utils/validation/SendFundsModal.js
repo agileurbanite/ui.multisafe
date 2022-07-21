@@ -2,7 +2,7 @@ import * as yup from 'yup';
 
 const requiredMessageType = {
     recipientId: 'Please enter recipient\'s address',
-    amount: 'Please enter a valid multisig name',
+    amount: 'Please enter a valid amount to send',
 };
 
 export const sendFundsSchema = yup.object().shape({

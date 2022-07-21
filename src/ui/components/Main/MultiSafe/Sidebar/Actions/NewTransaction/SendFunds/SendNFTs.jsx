@@ -109,7 +109,7 @@ export const SendNFTs = forwardRef(({ onClose, tabIndex }, ref) => {
     const nonFungibleTokens = useStoreState(({ multisafe }) => multisafe.general.nonFungibleTokens);
     const onTransferNFT = useStoreActions((actions) => actions.multisafe.onTransferNFT);
 
-    const { control, handleSubmit, errors } = useForm({
+    const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(transferNFTSchema),
         mode: 'all',
     });
