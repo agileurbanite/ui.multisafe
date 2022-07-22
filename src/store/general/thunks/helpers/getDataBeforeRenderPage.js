@@ -17,11 +17,7 @@ export const getDataBeforeRenderPage = async ({
     actions,
     history: browserHistory,
     withLoading,
-    state,
 }) => {
-
-    const near = state.general.entities.near;
-    if (!near) return;
     
     const enableLoading = actions.general.enableLoading;
     const disableLoading = actions.general.disableLoading;

@@ -17,13 +17,13 @@ render(
     <StrictMode>
         <StoreProvider store={store}>
             <MuiThemeProvider theme={theme}>
-                <Initializer history={history} store={store}>
-                    <Router>
-                        <WalletSelectorContextProvider>
+                <WalletSelectorContextProvider>
+                    <Initializer history={history} store={store}>
+                        <Router>
                             <App />
-                        </WalletSelectorContextProvider>
-                    </Router>
-                </Initializer>
+                        </Router>
+                    </Initializer>
+                </WalletSelectorContextProvider>
             </MuiThemeProvider>
         </StoreProvider>
     </StrictMode>,

@@ -8,7 +8,6 @@ import { setupNearWallet } from '@near-wallet-selector/near-wallet';
 import nearWalletIconUrl from '@near-wallet-selector/near-wallet/assets/near-wallet-icon.png';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 
 import { config } from '../../../near/config';
@@ -18,9 +17,9 @@ import '@near-wallet-selector/modal-ui/styles.css';
 const WalletSelectorContext = React.createContext(null);
 
 export const WalletSelectorContextProvider = ({ children }) => {
-    const history = useHistory();
     const onDisconnect = useStoreActions((actions) => actions.general.onDisconnect);
     const walletType = useStoreState((state) => state.general.user.walletType);
+    const isConnected = useStoreState((state) => state.general.user.isConnected);
     const [selector, setSelector] = useState(null);
     const [modal, setModal] = useState(null);
     const [accountId, setAccountId] = useState(null);
@@ -88,15 +87,18 @@ export const WalletSelectorContextProvider = ({ children }) => {
         if (!selector) {
             return;
         }
-
         // if legacy near-wallet or ledger auth instance found, remove and force logout
-        const oldNearWalletAuthKey = localStorage.getItem('multisafe_wallet_auth_key');
-        const newLedgerWalletAuthKey = localStorage.getItem('near-wallet-selector:ledger:accounts');
-        if (oldNearWalletAuthKey || (walletType === 'ledger' && !newLedgerWalletAuthKey)) {
-            localStorage.removeItem('multisafe_wallet_auth_key');
-            onDisconnect({ history, selector });
-        }
+        const handleLegacyWalletLogout = async () => {
+            const oldNearWalletAuthKey = localStorage.getItem('multisafe_wallet_auth_key');
+            const newLedgerWalletAuthKey = localStorage.getItem('near-wallet-selector:ledger:accounts');
+            if (oldNearWalletAuthKey || (walletType === 'ledger' && !newLedgerWalletAuthKey && isConnected)) {
+                localStorage.removeItem('multisafe_wallet_auth_key');
+                await onDisconnect({ selector });
+            }
+        };
 
+        handleLegacyWalletLogout();
+       
 
         const subscription = selector.store.observable
             .pipe(

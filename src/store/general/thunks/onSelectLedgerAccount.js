@@ -1,7 +1,5 @@
 import { thunk } from 'easy-peasy';
-// import { matchPath } from 'react-router';
 
-// import { routes } from '../../../ui/config/routes';
 import { getNearEntities } from './helpers/getNearEntities';
 
 export const onSelectLedgerAccount = thunk(

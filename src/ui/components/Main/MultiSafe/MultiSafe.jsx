@@ -1,6 +1,6 @@
-import { useStoreActions, useStoreState } from 'easy-peasy';
+import { useStoreActions } from 'easy-peasy';
 import { useState } from 'react';
-import { Switch, Route, useHistory } from 'react-router';
+import { Switch, Route } from 'react-router';
 
 import { routes } from '../../../config/routes';
 import { Loader } from '../../../providers/Initializer/Loader/Loader';
@@ -20,13 +20,6 @@ export const MultiSafe = () => {
     const [isListOpen, setListOpen] = useState(false);
     const onMountList = useStoreActions((actions) => actions.multisafe.onMountList);
     const classes = useStyles();
-    const history = useHistory();
-
-    const near = useStoreState((state) => state.general.entities.near);
-
-    if (!near) {
-        history.push(routes.welcome);
-    }
 
     const onListOpen = () => onMountList({ setListOpen });
     const onListClose = () => setListOpen(false);
@@ -38,20 +31,14 @@ export const MultiSafe = () => {
             {isListOpen && <MultisafeList onListClose={onListClose} />}
             <div className={classes.content}>
                 <Switch>
-                    {
-                        near && (
-                            <>
-                                <Route exact path={routes.dashboard} component={Dashboard} />
-                                <Route exact path={routes.history} component={History} />
-                                <Route exact path={routes.members} component={Members} />
-                                <Route exact path={routes.remove} component={Remove} />
-                                <Route exact path={routes.disconnect} component={Disconnect} />
-                                <Route exact path={routes.nonFungibleTokens} component={NonFungibleTokens} />
-                                <Route exact path={routes.safeEdit} component={EditSafe} />
-                                <Route exact path={routes.redirectFromWallet} component={Loader} />
-                            </>
-                        )
-                    }
+                    <Route exact path={routes.dashboard} component={Dashboard} />
+                    <Route exact path={routes.history} component={History} />
+                    <Route exact path={routes.members} component={Members} />
+                    <Route exact path={routes.remove} component={Remove} />
+                    <Route exact path={routes.disconnect} component={Disconnect} />
+                    <Route exact path={routes.nonFungibleTokens} component={NonFungibleTokens} />
+                    <Route exact path={routes.safeEdit} component={EditSafe} />
+                    <Route exact path={routes.redirectFromWallet} component={Loader} />
                 </Switch>
                 <Footer />
             </div>

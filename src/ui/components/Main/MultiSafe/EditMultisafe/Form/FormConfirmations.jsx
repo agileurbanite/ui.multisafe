@@ -1,4 +1,3 @@
-// import { useEffect } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@material-ui/core';
 import { useStoreActions, useStoreState } from 'easy-peasy';

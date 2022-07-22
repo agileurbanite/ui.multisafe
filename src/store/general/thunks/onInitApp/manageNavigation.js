@@ -21,8 +21,8 @@ const { root, welcome, getStarted, createMultisafe, loadMultisafe, dashboard, hi
  * * root / welcome / getStarted -> dashboard;
  * * dashboard / history / members / createMultisafe / loadMultisafe -> no changes;
  */
-export const manageNavigation = (state, browserHistory) => {
-    const isConnected = state.general.user.isConnected;
+export const manageNavigation = (state, browserHistory, selector) => {
+    const isConnected = selector.isSignedIn();
     const hasSavedMultisafes = state.general.selectors.hasSavedMultisafes;
     const lastActiveMultisafeId = state.multisafe.general.multisafeId;
 

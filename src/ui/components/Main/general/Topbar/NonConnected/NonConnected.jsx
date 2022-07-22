@@ -15,7 +15,7 @@ export const NonConnected = () => {
     const { selector, modal } = useWalletSelector();
 
     const disconnect = async () => {
-        onDisconnect({ history, selector });
+        await onDisconnect({ history, selector });
     };
 
     const openConnectWallet = () => modal.show();

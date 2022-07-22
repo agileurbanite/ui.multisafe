@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core';
-import { useStoreActions, useStoreState } from 'easy-peasy';
+import { useStoreState } from 'easy-peasy';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 
@@ -11,31 +11,15 @@ import { useStyles } from './Welcome.styles';
 
 export const Welcome = () => {
     const classes = useStyles();
-    const { modal, selector, accountId, selectedWalletId } = useWalletSelector();
+    const { modal, selector } = useWalletSelector();
     const openConnectWallet = () => modal.show();
 
     const signedIn = selector.isSignedIn();
-    const onConnectSuccess = useStoreActions((actions) => actions.general.setUserData);
-    const onLedgerConnectSuccess = useStoreActions((actions) => actions.general.onSelectLedgerAccount);
     const history = useHistory();
     const multisafeId = useStoreState((state) => state.multisafe.general.multisafeId);
 
     useEffect(() => {   
         if (signedIn && !multisafeId) {
-            // This is to support existing legacy code to work as same as before integrating with wallet-selector
-            if (selectedWalletId === 'ledger') {
-                const ledgerData = localStorage.getItem('near-wallet-selector:ledger:accounts');
-                const pk = ledgerData && JSON.parse(ledgerData)?.[0].publicKey;
-                onLedgerConnectSuccess({ accountId, pk, history });
-            } else {
-                onConnectSuccess({
-                    accountId,
-                    isConnected: true,
-                    walletType: selectedWalletId,
-                    publicKey: null,
-                });
-            }
-
             history.push('/get-started');
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps

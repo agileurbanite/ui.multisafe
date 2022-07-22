@@ -22,7 +22,7 @@ export const FormRemove = () => {
     });
 
     const onSubmit = handleSubmit(async () => {
-        onDisconnect({ history, selector });
+        await onDisconnect({ history, selector });
     });
 
     return (
