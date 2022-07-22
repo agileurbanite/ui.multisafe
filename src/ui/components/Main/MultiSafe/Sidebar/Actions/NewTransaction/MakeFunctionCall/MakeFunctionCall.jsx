@@ -16,7 +16,7 @@ import { TGas } from './TGas/TGas';
 
 export const MakeFunctionCall = forwardRef(({ onClose, tabIndex }, ref) => {
     const onMakeFunctionCall = useStoreActions((actions) => actions.multisafe.onMakeFunctionCall);
-    const { control, handleSubmit, errors } = useForm({
+    const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(makeFunctionCallSchema),
         mode: 'all',
     });
@@ -35,31 +35,31 @@ export const MakeFunctionCall = forwardRef(({ onClose, tabIndex }, ref) => {
                         control={control}
                         classNames={classes}
                         hasError={!!errors?.smartContractAddress}
-                        errorMessage={!!errors?.smartContractAddress && errors?.description?.smartContractAddress}
+                        errorMessage={errors?.smartContractAddress?.message}
                     />
                     <MethodName
                         control={control}
                         classNames={classes}
                         hasError={!!errors?.methodName}
-                        errorMessage={!!errors?.methodName && errors?.description?.methodName}
+                        errorMessage={errors?.methodName?.message}
                     />
                     <Arguments
                         control={control}
                         classNames={classes}
                         hasError={!!errors?.args}
-                        errorMessage={!!errors?.args && errors?.description?.args}
+                        errorMessage={errors?.args?.message}
                     />
                     <Deposit
                         control={control}
                         classNames={classes}
                         hasError={!!errors?.deposit}
-                        errorMessage={!!errors?.deposit && errors?.description?.deposit}
+                        errorMessage={errors?.deposit?.message}
                     />
                     <TGas
                         control={control}
                         classNames={classes}
                         hasError={!!errors?.tGas}
-                        errorMessage={!!errors?.tGas && errors?.description?.tGas}
+                        errorMessage={errors?.tGas?.message}
                     />
                     <Checkbox
                         control={control}

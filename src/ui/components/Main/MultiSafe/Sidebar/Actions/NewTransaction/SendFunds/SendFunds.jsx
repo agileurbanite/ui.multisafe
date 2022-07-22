@@ -16,7 +16,7 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
     const onTransferTokens = useStoreActions((actions) => actions.multisafe.onTransferTokens);
     const fungibleTokens = useStoreState((store) => store.multisafe.general.fungibleTokens);
 
-    const { control, handleSubmit, setValue, errors } = useForm({
+    const { control, handleSubmit, setValue, formState: { errors } } = useForm({
         resolver: yupResolver(sendFundsSchema),
         mode: 'all',
     });
