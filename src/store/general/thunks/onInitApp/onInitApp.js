@@ -40,7 +40,9 @@ export const onInitApp = thunk(async (_, payload, { getStoreState, getStoreActio
     // handle it and redirect the user to the appropriate page. If not - check if a user has access
     // to the page and redirect to the proper page
     if (isRedirect(state, history)) {
-        await handleRedirectFromWallet(state, actions, history);
+        const wallet = await selector.wallet();
+        const signAndSendTransaction = wallet.signAndSendTransaction;
+        await handleRedirectFromWallet(state, actions, history, signAndSendTransaction);
     } else {
         manageNavigation(state, history, selector);
     }
