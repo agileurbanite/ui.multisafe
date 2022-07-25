@@ -4,13 +4,16 @@ import { OpenInNew } from '@material-ui/icons';
 import { config } from '../../../../../../near/config';
 
 const getHref = ({ accountId, type, transactionHash }) => {
-    if (type === 'account' && accountId) {
-        return config.getCheckAccountInExplorerUrl(accountId);
+    switch (type) {
+        case 'account':
+            return config.getCheckAccountInExplorerUrl(accountId);
+        case 'transaction':
+            if (!transactionHash) 
+                return config.getCheckAccountInExplorerUrl(accountId);
+            return config.getCheckTransactionInExplorerUrl(transactionHash);
+        default:
+            return null;
     }
-    if (type === 'transaction' && transactionHash) {
-        return config.getCheckTransactionInExplorerUrl(transactionHash);
-    }
-    return null;
 };
 
 export const OpenInExplorer = ({ accountId, transactionHash, classNames, type = 'account' }) => {
