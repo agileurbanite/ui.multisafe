@@ -4,13 +4,16 @@ import { OpenInNew } from '@material-ui/icons';
 import { config } from '../../../../../../near/config';
 
 const getHref = ({ accountId, type, transactionHash }) => {
+    const getAccountInExplorerUrl =  (accountId) => `${config.explorerUrl}/accounts/${accountId}`;
+    const getTransactionInExplorerUrl = (transactionHash) => `${config.explorerUrl}/transactions/${transactionHash}`;
+
     switch (type) {
         case 'account':
-            return config.getCheckAccountInExplorerUrl(accountId);
+            return getAccountInExplorerUrl(accountId);
         case 'transaction':
             if (!transactionHash) 
-                return config.getCheckAccountInExplorerUrl(accountId);
-            return config.getCheckTransactionInExplorerUrl(transactionHash);
+                return getAccountInExplorerUrl(accountId);
+            return getTransactionInExplorerUrl(transactionHash);
         default:
             return null;
     }
