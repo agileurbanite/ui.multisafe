@@ -39,8 +39,8 @@ module.exports = {
             SwitchCase: 1,
         }],
         'no-restricted-syntax': ['error', {
-            'selector': 'VariableDeclarator[id.type=\'ObjectPattern\'] Property[key.name=\'searchParams\']', 
-            'message': 'URL.searchParams is not allowed, Use `query-string` package instead' 
+            'selector': 'VariableDeclarator[id.type=\'ObjectPattern\'] Property[key.name=\'searchParams\']',
+            'message': 'URL.searchParams is not allowed, Use `query-string` package instead'
         }, {
             'selector': 'CallExpression[callee.name=\'useSelector\'] MemberExpression[object.name=\'state\']',
             'message': 'Please use a selector for any state accesses within useSelector'
@@ -53,6 +53,19 @@ module.exports = {
         }]
     },
     settings: {
+        'import/resolver': {
+            alias: {
+                map: [
+                    ['@ui', './src/ui'],
+                    ['@store', './src/store'],
+                    ['@services', './src/services'],
+                    ['@near', './src/near'],
+                    ['@config', './src/config'],
+                    ['@utils', './src/utils'],
+                ],
+                extensions: ['.js', '.jsx', '.json'],
+            },
+        },
         'import/ignore': ['src/config/*'],
     },
     overrides: [
