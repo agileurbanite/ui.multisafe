@@ -1,7 +1,7 @@
 import { TableCell } from '@material-ui/core';
+import { CopyToClipboard } from '@ui/components/Main/MultiSafe/general/CopyToClipboard/CopyToClipboard';
+import { OpenInExplorer } from '@ui/components/Main/MultiSafe/general/OpenInExplorer/OpenInExplorer';
 
-import { CopyToClipboard } from '../../../general/CopyToClipboard/CopyToClipboard';
-import { OpenInExplorer } from '../../../general/OpenInExplorer/OpenInExplorer';
 import { useStyles } from './Recipient.styles';
 
 export const Recipient = ({ recipient, transactionHash }) => {

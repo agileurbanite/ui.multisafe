@@ -1,10 +1,10 @@
 import TransportWebHID from '@ledgerhq/hw-transport-webhid';
+import { handleLedgerError } from '@store/helpers/handleLedgerError';
 import { thunk } from 'easy-peasy';
 import { PublicKey } from 'near-api-js/lib/utils';
 import { KeyType } from 'near-api-js/lib/utils/key_pair';
 import { createClient } from 'near-ledger-js';
 
-import { handleLedgerError } from '../../helpers/handleLedgerError';
 import { getAccountIdsByPublicKey } from './helpers/getAccountIdsByPublicKey';
 
 export const onConnectLedger = thunk(async (_, payload, { getStoreActions }) => {

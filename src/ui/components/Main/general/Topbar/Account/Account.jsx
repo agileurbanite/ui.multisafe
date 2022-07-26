@@ -1,8 +1,8 @@
 import { ArrowDropDown, ArrowDropUp } from '@material-ui/icons';
+import { Near } from '@ui/components/general/icons/Near';
+import { Popover } from '@ui/components/general/Popover/Popover';
 import { useState } from 'react';
 
-import { Near } from '../../../../general/icons/Near';
-import { Popover } from '../../../../general/Popover/Popover';
 import { useStyles } from './Account.styles';
 import { Modal } from './Modal/Modal';
 

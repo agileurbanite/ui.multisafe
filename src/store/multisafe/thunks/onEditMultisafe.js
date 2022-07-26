@@ -1,8 +1,8 @@
+import { redirectActions } from '@config/redirectActions';
+import { config } from '@near/config';
+import { getRoute } from '@ui/config/routes';
 import { thunk } from 'easy-peasy';
 
-import { redirectActions } from '../../../config/redirectActions';
-import { config } from '../../../near/config';
-import { getRoute } from '../../../ui/config/routes';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 
 const ATTACHED_GAS = config.gas.default;
@@ -46,7 +46,7 @@ const generateConfirmationsActions = (values, numConfirmations) => values.numCon
     ? [{ type: 'SetNumConfirmations', num_confirmations: values.numConfirmations }]
     : [];
 
-const generateAddMembersActions = ({ membersIds, currentMembersIds, values }) => 
+const generateAddMembersActions = ({ membersIds, currentMembersIds, values }) =>
     membersIds.length
         ? values.members.reduce((x, member) => [
             ...x,
@@ -59,7 +59,7 @@ const generateAddMembersActions = ({ membersIds, currentMembersIds, values }) =>
         ], [])
         : [];
 
-const generateDeleteMembersActions = ({ membersIds, currentMembers }) => 
+const generateDeleteMembersActions = ({ membersIds, currentMembers }) =>
     membersIds.length
         ? currentMembers.reduce((x, currentMember) => [
             ...x,
@@ -177,7 +177,7 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
     const state = getStoreState();
     const actions = getStoreActions();
     const values = serializeData(data);
-  
+
     const isNearWallet = state.general.selectors.isNearWallet;
     const contract = state.multisafe.entities.contract;
     const members = state.multisafe.members;
@@ -213,7 +213,7 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
             ? prepareBatchRequest(contract, confirmationsActions, membersActions, actions, values, members)
             : await signBatchTxByLedger(contract, confirmationsActions, membersActions, actions, multisafeId, state, history, values, members);
         return;
-    } 
+    }
 
     // single request
     const contractActions = [
@@ -232,7 +232,7 @@ export const isBatchRequest = thunk(async (_, payload, { getStoreState }) => {
 
     const state = getStoreState();
     const values = serializeData(data);
-  
+
     const members = state.multisafe.members;
     const numConfirmations = state.multisafe.general.numConfirmations;
 

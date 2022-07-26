@@ -1,6 +1,6 @@
+import { routes } from '@ui/config/routes';
 import { thunk } from 'easy-peasy';
 
-import { routes } from '../../../ui/config/routes';
 import { getNearEntities } from './helpers/getNearEntities';
 
 export const onDisconnect = thunk(async (_, payload, { getStoreState, getStoreActions }) => {

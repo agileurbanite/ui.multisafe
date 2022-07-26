@@ -1,4 +1,4 @@
-import { TextField } from '../../../../../../general/TextField/TextField';
+import { TextField } from '@ui/components/Main/general/TextField/TextField';
 
 export const Recipient = ({ control, classNames, hasError, errorMessage }) => (
     <TextField

@@ -1,12 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@material-ui/core';
+import { Checkbox } from '@ui/components/general/Checkbox/Checkbox';
+import { transferNFTSchema } from '@utils/validation/SendFundsModal';
 import cn from 'classnames';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { forwardRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { transferNFTSchema } from '../../../../../../../../utils/validation/SendFundsModal';
-import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
 import { NFT } from './Collection/NFT';
 import { NFTCollection } from './Collection/NFTCollection';
 import { Recipient } from './Recipient/Recipient';

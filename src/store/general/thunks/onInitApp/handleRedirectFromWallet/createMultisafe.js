@@ -1,4 +1,4 @@
-import { getRoute, routes } from '../../../../../ui/config/routes';
+import { getRoute, routes } from '@ui/config/routes';
 
 const onSuccess = async (state, actions, browserHistory) => {
     const { name, multisafeId } = state.general.temporary;

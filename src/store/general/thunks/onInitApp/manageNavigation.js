@@ -1,9 +1,8 @@
+import { routes, getRoute } from '@ui/config/routes';
 import { matchPath } from 'react-router';
 
-import { routes, getRoute } from '../../../../ui/config/routes';
-
 const { root, welcome, getStarted, createMultisafe, loadMultisafe, dashboard, history, members } =
-  routes;
+    routes;
 
 /** Anon user without data:
  * * root / createMultisafe / dashboard / history / members -> welcome;
@@ -36,8 +35,8 @@ export const manageNavigation = (state, browserHistory) => {
     // Anon user without data
     if (
         !isConnected &&
-    !hasSavedMultisafes &&
-    ifInclude([root, createMultisafe, dashboard, history, members])
+        !hasSavedMultisafes &&
+        ifInclude([root, createMultisafe, dashboard, history, members])
     ) {
         browserHistory.replace(welcome);
     }
@@ -45,8 +44,8 @@ export const manageNavigation = (state, browserHistory) => {
     // Anon user with data
     if (
         !isConnected &&
-    hasSavedMultisafes &&
-    ifInclude([root, welcome, getStarted, createMultisafe])
+        hasSavedMultisafes &&
+        ifInclude([root, welcome, getStarted, createMultisafe])
     ) {
         browserHistory.replace(getRoute.dashboard(lastActiveMultisafeId));
     }
@@ -54,8 +53,8 @@ export const manageNavigation = (state, browserHistory) => {
     // Connected user without data
     if (
         isConnected &&
-    !hasSavedMultisafes &&
-    ifInclude([root, welcome, dashboard, history, members])
+        !hasSavedMultisafes &&
+        ifInclude([root, welcome, dashboard, history, members])
     ) {
         browserHistory.replace(getStarted);
     }

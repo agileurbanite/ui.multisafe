@@ -1,4 +1,4 @@
-import { handleLedgerError } from '../../helpers/handleLedgerError';
+import { handleLedgerError } from '@store/helpers/handleLedgerError';
 
 export const signTransactionByLedger = async ({
     actionName,

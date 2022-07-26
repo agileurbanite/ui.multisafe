@@ -1,10 +1,10 @@
 import { TableCell } from '@material-ui/core';
 import { Done } from '@material-ui/icons';
+import { config } from '@near/config';
+import { ConfirmModal } from '@ui/components/Main/MultiSafe/EditMultisafe/ConfirmModal/ConfirmModal';
 import cn from 'classnames';
 import { useState, useEffect } from 'react';
 
-import { config } from '../../../../../../../near/config';
-import { ConfirmModal } from '../../../EditMultisafe/ConfirmModal/ConfirmModal';
 import { useStyles } from './Status.styles';
 
 const canDeleteRequest = (createdAt) =>

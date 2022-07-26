@@ -1,7 +1,6 @@
+import FungibleTokens from '@services/FungibleTokens';
+import { listLikelyTokens } from '@utils/listLikelyAssets';
 import { thunk } from 'easy-peasy';
-
-import FungibleTokens from '../../../services/FungibleTokens';
-import { listLikelyTokens } from '../../../utils/listLikelyAssets';
 
 export const onMountTokenList = thunk(
     async (_, multisafeId, { getStoreState, getStoreActions }) => {
@@ -28,7 +27,7 @@ export const onMountTokenList = thunk(
             }
             return { ...fungibleTokensMetadata[token], tokenBalance, contractName: token };
         }));
-    
+
         // keeping metadata within the fungibleTokens as well for easier access, leads to duplicated information but cleaner code
         mountTokenList({
             fungibleTokens

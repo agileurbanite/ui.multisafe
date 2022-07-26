@@ -1,6 +1,6 @@
+import NonFungibleTokens from '@services/NonFungibleTokens';
 import { thunk } from 'easy-peasy';
 
-import NonFungibleTokens from '../../../services/NonFungibleTokens';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 
 const signTxByLedger = async ({
@@ -18,14 +18,14 @@ const signTxByLedger = async ({
         actionName: 'Transfer NFT',
         state,
         actions,
-        contractMethod: 
-        () => nonFungibleTokensService.addTransferRequest({
-            multisafeContract: contract, 
-            withApprove,
-            receiverId: recipientId,
-            tokenId, 
-            contractName 
-        }),
+        contractMethod:
+            () => nonFungibleTokensService.addTransferRequest({
+                multisafeContract: contract,
+                withApprove,
+                receiverId: recipientId,
+                tokenId,
+                contractName
+            }),
         callback: async () => {
             await actions.multisafe.onMountDashboard(multisafeId);
         },
@@ -36,7 +36,7 @@ export const onTransferNFT = thunk(async (_, payload, { getStoreState, getStoreA
     const { onClose, tokenId, contractName } = payload;
     const { recipientId, withApprove } = payload.data;
 
-    const state = getStoreState(); 
+    const state = getStoreState();
     const isNearWallet = state.general.selectors.isNearWallet;
     const near = state.general.entities.near;
     const contract = state.multisafe.entities.contract;
@@ -46,11 +46,11 @@ export const onTransferNFT = thunk(async (_, payload, { getStoreState, getStoreA
     const nonFungibleTokensService = new NonFungibleTokens(near.connection);
     isNearWallet
         ? await nonFungibleTokensService.addTransferRequest({
-            multisafeContract: contract, 
+            multisafeContract: contract,
             withApprove,
             receiverId: recipientId,
-            tokenId, 
-            contractName 
+            tokenId,
+            contractName
         })
         : await signTxByLedger({ nonFungibleTokensService, contract, withApprove, recipientId, multisafeId, state, actions, tokenId, contractName });
 

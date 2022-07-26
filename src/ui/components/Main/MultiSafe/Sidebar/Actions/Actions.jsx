@@ -1,11 +1,11 @@
 import { Button } from '@material-ui/core';
+import { config } from '@near/config';
+import { CopyToClipboard } from '@ui/components/Main/MultiSafe/general/CopyToClipboard/CopyToClipboard';
+import { OpenInExplorer } from '@ui/components/Main/MultiSafe/general/OpenInExplorer/OpenInExplorer';
+import { RefreshFungibleTokens } from '@ui/components/Main/MultiSafe/general/RefreshFungibleTokens/RefreshFungibleTokens';
+import { formatNearBalance, formatOtherBalance } from '@utils/format';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 
-import { config } from '../../../../../../near/config';
-import { formatNearBalance, formatOtherBalance } from '../../../../../../utils/format';
-import { CopyToClipboard } from '../../general/CopyToClipboard/CopyToClipboard';
-import { OpenInExplorer } from '../../general/OpenInExplorer/OpenInExplorer';
-import { RefreshFungibleTokens } from '../../general/RefreshFungibleTokens/RefreshFungibleTokens';
 import { useStyles } from './Actions.styles';
 import { NewTransaction } from './NewTransaction/NewTransaction';
 

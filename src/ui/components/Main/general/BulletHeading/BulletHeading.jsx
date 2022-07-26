@@ -1,6 +1,6 @@
 import { ChevronRight } from '@material-ui/icons';
+import { Headline } from '@ui/components/general/Headline/Headline';
 
-import { Headline } from '../../../general/Headline/Headline';
 import { useStyles } from './BulletHeading.styles';
 
 export const BulletHeading = ({ children }) => {

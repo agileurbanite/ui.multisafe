@@ -1,6 +1,5 @@
+import { config } from '@near/config';
 import { Account, Contract } from 'near-api-js';
-
-import { config } from '../../../near/config';
 
 export const getMultisafeFactoryContract = (state) => {
     const walletType = state.general.user.walletType;
@@ -9,7 +8,7 @@ export const getMultisafeFactoryContract = (state) => {
     const wallet = state.general.entities.wallet;
 
     const account =
-    walletType === 'near-wallet' ? wallet.account() : new Account(near.connection, accountId);
+        walletType === 'near-wallet' ? wallet.account() : new Account(near.connection, accountId);
 
     return new Contract(account, config.multisafeFactoryId, {
         viewMethods: [],

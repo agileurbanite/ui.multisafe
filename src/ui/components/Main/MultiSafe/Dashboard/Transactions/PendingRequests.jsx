@@ -7,12 +7,12 @@ import {
     TableBody,
     Button,
 } from '@material-ui/core';
+import { Type } from '@ui/components/Main/MultiSafe/general/Type/Type';
+import { formatNearBalance } from '@utils/format';
 import dateFormat from 'dateformat';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { Fragment } from 'react';
 
-import { formatNearBalance } from '../../../../../../utils/format';
-import { Type } from '../../general/Type/Type';
 import { useStyles } from './PendingRequests.styles';
 import { Recipient } from './Recipient/Recipient';
 import { BatchStatus } from './Status/BatchStatus';

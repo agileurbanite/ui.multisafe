@@ -1,6 +1,6 @@
 import { TableCell } from '@material-ui/core';
+import { MULT_SIG_REQUEST_ACTIONS } from '@utils/multiSegRequestActions';
 
-import { MULT_SIG_REQUEST_ACTIONS } from '../../../../../../utils/multiSegRequestActions';
 import { useStyles } from './Type.styles';
 
 export const Type = ({ type }) => {

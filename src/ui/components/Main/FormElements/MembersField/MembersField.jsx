@@ -1,10 +1,10 @@
 import { List, ListItem, Button, IconButton, Typography, FormHelperText } from '@material-ui/core';
 import { Delete as DeleteIcon, Add as AddIcon } from '@material-ui/icons';
+import { ContentSeparator } from '@ui/components/general/ContentSeparator/ContentSeparator';
+import { BulletHeading } from '@ui/components/Main/general/BulletHeading/BulletHeading';
+import { TextField } from '@ui/components/Main/general/TextField/TextField';
 import { useFieldArray, useWatch } from 'react-hook-form';
 
-import { ContentSeparator } from '../../../general/ContentSeparator/ContentSeparator';
-import { BulletHeading } from '../../general/BulletHeading/BulletHeading';
-import { TextField } from '../../general/TextField/TextField';
 import { useStyles } from './MembersField.styles';
 
 export const MembersField = ({

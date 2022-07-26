@@ -1,15 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Typography } from '@material-ui/core';
+import { AccountId } from '@ui/components/Main/FormElements/AccountId/AccountId';
+import { Amount } from '@ui/components/Main/FormElements/Amount/Amount';
+import { Confirmations } from '@ui/components/Main/FormElements/Confirmations/Confirmations';
+import { MembersField } from '@ui/components/Main/FormElements/MembersField/MembersField';
+import { MultisafeName } from '@ui/components/Main/FormElements/MultisafeName/MultisafeName';
+import { createMultisafeSchema } from '@utils/validation/CreateMultisafePage';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
-import { createMultisafeSchema } from '../../../../../../utils/validation/CreateMultisafePage';
-import { AccountId } from '../../../FormElements/AccountId/AccountId';
-import { Amount } from '../../../FormElements/Amount/Amount';
-import { Confirmations } from '../../../FormElements/Confirmations/Confirmations';
-import { MembersField } from '../../../FormElements/MembersField/MembersField';
-import { MultisafeName } from '../../../FormElements/MultisafeName/MultisafeName';
 import { useStyles } from './Form.styles';
 
 export const Form = () => {

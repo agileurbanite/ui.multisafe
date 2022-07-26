@@ -1,7 +1,7 @@
+import { redirectActions } from '@config/redirectActions';
+import { getMultisafeContract } from '@store/multisafe/helpers/getMultisafeContract';
 import qs from 'query-string';
 
-import { redirectActions } from '../../../../../config/redirectActions';
-import { getMultisafeContract } from '../../../../multisafe/helpers/getMultisafeContract';
 import { connectNearWallet } from './connectNearWallet';
 import { createMultisafe } from './createMultisafe';
 

@@ -1,8 +1,8 @@
 import { Button } from '@material-ui/core';
 import { Usb } from '@material-ui/icons';
+import { Icon } from '@ui/components/general/ConnectWallet/general/Icon/Icon.jsx';
 import { useStoreActions } from 'easy-peasy';
 
-import { Icon } from '../general/Icon/Icon';
 import { useStyles } from './ConnectLedger.styles';
 import { getWebHIDSupportStatus } from './getWebHIDSupportStatus';
 

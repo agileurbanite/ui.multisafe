@@ -1,10 +1,10 @@
 import { Button } from '@material-ui/core';
+import { ConnectWallet } from '@ui/components/general/ConnectWallet/ConnectWallet';
+import { Footer } from '@ui/components/general/Footer/Footer';
 import { useState } from 'react';
 
 import logo from '../../images/logo/logo-white.svg';
 import laptop from '../../images/welcome-page/laptop@2x.png';
-import { ConnectWallet } from '../general/ConnectWallet/ConnectWallet';
-import { Footer } from '../general/Footer/Footer';
 import { useStyles } from './Welcome.styles';
 
 export const Welcome = () => {

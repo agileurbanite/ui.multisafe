@@ -1,9 +1,9 @@
 import { Paper, Divider, IconButton, ClickAwayListener } from '@material-ui/core';
 import { Add, SystemUpdateAlt, Close } from '@material-ui/icons';
+import { GreenLink } from '@ui/components/Main/general/GreenLink/GreenLink';
+import { routes } from '@ui/config/routes';
 import { useStoreState } from 'easy-peasy';
 
-import { routes } from '../../../../config/routes';
-import { GreenLink } from '../../general/GreenLink/GreenLink';
 import { List } from './List/List';
 import { useStyles } from './MultisafeList.styles';
 

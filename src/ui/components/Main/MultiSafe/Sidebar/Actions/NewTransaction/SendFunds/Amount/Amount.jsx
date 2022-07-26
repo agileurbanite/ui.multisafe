@@ -1,10 +1,10 @@
 import { InputAdornment, Button, Select, MenuItem } from '@material-ui/core';
+import { Near } from '@ui/components/general/icons/Near';
+import { TextField } from '@ui/components/Main/general/TextField/TextField';
+import { formatNearBalance, formatOtherBalance, formatOtherAmountHumanReadable } from '@utils/format';
 import { useStoreState } from 'easy-peasy';
 import { formatNearAmount } from 'near-api-js/lib/utils/format';
 
-import { formatNearBalance, formatOtherBalance, formatOtherAmountHumanReadable } from '../../../../../../../../../utils/format';
-import { Near } from '../../../../../../../general/icons/Near';
-import { TextField } from '../../../../../../general/TextField/TextField';
 import { useStyles } from './Amount.styles';
 
 export const Amount = ({ control, classNames, setValue, tokenName, setTokenName, hasError, errorMessage}) => {

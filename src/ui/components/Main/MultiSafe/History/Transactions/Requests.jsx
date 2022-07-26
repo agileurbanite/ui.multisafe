@@ -6,11 +6,11 @@ import {
     TableCell,
     TableBody,
 } from '@material-ui/core';
+import { Type } from '@ui/components/Main/MultiSafe/general/Type/Type';
+import { formatNearBalance } from '@utils/format';
 import dateFormat from 'dateformat';
 import { useStoreState } from 'easy-peasy';
 
-import { formatNearBalance } from '../../../../../../utils/format';
-import { Type } from '../../general/Type/Type';
 import { Recipient } from './Recipient/Recipient';
 import { useStyles } from './Requests.styles';
 import { Status } from './Status/Status';

@@ -1,6 +1,6 @@
 import { ListItem, ListItemText } from '@material-ui/core';
+import { NFTMedia } from '@ui/components/Main/MultiSafe/NonFungibleTokens/Collection/NFTMedia';
 
-import { NFTMedia } from '../../../../../NonFungibleTokens/Collection/NFTMedia';
 import {useStyles} from './NFT.styles';
 
 export const NFT = ({ tokenId, nftCollection, nft, handleClick }) => {

@@ -1,11 +1,11 @@
 import { Add, SystemUpdateAlt } from '@material-ui/icons';
+import { EmojiIcon } from '@ui/components/general/EmojiIcon/EmojiIcon';
+import { Headline } from '@ui/components/general/Headline/Headline';
+import { GreenLink } from '@ui/components/Main/general/GreenLink/GreenLink';
+import { emoji } from '@ui/config/emoji';
+import { routes } from '@ui/config/routes';
 import { useStoreState } from 'easy-peasy';
 
-import { emoji } from '../../../../config/emoji';
-import { routes } from '../../../../config/routes';
-import { EmojiIcon } from '../../../general/EmojiIcon/EmojiIcon';
-import { Headline } from '../../../general/Headline/Headline';
-import { GreenLink } from '../../general/GreenLink/GreenLink';
 import { useStyles } from './GetStarted.styles';
 import { MultisafeList } from './MultisafeList/MultisafeList';
 

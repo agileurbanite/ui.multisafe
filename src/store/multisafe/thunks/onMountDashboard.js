@@ -1,7 +1,7 @@
+import { config } from '@near/config';
 import { thunk } from 'easy-peasy';
 import { Account } from 'near-api-js';
 
-import { config } from '../../../near/config';
 import { getMultisafeContract } from '../helpers/getMultisafeContract';
 
 const getAddRequestTxs = async (multisafeId) => {

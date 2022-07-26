@@ -1,9 +1,9 @@
 import { Buffer } from 'buffer';
 
+import { config } from '@near/config';
+import { formatTGasValue } from '@utils/format';
 import { thunk } from 'easy-peasy';
 
-import { config } from '../../../near/config';
-import { formatTGasValue } from '../../../utils/format';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 
 const ADD_REQUEST_AND_CONFIRM_GAS = config.gas.add_and_confirm;

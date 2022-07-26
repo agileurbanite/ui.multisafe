@@ -1,7 +1,7 @@
+import { Footer } from '@ui/components/general/Footer/Footer';
+import { routes } from '@ui/config/routes';
 import { Switch, Route } from 'react-router-dom';
 
-import { routes } from '../../../config/routes';
-import { Footer } from '../../general/Footer/Footer';
 import { CreateMultisafe } from './CreateMultisafe/CreateMultisafe';
 import { GetStarted } from './GetStarted/GetStarted';
 import { LoadMultisafe } from './LoadMultisafe/LoadMultisafe';

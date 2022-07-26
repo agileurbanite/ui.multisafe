@@ -1,9 +1,9 @@
 import { FormHelperText, MenuItem, TextField, Typography } from '@material-ui/core';
+import { ContentSeparator } from '@ui/components/general/ContentSeparator/ContentSeparator';
+import { BulletHeading } from '@ui/components/Main/general/BulletHeading/BulletHeading';
 import * as R from 'ramda';
 import { useController, useWatch } from 'react-hook-form';
 
-import { ContentSeparator } from '../../../general/ContentSeparator/ContentSeparator';
-import { BulletHeading } from '../../general/BulletHeading/BulletHeading';
 
 export const Confirmations = ({ control, classNames, hasError, errorMessage }) => {
     const watchedMembers = useWatch({

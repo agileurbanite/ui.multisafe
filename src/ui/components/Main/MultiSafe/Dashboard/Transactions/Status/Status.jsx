@@ -1,9 +1,9 @@
 import { TableCell, IconButton } from '@material-ui/core';
 import { Done, Close } from '@material-ui/icons';
+import { config } from '@near/config';
 import cn from 'classnames';
 import { useState, useEffect } from 'react';
 
-import { config } from '../../../../../../../near/config';
 import { useStyles } from './Status.styles';
 
 const canDeleteRequest = (createdAt) =>

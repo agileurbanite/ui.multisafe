@@ -6,8 +6,8 @@ import {
     IconButton,
 } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
+import { emoji as emojiConfig } from '@ui/config/emoji';
 
-import { emoji as emojiConfig } from '../../../../../config/emoji';
 import { NFTMedia } from './NFTMedia';
 
 export const Collection = ({ nftCollection, classes, handleClick }) => (

@@ -1,8 +1,7 @@
+import { routes } from '@ui/config/routes';
 import { matchPath } from 'react-router';
 
-import { routes } from '../../../../ui/config/routes';
-
-const { 
+const {
     createMultisafe,
     dashboard,
     history,
@@ -65,7 +64,7 @@ export const getDataBeforeRenderPage = async ({
     if (ifRouteIs(disconnect)) {
         await onMountMultisafe({ multisafeId });
     }
-  
+
     if (ifRouteIs(nonFungibleTokens)) {
         await onMountDashboard(multisafeId);
         await onMountNonFungibleTokenList(multisafeId);

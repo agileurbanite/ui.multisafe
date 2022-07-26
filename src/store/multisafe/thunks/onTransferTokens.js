@@ -1,9 +1,9 @@
+import { config } from '@near/config';
+import FungibleTokens from '@services/FungibleTokens';
+import { parseOtherAmount } from '@utils/format';
 import { thunk } from 'easy-peasy';
 import * as nearApiJs from 'near-api-js';
 
-import { config } from '../../../near/config';
-import FungibleTokens from '../../../services/FungibleTokens';
-import { parseOtherAmount } from '../../../utils/format';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 
 const ATTACHED_GAS = config.gas.default;
@@ -91,14 +91,14 @@ export const onTransferTokens = thunk(async (_, payload, { getStoreState, getSto
     }
     else {
         isNearWallet
-            ? await fungibleTokensService.addTransferRequest({ 
+            ? await fungibleTokensService.addTransferRequest({
                 multisafeContract: contract,
                 withApprove,
                 recipientId,
                 amount: parseOtherAmount(token, amount),
-                contractName: token.contractName 
+                contractName: token.contractName
             })
-            : await signTxByLedger({ 
+            : await signTxByLedger({
                 fungibleTokensService,
                 contract,
                 withApprove,
@@ -107,7 +107,7 @@ export const onTransferTokens = thunk(async (_, payload, { getStoreState, getSto
                 multisafeId,
                 state,
                 actions,
-                contractName: token.contractName 
+                contractName: token.contractName
             });
     }
 

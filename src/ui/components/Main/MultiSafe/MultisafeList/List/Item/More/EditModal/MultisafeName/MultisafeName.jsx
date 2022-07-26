@@ -1,4 +1,5 @@
-import { TextField } from '../../../../../../../general/TextField/TextField';
+import { TextField } from '@ui/components/Main/general/TextField/TextField';
+
 import { useStyles } from './MultisafeName.styles';
 
 export const MultisafeName = ({ control, hasError, errorMessage, name }) => {

@@ -1,9 +1,9 @@
 import { LinearProgress } from '@material-ui/core';
+import { getRoute, routes } from '@ui/config/routes';
+import logo from '@ui/images/logo/logo-black.svg';
 import {useStoreActions, useStoreState} from 'easy-peasy';
 import { Link } from 'react-router-dom';
 
-import { getRoute, routes } from '../../../../config/routes';
-import logo from '../../../../images/logo/logo-black.svg';
 import { Account } from './Account/Account';
 import { NonConnected } from './NonConnected/NonConnected';
 import { useStyles } from './Topbar.styles';

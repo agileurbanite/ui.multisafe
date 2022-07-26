@@ -2,9 +2,11 @@
 import { useHistory } from 'react-router-dom';
 import { Divider } from '@material-ui/core';
 import { More } from './More/More';
-import { emoji as emojiConfig } from '../../../../../../config/emoji';
-import { getRoute } from '../../../../../../config/routes';
-import { formatNearBalance } from '../../../../../../../utils/format';
+import { emoji as emojiConfig } from '@ui/config/emoji';
+
+
+import { getRoute } from '@ui/config/routes';
+import { formatNearBalance } from '@utils/format';
 import { useStyles } from './Item.styles';
 
 export const Item = ({

@@ -1,6 +1,5 @@
 import { Dashboard, People, Settings, PhotoLibrary } from '@material-ui/icons';
-
-import { routes, getRoute } from '../../../../../config/routes';
+import { routes, getRoute } from '@ui/config/routes';
 
 const items = [
     {
@@ -8,15 +7,17 @@ const items = [
         route: routes.dashboard,
         getPath: getRoute.dashboard,
         icon: Dashboard,
-        subItems: [{
-            name: 'Pending',
-            route: routes.dashboard,
-            getPath: getRoute.dashboard
-        },{
-            name: 'Completed',
-            route: routes.history,
-            getPath: getRoute.history
-        }]
+        subItems: [
+            {
+                name: 'Pending',
+                route: routes.dashboard,
+                getPath: getRoute.dashboard
+            },
+            {
+                name: 'Completed',
+                route: routes.history,
+                getPath: getRoute.history
+            }]
     },
     {
         name: 'Members',

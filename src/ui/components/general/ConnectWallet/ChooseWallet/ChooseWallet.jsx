@@ -1,10 +1,10 @@
 import { Button } from '@material-ui/core';
+import { Icon } from '@ui/components/general/ConnectWallet/general/Icon/Icon.jsx';
 import { useStoreActions } from 'easy-peasy';
 import { useHistory } from 'react-router-dom';
 
 import { Ledger } from '../../icons/Ledger';
 import { Near } from '../../icons/Near';
-import { Icon } from '../general/Icon/Icon';
 import { useStyles } from './ChooseWallet.styles';
 
 export const ChooseWallet = ({ onCloseModal, setStep }) => {

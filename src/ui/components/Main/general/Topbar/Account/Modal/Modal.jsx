@@ -1,10 +1,10 @@
 import { Button, Paper, Divider } from '@material-ui/core';
+import { Near } from '@ui/components/general/icons/Near';
+import { CopyToClipboard } from '@ui/components/Main/MultiSafe/general/CopyToClipboard/CopyToClipboard';
+import { OpenInExplorer } from '@ui/components/Main/MultiSafe/general/OpenInExplorer/OpenInExplorer';
 import { useStoreActions } from 'easy-peasy';
 import { useHistory } from 'react-router-dom';
 
-import { Near } from '../../../../../general/icons/Near';
-import { CopyToClipboard } from '../../../../MultiSafe/general/CopyToClipboard/CopyToClipboard';
-import { OpenInExplorer } from '../../../../MultiSafe/general/OpenInExplorer/OpenInExplorer';
 import { useStyles } from './Modal.styles';
 
 export const Modal = ({ accountId }) => {

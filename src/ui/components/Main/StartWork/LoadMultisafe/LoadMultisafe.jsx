@@ -1,9 +1,9 @@
 import { Typography, IconButton } from '@material-ui/core';
 import { ArrowBack } from '@material-ui/icons';
+import { redirectBack } from '@ui/components/Main/StartWork/general/redirectBack';
 import { useStoreState } from 'easy-peasy';
 import { useHistory } from 'react-router-dom';
 
-import { redirectBack } from '../general/redirectBack';
 import { Form } from './Form/Form';
 import { useStyles } from './LoadMultisafe.styles';
 

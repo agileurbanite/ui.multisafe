@@ -1,7 +1,6 @@
+import { config } from '@near/config';
+import { LedgerSigner } from '@near/LedgerSigner';
 import { connect, keyStores, WalletConnection } from 'near-api-js';
-
-import { config } from '../../../../near/config';
-import { LedgerSigner } from '../../../../near/LedgerSigner';
 
 const { networkId, nodeUrl, walletUrl, archivalRpcUrl } = config;
 
@@ -29,7 +28,7 @@ const getNearConnectConfig = ({ connectionType, getStoreState }) => {
         };
 
     throw new Error(
-    `Wrong connection type, must be 'rpc_near-wallet', 'rpc_ledger' or 'archival-rpc_read-only',
+        `Wrong connection type, must be 'rpc_near-wallet', 'rpc_ledger' or 'archival-rpc_read-only',
      got '${connectionType}' instead`,
     );
 };

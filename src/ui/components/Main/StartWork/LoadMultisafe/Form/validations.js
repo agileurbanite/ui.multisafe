@@ -1,9 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { debounce } from '@utils/debounce';
+import { getMultisafeAccountId } from '@utils/getMultisafeAccountId';
+import { isAccountExist } from '@utils/isAccountExist';
 import * as yup from 'yup';
-
-import { debounce } from '../../../../../../utils/debounce';
-import { getMultisafeAccountId } from '../../../../../../utils/getMultisafeAccountId';
-import { isAccountExist } from '../../../../../../utils/isAccountExist';
 
 const errors = {
     name: 'Please enter multisafe local name',

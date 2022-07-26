@@ -1,12 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@material-ui/core';
+import { Checkbox } from '@ui/components/general/Checkbox/Checkbox';
+import { sendFundsSchema } from '@utils/validation/SendFundsModal';
 import cn from 'classnames';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { forwardRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { sendFundsSchema } from '../../../../../../../../utils/validation/SendFundsModal';
-import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
 import { Amount } from './Amount/Amount';
 import { Recipient } from './Recipient/Recipient';
 import { useStyles } from './SendFunds.styles';

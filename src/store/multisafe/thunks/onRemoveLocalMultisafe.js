@@ -1,6 +1,5 @@
+import { getRoute, routes } from '@ui/config/routes';
 import { thunk } from 'easy-peasy';
-
-import { getRoute, routes } from '../../../ui/config/routes';
 
 export const onRemoveLocalMultisafe = thunk(
     async (_, payload, { getStoreState, getStoreActions }) => {

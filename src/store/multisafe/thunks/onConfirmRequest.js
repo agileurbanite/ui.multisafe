@@ -1,14 +1,14 @@
+import { redirectActions } from '@config/redirectActions';
+import { config } from '@near/config';
+import { getRoute } from '@ui/config/routes';
 import { thunk } from 'easy-peasy';
 
-import { redirectActions } from '../../../config/redirectActions';
-import { config } from '../../../near/config';
-import { getRoute } from '../../../ui/config/routes';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 
 const ATTACHED_GAS = config.gas.default;
 
 const callContractChangeMethod = (contract, requestId, callbackUrl) =>
-    contract.confirm({ 
+    contract.confirm({
         args: {
             request_id: requestId
         },
@@ -63,7 +63,7 @@ const prepareBatchConfirmation = ({ contract, requests, actions }) => {
             args: {
                 args: {
                     request_id: requests[1].requestId
-                }, 
+                },
                 gas: ATTACHED_GAS,
                 callbackUrl: `${window.location.origin}${getRoute.dashboard(contract.contractId)}`
             }

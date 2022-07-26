@@ -1,18 +1,19 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Paper } from '@material-ui/core';
+import { Checkbox } from '@ui/components/general/Checkbox/Checkbox';
+import { makeFunctionCallSchema } from '@utils/validation/makeFunctionCallModal';
 import cn from 'classnames';
 import { useStoreActions } from 'easy-peasy';
 import { forwardRef } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { makeFunctionCallSchema } from '../../../../../../../../utils/validation/makeFunctionCallModal';
-import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
 import { Arguments } from './arguments/Arguments';
 import { Deposit } from './Deposit/Deposit';
 import { useStyles } from './MakeFunctionCall.styles';
 import { MethodName } from './MethodName/MethodName';
 import { SmartContractAddress } from './SmartContractAddress/SmartContractAddress';
 import { TGas } from './TGas/TGas';
+
 
 export const MakeFunctionCall = forwardRef(({ onClose, tabIndex }, ref) => {
     const onMakeFunctionCall = useStoreActions((actions) => actions.multisafe.onMakeFunctionCall);

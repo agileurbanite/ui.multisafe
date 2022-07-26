@@ -1,9 +1,9 @@
 import { Button, Divider, Typography } from '@material-ui/core';
+import { TextField } from '@ui/components/Main/general/TextField/TextField';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
-import { TextField } from '../../../general/TextField/TextField';
 import { useStyles } from './Form.styles';
 import { resolver } from './validations';
 

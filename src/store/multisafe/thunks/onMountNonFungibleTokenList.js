@@ -1,7 +1,6 @@
+import NonFungibleTokens from '@services/NonFungibleTokens';
+import { listLikelyNfts } from '@utils/listLikelyAssets';
 import { thunk } from 'easy-peasy';
-
-import NonFungibleTokens from '../../../services/NonFungibleTokens';
-import { listLikelyNfts } from '../../../utils/listLikelyAssets';
 
 export const onMountNonFungibleTokenList = thunk(
     async (_, multisafeId, { getStoreState, getStoreActions }) => {
@@ -22,17 +21,19 @@ export const onMountNonFungibleTokenList = thunk(
             }
             else {
                 nonFungibleTokensMetadata[contractName] = nftMetadata[contractName];
-            } 
+            }
             const tokens = await nonFungibleTokensService.getTokens(
-                { contractName, 
+                {
+                    contractName,
                     accountId: multisafeId,
-                    base_uri: nonFungibleTokensMetadata[contractName].base_uri });
+                    base_uri: nonFungibleTokensMetadata[contractName].base_uri
+                });
 
             const tokenBalance = await nonFungibleTokensService.getBalanceOf({ contractName, accountId: multisafeId });
-      
+
             return { ...nonFungibleTokensMetadata[contractName], tokenBalance, contractName, tokens };
         }));
-    
+
         mountNonFungibleTokenList({
             nonFungibleTokens,
             nonFungibleTokensMetadata

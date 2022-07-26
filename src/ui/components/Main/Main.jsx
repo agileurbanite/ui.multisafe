@@ -1,6 +1,6 @@
+import { routes } from '@ui/config/routes';
 import { Route, Switch } from 'react-router-dom';
 
-import { routes } from '../../config/routes';
 import { Topbar } from './general/Topbar/Topbar';
 import { MultiSafe } from './MultiSafe/MultiSafe';
 import { StartWork } from './StartWork/StartWork';

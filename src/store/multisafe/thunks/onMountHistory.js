@@ -1,6 +1,6 @@
+import { config } from '@near/config';
 import { thunk } from 'easy-peasy';
 
-import { config } from '../../../near/config';
 import { toCamelCase } from '../../helpers/toCamelCase';
 
 const getRequestTxs = async (multisafeId) => {

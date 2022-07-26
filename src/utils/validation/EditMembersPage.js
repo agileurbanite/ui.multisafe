@@ -1,7 +1,6 @@
+import { config } from '@near/config';
 import * as R from 'ramda';
 import * as yup from 'yup';
-
-import { config } from '../../near/config';
 
 const requiredMessageType = {
     name: 'Please enter multisafe name',

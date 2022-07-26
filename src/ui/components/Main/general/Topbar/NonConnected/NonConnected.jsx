@@ -1,10 +1,10 @@
 import { Button } from '@material-ui/core';
 import { ExitToApp, DeleteOutline } from '@material-ui/icons';
+import { ConnectWallet } from '@ui/components/general/ConnectWallet/ConnectWallet';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { ConnectWallet } from '../../../../general/ConnectWallet/ConnectWallet';
 import { useStyles } from './NonConnected.styles';
 
 export const NonConnected = () => {

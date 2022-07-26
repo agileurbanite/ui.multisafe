@@ -1,10 +1,8 @@
 import { InputAdornment, Typography } from '@material-ui/core';
-
-import { ContentSeparator } from '../../../general/ContentSeparator/ContentSeparator';
-import { Near } from '../../../general/icons/Near';
-import { BulletHeading } from '../../general/BulletHeading/BulletHeading';
-import { TextField } from '../../general/TextField/TextField';
-
+import { ContentSeparator } from '@ui/components/general/ContentSeparator/ContentSeparator';
+import { Near } from '@ui/components/general/icons/Near';
+import { BulletHeading } from '@ui/components/Main/general/BulletHeading/BulletHeading';
+import { TextField } from '@ui/components/Main/general/TextField/TextField';
 export const Amount = ({ control, classNames, hasError, errorMessage }) => (
     <>
         <BulletHeading>Deposit funds</BulletHeading>

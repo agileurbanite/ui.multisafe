@@ -1,6 +1,6 @@
+import { config } from '@near/config';
 import { thunk } from 'easy-peasy';
 
-import { config } from '../../../near/config';
 import { signTransactionByLedger } from '../helpers/signTransactionByLedger';
 
 const ATTACHED_GAS = config.gas.default;

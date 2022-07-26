@@ -1,6 +1,5 @@
+import { routes } from '@ui//config/routes';
 import { matchPath } from 'react-router';
-
-import { routes } from '../../../../../ui/config/routes';
 
 const { welcome, getStarted } = routes;
 

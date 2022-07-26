@@ -1,5 +1,6 @@
-import { CopyToClipboard } from '../../general/CopyToClipboard/CopyToClipboard';
-import { OpenInExplorer } from '../../general/OpenInExplorer/OpenInExplorer';
+import { CopyToClipboard } from '@ui/components/Main/MultiSafe/general/CopyToClipboard/CopyToClipboard';
+import { OpenInExplorer } from '@ui/components/Main/MultiSafe/general/OpenInExplorer/OpenInExplorer';
+
 import { useStyles } from './Actions.styles';
 
 export const Actions = ({ accountId }) => {

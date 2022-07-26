@@ -1,7 +1,6 @@
 import { IconButton, Tooltip } from '@material-ui/core';
 import { OpenInNew } from '@material-ui/icons';
-
-import { config } from '../../../../../../near/config';
+import { config } from '@near/config';
 
 const getHref = ({ accountId, type, transactionHash }) => {
     if (type === 'account' && accountId) {

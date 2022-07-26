@@ -1,10 +1,10 @@
+import { redirectActions } from '@config/redirectActions';
+import { config } from '@near/config';
+import { getRoute } from '@ui/config/routes';
+import { spaceToSnake } from '@utils/format';
 import { thunk } from 'easy-peasy';
 import { utils } from 'near-api-js';
 
-import { redirectActions } from '../../../config/redirectActions';
-import { config } from '../../../near/config';
-import { getRoute } from '../../../ui/config/routes';
-import { spaceToSnake } from '../../../utils/format';
 import { signTransactionByLedger } from '../../multisafe/helpers/signTransactionByLedger';
 import { getMultisafeFactoryContract } from '../helpers/getMultisafeFactoryContract';
 

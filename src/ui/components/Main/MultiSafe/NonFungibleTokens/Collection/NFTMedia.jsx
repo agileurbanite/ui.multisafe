@@ -1,7 +1,7 @@
 import { CardMedia } from '@material-ui/core';
+import FailedToLoad from '@ui/images/failed_to_load.svg';
 import { useMemo } from 'react';
 
-import FailedToLoad from '../../../../../images/failed_to_load.svg';
 
 export const NFTMedia = ({ nft, classes, autoPlay = false}) => {
 

@@ -1,10 +1,10 @@
+import { Footer } from '@ui/components/general/Footer/Footer';
+import { routes } from '@ui/config/routes';
+import { Loader } from '@ui/providers/Initializer/Loader/Loader';
 import { useStoreActions } from 'easy-peasy';
 import { useState } from 'react';
 import { Switch, Route } from 'react-router';
 
-import { routes } from '../../../config/routes';
-import { Loader } from '../../../providers/Initializer/Loader/Loader';
-import { Footer } from '../../general/Footer/Footer';
 import { Dashboard } from './Dashboard/Dashboard';
 import { Disconnect } from './EditMultisafe/Disconnect';
 import { EditSafe } from './EditMultisafe/EditSafe';

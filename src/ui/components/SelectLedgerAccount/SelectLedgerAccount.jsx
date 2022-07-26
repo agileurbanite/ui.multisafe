@@ -1,10 +1,10 @@
 import { Backdrop, Button, Modal, Paper } from '@material-ui/core';
+import { config } from '@near/config';
 import cn from 'classnames';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { config } from '../../../near/config';
 import { AccountList } from './AccountList/AccountList';
 import { useStyles } from './SelectLedgerAccount.styles';
 
