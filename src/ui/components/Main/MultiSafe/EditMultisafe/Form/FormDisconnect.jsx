@@ -13,7 +13,6 @@ export const FormDisconnect = () => {
 
     const {
         handleSubmit,
-        formState: {isValid}
     } = useForm({
         mode: 'all',
     });
@@ -25,7 +24,7 @@ export const FormDisconnect = () => {
             <Typography className={classes?.description}>
         Disconnecting the account will not remove the Safe, you will be able to connect your wallet again.
             </Typography>
-            <FormButton disabled={!isValid} variant="contained" className={classes.submitButton}>
+            <FormButton variant="contained" className={classes.submitButton}>
                 Disconnect Account
             </FormButton>
         </form>

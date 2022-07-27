@@ -13,7 +13,7 @@ export const Form = () => {
     const near = useStoreState((state) => state.general.entities.near);
     const multisafes = useStoreState((state) => state.multisafe.multisafes);
     const onLoadMultisafe = useStoreActions((actions) => actions.startWork.onLoadMultisafe);
-    const { control, handleSubmit, reset, formState: { errors, isValid, isDirty}} = useForm({
+    const { control, handleSubmit, reset, formState: { errors }} = useForm({
         resolver,
         context: { near, multisafes: new Set(multisafes.map((multisafe) => multisafe.multisafeId)) },
     });
@@ -49,7 +49,7 @@ export const Form = () => {
         By continuing you consent to the terms of use and privacy policy.
             </Typography>
             <Divider className={classes.divider} />
-            <FormButton disabled={!isValid || !isDirty } variant="contained" className={classes.submitButton}>
+            <FormButton variant="contained" className={classes.submitButton}>
             Load Multi Safe
             </FormButton>
         </form>

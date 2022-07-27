@@ -14,7 +14,6 @@ export const FormRemove = () => {
 
     const {
         handleSubmit,
-        formState: {isValid}
     } = useForm({
         mode: 'all',
     });
@@ -29,7 +28,7 @@ export const FormRemove = () => {
             <Typography className={classes?.description}>
                 Notice that it will be removed only locally from your browser - you won&apos;t delete it from the blockchain.
             </Typography>
-            <FormButton disabled={!isValid} variant="contained" className={classes.submitButton}>
+            <FormButton variant="contained" className={classes.submitButton}>
             Remove Multi Safe
             </FormButton>
         </form>
