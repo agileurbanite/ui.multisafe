@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { createMultisafeSchema } from '../../../../../../utils/validation/Create
 import { AccountId } from '../../../FormElements/AccountId/AccountId';
 import { Amount } from '../../../FormElements/Amount/Amount';
 import { Confirmations } from '../../../FormElements/Confirmations/Confirmations';
+import FormButton from '../../../FormElements/FormButton/FormButton';
 import { MembersField } from '../../../FormElements/MembersField/MembersField';
 import { MultisafeName } from '../../../FormElements/MultisafeName/MultisafeName';
 import { useStyles } from './Form.styles';
@@ -22,7 +23,8 @@ export const Form = () => {
         control,
         handleSubmit,
         getValues,
-        formState: { errors },
+        reset,
+        formState: { errors, isDirty },
     } = useForm({
         resolver: yupResolver(createMultisafeSchema),
         mode: 'all',
@@ -32,7 +34,10 @@ export const Form = () => {
         },
     });
 
-    const onSubmit = handleSubmit((data) => onCreateMultisafe({ data, history }));
+    const onSubmit = handleSubmit((data) => {
+        onCreateMultisafe({ data, history });
+        reset(data);
+    });
 
     return (
         <form autoComplete="off" className={classes.form} onSubmit={onSubmit}>
@@ -70,9 +75,9 @@ export const Form = () => {
             <Typography className={classes.policy}>
                 By continuing you consent to the terms of use and privacy policy.
             </Typography>
-            <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
-                Create Multi Safe
-            </Button>
+            <FormButton disabled={!isDirty} variant="contained" className={classes.submitButton}>
+            Create Multi Safe
+            </FormButton>
         </form>
     );
 };

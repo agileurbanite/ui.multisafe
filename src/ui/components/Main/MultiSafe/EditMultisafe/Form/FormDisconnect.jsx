@@ -1,8 +1,9 @@
-import { Button, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { useStoreActions } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
+import FormButton from '../../../FormElements/FormButton/FormButton';
 import { useStyles } from './Form.styles';
 
 export const FormDisconnect = () => {
@@ -12,6 +13,7 @@ export const FormDisconnect = () => {
 
     const {
         handleSubmit,
+        formState: {isValid}
     } = useForm({
         mode: 'all',
     });
@@ -23,9 +25,9 @@ export const FormDisconnect = () => {
             <Typography className={classes?.description}>
         Disconnecting the account will not remove the Safe, you will be able to connect your wallet again.
             </Typography>
-            <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
-        Disconnect Account
-            </Button>
+            <FormButton disabled={!isValid} variant="contained" className={classes.submitButton}>
+                Disconnect Account
+            </FormButton>
         </form>
     );
 };

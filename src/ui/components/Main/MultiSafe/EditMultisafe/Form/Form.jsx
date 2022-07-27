@@ -1,5 +1,4 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button } from '@material-ui/core';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -7,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { EditSafeSchema } from '../../../../../../utils/validation/EditMembersPage';
 import { Confirmations } from '../../../FormElements/Confirmations/Confirmations';
+import FormButton from '../../../FormElements/FormButton/FormButton';
 import { MembersField } from '../../../FormElements/MembersField/MembersField';
 import { MultisafeName } from '../../../FormElements/MultisafeName/MultisafeName';
 import { ConfirmModal } from '../ConfirmModal/ConfirmModal';
@@ -24,12 +24,13 @@ export const Form = () => {
 
     const [isOpenConfirmModal, setOpenConfirmModal] = useState(false);
     const [formData, setFormData] = useState();
-
+  
     const {
         control,
         handleSubmit,
         getValues,
-        formState: { errors }
+        reset,
+        formState: { errors, isValid, isDirty }
     } = useForm({
         resolver: yupResolver(EditSafeSchema),
         mode: 'all',
@@ -41,15 +42,15 @@ export const Form = () => {
             num_confirmations: numConfirmations
         }
     });
-
+    
     const onSubmit = handleSubmit(async (data) => {
         if (await isBatchRequest({ data, history })) {
             setOpenConfirmModal(true);
             setFormData(data);
             return;
         }
-
-        onEditMultisafe({ data, history });
+        await onEditMultisafe({ data, history });
+        reset(data);
     });
 
     return (
@@ -82,9 +83,9 @@ export const Form = () => {
                     hasError={!!errors?.num_confirmations}
                     errorMessage={!!errors?.num_confirmations && errors?.num_confirmations?.message}
                 />
-                <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
+                <FormButton disabled={!isValid || !isDirty } variant="contained" className={classes.submitButton}>
                     Send Request
-                </Button>
+                </FormButton>
             </form>
         </>
     );

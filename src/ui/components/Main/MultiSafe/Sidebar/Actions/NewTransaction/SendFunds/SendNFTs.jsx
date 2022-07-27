@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 
 import { transferNFTSchema } from '../../../../../../../../utils/validation/SendFundsModal';
 import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
+import FormButton from '../../../../../FormElements/FormButton/FormButton';
 import { NFT } from './Collection/NFT';
 import { NFTCollection } from './Collection/NFTCollection';
 import { Recipient } from './Recipient/Recipient';
@@ -17,7 +18,7 @@ const VIEWS = {
     CHOOSE_RECIPIENT: 'chooseRecipient'
 };
 
-const TransferView = ({ nonFungibleTokens, currentView, setCurrentView, onClose, control, errors, classes, onClick, tokenId, contractName }) => {
+const TransferView = ({ nonFungibleTokens, currentView, setCurrentView, onClose, control, errors, isValid, isDirty, classes, onClick, tokenId, contractName }) => {
     switch (currentView) {
         case VIEWS.CHOOSE_NFT: {
             const onClickNext = () => setCurrentView(VIEWS.CHOOSE_RECIPIENT);
@@ -85,13 +86,9 @@ const TransferView = ({ nonFungibleTokens, currentView, setCurrentView, onClose,
                         >
                             Previous
                         </Button>
-                        <Button
-                            type="submit"
-                            color="primary"
-                            className={cn(classes.cancel, classes.send)}
-                        >
+                        <FormButton disabled={!isValid || !isDirty} className={cn(classes.cancel, classes.send)}>
                             Send
-                        </Button>
+                        </FormButton>
                     </div>
                 </>
             );
@@ -109,7 +106,7 @@ export const SendNFTs = forwardRef(({ onClose, tabIndex }, ref) => {
     const nonFungibleTokens = useStoreState(({ multisafe }) => multisafe.general.nonFungibleTokens);
     const onTransferNFT = useStoreActions((actions) => actions.multisafe.onTransferNFT);
 
-    const { control, handleSubmit, formState: { errors } } = useForm({
+    const { control, handleSubmit, reset, formState: { errors, isValid, isDirty } } = useForm({
         resolver: yupResolver(transferNFTSchema),
         mode: 'all',
     });
@@ -117,6 +114,7 @@ export const SendNFTs = forwardRef(({ onClose, tabIndex }, ref) => {
 
     const onSubmit = handleSubmit((data) => {
         onTransferNFT({ data, onClose, tokenId, contractName });
+        reset(data);
     });
 
     const onClick = ({id, contract}) => {
@@ -128,7 +126,7 @@ export const SendNFTs = forwardRef(({ onClose, tabIndex }, ref) => {
     return (
         <div className={classes.wrapper}>
             <form className={classes.form} onSubmit={onSubmit}>
-                {TransferView({ nonFungibleTokens, currentView, setCurrentView, onClose, control, errors, classes, onClick, tokenId, contractName })}
+                {TransferView({ nonFungibleTokens, currentView, setCurrentView, onClose, control, errors, isValid, isDirty, classes, onClick, tokenId, contractName })}
             </form>
         </div>
     );
