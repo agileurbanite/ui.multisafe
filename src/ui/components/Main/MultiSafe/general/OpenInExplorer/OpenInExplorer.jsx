@@ -3,7 +3,7 @@ import { OpenInNew } from '@material-ui/icons';
 
 import { config } from '../../../../../../near/config';
 
-const getHref = ({ accountId, type, transactionHash }) => {
+const getExplorerLink = ({ accountId, type, transactionHash }) => {
     const getAccountInExplorerUrl =  (accountId) => `${config.explorerUrl}/accounts/${accountId}`;
     const getTransactionInExplorerUrl = (transactionHash) => `${config.explorerUrl}/transactions/${transactionHash}`;
 
@@ -11,8 +11,6 @@ const getHref = ({ accountId, type, transactionHash }) => {
         case 'account':
             return getAccountInExplorerUrl(accountId);
         case 'transaction':
-            if (!transactionHash) 
-                return getAccountInExplorerUrl(accountId);
             return getTransactionInExplorerUrl(transactionHash);
         default:
             return null;
@@ -20,11 +18,11 @@ const getHref = ({ accountId, type, transactionHash }) => {
 };
 
 export const OpenInExplorer = ({ accountId, transactionHash, classNames, type = 'account' }) => {
-    const href = getHref({ accountId, transactionHash, type });
+    const linkToExplorer = getExplorerLink({ accountId, transactionHash, type });
 
     return (
         <IconButton className={classNames?.iconButton}>
-            <a href={href} target="_blank" rel="noreferrer">
+            <a href={linkToExplorer} target="_blank" rel="noreferrer">
                 <Tooltip title={`View ${type} in explorer`} placement="top">
                     <OpenInNew className={classNames?.icon} />
                 </Tooltip>
