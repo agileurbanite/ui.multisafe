@@ -24,13 +24,14 @@ export const Form = () => {
         handleSubmit,
         getValues,
         reset,
-        formState: { errors, isDirty },
+        formState: { errors, isValid, isDirty },
     } = useForm({
         resolver: yupResolver(createMultisafeSchema),
         mode: 'all',
         defaultValues: {
             members: [{ account_id: accountId }],
             num_confirmations: '1',
+            amount: '5' 
         },
     });
 
@@ -75,7 +76,7 @@ export const Form = () => {
             <Typography className={classes.policy}>
                 By continuing you consent to the terms of use and privacy policy.
             </Typography>
-            <FormButton disabled={!isDirty} variant="contained" className={classes.submitButton}>
+            <FormButton disabled={!isValid || !isDirty} variant="contained" className={classes.submitButton}>
             Create Multi Safe
             </FormButton>
         </form>
