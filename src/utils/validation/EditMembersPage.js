@@ -1,7 +1,6 @@
-import * as R from 'ramda';
 import * as yup from 'yup';
 
-import { config } from '../../near/config';
+import isValidNearAccount from '../isValidNearAccount';
 
 const requiredMessageType = {
     name: 'Please enter multisafe name',
@@ -25,17 +24,6 @@ const patterns = {
     amount: /^([5-9]|0?[1-9][0-9]+)$/g,
 };
 
-const isUserExist = async (value) => {
-    const response = await fetch(config.nodeUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(config.endpoint.setParams({ account_id: value })),
-    });
-    const result = await response.json();
-    return R.has('result', result);
-};
 
 export const EditMembersPage = yup.object().shape({
     members: yup
@@ -47,9 +35,9 @@ export const EditMembersPage = yup.object().shape({
                     .required(requiredMessageType.account_id)
                     .matches(patterns.memberAddress, validationMessageType.account_id)
                     .test({
-                        message: 'Oops! The user is not found :(',
+                        message: 'Oops! The user does not exist :(',
                         test: async (e) => {
-                            const res = await isUserExist(e);
+                            const res = await isValidNearAccount(e);
                             return res;
                         },
                     }),
@@ -75,9 +63,9 @@ export const EditSafeSchema = yup.object().shape({
                     .required(requiredMessageType.account_id)
                     .matches(patterns.memberAddress, validationMessageType.account_id)
                     .test({
-                        message: 'Oops! The user is not found :(',
+                        message: 'Oops! The user does not exist :(',
                         test: async (e) => {
-                            const res = await isUserExist(e);
+                            const res = await isValidNearAccount(e);
                             return res;
                         },
                     }),

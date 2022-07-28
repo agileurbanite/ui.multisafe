@@ -1,8 +1,7 @@
-import * as R from 'ramda';
 import * as yup from 'yup';
 
 import { config } from '../../near/config';
-import { debounce } from '../debounce';
+import isValidNearAccount from '../isValidNearAccount';
 
 const requiredMessageType = {
     name: 'Please enter multisafe name',
@@ -23,24 +22,9 @@ const validationMessageType = {
 
 const patterns = {
     memberAddress:
-  /^[a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]\.?(testnet|betanet|localnet|guildnet|near)?/g,
+        /^[a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]\.?(testnet|betanet|localnet|guildnet|near)?/g,
     amount: /^([5-9]|0?[1-9][0-9]+)$/g,
 };
-
-const isUserExist = async (value) => {
-    const response = await fetch(config.nodeUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(config.endpoint.setParams({ account_id: value })),
-    });
-    const result = await response.json();
-    return R.has('result', result);
-};
-
-const isMultiSafeIdExist = debounce(isUserExist, 350);
-const debouncedIsUserExist = debounce(isUserExist, 350);
 
 export const createMultisafeSchema = yup.object().shape({
     name: yup.string().required(requiredMessageType.name),
@@ -48,7 +32,7 @@ export const createMultisafeSchema = yup.object().shape({
         .test({
             message: 'Account already exists.',
             test: async (multisafeId) => {
-                const response = await isMultiSafeIdExist(`${multisafeId}.multisafe.${config.networkId}`);
+                const response = await isValidNearAccount(`${multisafeId}.multisafe.${config.networkId}`);
                 return !response;
             },
         }),
@@ -61,9 +45,9 @@ export const createMultisafeSchema = yup.object().shape({
                     .required(requiredMessageType.account_id)
                     .matches(patterns.memberAddress, validationMessageType.account_id)
                     .test({
-                        message: 'Oops! The user is not found :(',
+                        message: 'Oops! The user does not exist :(',
                         test: async (e) => {
-                            return debouncedIsUserExist(e);
+                            return isValidNearAccount(e);
                         },
                     }),
             }),
