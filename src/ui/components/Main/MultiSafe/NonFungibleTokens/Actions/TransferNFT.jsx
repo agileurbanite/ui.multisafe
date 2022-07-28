@@ -7,13 +7,15 @@ import { useForm } from 'react-hook-form';
 
 import { transferNFTSchema } from '../../../../../../utils/validation/SendFundsModal';
 import { Checkbox } from '../../../../general/Checkbox/Checkbox';
+import FormButton from '../../../FormElements/FormButton/FormButton';
 import { Recipient } from '../../Sidebar/Actions/NewTransaction/SendFunds/Recipient/Recipient';
 import { useStyles } from '../../Sidebar/Actions/NewTransaction/SendFunds/SendFunds.styles';
 
+       
 export const TransferNFT = forwardRef(({ onClose, tabIndex, tokenId, contractName, tokenName }, ref) => {
     const onTransferNFT = useStoreActions((actions) => actions.multisafe.onTransferNFT);
 
-    const { control, handleSubmit, errors } = useForm({
+    const { control, handleSubmit, errors, reset, formState: {isValid, isDirty} } = useForm({
         resolver: yupResolver(transferNFTSchema),
         mode: 'all',
     });
@@ -21,6 +23,7 @@ export const TransferNFT = forwardRef(({ onClose, tabIndex, tokenId, contractNam
 
     const onSubmit = handleSubmit((data) => {
         onTransferNFT({ data, onClose, tokenId, contractName });
+        reset(data);
     });
 
     return (
@@ -54,9 +57,9 @@ export const TransferNFT = forwardRef(({ onClose, tabIndex, tokenId, contractNam
                         <Button color="secondary" className={classes.cancel} onClick={onClose}>
               Cancel
                         </Button>
-                        <Button type="submit" color="primary" className={cn(classes.cancel, classes.send)}>
-              Send
-                        </Button>
+                        <FormButton disabled={!isValid || !isDirty} className={cn(classes.cancel, classes.send)}>
+                        Send
+                        </FormButton>
                     </div>
                 </form>
             </div>

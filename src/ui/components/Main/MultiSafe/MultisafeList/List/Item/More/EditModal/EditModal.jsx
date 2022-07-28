@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { useStoreActions } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 
+import FormButton from '../../../../../../FormElements/FormButton/FormButton';
 import { useStyles } from './EditModal.styles';
 import { MultisafeName } from './MultisafeName/MultisafeName';
 import { validationSchema } from './validationSchema';
@@ -21,7 +22,8 @@ export const EditModal = ({
     const {
         control,
         handleSubmit,
-        formState: { errors },
+        reset,
+        formState: { errors, isValid, isDirty },
     } = useForm({
         resolver: yupResolver(validationSchema),
         mode: 'all',
@@ -30,6 +32,7 @@ export const EditModal = ({
     const onSubmit = handleSubmit((data) => {
         changeMultisafeName({ multisafeId, data });
         closeEditModal();
+        reset(data);
     });
 
     return (
@@ -53,9 +56,9 @@ export const EditModal = ({
                             <Button className={classes.cancel} onClick={closeEditModal}>
                 Cancel
                             </Button>
-                            <Button type="submit" color="primary" className={cn(classes.cancel, classes.send)}>
-                Save
-                            </Button>
+                            <FormButton disabled={!isValid || !isDirty} className={cn(classes.cancel, classes.send)}>
+                                Save
+                            </FormButton>
                         </div>
                     </form>
                 </div>
