@@ -18,7 +18,7 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
 
     const { control, handleSubmit, setValue, formState: { errors } } = useForm({
         resolver: yupResolver(sendFundsSchema),
-        mode: 'all',
+        mode: 'onBlur',
     });
     const classes = useStyles();
 

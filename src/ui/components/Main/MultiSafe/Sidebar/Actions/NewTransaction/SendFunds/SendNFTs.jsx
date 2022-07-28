@@ -111,7 +111,7 @@ export const SendNFTs = forwardRef(({ onClose, tabIndex }, ref) => {
 
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(transferNFTSchema),
-        mode: 'all',
+        mode: 'onBlur',
     });
     const classes = useStyles();
 

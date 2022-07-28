@@ -32,7 +32,7 @@ export const Form = () => {
         formState: { errors }
     } = useForm({
         resolver: yupResolver(EditSafeSchema),
-        mode: 'all',
+        mode: 'onBlur',
         defaultValues: {
             name,
             members: members.map((member) => ({

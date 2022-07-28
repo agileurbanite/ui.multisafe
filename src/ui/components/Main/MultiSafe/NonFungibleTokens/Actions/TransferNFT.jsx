@@ -15,7 +15,7 @@ export const TransferNFT = forwardRef(({ onClose, tabIndex, tokenId, contractNam
 
     const { control, handleSubmit, errors } = useForm({
         resolver: yupResolver(transferNFTSchema),
-        mode: 'all',
+        mode: 'onBlur',
     });
     const classes = useStyles();
 

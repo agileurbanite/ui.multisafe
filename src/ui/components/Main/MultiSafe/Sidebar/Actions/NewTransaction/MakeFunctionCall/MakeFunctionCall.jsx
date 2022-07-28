@@ -18,7 +18,7 @@ export const MakeFunctionCall = forwardRef(({ onClose, tabIndex }, ref) => {
     const onMakeFunctionCall = useStoreActions((actions) => actions.multisafe.onMakeFunctionCall);
     const { control, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(makeFunctionCallSchema),
-        mode: 'all',
+        mode: 'onBlur',
     });
     const classes = useStyles();
 
