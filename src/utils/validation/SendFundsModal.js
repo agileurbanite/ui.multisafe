@@ -1,15 +1,10 @@
 import * as yup from 'yup';
 
-import isValidNearAccount from '../isValidNearAccount';
+import isValidNearAccount, { patterns } from '../isValidNearAccount';
 
 const requiredMessageType = {
     recipientId: 'Please enter recipient\'s address',
     amount: 'Please enter a valid amount to send',
-};
-
-const patterns = {
-    memberAddress: /^[a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]\.?(testnet|betanet|localnet|guildnet|near)?/g,
-    amount: /^([5-9]|0?[1-9][0-9]+)$/g,
 };
 
 export const sendFundsSchema = yup.object().shape({

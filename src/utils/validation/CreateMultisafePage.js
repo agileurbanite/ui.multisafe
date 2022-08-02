@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 import { config } from '../../near/config';
-import isValidNearAccount from '../isValidNearAccount';
+import isValidNearAccount, { patterns } from '../isValidNearAccount';
 
 const requiredMessageType = {
     name: 'Please enter multisafe name',
@@ -18,12 +18,6 @@ const validationMessageType = {
     account_id: 'Member Account ID must contain network connection type: e.g. alice.near, alice.testnet',
     num_confirmations: '',
     amount: 'Enter a valid amount. Minimum is 5 NEAR',
-};
-
-const patterns = {
-    memberAddress:
-        /^[a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]\.?(testnet|betanet|localnet|guildnet|near)?/g,
-    amount: /^([5-9]|0?[1-9][0-9]+)$/g,
 };
 
 export const createMultisafeSchema = yup.object().shape({
