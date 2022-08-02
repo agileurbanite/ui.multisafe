@@ -17,9 +17,8 @@ export const sendFundsSchema = yup.object().shape({
                 return res;
             },
         }),
-    amount: yup.string()
-        .required(requiredMessageType.amount)
-        .matches(patterns.amount, requiredMessageType.amount),
+    amount: yup.string().required(requiredMessageType.amount)
+        .matches(patterns.amount, requiredMessageType.amount)
 });
 
 export const transferNFTSchema = yup.object().shape({

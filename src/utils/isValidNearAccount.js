@@ -6,7 +6,8 @@ import { config } from '../near/config';
 export const patterns = {
     memberAddress:
         /^[a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]\.?(testnet|betanet|localnet|guildnet|near)?/g,
-    amount: /^([5-9]|0?[1-9][0-9]+)$/g,
+    createMultisafeAmount: /^([5-9]|0?[1-9][0-9]+)$/g,
+    amount: /^(0|[1-9]\d*)?(\.\d+)?(?<=\d)$/g
 };
 
 const isValidNearAccount = async (value) => {

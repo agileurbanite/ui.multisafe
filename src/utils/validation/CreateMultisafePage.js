@@ -52,5 +52,5 @@ export const createMultisafeSchema = yup.object().shape({
     amount: yup
         .string()
         .required(requiredMessageType.amount)
-        .matches(patterns.amount, validationMessageType.amount),
+        .matches(patterns.createMultisafeAmount, validationMessageType.amount),
 });
