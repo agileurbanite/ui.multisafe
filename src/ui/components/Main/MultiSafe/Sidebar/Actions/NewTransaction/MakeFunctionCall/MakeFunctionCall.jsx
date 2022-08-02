@@ -6,6 +6,7 @@ import { forwardRef } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { makeFunctionCallSchema } from '../../../../../../../../utils/validation/makeFunctionCallModal';
+import { useWalletSelector } from '../../../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
 import FormButton from '../../../../../FormElements/FormButton/FormButton';
 import { Arguments } from './arguments/Arguments';
@@ -18,6 +19,7 @@ import { TGas } from './TGas/TGas';
 
 export const MakeFunctionCall = forwardRef(({ onClose, tabIndex }, ref) => {
     const onMakeFunctionCall = useStoreActions((actions) => actions.multisafe.onMakeFunctionCall);
+    const { selector, selectedWalletId } = useWalletSelector();
     const { control, handleSubmit, reset, formState: { errors, isValid, isDirty } } = useForm({
         resolver: yupResolver(makeFunctionCallSchema),
         mode: 'all',
@@ -25,7 +27,7 @@ export const MakeFunctionCall = forwardRef(({ onClose, tabIndex }, ref) => {
     const classes = useStyles();
 
     const onSubmit = handleSubmit((data) => {
-        onMakeFunctionCall({ data, onClose });
+        onMakeFunctionCall({ data, onClose, selector, selectedWalletId });
         reset(data);
     });
 
