@@ -45,15 +45,10 @@ export const PendingRequests = () => {
         // only member related actions might be recognized as batch actions
         const batchActions = isBatchActions(candidate, newRequest) || isBatchActions(newRequest, candidate);
 
-        if (
-            candidateIsRequest
+        return candidateIsRequest
             && subsequentRequests
             && lowCreationDateDifference
-            && batchActions
-        ) {
-            return true;
-        }
-        return false;
+            && batchActions;
     };
 
     const requestsList = batchRequestView
