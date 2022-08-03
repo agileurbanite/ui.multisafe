@@ -10,7 +10,7 @@ export const onInitApp = thunk(async (_, payload, { getStoreState, getStoreActio
     const { history, setInit, selector, accountId, selectedWalletId } = payload;
 
     const actions = getStoreActions();
-    let state = getStoreState();
+    const state = getStoreState();
     const initApp = actions.general.initApp;
     const isConnected = state.general.user.isConnected;
     const isSignedIn = selector.isSignedIn();
@@ -35,7 +35,6 @@ export const onInitApp = thunk(async (_, payload, { getStoreState, getStoreActio
             });
         }
     }
-    state = getStoreState();
 
     // All redirect from NEAR Wallet leads to /redirect-from-wallet route. If it is the case,
     // handle it and redirect the user to the appropriate page. If not - check if a user has access
