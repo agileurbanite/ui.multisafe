@@ -9,7 +9,6 @@ import { App } from './ui/components/App';
 import { theme } from './ui/config/theme';
 import { Initializer } from './ui/providers/Initializer/Initializer';
 import { Router } from './ui/providers/Router';
-import { WalletSelectorContextProvider } from './ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 
 const history = createBrowserHistory();
 
@@ -17,13 +16,11 @@ render(
     <StrictMode>
         <StoreProvider store={store}>
             <MuiThemeProvider theme={theme}>
-                <WalletSelectorContextProvider>
-                    <Initializer history={history} store={store}>
-                        <Router>
-                            <App />
-                        </Router>
-                    </Initializer>
-                </WalletSelectorContextProvider>
+                <Initializer history={history} store={store}>
+                    <Router>
+                        <App />
+                    </Router>
+                </Initializer>
             </MuiThemeProvider>
         </StoreProvider>
     </StrictMode>,

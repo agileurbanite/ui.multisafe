@@ -6,7 +6,6 @@ import { forwardRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { sendFundsSchema } from '../../../../../../../../utils/validation/SendFundsModal';
-import { useWalletSelector } from '../../../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
 import FormButton from '../../../../../FormElements/FormButton/FormButton';
 import { Amount } from './Amount/Amount';
@@ -24,13 +23,11 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
     });
     const classes = useStyles();
 
-    const { selector, selectedWalletId, accountId } = useWalletSelector();
-
     const onSubmit = handleSubmit((data) => {
         const token = fungibleTokens.find(({name}) => name === tokenName) 
             ? fungibleTokens.find(({name}) => name === tokenName) 
             : undefined;
-        onTransferTokens({ data, onClose, token, selector, selectedWalletId, accountId });
+        onTransferTokens({ data, onClose, token});
         reset(data);
     });
 

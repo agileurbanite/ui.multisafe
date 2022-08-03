@@ -3,15 +3,12 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
-import { useWalletSelector } from '../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import FormButton from '../../../FormElements/FormButton/FormButton';
 import { useStyles } from './Form.styles';
 
 export const FormRemove = () => {
     const history = useHistory();
     const classes = useStyles();
-    const { selector } = useWalletSelector();
-
     const onDisconnect = useStoreActions((actions) => actions.general.onDisconnect);
     const name = useStoreState((state) => state.multisafe.general.name);
 
@@ -21,9 +18,7 @@ export const FormRemove = () => {
         mode: 'all',
     });
 
-    const onSubmit = handleSubmit(async () => {
-        await onDisconnect({ history, selector });
-    });
+    const onSubmit = handleSubmit(() => onDisconnect({ history }));
 
     return (
         <form autoComplete="off" className={classes.form} onSubmit={onSubmit}>

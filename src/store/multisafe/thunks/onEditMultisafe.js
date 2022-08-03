@@ -29,26 +29,17 @@ const serializeData = ({ name, members, num_confirmations }) => ({
     members: members.map(({ account_id }) => ({ account_id })),
 });
 
-const addEditRequest = async (contract, contractActions, callbackUrl, signAndSendTransaction, multisafeId) => {
+const addEditRequest = (contract, contractActions, callbackUrl) => {
     const method = 'add_request_and_confirm';
-  
-    return await signAndSendTransaction({
-        receiverId: multisafeId,
-        actions: [{
-            type: 'FunctionCall',
-            params: {
-                methodName: method,
-                args: {
-                    request: {
-                        receiver_id: contract.contractId,
-                        actions: contractActions,
-                    },
-                },
-                gas: ATTACHED_GAS
-            },
-        }],
-        callbackUrl,
+
+    const args = prepareRequestArgs({
+        receiver_id: contract.contractId,
+        actions: contractActions,
+        gas: ATTACHED_GAS,
+        callbackUrl
     });
+
+    return contract[method](args);
 };
 
 const generateConfirmationsActions = (values, numConfirmations) => values.numConfirmations !== numConfirmations
@@ -95,12 +86,12 @@ const generateMembersActions = (values, currentMembers) => {
     ];
 };
 
-const signTxByLedger = async (contract, contractActions, actions, multisafeId, state, history, signAndSendTransaction) => {
+const signTxByLedger = async (contract, contractActions, actions, multisafeId, state, history) => {
     await signTransactionByLedger({
         actionName: 'Edit Multi Safe',
         state,
         actions,
-        contractMethod: async () => await addEditRequest(contract, contractActions, null, signAndSendTransaction, multisafeId),
+        contractMethod: () => addEditRequest(contract, contractActions),
         callback: async () => {
             await actions.multisafe.onMountDashboard(multisafeId);
             history.push(getRoute.dashboard(multisafeId));
@@ -108,7 +99,7 @@ const signTxByLedger = async (contract, contractActions, actions, multisafeId, s
     });
 };
 
-const signBatchTxByLedger = async (contract, confirmationsActions, membersActions, actions, multisafeId, state, history, values, currentMembers, signAndSendTransaction) => {
+const signBatchTxByLedger = async (contract, confirmationsActions, membersActions, actions, multisafeId, state, history, values, currentMembers) => {
     let requestOrder = [membersActions, confirmationsActions];
     if (checkChangeOrder({ currentMembers, values })) {
         requestOrder = [confirmationsActions, membersActions];
@@ -118,14 +109,14 @@ const signBatchTxByLedger = async (contract, confirmationsActions, membersAction
         actionName: 'Edit Multi Safe',
         state,
         actions,
-        contractMethod: async () => await addEditRequest(contract, requestOrder[0], null, signAndSendTransaction, multisafeId)
+        contractMethod: () => addEditRequest(contract, requestOrder[0])
     });
 
     await signTransactionByLedger({
         actionName: 'Edit Multi Safe',
         state,
         actions,
-        contractMethod: async () => await addEditRequest(contract, requestOrder[1], null, signAndSendTransaction, multisafeId),
+        contractMethod: () => addEditRequest(contract, requestOrder[1]),
         callback: async () => {
             await actions.multisafe.onMountDashboard(multisafeId);
             history.push(getRoute.dashboard(multisafeId));
@@ -153,7 +144,7 @@ const checkChangeOrder = ({ currentMembers, values, }) => {
     return deleteMembersActions.length >= 1 && addMembersActions.length < deleteMembersActions.length;
 };
 
-const prepareBatchRequest = async (contract, confirmationsActions, membersActions, actions, values, currentMembers, signAndSendTransaction, multisafeId) => {
+const prepareBatchRequest = (contract, confirmationsActions, membersActions, actions, values, currentMembers) => {
     const method = 'add_request_and_confirm';
 
     // in few cases we need to revert the order of actions
@@ -177,24 +168,22 @@ const prepareBatchRequest = async (contract, confirmationsActions, membersAction
     });
 
     const callbackUrl = getRoute.callbackUrl({ redirectAction: redirectActions.batchRequest });
-    await addEditRequest(contract, requestOrder[0], callbackUrl, signAndSendTransaction, multisafeId);
+    addEditRequest(contract, requestOrder[0], callbackUrl);
 };
 
 export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
-    const { data, history, selector, selectedWalletId } = payload;
+    const { data, history } = payload;
 
     const state = getStoreState();
     const actions = getStoreActions();
     const values = serializeData(data);
   
+    const isNearWallet = state.general.selectors.isNearWallet;
     const contract = state.multisafe.entities.contract;
     const members = state.multisafe.members;
     const name = state.multisafe.general.name;
     const numConfirmations = state.multisafe.general.numConfirmations;
     const multisafeId = state.multisafe.general.multisafeId;
-
-    const wallet = await selector.wallet();
-    const signAndSendTransaction = wallet.signAndSendTransaction;
 
     const membersActions = generateMembersActions(values, members);
     const confirmationsActions = generateConfirmationsActions(values, numConfirmations);
@@ -220,19 +209,9 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
     }
 
     if (isBatchRequest) {
-        // If new wallet gets introduced, please update here
-        switch (selectedWalletId) {
-            case 'near-wallet':
-            case 'my-near-wallet':
-                await prepareBatchRequest(contract, confirmationsActions, membersActions, actions, values, members, signAndSendTransaction, multisafeId);
-                break;
-            case 'ledger':
-                await signBatchTxByLedger(contract, confirmationsActions, membersActions, actions, multisafeId, state, history, values, members, signAndSendTransaction);
-                break;
-
-            default:
-                throw Error(`Unsupported wallet selected: '${selectedWalletId}'`);
-        }
+        isNearWallet
+            ? prepareBatchRequest(contract, confirmationsActions, membersActions, actions, values, members)
+            : await signBatchTxByLedger(contract, confirmationsActions, membersActions, actions, multisafeId, state, history, values, members);
         return;
     } 
 
@@ -243,19 +222,9 @@ export const onEditMultisafe = thunk(async (_, payload, { getStoreState, getStor
     ];
     const callbackUrl = `${window.location.origin}${getRoute.dashboard(contract.contractId)}`;
 
-    // If new wallet gets introduced, please update here
-    switch (selectedWalletId) {
-        case 'near-wallet':
-        case 'my-near-wallet':
-            await addEditRequest(contract, contractActions, callbackUrl, signAndSendTransaction, multisafeId);
-            break;
-        case 'ledger':
-            await signTxByLedger(contract, contractActions, actions, multisafeId, state, history, signAndSendTransaction);
-            break;
-
-        default:
-            throw Error(`Unsupported wallet selected: '${selectedWalletId}'`);
-    }
+    isNearWallet
+        ? addEditRequest(contract, contractActions, callbackUrl)
+        : await signTxByLedger(contract, contractActions, actions, multisafeId, state, history);
 });
 
 export const isBatchRequest = thunk(async (_, payload, { getStoreState }) => {

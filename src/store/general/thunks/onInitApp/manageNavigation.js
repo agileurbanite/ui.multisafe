@@ -2,7 +2,7 @@ import { matchPath } from 'react-router';
 
 import { routes, getRoute } from '../../../../ui/config/routes';
 
-const { root, welcome, getStarted, createMultisafe, loadMultisafe, dashboard, history, members, safeEdit } =
+const { root, welcome, getStarted, createMultisafe, loadMultisafe, dashboard, history, members } =
   routes;
 
 /** Anon user without data:
@@ -21,13 +21,13 @@ const { root, welcome, getStarted, createMultisafe, loadMultisafe, dashboard, hi
  * * root / welcome / getStarted -> dashboard;
  * * dashboard / history / members / createMultisafe / loadMultisafe -> no changes;
  */
-export const manageNavigation = (state, browserHistory, selector) => {
-    const isConnected = selector.isSignedIn();
+export const manageNavigation = (state, browserHistory) => {
+    const isConnected = state.general.user.isConnected;
     const hasSavedMultisafes = state.general.selectors.hasSavedMultisafes;
     const lastActiveMultisafeId = state.multisafe.general.multisafeId;
 
     const match = matchPath(browserHistory.location.pathname, {
-        path: [root, welcome, getStarted, createMultisafe, loadMultisafe, dashboard, history, members, safeEdit],
+        path: [root, welcome, getStarted, createMultisafe, loadMultisafe, dashboard, history, members],
         exact: true,
     });
     if (!match) return;
@@ -37,7 +37,7 @@ export const manageNavigation = (state, browserHistory, selector) => {
     if (
         !isConnected &&
     !hasSavedMultisafes &&
-    ifInclude([root, createMultisafe, dashboard, history, members, safeEdit])
+    ifInclude([root, createMultisafe, dashboard, history, members])
     ) {
         browserHistory.replace(welcome);
     }

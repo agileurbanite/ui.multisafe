@@ -18,7 +18,6 @@ export const getDataBeforeRenderPage = async ({
     history: browserHistory,
     withLoading,
 }) => {
-    
     const enableLoading = actions.general.enableLoading;
     const disableLoading = actions.general.disableLoading;
     const onMountMultisafe = actions.multisafe.onMountMultisafe;

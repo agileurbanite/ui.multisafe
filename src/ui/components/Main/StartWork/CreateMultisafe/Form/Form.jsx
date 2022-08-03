@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
 import { createMultisafeSchema } from '../../../../../../utils/validation/CreateMultisafePage';
-import { useWalletSelector } from '../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { AccountId } from '../../../FormElements/AccountId/AccountId';
 import { Amount } from '../../../FormElements/Amount/Amount';
 import { Confirmations } from '../../../FormElements/Confirmations/Confirmations';
@@ -19,7 +18,6 @@ export const Form = () => {
     const onCreateMultisafe = useStoreActions((actions) => actions.startWork.onCreateMultisafe);
     const history = useHistory();
     const classes = useStyles();
-    const { selectedWalletId } = useWalletSelector();
 
     const {
         control,
@@ -38,7 +36,7 @@ export const Form = () => {
     });
 
     const onSubmit = handleSubmit((data) => {
-        onCreateMultisafe({ data, history, selectedWalletId });
+        onCreateMultisafe({ data, history });
         reset(data);
     });
 

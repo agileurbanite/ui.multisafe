@@ -4,14 +4,12 @@ import cn from 'classnames';
 import { useState, useEffect } from 'react';
 
 import { config } from '../../../../../../../near/config';
-import { useWalletSelector } from '../../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { useStyles } from './Status.styles';
 
 const canDeleteRequest = (createdAt) =>
     Date.now() > createdAt + config.multisafe.deleteRequestCooldown;
 
 export const Status = ({ request, onConfirmRequest, onDeleteRequest }) => {
-    const { selectedWalletId } = useWalletSelector();
     const { requestId, isMember, createdAt } = request;
     const { hasUserConfirm, totalNum, currentNum } = request.confirms;
     const [canDelete, setCanDelete] = useState(canDeleteRequest(createdAt));
@@ -35,8 +33,8 @@ export const Status = ({ request, onConfirmRequest, onDeleteRequest }) => {
         };
     }, [isMember, canDelete, createdAt]);
 
-    const confirmRequest = () => onConfirmRequest({ requestId, selectedWalletId });
-    const deleteRequest = () => onDeleteRequest({ requestId, selectedWalletId });
+    const confirmRequest = () => onConfirmRequest({ requestId });
+    const deleteRequest = () => onDeleteRequest({ requestId });
 
     return (
         <TableCell className={classes.tableCell}>
