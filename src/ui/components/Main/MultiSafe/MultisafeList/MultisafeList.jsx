@@ -3,14 +3,12 @@ import { Add, SystemUpdateAlt, Close } from '@material-ui/icons';
 import { useStoreState } from 'easy-peasy';
 
 import { routes } from '../../../../config/routes';
-import { useWalletSelector } from '../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { GreenLink } from '../../general/GreenLink/GreenLink';
 import { List } from './List/List';
 import { useStyles } from './MultisafeList.styles';
 
 export const MultisafeList = ({ onListClose }) => {
-    const { selector } = useWalletSelector();
-    const isConnected = selector.isSignedIn();
+    const isConnected = useStoreState((store) => store.general.user.isConnected);
     const membership = useStoreState((store) => store.multisafe.selectors.multisafes.membership);
     const readOnly = useStoreState((store) => store.multisafe.selectors.multisafes.readOnly);
     const classes = useStyles();

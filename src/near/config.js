@@ -28,7 +28,7 @@ const testnet = {
     networkId: 'testnet',
     nodeUrl: 'https://rpc.testnet.near.org',
     archivalRpcUrl: 'https://archival-rpc.testnet.near.org',
-    walletUrl: 'https://testnet.mynearwallet.com/',
+    walletUrl: 'https://wallet.testnet.near.org',
     helperUrl: 'https://testnet-api.kitwallet.app',
     explorerUrl: 'https://explorer.testnet.near.org',
     multisafeFactoryId: 'multisafe.testnet',

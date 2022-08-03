@@ -124,33 +124,28 @@ export default class FungibleTokens {
         };
     };
 
-    addTransferRequest = async ({withApprove, receiverId, tokenId, contractName, signAndSendTransaction, multisafeId }) => {
+    //
+
+    addTransferRequest = async ({multisafeContract, withApprove, receiverId, tokenId, contractName}) => {
         const method = withApprove ? 'add_request_and_confirm' : 'add_request';
         const args = Buffer.from(`{"token_id": "${tokenId}", "receiver_id": "${receiverId}"}`)
             .toString('base64');
-
-        return await signAndSendTransaction({
-            receiverId: multisafeId,
-            actions: [{
-                type: 'FunctionCall',
-                params: {
-                    methodName: method,
-                    args: {
-                        request: {
-                            receiver_id: contractName,
-                            actions: [{
-                                type: 'FunctionCall',
-                                method_name: 'nft_transfer',
-                                args,
-                                deposit: NFT_TRANSFER_DEPOSIT,
-                                gas: NFT_TRANSFER_GAS,
-                            }]
-                        },
+        return multisafeContract[method](
+            {
+                args: {
+                    request: {
+                        receiver_id: contractName,
+                        actions: [{
+                            type: 'FunctionCall',
+                            method_name: 'nft_transfer',
+                            args,
+                            deposit: NFT_TRANSFER_DEPOSIT,
+                            gas: NFT_TRANSFER_GAS,
+                        }]
                     },
-                    gas: ADD_REQUEST_AND_CONFIRM_GAS 
                 },
-                
-            }],
-        });
+                gas: ADD_REQUEST_AND_CONFIRM_GAS 
+            },
+        );
     };
 }

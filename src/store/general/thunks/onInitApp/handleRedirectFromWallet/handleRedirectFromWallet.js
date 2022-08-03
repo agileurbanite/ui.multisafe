@@ -1,11 +1,11 @@
 import qs from 'query-string';
 
 import { redirectActions } from '../../../../../config/redirectActions';
-import { config } from '../../../../../near/config';
+import { getMultisafeContract } from '../../../../multisafe/helpers/getMultisafeContract';
 import { connectNearWallet } from './connectNearWallet';
 import { createMultisafe } from './createMultisafe';
 
-export const handleRedirectFromWallet = async (state, actions, history, signAndSendTransaction) => {
+export const handleRedirectFromWallet = async (state, actions, history) => {
     const query = qs.parse(history.location.search);
     const { redirectAction } = query;
 
@@ -17,33 +17,13 @@ export const handleRedirectFromWallet = async (state, actions, history, signAndS
 
     if (redirectAction === redirectActions.batchRequest) {
         const { multisafeId, batchRequest: { args, method } } = state.general.temporary;
-        await signAndSendTransaction({
-            receiverId: multisafeId,
-            actions: [{
-                type: 'FunctionCall',
-                params: {
-                    methodName: method,
-                    args: args.args,
-                    gas: config.gas.default,
-                },
-            }],
-            callbackUrl: args.callbackUrl,
-        });
+        const contract = getMultisafeContract(state, multisafeId);
+        contract[method](args);
     }
 
     if (redirectAction === redirectActions.batchConfirm) {
         const { multisafeId, batchConfirm: { args } } = state.general.temporary;
-        await signAndSendTransaction({
-            receiverId: multisafeId,
-            actions: [{
-                type: 'FunctionCall',
-                params: {
-                    methodName: 'confirm',
-                    args: args.args,
-                    gas: config.gas.default,
-                },
-            }],
-            callbackUrl: args.callbackUrl,
-        });
+        const contract = getMultisafeContract(state, multisafeId);
+        contract.confirm(args);
     }
 };

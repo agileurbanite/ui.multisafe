@@ -75,24 +75,18 @@ const prepareBatchConfirmation = ({ contract, requests, actions }) => {
 };
 
 export const onConfirmRequest = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
-    const { requestId, selectedWalletId } = payload;
+    const { requestId } = payload;
 
     const state = getStoreState();
+    const isNearWallet = state.general.selectors.isNearWallet;
     const contract = state.multisafe.entities.contract;
     const multisafeId = state.multisafe.general.multisafeId;
+
     const actions = getStoreActions();
 
-    switch (selectedWalletId) {
-        case 'near-wallet':
-        case 'my-near-wallet':
-            signTxByNearWallet(contract, requestId);
-            break;
-        case 'ledger':
-            await signTxByLedger(contract, requestId, multisafeId, state, actions);
-            break;
-        default:
-            throw Error(`Unsupported wallet selected: '${selectedWalletId}'`);
-    }
+    isNearWallet
+        ? signTxByNearWallet(contract, requestId)
+        : await signTxByLedger(contract, requestId, multisafeId, state, actions);
 });
 
 export const onConfirmBatchRequest = thunk(async (_, payload, { getStoreState, getStoreActions }) => {

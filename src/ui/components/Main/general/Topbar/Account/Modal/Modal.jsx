@@ -2,7 +2,6 @@ import { Button, Paper, Divider } from '@material-ui/core';
 import { useStoreActions } from 'easy-peasy';
 import { useHistory } from 'react-router-dom';
 
-import { useWalletSelector } from '../../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { Near } from '../../../../../general/icons/Near';
 import { CopyToClipboard } from '../../../../MultiSafe/general/CopyToClipboard/CopyToClipboard';
 import { OpenInExplorer } from '../../../../MultiSafe/general/OpenInExplorer/OpenInExplorer';
@@ -12,11 +11,8 @@ export const Modal = ({ accountId }) => {
     const onDisconnect = useStoreActions((actions) => actions.general.onDisconnect);
     const history = useHistory();
     const classes = useStyles();
-    const { selector } = useWalletSelector();
-    
-    const disconnect = async () => {
-        onDisconnect({ history, selector });
-    };
+
+    const disconnect = () => onDisconnect({ history });
 
     return (
         <Paper className={classes.container} elevation={4}>

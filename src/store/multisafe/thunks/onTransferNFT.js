@@ -12,22 +12,19 @@ const signTxByLedger = async ({
     state,
     actions,
     tokenId,
-    contractName,
-    signAndSendTransaction,
+    contractName
 }) => {
     await signTransactionByLedger({
         actionName: 'Transfer NFT',
         state,
         actions,
         contractMethod: 
-        async () => await nonFungibleTokensService.addTransferRequest({
+        () => nonFungibleTokensService.addTransferRequest({
             multisafeContract: contract, 
             withApprove,
             receiverId: recipientId,
             tokenId, 
-            contractName,
-            signAndSendTransaction,
-            multisafeId,
+            contractName 
         }),
         callback: async () => {
             await actions.multisafe.onMountDashboard(multisafeId);
@@ -36,39 +33,26 @@ const signTxByLedger = async ({
 };
 
 export const onTransferNFT = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
-    const { onClose, tokenId, contractName, selector, selectedWalletId } = payload;
+    const { onClose, tokenId, contractName } = payload;
     const { recipientId, withApprove } = payload.data;
 
     const state = getStoreState(); 
+    const isNearWallet = state.general.selectors.isNearWallet;
     const near = state.general.entities.near;
     const contract = state.multisafe.entities.contract;
     const multisafeId = state.multisafe.general.multisafeId;
     const actions = getStoreActions();
-    const wallet = await selector.wallet();
-    const signAndSendTransaction = wallet.signAndSendTransaction;
 
     const nonFungibleTokensService = new NonFungibleTokens(near.connection);
-
-    // TODO: nonFungibleTokensService.addTransferRequest need to be tested
-    switch (selectedWalletId) {
-        case 'near-wallet':
-        case 'my-near-wallet':
-            await nonFungibleTokensService.addTransferRequest({
-                multisafeContract: contract, 
-                withApprove,
-                receiverId: recipientId,
-                tokenId, 
-                contractName,
-                signAndSendTransaction,
-                multisafeId,
-            });
-            break;
-        case 'ledger':
-            await signTxByLedger({ nonFungibleTokensService, contract, withApprove, recipientId, multisafeId, state, actions, tokenId, contractName, signAndSendTransaction });
-            break;
-        default:
-            throw Error(`Unsupported wallet selected: '${selectedWalletId}'`);
-    }
+    isNearWallet
+        ? await nonFungibleTokensService.addTransferRequest({
+            multisafeContract: contract, 
+            withApprove,
+            receiverId: recipientId,
+            tokenId, 
+            contractName 
+        })
+        : await signTxByLedger({ nonFungibleTokensService, contract, withApprove, recipientId, multisafeId, state, actions, tokenId, contractName });
 
     onClose();
 });
