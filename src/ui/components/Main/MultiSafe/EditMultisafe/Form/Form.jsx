@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
 import { EditSafeSchema } from '../../../../../../utils/validation/EditMembersPage';
+import { useWalletSelector } from '../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { Confirmations } from '../../../FormElements/Confirmations/Confirmations';
 import FormButton from '../../../FormElements/FormButton/FormButton';
 import { MembersField } from '../../../FormElements/MembersField/MembersField';
@@ -18,6 +19,7 @@ export const Form = () => {
     const isBatchRequest = useStoreActions((actions) => actions.multisafe.isBatchRequest);
     const history = useHistory();
     const classes = useStyles();
+    const { selector, selectedWalletId } = useWalletSelector();
     const name = useStoreState((state) => state.multisafe.general.name);
     const members = useStoreState((state) => state.multisafe.members || []);
     const numConfirmations = useStoreState((state) => state.multisafe.general.numConfirmations);
@@ -49,7 +51,8 @@ export const Form = () => {
             setFormData(data);
             return;
         }
-        await onEditMultisafe({ data, history });
+
+        onEditMultisafe({ data, history, selector, selectedWalletId });
         reset(data);
     });
 

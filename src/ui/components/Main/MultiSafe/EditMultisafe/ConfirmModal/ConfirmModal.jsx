@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { useStoreActions } from 'easy-peasy';
 import { useHistory } from 'react-router';
 
+import { useWalletSelector } from '../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { useStyles } from './ConfirmModal.styles';
 
 export const ConfirmModal = ({
@@ -13,12 +14,13 @@ export const ConfirmModal = ({
 }) => {
     const classes = useStyles();
     const history = useHistory();
+    const { selector, selectedWalletId } = useWalletSelector();
 
     const onEditMultisafe = useStoreActions((actions) => actions.multisafe.onEditMultisafe);
     const onConfirmBatchRequest = useStoreActions((actions) => actions.multisafe.onConfirmBatchRequest);
 
     const onConfirm = () => formData
-        ? onEditMultisafe({ data: formData, history })
+        ? onEditMultisafe({ data: formData, history, selector, selectedWalletId })
         : onConfirmBatchRequest({ requests });
 
     return (

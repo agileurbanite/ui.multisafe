@@ -11,7 +11,7 @@ export const initState = {
     user: {
         isConnected: false,
         accountId: null,
-        walletType: 'near-wallet',
+        walletType: 'my-near-wallet',
         publicKey: null,
     },
     selectors: {

@@ -1,17 +1,29 @@
 import { Button } from '@material-ui/core';
-import { useState } from 'react';
+import { useStoreState } from 'easy-peasy';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router';
 
 import logo from '../../images/logo/logo-white.svg';
 import laptop from '../../images/welcome-page/laptop@2x.png';
-import { ConnectWallet } from '../general/ConnectWallet/ConnectWallet';
+import { useWalletSelector } from '../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { Footer } from '../general/Footer/Footer';
 import { useStyles } from './Welcome.styles';
 
 export const Welcome = () => {
-    const [isOpenConnectWallet, setOpenConnectWallet] = useState(false);
     const classes = useStyles();
+    const { modal, selector } = useWalletSelector();
+    const openConnectWallet = () => modal.show();
 
-    const openConnectWallet = () => setOpenConnectWallet(true);
+    const signedIn = selector.isSignedIn();
+    const history = useHistory();
+    const multisafeId = useStoreState((state) => state.multisafe.general.multisafeId);
+
+    useEffect(() => {   
+        if (signedIn && !multisafeId) {
+            history.push('/get-started');
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [signedIn]);
 
     return (
         <>
@@ -48,7 +60,6 @@ export const Welcome = () => {
                 <img className={classes.laptop} src={laptop} alt="laptop with multisafe app" />
                 <Footer classNames={{ container: classes.footer }} variant="dark" />
             </div>
-            {isOpenConnectWallet && <ConnectWallet setModalOpen={setOpenConnectWallet} />}
         </>
     );
 };
