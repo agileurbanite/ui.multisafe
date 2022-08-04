@@ -43,9 +43,9 @@ export const Requests = () => {
                                     <TableCell>{request.requestId}</TableCell>
                                     <TableCell>{dateFormat(request.createdAt, 'd mmm yyyy - HH:MM')}</TableCell>
                                     <Type type={request.type} />
-                                    <Recipient recipient={request.recipient} transactionHash={request.transactionHash} />
+                                    <Recipient recipient={request.recipient} />
                                     <TableCell>{formatNearBalance(request.amount)}</TableCell>
-                                    <Status status={request.status} />
+                                    <Status status={request.status} transactionHash={request.transactionHash}/>
                                 </TableRow>
                             ))}
                         </TableBody>

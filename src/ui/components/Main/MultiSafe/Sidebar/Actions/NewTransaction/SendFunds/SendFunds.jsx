@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 
 import { sendFundsSchema } from '../../../../../../../../utils/validation/SendFundsModal';
 import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
+import FormButton from '../../../../../FormElements/FormButton/FormButton';
 import { Amount } from './Amount/Amount';
 import { Recipient } from './Recipient/Recipient';
 import { useStyles } from './SendFunds.styles';
@@ -16,7 +17,7 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
     const onTransferTokens = useStoreActions((actions) => actions.multisafe.onTransferTokens);
     const fungibleTokens = useStoreState((store) => store.multisafe.general.fungibleTokens);
 
-    const { control, handleSubmit, setValue, formState: { errors } } = useForm({
+    const { control, handleSubmit, setValue, reset, formState: { errors, isValid, isDirty } } = useForm({
         resolver: yupResolver(sendFundsSchema),
         mode: 'onBlur',
     });
@@ -27,6 +28,7 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
             ? fungibleTokens.find(({name}) => name === tokenName) 
             : undefined;
         onTransferTokens({ data, onClose, token});
+        reset(data);
     });
 
     return (
@@ -59,9 +61,9 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
                     <Button color="secondary" className={classes.cancel} onClick={onClose}>
                         Cancel
                     </Button>
-                    <Button type="submit" color="primary" className={cn(classes.cancel, classes.send)}>
+                    <FormButton disabled={!isValid || !isDirty} className={cn(classes.cancel, classes.send)}>
                         Send
-                    </Button>
+                    </FormButton>
                 </div>
             </form>
         </div>

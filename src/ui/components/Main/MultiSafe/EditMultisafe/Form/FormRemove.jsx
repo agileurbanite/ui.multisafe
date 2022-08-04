@@ -1,8 +1,9 @@
-import { Button, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
+import FormButton from '../../../FormElements/FormButton/FormButton';
 import { useStyles } from './Form.styles';
 
 export const FormRemove = () => {
@@ -27,9 +28,9 @@ export const FormRemove = () => {
             <Typography className={classes?.description}>
                 Notice that it will be removed only locally from your browser - you won&apos;t delete it from the blockchain.
             </Typography>
-            <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
-                Remove Multi Safe
-            </Button>
+            <FormButton variant="contained" className={classes.submitButton}>
+            Remove Multi Safe
+            </FormButton>
         </form>
     );
 };
