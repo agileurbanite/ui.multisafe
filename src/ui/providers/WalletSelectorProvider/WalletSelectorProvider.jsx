@@ -13,6 +13,8 @@ import { distinctUntilChanged, map } from 'rxjs/operators';
 import { config } from '../../../near/config';
 
 import '@near-wallet-selector/modal-ui/styles.css';
+// TODO: Remove this custom css file when https://github.com/near/wallet-selector/issues/374 gets resolved and fix is ready
+import './custom.css';
 
 const WalletSelectorContext = React.createContext(null);
 
