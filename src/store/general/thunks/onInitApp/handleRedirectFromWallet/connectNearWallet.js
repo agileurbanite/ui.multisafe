@@ -16,7 +16,7 @@ const onSuccess = (state, actions, browserHistory, query) => {
     actions.general.setUserData({
         accountId: query.account_id,
         isConnected: true,
-        walletType: 'near-wallet',
+        walletType: 'my-near-wallet',
         publicKey: null,
     });
 
