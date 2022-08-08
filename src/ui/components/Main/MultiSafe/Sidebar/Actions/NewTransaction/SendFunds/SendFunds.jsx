@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 
 import isValidNearAccount from '../../../../../../../../utils/isValidNearAccount';
 import { sendFundsSchema } from '../../../../../../../../utils/validation/SendFundsModal';
+import { useWalletSelector } from '../../../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
 import FormButton from '../../../../../FormElements/FormButton/FormButton';
 import { Amount } from './Amount/Amount';
@@ -23,6 +24,8 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
         mode: 'all',
     });
     const classes = useStyles();
+    
+    const { selector, selectedWalletId, accountId } = useWalletSelector();
 
     const onSubmit = handleSubmit(async (data) => {
         const isAccountValid = await isValidNearAccount(data.recipientId);
@@ -35,7 +38,7 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
         const token = fungibleTokens.find(({name}) => name === tokenName) 
             ? fungibleTokens.find(({name}) => name === tokenName) 
             : undefined;
-        onTransferTokens({ data, onClose, token});
+        onTransferTokens({ data, onClose, token, selector, selectedWalletId, accountId });
         reset(data);
     });
 

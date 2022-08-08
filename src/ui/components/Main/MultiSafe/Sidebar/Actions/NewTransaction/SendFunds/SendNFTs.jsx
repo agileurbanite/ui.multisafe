@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 
 import isValidNearAccount from '../../../../../../../../utils/isValidNearAccount';
 import { transferNFTSchema } from '../../../../../../../../utils/validation/SendFundsModal';
+import { useWalletSelector } from '../../../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
 import FormButton from '../../../../../FormElements/FormButton/FormButton';
 import { NFT } from './Collection/NFT';
@@ -100,6 +101,7 @@ const TransferView = ({ nonFungibleTokens, currentView, setCurrentView, onClose,
 };
 
 export const SendNFTs = forwardRef(({ onClose, tabIndex }, ref) => {
+    const { selector, selectedWalletId } = useWalletSelector();
     const [currentView, setCurrentView] = useState(VIEWS.CHOOSE_NFT);
     const [tokenId, setTokenId] = useState('');
     const [contractName, setContractName] = useState('');
@@ -122,7 +124,7 @@ export const SendNFTs = forwardRef(({ onClose, tabIndex }, ref) => {
             return;
         }
         
-        onTransferNFT({ data, onClose, tokenId, contractName });
+        onTransferNFT({ data, onClose, tokenId, selector, selectedWalletId, contractName });
         reset(data);
     });
 

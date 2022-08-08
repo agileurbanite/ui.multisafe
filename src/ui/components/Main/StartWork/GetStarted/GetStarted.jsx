@@ -1,8 +1,8 @@
 import { Add, SystemUpdateAlt } from '@material-ui/icons';
-import { useStoreState } from 'easy-peasy';
 
 import { emoji } from '../../../../config/emoji';
 import { routes } from '../../../../config/routes';
+import { useWalletSelector } from '../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { EmojiIcon } from '../../../general/EmojiIcon/EmojiIcon';
 import { Headline } from '../../../general/Headline/Headline';
 import { GreenLink } from '../../general/GreenLink/GreenLink';
@@ -10,7 +10,8 @@ import { useStyles } from './GetStarted.styles';
 import { MultisafeList } from './MultisafeList/MultisafeList';
 
 export const GetStarted = () => {
-    const isConnected = useStoreState((store) => store.general.user.isConnected);
+    const { selector } = useWalletSelector();
+    const isConnected = selector.isSignedIn();
     const classes = useStyles();
     return (
         <div className={classes.container}>

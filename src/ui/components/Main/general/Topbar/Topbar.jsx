@@ -2,16 +2,20 @@ import { LinearProgress } from '@material-ui/core';
 import {useStoreActions, useStoreState} from 'easy-peasy';
 import { Link } from 'react-router-dom';
 
+
 import { getRoute, routes } from '../../../../config/routes';
 import logo from '../../../../images/logo/logo-black.svg';
+import { useWalletSelector } from '../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { Account } from './Account/Account';
 import { NonConnected } from './NonConnected/NonConnected';
 import { useStyles } from './Topbar.styles';
 
 export const Topbar = () => {
-    const isConnected = useStoreState((store) => store.general.user.isConnected);
-    const isLoading = useStoreState((store) => store.general.isLoading);
+    const { selector } = useWalletSelector();
+    const isConnected = selector.isSignedIn();
+
     const accountId = useStoreState((store) => store.general.user.accountId);
+    const isLoading = useStoreState((store) => store.general.isLoading);
     const isMobileMenuOpen = useStoreState((store) => store.general.isMobileMenuOpen);
     const multisafeId = useStoreState((store) => store.multisafe.general.multisafeId);
     const onMobileMenuClick = useStoreActions((actions) => actions.general.onMobileMenuClick);
