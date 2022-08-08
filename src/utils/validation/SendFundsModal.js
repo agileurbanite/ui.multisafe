@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-import isValidNearAccount, { patterns } from '../isValidNearAccount';
+import { patterns } from '../isValidNearAccount';
 
 const requiredMessageType = {
     recipientId: 'Please enter recipient\'s address',
@@ -9,25 +9,12 @@ const requiredMessageType = {
 
 export const sendFundsSchema = yup.object().shape({
     recipientId: yup.string().required(requiredMessageType.recipientId)
-        .matches(patterns.memberAddress, requiredMessageType.recipientId)
-        .test({
-            message: 'Oops! The user does not exist :(',
-            test: async (e) => {
-                const res = await isValidNearAccount(e);
-                return res;
-            },
-        }),
+        .matches(patterns.memberAddress, requiredMessageType.recipientId),
     amount: yup.string().required(requiredMessageType.amount)
         .matches(patterns.amount, requiredMessageType.amount)
 });
 
 export const transferNFTSchema = yup.object().shape({
     recipientId: yup.string().required(requiredMessageType.recipientId)
-        .test({
-            message: 'Oops! The user does not exist :(',
-            test: async (e) => {
-                const res = await isValidNearAccount(e);
-                return res;
-            },
-        })
+        .matches(patterns.memberAddress, requiredMessageType.recipientId),
 });

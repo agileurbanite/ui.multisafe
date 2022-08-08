@@ -5,6 +5,7 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import { forwardRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import isValidNearAccount from '../../../../../../../../utils/isValidNearAccount';
 import { sendFundsSchema } from '../../../../../../../../utils/validation/SendFundsModal';
 import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
 import FormButton from '../../../../../FormElements/FormButton/FormButton';
@@ -17,13 +18,20 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
     const onTransferTokens = useStoreActions((actions) => actions.multisafe.onTransferTokens);
     const fungibleTokens = useStoreState((store) => store.multisafe.general.fungibleTokens);
 
-    const { control, handleSubmit, setValue, reset, formState: { errors, isValid, isDirty } } = useForm({
+    const { control, handleSubmit, setValue, reset, setError, setFocus, formState: { errors, isValid, isDirty } } = useForm({
         resolver: yupResolver(sendFundsSchema),
-        mode: 'onBlur',
+        mode: 'all',
     });
     const classes = useStyles();
 
-    const onSubmit = handleSubmit((data) => {
+    const onSubmit = handleSubmit(async (data) => {
+        const isAccountValid = await isValidNearAccount(data.recipientId);
+        if (!isAccountValid) {
+            setError('recipientId', {message: 'Oops! The user does not exist :('});
+            setFocus('recipientId');
+            return;
+        }
+        
         const token = fungibleTokens.find(({name}) => name === tokenName) 
             ? fungibleTokens.find(({name}) => name === tokenName) 
             : undefined;
