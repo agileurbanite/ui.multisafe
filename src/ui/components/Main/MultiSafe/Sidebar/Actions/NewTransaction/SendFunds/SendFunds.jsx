@@ -7,6 +7,9 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import { forwardRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import isValidNearAccount from '@utils/isValidNearAccount';
+import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
+import FormButton from '../../../../../FormElements/FormButton/FormButton';
 import { Amount } from './Amount/Amount';
 import { Recipient } from './Recipient/Recipient';
 import { useStyles } from './SendFunds.styles';
@@ -16,17 +19,27 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
     const onTransferTokens = useStoreActions((actions) => actions.multisafe.onTransferTokens);
     const fungibleTokens = useStoreState((store) => store.multisafe.general.fungibleTokens);
 
-    const { control, handleSubmit, setValue, formState: { errors } } = useForm({
+    const { control, handleSubmit, setValue, reset, setError, setFocus, formState: { errors, isValid, isDirty } } = useForm({
         resolver: yupResolver(sendFundsSchema),
         mode: 'all',
     });
     const classes = useStyles();
+    
+    const { selector, selectedWalletId, accountId } = useWalletSelector();
 
-    const onSubmit = handleSubmit((data) => {
+    const onSubmit = handleSubmit(async (data) => {
+        const isAccountValid = await isValidNearAccount(data.recipientId);
+        if (!isAccountValid) {
+            setError('recipientId', {message: 'Oops! The user does not exist :('});
+            setFocus('recipientId');
+            return;
+        }
+        
         const token = fungibleTokens.find(({name}) => name === tokenName) 
             ? fungibleTokens.find(({name}) => name === tokenName) 
             : undefined;
-        onTransferTokens({ data, onClose, token});
+        onTransferTokens({ data, onClose, token, selector, selectedWalletId, accountId });
+        reset(data);
     });
 
     return (
@@ -59,9 +72,9 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
                     <Button color="secondary" className={classes.cancel} onClick={onClose}>
                         Cancel
                     </Button>
-                    <Button type="submit" color="primary" className={cn(classes.cancel, classes.send)}>
+                    <FormButton disabled={!isValid || !isDirty} className={cn(classes.cancel, classes.send)}>
                         Send
-                    </Button>
+                    </FormButton>
                 </div>
             </form>
         </div>

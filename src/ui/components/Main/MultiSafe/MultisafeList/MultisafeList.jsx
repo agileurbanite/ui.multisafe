@@ -4,11 +4,13 @@ import { GreenLink } from '@ui/components/Main/general/GreenLink/GreenLink';
 import { routes } from '@ui/config/routes';
 import { useStoreState } from 'easy-peasy';
 
+import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 import { List } from './List/List';
 import { useStyles } from './MultisafeList.styles';
 
 export const MultisafeList = ({ onListClose }) => {
-    const isConnected = useStoreState((store) => store.general.user.isConnected);
+    const { selector } = useWalletSelector();
+    const isConnected = selector.isSignedIn();
     const membership = useStoreState((store) => store.multisafe.selectors.multisafes.membership);
     const readOnly = useStoreState((store) => store.multisafe.selectors.multisafes.readOnly);
     const classes = useStyles();

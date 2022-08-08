@@ -7,20 +7,33 @@ import { useStoreActions } from 'easy-peasy';
 import { forwardRef } from 'react';
 import { useForm } from 'react-hook-form';
 
+import isValidNearAccount from '@utils/isValidNearAccount';
+import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
+import FormButton from '../../../FormElements/FormButton/FormButton';
 import { Recipient } from '../../Sidebar/Actions/NewTransaction/SendFunds/Recipient/Recipient';
 import { useStyles } from '../../Sidebar/Actions/NewTransaction/SendFunds/SendFunds.styles';
 
+       
 export const TransferNFT = forwardRef(({ onClose, tabIndex, tokenId, contractName, tokenName }, ref) => {
+    const { selector, selectedWalletId } = useWalletSelector();
     const onTransferNFT = useStoreActions((actions) => actions.multisafe.onTransferNFT);
 
-    const { control, handleSubmit, errors } = useForm({
+    const { control, handleSubmit, reset, setError, setFocus, formState: {isValid, isDirty, errors} } = useForm({
         resolver: yupResolver(transferNFTSchema),
         mode: 'all',
     });
     const classes = useStyles();
 
-    const onSubmit = handleSubmit((data) => {
-        onTransferNFT({ data, onClose, tokenId, contractName });
+    const onSubmit = handleSubmit(async (data) => {
+        const isAccountValid = await isValidNearAccount(data.recipientId);
+        if (!isAccountValid) {
+            setError('recipientId', {message: 'Oops! The user does not exist :('});
+            setFocus('recipientId');
+            return;
+        }
+
+        onTransferNFT({ data, onClose, tokenId, contractName, selector, selectedWalletId });
+        reset(data);
     });
 
     return (
@@ -32,7 +45,7 @@ export const TransferNFT = forwardRef(({ onClose, tabIndex, tokenId, contractNam
                         control={control}
                         classNames={classes}
                         hasError={!!errors?.recipientId}
-                        errorMessage={!!errors?.recipientId && errors?.recipientId?.message}
+                        errorMessage={errors?.recipientId?.message}
                     />
                     <TextField
                         disabled
@@ -54,9 +67,9 @@ export const TransferNFT = forwardRef(({ onClose, tabIndex, tokenId, contractNam
                         <Button color="secondary" className={classes.cancel} onClick={onClose}>
               Cancel
                         </Button>
-                        <Button type="submit" color="primary" className={cn(classes.cancel, classes.send)}>
-              Send
-                        </Button>
+                        <FormButton disabled={!isValid || !isDirty} className={cn(classes.cancel, classes.send)}>
+                        Send
+                        </FormButton>
                     </div>
                 </form>
             </div>

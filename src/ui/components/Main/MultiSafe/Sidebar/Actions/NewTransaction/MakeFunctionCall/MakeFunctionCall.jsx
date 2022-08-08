@@ -7,6 +7,8 @@ import { useStoreActions } from 'easy-peasy';
 import { forwardRef } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
+import FormButton from '../../../../../FormElements/FormButton/FormButton';
 import { Arguments } from './arguments/Arguments';
 import { Deposit } from './Deposit/Deposit';
 import { useStyles } from './MakeFunctionCall.styles';
@@ -17,14 +19,16 @@ import { TGas } from './TGas/TGas';
 
 export const MakeFunctionCall = forwardRef(({ onClose, tabIndex }, ref) => {
     const onMakeFunctionCall = useStoreActions((actions) => actions.multisafe.onMakeFunctionCall);
-    const { control, handleSubmit, formState: { errors } } = useForm({
+    const { selector, selectedWalletId } = useWalletSelector();
+    const { control, handleSubmit, reset, formState: { errors, isValid, isDirty } } = useForm({
         resolver: yupResolver(makeFunctionCallSchema),
-        mode: 'all',
+        mode: 'onBlur',
     });
     const classes = useStyles();
 
     const onSubmit = handleSubmit((data) => {
-        onMakeFunctionCall({ data, onClose });
+        onMakeFunctionCall({ data, onClose, selector, selectedWalletId });
+        reset(data);
     });
 
     return (
@@ -74,9 +78,9 @@ export const MakeFunctionCall = forwardRef(({ onClose, tabIndex }, ref) => {
                         <Button color='secondary' className={classes.cancel} onClick={onClose}>
                             Cancel
                         </Button>
-                        <Button type='submit' color='primary' className={cn(classes.cancel, classes.send)}>
-                            Make function call
-                        </Button>
+                        <FormButton disabled={!isValid || !isDirty} className={cn(classes.cancel, classes.send)}>
+                        Make function call
+                        </FormButton>
                     </div>
                 </form>
             </div>

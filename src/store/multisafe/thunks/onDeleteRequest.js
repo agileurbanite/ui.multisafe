@@ -27,16 +27,23 @@ const signTxByLedger = async (contract, requestId, multisafeId, state, actions) 
 };
 
 export const onDeleteRequest = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
-    const { requestId } = payload;
+    const { requestId, selectedWalletId } = payload;
 
     const state = getStoreState();
-    const isNearWallet = state.general.selectors.isNearWallet;
     const contract = state.multisafe.entities.contract;
     const multisafeId = state.multisafe.general.multisafeId;
 
     const actions = getStoreActions();
 
-    isNearWallet
-        ? signTxByNearWallet(contract, requestId)
-        : await signTxByLedger(contract, requestId, multisafeId, state, actions);
+    switch (selectedWalletId) {
+        case 'near-wallet':
+        case 'my-near-wallet':
+            signTxByNearWallet(contract, requestId);
+            break;
+        case 'ledger':
+            await signTxByLedger(contract, requestId, multisafeId, state, actions);
+            break;
+        default:
+            throw Error(`Unsupported wallet selected: '${selectedWalletId}'`);
+    }
 });

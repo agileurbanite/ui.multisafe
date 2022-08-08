@@ -7,24 +7,45 @@ import { isRedirect } from './isRedirect';
 import { manageNavigation } from './manageNavigation';
 
 export const onInitApp = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
-    const { history, setInit } = payload;
+    const { history, setInit, selector, accountId, selectedWalletId } = payload;
 
     const actions = getStoreActions();
+    let state = getStoreState();
     const initApp = actions.general.initApp;
+    const isConnected = state.general.user.isConnected;
+    const isSignedIn = selector.isSignedIn();
 
     const nearEntities = await getNearEntities(getStoreState);
-
+    
     initApp({ nearEntities });
 
-    const state = getStoreState();
+    if (isSignedIn && isConnected !== isSignedIn) {
+        if (selectedWalletId === 'ledger') {
+            const onLedgerConnectSuccess = actions.general.onSelectLedgerAccount;
+            const ledgerData = localStorage.getItem('near-wallet-selector:ledger:accounts');
+            const pk = ledgerData && JSON.parse(ledgerData)?.[0].publicKey;
+            onLedgerConnectSuccess({ accountId, pk, history });
+        } else {
+            const onConnectSuccess = actions.general.setUserData;        
+            onConnectSuccess({
+                accountId,
+                isConnected: isSignedIn,
+                walletType: selectedWalletId,
+                publicKey: null,
+            });
+        }
+    }
+    state = getStoreState();
 
     // All redirect from NEAR Wallet leads to /redirect-from-wallet route. If it is the case,
     // handle it and redirect the user to the appropriate page. If not - check if a user has access
     // to the page and redirect to the proper page
     if (isRedirect(state, history)) {
-        await handleRedirectFromWallet(state, actions, history);
+        const wallet = await selector.wallet();
+        const signAndSendTransaction = wallet.signAndSendTransaction;
+        await handleRedirectFromWallet(state, actions, history, signAndSendTransaction);
     } else {
-        manageNavigation(state, history);
+        manageNavigation(state, history, selector);
     }
 
     // Call onMount thunk for the page - we want to load data before the page will be mounted -

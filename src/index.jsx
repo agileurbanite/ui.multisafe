@@ -9,6 +9,7 @@ import { StrictMode } from 'react';
 import { render } from 'react-dom';
 
 import { store } from './store';
+import { WalletSelectorContextProvider } from '@/ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 
 const history = createBrowserHistory();
 
@@ -16,11 +17,13 @@ render(
     <StrictMode>
         <StoreProvider store={store}>
             <MuiThemeProvider theme={theme}>
-                <Initializer history={history} store={store}>
-                    <Router>
-                        <App />
-                    </Router>
-                </Initializer>
+                <WalletSelectorContextProvider>
+                    <Initializer history={history} store={store}>
+                        <Router>
+                            <App />
+                        </Router>
+                    </Initializer>
+                </WalletSelectorContextProvider>
             </MuiThemeProvider>
         </StoreProvider>
     </StrictMode>,

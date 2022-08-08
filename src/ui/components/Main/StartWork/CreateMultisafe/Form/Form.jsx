@@ -6,10 +6,13 @@ import { Confirmations } from '@ui/components/Main/FormElements/Confirmations/Co
 import { MembersField } from '@ui/components/Main/FormElements/MembersField/MembersField';
 import { MultisafeName } from '@ui/components/Main/FormElements/MultisafeName/MultisafeName';
 import { createMultisafeSchema } from '@utils/validation/CreateMultisafePage';
+import { Typography } from '@material-ui/core';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
+import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
+import FormButton from '../../../FormElements/FormButton/FormButton';
 import { useStyles } from './Form.styles';
 
 export const Form = () => {
@@ -17,22 +20,28 @@ export const Form = () => {
     const onCreateMultisafe = useStoreActions((actions) => actions.startWork.onCreateMultisafe);
     const history = useHistory();
     const classes = useStyles();
+    const { selectedWalletId } = useWalletSelector();
 
     const {
         control,
         handleSubmit,
         getValues,
-        formState: { errors },
+        reset,
+        formState: { errors, isValid, isDirty },
     } = useForm({
         resolver: yupResolver(createMultisafeSchema),
-        mode: 'all',
+        mode: 'onBlur',
         defaultValues: {
             members: [{ account_id: accountId }],
             num_confirmations: '1',
+            amount: '5' 
         },
     });
 
-    const onSubmit = handleSubmit((data) => onCreateMultisafe({ data, history }));
+    const onSubmit = handleSubmit((data) => {
+        onCreateMultisafe({ data, history, selectedWalletId });
+        reset(data);
+    });
 
     return (
         <form autoComplete="off" className={classes.form} onSubmit={onSubmit}>
@@ -70,9 +79,9 @@ export const Form = () => {
             <Typography className={classes.policy}>
                 By continuing you consent to the terms of use and privacy policy.
             </Typography>
-            <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
-                Create Multi Safe
-            </Button>
+            <FormButton disabled={!isValid || !isDirty} variant="contained" className={classes.submitButton}>
+            Create Multi Safe
+            </FormButton>
         </form>
     );
 };

@@ -5,14 +5,18 @@ import { OpenInExplorer } from '@ui/components/Main/MultiSafe/general/OpenInExpl
 import { useStoreActions } from 'easy-peasy';
 import { useHistory } from 'react-router-dom';
 
+import { useWalletSelector } from '../../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { useStyles } from './Modal.styles';
 
 export const Modal = ({ accountId }) => {
     const onDisconnect = useStoreActions((actions) => actions.general.onDisconnect);
     const history = useHistory();
     const classes = useStyles();
-
-    const disconnect = () => onDisconnect({ history });
+    const { selector } = useWalletSelector();
+    
+    const disconnect = async () => {
+        onDisconnect({ history, selector });
+    };
 
     return (
         <Paper className={classes.container} elevation={4}>

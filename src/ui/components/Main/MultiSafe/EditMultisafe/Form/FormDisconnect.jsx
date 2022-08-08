@@ -1,14 +1,17 @@
-import { Button, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { useStoreActions } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
+import { useWalletSelector } from '../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
+import FormButton from '../../../FormElements/FormButton/FormButton';
 import { useStyles } from './Form.styles';
 
 export const FormDisconnect = () => {
     const history = useHistory();
     const classes = useStyles();
     const onDisconnect = useStoreActions((actions) => actions.general.onDisconnect);
+    const { selector } = useWalletSelector();
 
     const {
         handleSubmit,
@@ -16,16 +19,18 @@ export const FormDisconnect = () => {
         mode: 'all',
     });
 
-    const onSubmit = handleSubmit(() => onDisconnect({ history }));
+    const onSubmit = handleSubmit(async () => {
+        await onDisconnect({ history, selector });
+    });
 
     return (
         <form autoComplete="off" className={classes.form} onSubmit={onSubmit}>
             <Typography className={classes?.description}>
         Disconnecting the account will not remove the Safe, you will be able to connect your wallet again.
             </Typography>
-            <Button type="submit" variant="contained" color="primary" className={classes.submitButton}>
-        Disconnect Account
-            </Button>
+            <FormButton variant="contained" className={classes.submitButton}>
+                Disconnect Account
+            </FormButton>
         </form>
     );
 };

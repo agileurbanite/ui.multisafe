@@ -59,16 +59,23 @@ const signTxByLedger = async (contract, values, state, actions, history) => {
 };
 
 export const onCreateMultisafe = thunk(async (_, payload, { getStoreState, getStoreActions }) => {
-    const { data, history } = payload;
+    const { data, history, selectedWalletId } = payload;
 
     const state = getStoreState();
-    const isNearWallet = state.general.selectors.isNearWallet;
 
     const actions = getStoreActions();
     const factoryContract = getMultisafeFactoryContract(state);
     const values = serializeData(data);
 
-    isNearWallet
-        ? signByNearWallet(factoryContract, values, actions)
-        : await signTxByLedger(factoryContract, values, state, actions, history);
+    switch (selectedWalletId) {
+        case 'near-wallet':
+        case 'my-near-wallet':
+            signByNearWallet(factoryContract, values, actions);
+            break;
+        case 'ledger':
+            await signTxByLedger(factoryContract, values, state, actions, history);
+            break;
+        default:
+            throw Error(`Unsupported wallet selected: '${selectedWalletId}'`);
+    }
 });

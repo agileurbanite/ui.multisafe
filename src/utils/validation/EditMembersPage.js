@@ -1,6 +1,6 @@
-import { config } from '@near/config';
-import * as R from 'ramda';
 import * as yup from 'yup';
+
+import isValidNearAccount, { patterns } from '../isValidNearAccount';
 
 const requiredMessageType = {
     name: 'Please enter multisafe name',
@@ -19,23 +19,6 @@ const validationMessageType = {
     amount: 'Enter a valid amount. Minimum is 5 NEAR',
 };
 
-const patterns = {
-    memberAddress: /^[a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]\.?(testnet|betanet|localnet|guildnet|near)?/g,
-    amount: /^([5-9]|0?[1-9][0-9]+)$/g,
-};
-
-const isUserExist = async (value) => {
-    const response = await fetch(config.nodeUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(config.endpoint.setParams({ account_id: value })),
-    });
-    const result = await response.json();
-    return R.has('result', result);
-};
-
 export const EditMembersPage = yup.object().shape({
     members: yup
         .array()
@@ -46,9 +29,9 @@ export const EditMembersPage = yup.object().shape({
                     .required(requiredMessageType.account_id)
                     .matches(patterns.memberAddress, validationMessageType.account_id)
                     .test({
-                        message: 'Oops! The user is not found :(',
+                        message: 'Oops! The user does not exist :(',
                         test: async (e) => {
-                            const res = await isUserExist(e);
+                            const res = await isValidNearAccount(e);
                             return res;
                         },
                     }),
@@ -74,9 +57,9 @@ export const EditSafeSchema = yup.object().shape({
                     .required(requiredMessageType.account_id)
                     .matches(patterns.memberAddress, validationMessageType.account_id)
                     .test({
-                        message: 'Oops! The user is not found :(',
+                        message: 'Oops! The user does not exist :(',
                         test: async (e) => {
-                            const res = await isUserExist(e);
+                            const res = await isValidNearAccount(e);
                             return res;
                         },
                     }),
