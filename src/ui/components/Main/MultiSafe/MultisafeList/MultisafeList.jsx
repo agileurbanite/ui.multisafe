@@ -2,9 +2,9 @@ import { Paper, Divider, IconButton, ClickAwayListener } from '@material-ui/core
 import { Add, SystemUpdateAlt, Close } from '@material-ui/icons';
 import { GreenLink } from '@ui/components/Main/general/GreenLink/GreenLink';
 import { routes } from '@ui/config/routes';
+import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 import { useStoreState } from 'easy-peasy';
 
-import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 import { List } from './List/List';
 import { useStyles } from './MultisafeList.styles';
 

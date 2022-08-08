@@ -1,13 +1,12 @@
 import { Button } from '@material-ui/core';
 import { Footer } from '@ui/components/general/Footer/Footer';
-
-import logo from '../../images/logo/logo-white.svg';
-import laptop from '../../images/welcome-page/laptop@2x.png';
+import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 import { useStoreState } from 'easy-peasy';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 
-import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
+import logo from '../../images/logo/logo-white.svg';
+import laptop from '../../images/welcome-page/laptop@2x.png';
 import { useStyles } from './Welcome.styles';
 
 export const Welcome = () => {

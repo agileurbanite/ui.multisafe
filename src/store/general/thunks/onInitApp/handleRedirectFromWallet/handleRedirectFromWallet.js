@@ -1,4 +1,5 @@
 import { redirectActions } from '@config/redirectActions';
+import { config } from '@near/config';
 import qs from 'query-string';
 
 import { connectNearWallet } from './connectNearWallet';

@@ -4,8 +4,8 @@ import { Headline } from '@ui/components/general/Headline/Headline';
 import { GreenLink } from '@ui/components/Main/general/GreenLink/GreenLink';
 import { emoji } from '@ui/config/emoji';
 import { routes } from '@ui/config/routes';
-
 import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
+
 import { useStyles } from './GetStarted.styles';
 import { MultisafeList } from './MultisafeList/MultisafeList';
 

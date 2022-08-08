@@ -1,4 +1,3 @@
-import { routes } from '@ui/config/routes';
 import { thunk } from 'easy-peasy';
 
 import { getNearEntities } from './helpers/getNearEntities';

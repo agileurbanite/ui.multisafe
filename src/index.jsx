@@ -3,13 +3,13 @@ import { App } from '@ui/components/App';
 import { theme } from '@ui/config/theme';
 import { Initializer } from '@ui/providers/Initializer/Initializer';
 import { Router } from '@ui/providers/Router';
+import { WalletSelectorContextProvider } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 import { StoreProvider } from 'easy-peasy';
 import { createBrowserHistory } from 'history';
 import { StrictMode } from 'react';
 import { render } from 'react-dom';
 
 import { store } from './store';
-import { WalletSelectorContextProvider } from '@/ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 
 const history = createBrowserHistory();
 

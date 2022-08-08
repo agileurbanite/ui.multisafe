@@ -1,13 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Paper } from '@material-ui/core';
 import { Checkbox } from '@ui/components/general/Checkbox/Checkbox';
+import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 import { makeFunctionCallSchema } from '@utils/validation/makeFunctionCallModal';
 import cn from 'classnames';
 import { useStoreActions } from 'easy-peasy';
 import { forwardRef } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 import FormButton from '../../../../../FormElements/FormButton/FormButton';
 import { Arguments } from './arguments/Arguments';
 import { Deposit } from './Deposit/Deposit';

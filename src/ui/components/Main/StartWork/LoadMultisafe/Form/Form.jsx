@@ -1,6 +1,5 @@
 import { Divider, Typography } from '@material-ui/core';
 import { TextField } from '@ui/components/Main/general/TextField/TextField';
-import { Divider, Typography } from '@material-ui/core';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';

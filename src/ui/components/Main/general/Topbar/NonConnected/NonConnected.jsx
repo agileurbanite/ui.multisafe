@@ -1,9 +1,9 @@
 import { Button } from '@material-ui/core';
 import { ExitToApp, DeleteOutline } from '@material-ui/icons';
+import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useHistory } from 'react-router-dom';
 
-import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 import { useStyles } from './NonConnected.styles';
 
 export const NonConnected = () => {

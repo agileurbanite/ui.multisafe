@@ -1,17 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { AccountId } from '@ui/components/Main/FormElements/AccountId/AccountId';
 import { Amount } from '@ui/components/Main/FormElements/Amount/Amount';
 import { Confirmations } from '@ui/components/Main/FormElements/Confirmations/Confirmations';
 import { MembersField } from '@ui/components/Main/FormElements/MembersField/MembersField';
 import { MultisafeName } from '@ui/components/Main/FormElements/MultisafeName/MultisafeName';
+import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 import { createMultisafeSchema } from '@utils/validation/CreateMultisafePage';
-import { Typography } from '@material-ui/core';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
-import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 import FormButton from '../../../FormElements/FormButton/FormButton';
 import { useStyles } from './Form.styles';
 

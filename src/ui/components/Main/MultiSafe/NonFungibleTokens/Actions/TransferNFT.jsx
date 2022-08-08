@@ -1,14 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Paper, TextField } from '@material-ui/core';
 import { Checkbox } from '@ui/components/general/Checkbox/Checkbox';
+import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
+import isValidNearAccount from '@utils/isValidNearAccount';
 import { transferNFTSchema } from '@utils/validation/SendFundsModal';
 import cn from 'classnames';
 import { useStoreActions } from 'easy-peasy';
 import { forwardRef } from 'react';
 import { useForm } from 'react-hook-form';
 
-import isValidNearAccount from '@utils/isValidNearAccount';
-import { useWalletSelector } from '@ui/providers/WalletSelectorProvider/WalletSelectorProvider';
 import FormButton from '../../../FormElements/FormButton/FormButton';
 import { Recipient } from '../../Sidebar/Actions/NewTransaction/SendFunds/Recipient/Recipient';
 import { useStyles } from '../../Sidebar/Actions/NewTransaction/SendFunds/SendFunds.styles';
