@@ -18,6 +18,12 @@ import { Recipient } from './Recipient/Recipient';
 import { BatchStatus } from './Status/BatchStatus';
 import { Status } from './Status/Status';
 
+const isActionMemberRelated = (action) => ['DeleteMember', 'AddMember'].includes(action.type);
+
+const isSetNumConfirmationsAction = (action) => action.type === 'SetNumConfirmations';
+
+const isBatchActions = (firstAction, secondAction) => isActionMemberRelated(firstAction) && isSetNumConfirmationsAction(secondAction);
+
 export const PendingRequests = () => {
     const pendingRequests = useStoreState((store) => store.multisafe.dashboard.pendingRequests);
     const onConfirmRequest = useStoreActions((actions) => actions.multisafe.onConfirmRequest);
@@ -36,15 +42,13 @@ export const PendingRequests = () => {
         const lowCreationDateDifference = candidate.createdAt - newRequest.createdAt < 120000;
         // it's possible that the request candidate was already recognized as a batch request, in this case, we don't need to check further
         const candidateIsRequest = !candidate.batchRequest;
-        
-        if (
-            candidateIsRequest
+        // only member related actions might be recognized as batch actions
+        const batchActions = isBatchActions(candidate, newRequest) || isBatchActions(newRequest, candidate);
+
+        return candidateIsRequest
             && subsequentRequests
             && lowCreationDateDifference
-        ) {
-            return true;
-        }
-        return false;
+            && batchActions;
     };
 
     const requestsList = batchRequestView
