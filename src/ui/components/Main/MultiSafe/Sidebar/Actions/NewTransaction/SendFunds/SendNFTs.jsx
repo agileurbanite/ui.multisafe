@@ -5,6 +5,7 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import { forwardRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import isValidNearAccount from '../../../../../../../../utils/isValidNearAccount';
 import { transferNFTSchema } from '../../../../../../../../utils/validation/SendFundsModal';
 import { useWalletSelector } from '../../../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
@@ -108,13 +109,21 @@ export const SendNFTs = forwardRef(({ onClose, tabIndex }, ref) => {
     const nonFungibleTokens = useStoreState(({ multisafe }) => multisafe.general.nonFungibleTokens);
     const onTransferNFT = useStoreActions((actions) => actions.multisafe.onTransferNFT);
 
-    const { control, handleSubmit, reset, formState: { errors, isValid, isDirty } } = useForm({
+    const { control, handleSubmit, reset, setError, setFocus, formState: { errors, isValid, isDirty } } = useForm({
         resolver: yupResolver(transferNFTSchema),
         mode: 'all',
     });
     const classes = useStyles();
 
-    const onSubmit = handleSubmit((data) => {
+
+    const onSubmit = handleSubmit(async (data) => {
+        const isAccountValid = await isValidNearAccount(data.recipientId);
+        if (!isAccountValid) {
+            setError('recipientId', {message: 'Oops! The user does not exist :('});
+            setFocus('recipientId');
+            return;
+        }
+        
         onTransferNFT({ data, onClose, tokenId, selector, selectedWalletId, contractName });
         reset(data);
     });

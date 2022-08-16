@@ -29,7 +29,7 @@ export const Form = () => {
         formState: { errors, isValid, isDirty },
     } = useForm({
         resolver: yupResolver(createMultisafeSchema),
-        mode: 'all',
+        mode: 'onBlur',
         defaultValues: {
             members: [{ account_id: accountId }],
             num_confirmations: '1',

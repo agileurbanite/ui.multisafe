@@ -5,6 +5,7 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import { forwardRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import isValidNearAccount, { isImplicitAccount } from '../../../../../../../../utils/isValidNearAccount';
 import { sendFundsSchema } from '../../../../../../../../utils/validation/SendFundsModal';
 import { useWalletSelector } from '../../../../../../../providers/WalletSelectorProvider/WalletSelectorProvider';
 import { Checkbox } from '../../../../../../general/Checkbox/Checkbox';
@@ -18,15 +19,29 @@ export const SendFunds = forwardRef(({ onClose, tabIndex }, ref) => {
     const onTransferTokens = useStoreActions((actions) => actions.multisafe.onTransferTokens);
     const fungibleTokens = useStoreState((store) => store.multisafe.general.fungibleTokens);
 
-    const { control, handleSubmit, setValue, reset, formState: { errors, isValid, isDirty } } = useForm({
+    const { control, handleSubmit, setValue, reset, setError, setFocus, formState: { errors, isValid, isDirty } } = useForm({
         resolver: yupResolver(sendFundsSchema),
         mode: 'all',
     });
     const classes = useStyles();
-
+    
     const { selector, selectedWalletId, accountId } = useWalletSelector();
 
-    const onSubmit = handleSubmit((data) => {
+    const isAccountValid = async (data) => {
+        const isAccountValid = await isValidNearAccount(data.recipientId);
+        const isValidImplicitAccount = isImplicitAccount(data.recipientId);
+        if (!isAccountValid && !isValidImplicitAccount) {
+            setError('recipientId', {message: 'Oops! The user does not exist :('});
+            setFocus('recipientId');
+            return false;
+        }
+        return true;
+    };
+
+    const onSubmit = handleSubmit(async (data) => {
+        const isRecipientValid = await isAccountValid(data);
+        if (!isRecipientValid) return;
+        
         const token = fungibleTokens.find(({name}) => name === tokenName) 
             ? fungibleTokens.find(({name}) => name === tokenName) 
             : undefined;

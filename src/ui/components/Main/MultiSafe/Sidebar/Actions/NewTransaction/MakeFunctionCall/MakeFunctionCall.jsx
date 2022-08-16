@@ -22,7 +22,7 @@ export const MakeFunctionCall = forwardRef(({ onClose, tabIndex }, ref) => {
     const { selector, selectedWalletId } = useWalletSelector();
     const { control, handleSubmit, reset, formState: { errors, isValid, isDirty } } = useForm({
         resolver: yupResolver(makeFunctionCallSchema),
-        mode: 'all',
+        mode: 'onBlur',
     });
     const classes = useStyles();
 
